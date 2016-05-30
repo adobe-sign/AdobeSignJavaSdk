@@ -1,0 +1,8 @@
+var enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_library_document_creation_info_1_1_library_sharing_mode_enum =
+[
+    [ "LibrarySharingModeEnum", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_library_document_creation_info_1_1_library_sharing_mode_enum.html#aea77b69d6d83222533452cbd8d7fa8c7", null ],
+    [ "toString", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_library_document_creation_info_1_1_library_sharing_mode_enum.html#ae78024290cefa6837e40aa3fb620ac21", null ],
+    [ "ACCOUNT", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_library_document_creation_info_1_1_library_sharing_mode_enum.html#af3114f747e291d172c3b526f499bd3c4", null ],
+    [ "GROUP", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_library_document_creation_info_1_1_library_sharing_mode_enum.html#aea32791f50a131f9a79a56abb99e9951", null ],
+    [ "USER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_library_document_creation_info_1_1_library_sharing_mode_enum.html#a4e8278208318bd64ce3fa5567259b19f", null ]
+];

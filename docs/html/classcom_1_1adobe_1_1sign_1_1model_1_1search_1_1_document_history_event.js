@@ -1,0 +1,27 @@
+var classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event =
+[
+    [ "TypeEnum", "enumcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event_1_1_type_enum.html", "enumcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event_1_1_type_enum" ],
+    [ "getActingUserEmail", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#ae7ff3b99a8220b1651d442ee00f27a74", null ],
+    [ "getActingUserIpAddress", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#ac688d52580e798f23da9da29127326db", null ],
+    [ "getComment", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#a3829c2cb40086b4079b36f2bfefe7fb6", null ],
+    [ "getDate", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#aab050fd790fe180daa8f9d4e3bd62afa", null ],
+    [ "getDescription", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#adfade6d5b4150755ba43ecf2434f4e8b", null ],
+    [ "getDeviceLocation", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#ae291f641f27d071ca695e948d0d37ee4", null ],
+    [ "getParticipantEmail", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#a639d282966d42fffceedf203d2b2cd6e", null ],
+    [ "getSynchronizationId", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#a39e6f7f6b7ecbd8e6b1327c08cf2cef9", null ],
+    [ "getType", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#ac145677dee6560fe940013662a2b41a0", null ],
+    [ "getVaultEventId", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#a8a60be1938bb21ca36e977351b17ddf0", null ],
+    [ "getVersionId", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#a407e4c423385f4791173687521ab600c", null ],
+    [ "setActingUserEmail", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#a7b9d0b70f5341b5f940a289b217e4760", null ],
+    [ "setActingUserIpAddress", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#a10e32fd58b1e7e5f5740255ac2921549", null ],
+    [ "setComment", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#ac2ecc013978bd87f5bf081790b14e9e5", null ],
+    [ "setDate", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#ad237e99f297c398f7749031d0352afd9", null ],
+    [ "setDescription", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#af2046e5195c7d26e9f4a651734913426", null ],
+    [ "setDeviceLocation", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#a952cece8d35f36af6391a13f1d9306cd", null ],
+    [ "setParticipantEmail", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#a7dcab6bbb9185410a2d9b111b4070d96", null ],
+    [ "setSynchronizationId", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#afab61100f2b2270058d6c0c1cadd002c", null ],
+    [ "setType", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#aaa2809e5f7a34ced0869b11992130002", null ],
+    [ "setVaultEventId", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#a5be039bba49cab6f1b908c5fcf321af6", null ],
+    [ "setVersionId", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#ad4b541aeecab20d4e248b53a6e74214c", null ],
+    [ "toString", "classcom_1_1adobe_1_1sign_1_1model_1_1search_1_1_document_history_event.html#a6a2aa913064e53aee0389421d2a76023", null ]
+];

@@ -1,0 +1,26 @@
+var enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum =
+[
+    [ "StatusEnum", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a07ab35d53edfa75c2b5f4a7a3c3d8f5d", null ],
+    [ "toString", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#ac45dea6d4da46904d0cab14052784c00", null ],
+    [ "APPROVED", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a7b6c66fd97acf1235443da877fef3d26", null ],
+    [ "ARCHIVED", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a7e948e877117b09e91cd8fc0fbdd42bd", null ],
+    [ "EXPIRED", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a5c6ad729c0b59f7f73fcc27e00bdb8ff", null ],
+    [ "FORM", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#ae42ac7a24de7ce3767277e4c9bf1c394", null ],
+    [ "HIDDEN", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#ad32dfd48dd9ffd688beafcc21c9296b6", null ],
+    [ "IN_REVIEW", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#ac820c09d4c606f3d2328c2084a9e214d", null ],
+    [ "NOT_YET_VISIBLE", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a079c2ce80e37438bfae05bd5dc97c98f", null ],
+    [ "OTHER", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a9d5fbfb42b33b814bdd97a92bbcad618", null ],
+    [ "OUT_FOR_APPROVAL", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#aafa2c3ffe245ed0948c00bbb4fb0c00b", null ],
+    [ "OUT_FOR_SIGNATURE", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a39a17f8d18aab6da973078666b77b277", null ],
+    [ "PARTIAL", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a1182da950bc9a7b3422a4bd4d1706987", null ],
+    [ "RECALLED", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a6148c0771292874f13a9b3dbaf05bdb8", null ],
+    [ "SIGNED", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a1ffc9df42381f8352757b0f5cb717185", null ],
+    [ "UNKNOWN", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a6cc97e59158cfb28c2a5f278cc18f78e", null ],
+    [ "WAITING_FOR_AUTHORING", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#aaab9b62cea45597b7cac797ee976641c", null ],
+    [ "WAITING_FOR_FAXIN", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a5045a4d679b6cf8cd000c742a41050ad", null ],
+    [ "WAITING_FOR_MY_APPROVAL", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#af5622be9330c8ee0513c638ca9c37a97", null ],
+    [ "WAITING_FOR_MY_DELEGATION", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a4be31c0962757dfa63fc48a85058c3f6", null ],
+    [ "WAITING_FOR_MY_REVIEW", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#af5da3cfbc16f96553d51987f3995374e", null ],
+    [ "WAITING_FOR_MY_SIGNATURE", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#a164b6c2a2b70ab10aa62675be9f34570", null ],
+    [ "WIDGET", "enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_participant_set_info_1_1_status_enum.html#acd3c97962bf0070e3d2f88811af0e1bf", null ]
+];

@@ -1,0 +1,26 @@
+var enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum =
+[
+    [ "StatusEnum", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a83639d19650894ce1917535cd98b711a", null ],
+    [ "toString", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a187048b16ae9a914408e5ae9496f9e79", null ],
+    [ "APPROVED", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a50c2eb1cec5026631026e0317003d8fb", null ],
+    [ "ARCHIVED", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#ad33285a65bdbce36c039ebe7c692756a", null ],
+    [ "EXPIRED", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a8d36ca2798691a21f1132424a28d2a0d", null ],
+    [ "FORM", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#ad9ebb4f00e5ecef580b49ea8a873437a", null ],
+    [ "HIDDEN", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a2a5b002556261ffec887929dfefb8eae", null ],
+    [ "IN_REVIEW", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a101de8fb0293edeb186d2760c671752d", null ],
+    [ "NOT_YET_VISIBLE", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a1c2bd8a096977e0d3bc74db55dc3f404", null ],
+    [ "OTHER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a86c03415b2e66474fa7413454bbaf927", null ],
+    [ "OUT_FOR_APPROVAL", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a68b2b61891391db30e5bb978a307aa18", null ],
+    [ "OUT_FOR_SIGNATURE", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a943df6cf14664af251e5065de7afbe53", null ],
+    [ "PARTIAL", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a02351a1d16862c0a10c162a275994718", null ],
+    [ "RECALLED", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a19164204e71f13f0d01e62058d6950c4", null ],
+    [ "SIGNED", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a1774f0b73532099b90070e53c30bab1b", null ],
+    [ "UNKNOWN", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a94832a790d11c3f041604fed530751e8", null ],
+    [ "WAITING_FOR_AUTHORING", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#ad4b7d37ff683fa6adcc2502e8858c719", null ],
+    [ "WAITING_FOR_FAXIN", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#ab42140cbe46f53d74af17534b75a2b5c", null ],
+    [ "WAITING_FOR_MY_APPROVAL", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a697b3b8cc041aaac8f29fb310df6867f", null ],
+    [ "WAITING_FOR_MY_DELEGATION", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a8a7120ecd012548cda8feaf7d3564a0d", null ],
+    [ "WAITING_FOR_MY_REVIEW", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#aa8fe6770dc798708e15be8b19a4544ab", null ],
+    [ "WAITING_FOR_MY_SIGNATURE", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a1a33f9c9e7009952750c415eb69ada6b", null ],
+    [ "WIDGET", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_status_enum.html#a9707332367eb9711b06b38dc3d0e1de0", null ]
+];

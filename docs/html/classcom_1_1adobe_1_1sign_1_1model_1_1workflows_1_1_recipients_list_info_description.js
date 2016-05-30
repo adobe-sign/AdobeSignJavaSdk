@@ -1,0 +1,25 @@
+var classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description =
+[
+    [ "AuthenticationMethodEnum", "enumcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description_1_1_authentication_method_enum.html", "enumcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description_1_1_authentication_method_enum" ],
+    [ "getAllowfax", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#a2ecead950e025c8bef2d2e9be5de8784", null ],
+    [ "getAllowSender", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#a16c815428a0fa2dc549648557c05f036", null ],
+    [ "getAuthenticationMethod", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#aa6286b2794d07d8b5acfae4d9f657170", null ],
+    [ "getDefaultValue", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#a7a3d61413ab582fdbc2fef2b86ea8c10", null ],
+    [ "getEditable", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#afa1b3965749f4d4aa38f7870857380e6", null ],
+    [ "getLabel", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#ac254c2905675d0f633ce611284bcfa73", null ],
+    [ "getMaxListCount", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#a9926f5957361ab9954ca0f9d1d61610b", null ],
+    [ "getMinListCount", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#a0df73d23d33d65d6e2693655346148b4", null ],
+    [ "getName", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#a5bcb1969d087007a5f66369c00ab8df4", null ],
+    [ "getVisible", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#a8403fdeca7b1d91d59171d58ca0434ea", null ],
+    [ "setAllowfax", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#a5af84de2b1bec3034ef6e03d1af5d30a", null ],
+    [ "setAllowSender", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#aa6b4c4389c5107269714d26b786fb1d0", null ],
+    [ "setAuthenticationMethod", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#a057ac424eb17d6bb46e03f48aa837ab7", null ],
+    [ "setDefaultValue", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#ada1c7d4888970b5791cc455988322f78", null ],
+    [ "setEditable", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#a5dcd6e2f75defa9186d2f6e0771dd9ed", null ],
+    [ "setLabel", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#ab8b7e5d0132503587e2ff42a1644eb23", null ],
+    [ "setMaxListCount", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#a036bb80dc04c3cdfbf30ce3036a63f7b", null ],
+    [ "setMinListCount", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#aed31c446158ab6a4f77bedb39304165b", null ],
+    [ "setName", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#a9a41d65eb1ddcce063abc7ea21f77391", null ],
+    [ "setVisible", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#afb3f02efe854c392957638a973c95054", null ],
+    [ "toString", "classcom_1_1adobe_1_1sign_1_1model_1_1workflows_1_1_recipients_list_info_description.html#aec21e64bb205186ca6455a125697c331", null ]
+];
