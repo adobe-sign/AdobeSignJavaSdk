@@ -18,6 +18,9 @@ import java.util.List;
 import com.adobe.sign.model.agreements.UserAgreement;
 import com.adobe.sign.model.agreements.UserAgreements;
 import com.adobe.sign.utils.AgreementUtils;
+import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
 
 /**
@@ -33,20 +36,23 @@ public class GetNextParticipantInfoOfAllWaitingAgreements {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(GetNextParticipantInfoOfAllWaitingAgreements.class.getName());
     try {
       GetNextParticipantInfoOfAllWaitingAgreements client = new GetNextParticipantInfoOfAllWaitingAgreements();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.GET_NEXT_PARTICIPANT_SET_INFO);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_NEXT_PARTICIPANT_SET_INFO, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception {
+  private void run() throws ApiException {
+    // Set the number of agreements for which next participant is to be retrieved.
+    int agreementCountLimit = Constants.AGREEMENT_COUNT_LIMIT;
     //Make API call to get all the agreements of a user.
     UserAgreements userAgreements = AgreementUtils.getAllAgreements();
 
@@ -55,19 +61,24 @@ public class GetNextParticipantInfoOfAllWaitingAgreements {
 
     //Check status of each agreement.
     for (UserAgreement userAgreement : userAgreementList) {
+      
+      if(agreementCountLimit == 0)
+        break;
 
       //Show next participant info if the agreement is out for signature.
       if(userAgreement.getStatus().equals(UserAgreement.StatusEnum.OUT_FOR_SIGNATURE)) {
 
         //Display agreement name and id.
-        System.out.println("Agreement Name = " + userAgreement.getName());
-        System.out.println("Agreement Id = " + userAgreement.getAgreementId());
+        ApiUtils.getLogger().info("Agreement Name = " + userAgreement.getName());
+        ApiUtils.getLogger().info("Agreement Id = " + userAgreement.getAgreementId());
 
         //Get id of the agreement.
         String agreementId = userAgreement.getAgreementId();
 
         //Display details about next participant set.
         AgreementUtils.printNextParticipantSetInfo(agreementId);
+        
+        agreementCountLimit--;
       }
     }
   }

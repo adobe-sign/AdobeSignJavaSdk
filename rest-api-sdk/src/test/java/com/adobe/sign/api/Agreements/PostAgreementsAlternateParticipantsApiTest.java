@@ -22,31 +22,35 @@ import com.adobe.sign.model.agreements.AgreementInfo;
 import com.adobe.sign.model.agreements.AlternateParticipantInfo;
 import com.adobe.sign.model.agreements.AlternateParticipantResponse;
 import com.adobe.sign.model.agreements.ParticipantSetInfo;
-import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.AgreementsUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * Junit test cases for Post Agreements Alternate Participants API.
  */
 public class PostAgreementsAlternateParticipantsApiTest {
-  private AgreementsApi agreementsApi = null;
-  private String agreementId = null;
-  private String participantSetId = null;
-  private String participantId = null;
+  private static AgreementsApi agreementsApi = null;
+  private static String agreementId = null;
+  private static String participantSetId = null;
+  private static String participantId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     agreementsApi = AgreementsUtils.getAgreementsApi();
-    agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
+    agreementId = AgreementsUtils.createAgreement(ApiUtils.getAgreementName());
 
-    AgreementInfo agreementInfo = agreementsApi.getAgreementInfo(TestData.ACCESS_TOKEN,
-                                                                 agreementId,
-                                                                 TestData.X_API_HEADER);
+    AgreementInfo agreementInfo = agreementsApi.getAgreementInfo(ApiUtils.getValidHeaderParams(),
+                                                                 agreementId);
 
     assertNotNull(agreementInfo);
     assertNotNull(agreementInfo.getParticipantSetInfos());
@@ -69,12 +73,11 @@ public class PostAgreementsAlternateParticipantsApiTest {
     AlternateParticipantInfo updateInfo = new AlternateParticipantInfo();
 
     try {
-      agreementsApi.createAlternateParticipant(TestData.NULL_PARAM,
+      agreementsApi.createAlternateParticipant(ApiUtils.getNullAccessTokenHeaderParams(),
                                                agreementId,
                                                participantSetId,
                                                participantId,
-                                               updateInfo,
-                                               TestData.X_API_HEADER);
+                                               updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -82,12 +85,11 @@ public class PostAgreementsAlternateParticipantsApiTest {
     }
 
     try {
-      agreementsApi.createAlternateParticipant(TestData.EMPTY_PARAM,
+      agreementsApi.createAlternateParticipant(ApiUtils.getEmptyAccessTokenHeaderParams(),
                                                agreementId,
                                                participantSetId,
                                                participantId,
-                                               updateInfo,
-                                               TestData.X_API_HEADER);
+                                               updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -107,12 +109,11 @@ public class PostAgreementsAlternateParticipantsApiTest {
     AlternateParticipantInfo updateInfo = new AlternateParticipantInfo();
 
     try {
-      agreementsApi.createAlternateParticipant(TestData.ACCESS_TOKEN,
+      agreementsApi.createAlternateParticipant(ApiUtils.getEmptyXApiUserHeaderParams(),
                                                agreementId,
                                                participantSetId,
                                                participantId,
-                                               updateInfo,
-                                               TestData.EMPTY_PARAM);
+                                               updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -133,12 +134,11 @@ public class PostAgreementsAlternateParticipantsApiTest {
     AlternateParticipantInfo updateInfo = new AlternateParticipantInfo();
 
     try {
-      agreementsApi.createAlternateParticipant(TestData.ACCESS_TOKEN,
+      agreementsApi.createAlternateParticipant(ApiUtils.getValidHeaderParams(),
                                                TestData.EMPTY_PARAM,
                                                participantSetId,
                                                participantId,
-                                               updateInfo,
-                                               TestData.X_API_HEADER);
+                                               updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -146,12 +146,11 @@ public class PostAgreementsAlternateParticipantsApiTest {
     }
 
     try {
-      agreementsApi.createAlternateParticipant(TestData.ACCESS_TOKEN,
+      agreementsApi.createAlternateParticipant(ApiUtils.getValidHeaderParams(),
                                                TestData.NULL_PARAM,
                                                participantSetId,
                                                participantId,
-                                               updateInfo,
-                                               TestData.X_API_HEADER);
+                                               updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -159,12 +158,11 @@ public class PostAgreementsAlternateParticipantsApiTest {
     }
 
     try {
-      agreementsApi.createAlternateParticipant(TestData.ACCESS_TOKEN,
+      agreementsApi.createAlternateParticipant(ApiUtils.getValidHeaderParams(),
                                                agreementId,
                                                participantSetId,
                                                TestData.EMPTY_PARAM,
-                                               updateInfo,
-                                               TestData.X_API_HEADER);
+                                               updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -172,12 +170,11 @@ public class PostAgreementsAlternateParticipantsApiTest {
     }
 
     try {
-      agreementsApi.createAlternateParticipant(TestData.ACCESS_TOKEN,
+      agreementsApi.createAlternateParticipant(ApiUtils.getValidHeaderParams(),
                                                agreementId,
                                                participantSetId,
                                                TestData.NULL_PARAM,
-                                               updateInfo,
-                                               TestData.X_API_HEADER);
+                                               updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -185,12 +182,11 @@ public class PostAgreementsAlternateParticipantsApiTest {
     }
 
     try {
-      agreementsApi.createAlternateParticipant(TestData.ACCESS_TOKEN,
+      agreementsApi.createAlternateParticipant(ApiUtils.getValidHeaderParams(),
                                                agreementId,
                                                TestData.EMPTY_PARAM,
                                                participantId,
-                                               updateInfo,
-                                               TestData.X_API_HEADER);
+                                               updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -198,12 +194,11 @@ public class PostAgreementsAlternateParticipantsApiTest {
     }
 
     try {
-      agreementsApi.createAlternateParticipant(TestData.ACCESS_TOKEN,
+      agreementsApi.createAlternateParticipant(ApiUtils.getValidHeaderParams(),
                                                agreementId,
                                                TestData.NULL_PARAM,
                                                participantId,
-                                               updateInfo,
-                                               TestData.X_API_HEADER);
+                                               updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -226,12 +221,11 @@ public class PostAgreementsAlternateParticipantsApiTest {
     updateInfo.setPrivateMessage(TestData.PRIVATE_MESSAGE);
 
     try {
-      agreementsApi.createAlternateParticipant(TestData.ACCESS_TOKEN,
+      agreementsApi.createAlternateParticipant(ApiUtils.getValidHeaderParams(),
                                                agreementId,
                                                participantSetId,
                                                participantId,
-                                               updateInfo,
-                                               TestData.X_API_HEADER);
+                                               updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -241,12 +235,11 @@ public class PostAgreementsAlternateParticipantsApiTest {
     updateInfo.setEmail(TestData.INVALID_EMAIL);
 
     try {
-      agreementsApi.createAlternateParticipant(TestData.ACCESS_TOKEN,
+      agreementsApi.createAlternateParticipant(ApiUtils.getValidHeaderParams(),
                                                agreementId,
                                                participantSetId,
                                                participantId,
-                                               updateInfo,
-                                               TestData.X_API_HEADER);
+                                               updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_EMAIL.getApiCode().equals(e.getApiCode()));
@@ -256,12 +249,11 @@ public class PostAgreementsAlternateParticipantsApiTest {
     updateInfo.setPrivateMessage(TestData.EMPTY_PARAM);
 
     try {
-      agreementsApi.createAlternateParticipant(TestData.ACCESS_TOKEN,
+      agreementsApi.createAlternateParticipant(ApiUtils.getValidHeaderParams(),
                                                agreementId,
                                                participantSetId,
                                                participantId,
-                                               updateInfo,
-                                               TestData.X_API_HEADER);
+                                               updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.EMPTY_PRIVATE_MESSAGE.getApiCode().equals(e.getApiCode()));
@@ -280,12 +272,11 @@ public class PostAgreementsAlternateParticipantsApiTest {
     updateInfo.setPrivateMessage(TestData.PRIVATE_MESSAGE);
 
     try {
-      AlternateParticipantResponse response = agreementsApi.createAlternateParticipant(TestData.ACCESS_TOKEN,
+      AlternateParticipantResponse response = agreementsApi.createAlternateParticipant(ApiUtils.getValidHeaderParams(),
                                                                                        agreementId,
                                                                                        participantSetId,
                                                                                        participantId,
-                                                                                       updateInfo,
-                                                                                       TestData.X_API_HEADER);
+                                                                                       updateInfo);
       assertNotNull(response);
       assertNotNull(response.getParticipantId());
     }

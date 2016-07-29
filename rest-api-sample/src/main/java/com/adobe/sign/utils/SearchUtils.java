@@ -15,6 +15,7 @@ package com.adobe.sign.utils;
 
 import java.util.Date;
 import java.util.List;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.SearchApi;
 import com.adobe.sign.model.search.AgreementAssetEventGetResponse;
@@ -25,6 +26,7 @@ import com.adobe.sign.model.search.DocumentEventForUser;
 public class SearchUtils {
 
   private final static SearchApi searchApi = new SearchApi();
+  private final static MultivaluedMap headers = ApiUtils.getHeaderParams();
 
   /**
    * Create search for agreement asset event.
@@ -35,7 +37,7 @@ public class SearchUtils {
    * @throws Exception
    */
   public static AgreementAssetEventPostResponse createSearchForAgreementAssetEvent(Date startDate ,
-                                                                                   Date endDate) throws Exception {
+                                                                                   Date endDate) throws ApiException {
     try {
       //Create agreement asset event request
       AgreementAssetEventRequest agreementAssetEventRequest = new AgreementAssetEventRequest();
@@ -47,14 +49,13 @@ public class SearchUtils {
       agreementAssetEventRequest.setEndDate(endDate);
 
       //Get agreement asset event response
-      AgreementAssetEventPostResponse agreementAssetEventPostResponse = searchApi.createAssetEvent(Constants.ACCESS_TOKEN,
-                                                                                                   agreementAssetEventRequest,
-                                                                                                   Constants.X_API_USER);
+      AgreementAssetEventPostResponse agreementAssetEventPostResponse = searchApi.createAssetEvent(headers,
+                                                                                                   agreementAssetEventRequest);
       return agreementAssetEventPostResponse;
     }
-    catch (Exception e) {
-      System.err.println(Errors.CREATE_SEARCH_FOR_AGREEMENT_ASSET_EVENT_FOR_USER);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CREATE_SEARCH_FOR_AGREEMENT_ASSET_EVENT_FOR_USER,e);
+      return null;
     }
   }
 
@@ -69,19 +70,18 @@ public class SearchUtils {
    */
   public static AgreementAssetEventGetResponse getAgreementEventsForUser(int pageSize,
                                                                          String pageCursor,
-                                                                         String searchId) throws Exception {
+                                                                         String searchId) throws ApiException {
     try {
       // Get the next set of search results for the specified search Id.
-      AgreementAssetEventGetResponse agreementAssetEventGetResponse = searchApi.getAssetEvent(Constants.ACCESS_TOKEN,
+      AgreementAssetEventGetResponse agreementAssetEventGetResponse = searchApi.getAssetEvent(headers,
                                                                                               searchId,
                                                                                               pageCursor,
-                                                                                              Constants.X_API_USER,
                                                                                               pageSize);
       return agreementAssetEventGetResponse;
     }
     catch (Exception e) {
-      System.err.println(Errors.GET_SEARCH_AGREEMENT_ASSET_EVENT_FOR_USER);
-      throw new Exception(e);
+      ApiUtils.logException(Errors.GET_SEARCH_AGREEMENT_ASSET_EVENT_FOR_USER, e);
+      return null;
     }
   }
 
@@ -94,12 +94,11 @@ public class SearchUtils {
 
     //In case there are no agreement asset events in the given range
     if(events.size() == 0)
-      System.out.println(Errors.NO_EVENT_IN_GIVEN_RANGE);
+      ApiUtils.getLogger().info(Errors.NO_EVENT_IN_GIVEN_RANGE);
 
     //Display first few events
     for (int index = 0; index < Math.min(Constants.MAX_EVENTS_SIZE, events.size()); index++)
-      System.out.println("Agreement Asset Event: " + events.get(index));
-
-    System.out.println();
+      ApiUtils.getLogger().info("Agreement Asset Event: " + events.get(index));
+      ApiUtils.getLogger().info("");
   }
 }

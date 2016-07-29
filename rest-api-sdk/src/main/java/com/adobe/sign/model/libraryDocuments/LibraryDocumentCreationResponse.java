@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * A JSON object describing the library template
  **/
 @ApiModel(description = "A JSON object describing the library template")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:24:58.451+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:05.613+05:30")
 public class LibraryDocumentCreationResponse   {
   
   private String embeddedCode = null;

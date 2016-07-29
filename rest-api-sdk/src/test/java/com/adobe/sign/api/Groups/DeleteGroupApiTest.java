@@ -16,11 +16,12 @@ package com.adobe.sign.api.Groups;
 import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.GroupsApi;
+import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.GroupUtils;
-import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.ApiException;
-import org.junit.Before;
+import com.adobe.sign.utils.Retry;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -28,12 +29,15 @@ import org.junit.Test;
  */
 public class DeleteGroupApiTest {
   
-  String groupId = null;
-  GroupsApi groupsApi = null;
+  private static String groupId = null;
+  private static GroupsApi groupsApi = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-	@Before
-	public void setup() throws ApiException {
-		groupId = GroupUtils.getResourceId(TestData.GROUP_NAME);
+	@BeforeClass
+	public static void setup() throws ApiException {
+		groupId = GroupUtils.createGroup(ApiUtils.getGroupName());
 		groupsApi = GroupUtils.getGroupsApi();
 	}
 
@@ -45,9 +49,8 @@ public class DeleteGroupApiTest {
   @Test
   public void testDeleteGroup() throws ApiException {
     try {
-      groupsApi.deleteGroup(TestData.ACCESS_TOKEN,
-                            groupId,
-                            TestData.X_API_HEADER);
+      groupsApi.deleteGroup(ApiUtils.getValidHeaderParams(),
+                            groupId);
     }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));

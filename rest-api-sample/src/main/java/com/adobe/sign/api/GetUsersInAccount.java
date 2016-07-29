@@ -17,8 +17,10 @@ import java.util.List;
 
 import com.adobe.sign.model.users.UserInfo;
 import com.adobe.sign.model.users.UsersInfo;
-import com.adobe.sign.utils.Errors;
 import com.adobe.sign.utils.UserUtils;
+import com.adobe.sign.utils.Errors;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
 
 /**
  * This sample client demonstrates how to get all the users in an account.
@@ -33,29 +35,30 @@ public class GetUsersInAccount {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(GetUsersInAccount.class.getName());
     try {
       GetUsersInAccount client = new GetUsersInAccount();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.GET_USERS_IN_ACCOUNT);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_USERS_IN_ACCOUNT, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException{
     //Make API call to get list of users in the account.
     UsersInfo usersInfo = UserUtils.getUsers();
 
     //Display details of each user.
     List<UserInfo> userInfos = usersInfo.getUserInfoList();
     for(UserInfo userInfo : userInfos) {
-      System.out.println("User ID : " + userInfo.getUserId());
-      System.out.println("User Name : " + userInfo.getFullNameOrEmail());
-      System.out.println("Email ID of User : " + userInfo.getEmail());
+      ApiUtils.getLogger().info("User ID : " + userInfo.getUserId());
+      ApiUtils.getLogger().info("User Name : " + userInfo.getFullNameOrEmail());
+      ApiUtils.getLogger().info("Email ID of User : " + userInfo.getEmail());
     }
   }
 }

@@ -20,6 +20,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 
+import javax.ws.rs.core.MultivaluedMap;
+
+import com.sun.jersey.core.util.MultivaluedMapImpl;
+
 /**
  * This file contains basic utility functions which will be used by the ApiTest classes and the utility classes.
  */
@@ -30,12 +34,15 @@ public class ApiUtils {
   private static final String CODE = "\"apiCode\": ";
   private static final String MESSAGE = "\"message\": ";
   private static final String SEPARATOR = ", ";
+  private static final String BUILD_SEPERATOR = "build";
+  private final static String ACCESS_TOKEN_KEY= "Access-Token";
+  private final static String X_API_USER_KEY = "x-api-user";
 
   public static Properties getProperties(String configPath) {
     Properties prop = new Properties();
     try {
       InputStream input = new FileInputStream(configPath);
-      // load the properties file
+      //load the properties file
       prop.load(input);
     } catch (IOException ex) {
       System.out.println(ex.getMessage());
@@ -108,6 +115,47 @@ public class ApiUtils {
     Calendar cal = Calendar.getInstance();
     cal.add(Calendar.DATE, offset);
     return cal.getTime();
+  }
+
+  public static String getSdkAbsolutePath() {
+    String path = ApiUtils.class.getClassLoader().getResource(".").getPath();
+    return path.substring(0, path.indexOf(BUILD_SEPERATOR));
+  }
+
+  public static MultivaluedMap getValidHeaderParams() {
+    MultivaluedMap headers = new MultivaluedMapImpl();
+
+    //Add headers
+    headers.put(ACCESS_TOKEN_KEY, TestData.ACCESS_TOKEN);
+    headers.put(X_API_USER_KEY, TestData.X_API_HEADER);
+    return headers;
+  }
+
+  public static MultivaluedMap getNullAccessTokenHeaderParams() {
+    MultivaluedMap headers = new MultivaluedMapImpl();
+
+    //Add headers
+    headers.put(ACCESS_TOKEN_KEY, TestData.NULL_PARAM);
+    headers.put(X_API_USER_KEY, TestData.X_API_HEADER);
+    return headers;
+  }
+
+  public static MultivaluedMap getEmptyAccessTokenHeaderParams() {
+    MultivaluedMap headers = new MultivaluedMapImpl();
+
+    //Add headers
+    headers.put(ACCESS_TOKEN_KEY, TestData.EMPTY_PARAM);
+    headers.put(X_API_USER_KEY, TestData.X_API_HEADER);
+    return headers;
+  }
+
+  public static MultivaluedMap getEmptyXApiUserHeaderParams() {
+    MultivaluedMap headers = new MultivaluedMapImpl();
+
+    //Add headers
+    headers.put(ACCESS_TOKEN_KEY, TestData.ACCESS_TOKEN);
+    headers.put(X_API_USER_KEY, TestData.EMPTY_PARAM);
+    return headers;
   }
 }
 

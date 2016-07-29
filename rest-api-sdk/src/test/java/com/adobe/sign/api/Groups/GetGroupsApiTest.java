@@ -19,12 +19,13 @@ import static org.junit.Assert.assertTrue;
 
 import com.adobe.sign.api.GroupsApi;
 import com.adobe.sign.model.groups.GroupsInfo;
+import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.GroupUtils;
-import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -32,10 +33,14 @@ import org.junit.Test;
  */
 public class GetGroupsApiTest {
   
-  private GroupsApi groupsApi = null;
+  private static GroupsApi groupsApi = null;
   
-  @Before
-  public void setup() {
+  @Rule
+  public Retry retry = new Retry();
+  
+  @BeforeClass
+  public static void setup() {
+
     groupsApi = GroupUtils.getGroupsApi();
   }
   
@@ -50,8 +55,7 @@ public class GetGroupsApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      groupsApi.getGroups(TestData.NULL_PARAM,
-                          TestData.X_API_HEADER);
+      groupsApi.getGroups(ApiUtils.getNullAccessTokenHeaderParams());
     }
     catch (ApiException e){
       assertTrue(e.getMessage(),
@@ -59,8 +63,7 @@ public class GetGroupsApiTest {
     }
 
     try {
-      groupsApi.getGroups(TestData.EMPTY_PARAM,
-                          TestData.X_API_HEADER);
+      groupsApi.getGroups(ApiUtils.getEmptyAccessTokenHeaderParams());
     }
     catch (ApiException e){
       assertTrue(e.getMessage(),
@@ -78,8 +81,7 @@ public class GetGroupsApiTest {
   public void testInvalidXApiHeader() throws ApiException {
 
     try {
-      groupsApi.getGroups(TestData.ACCESS_TOKEN,
-                          TestData.EMPTY_PARAM);
+      groupsApi.getGroups(ApiUtils.getEmptyXApiUserHeaderParams());
     }
     catch (ApiException e){
       assertTrue(e.getMessage(),
@@ -97,8 +99,7 @@ public class GetGroupsApiTest {
   public void testGetGroups() throws ApiException {
 
     try {
-      GroupsInfo groupsInfo = groupsApi.getGroups(TestData.ACCESS_TOKEN,
-                                                  TestData.X_API_HEADER);
+      GroupsInfo groupsInfo = groupsApi.getGroups(ApiUtils.getValidHeaderParams());
       assertNotNull(groupsInfo);
     }
     catch (ApiException e) {

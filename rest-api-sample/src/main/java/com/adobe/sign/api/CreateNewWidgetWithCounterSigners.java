@@ -17,10 +17,12 @@ import java.util.ArrayList;
 
 import com.adobe.sign.model.transientDocuments.TransientDocumentResponse;
 import com.adobe.sign.model.widgets.WidgetCreationResponse;
+import com.adobe.sign.utils.TransientDocumentUtils;
 import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
 import com.adobe.sign.utils.WidgetUtils;
-import com.adobe.sign.utils.TransientDocumentUtils;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
 
 /**
  * This sample client demonstrates how to create a new widget.
@@ -37,19 +39,20 @@ public class CreateNewWidgetWithCounterSigners {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(CreateNewWidgetWithCounterSigners.class.getName());
     try {
       CreateNewWidgetWithCounterSigners client = new CreateNewWidgetWithCounterSigners();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.CREATE_WIDGET_WITH_COUNTER_SIGNERS);
-    }
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CREATE_WIDGET_WITH_COUNTER_SIGNERS, e);
+      }
   }
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException{
 
     // Upload a transient document and retrieve transient document ID from the response.
     TransientDocumentResponse transientDocument = TransientDocumentUtils.createTransientDocument(Constants.REQUEST_PATH,
@@ -73,7 +76,7 @@ public class CreateNewWidgetWithCounterSigners {
                                                                                               Constants.WIDGET_NAME,
                                                                                               counterSignerMemberList);
     // Display widget ID and corresponding code of newly created widget.
-    System.out.println("Newly created widget's ID: " + widgetCreationResponse.getWidgetId());
-    System.out.println("The corresponding Javascript code to embed the created widget: " + widgetCreationResponse.getJavascript() + "\n" + "OR \n" + "URL to host the widget: " + widgetCreationResponse.getUrl());
+    ApiUtils.getLogger().info("Newly created widget's ID: " + widgetCreationResponse.getWidgetId());
+    ApiUtils.getLogger().info("The corresponding Javascript code to embed the created widget: " + widgetCreationResponse.getJavascript() + "\n" + "OR \n" + "URL to host the widget: " + widgetCreationResponse.getUrl());
   }
 }

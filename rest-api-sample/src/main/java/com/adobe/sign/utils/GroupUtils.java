@@ -12,6 +12,8 @@
 */
 package com.adobe.sign.utils;
 
+import javax.ws.rs.core.MultivaluedMap;
+
 import com.adobe.sign.api.GroupsApi;
 import com.adobe.sign.model.groups.GroupCreationInfo;
 import com.adobe.sign.model.groups.GroupCreationResponse;
@@ -20,6 +22,8 @@ import com.adobe.sign.model.groups.GroupsInfo;
 public class GroupUtils {
 
   private final static GroupsApi groupsApi = new GroupsApi();
+  private final static MultivaluedMap headers = ApiUtils.getHeaderParams();
+  private final static String ACCESS_TOKEN_KEY= "Access-Token";
 
   /**
    * Create sample group and returns group Id
@@ -28,36 +32,58 @@ public class GroupUtils {
    * @return String containing id of the group created.
    * @throws Exception
    */
-  public static String createGroup(String groupName) throws Exception {
+  public static String createGroup(String groupName) throws ApiException {
     try {
       GroupCreationInfo groupCreationInfo = new GroupCreationInfo();
       groupCreationInfo.setGroupName(groupName);
 
-      GroupCreationResponse groupCreationResponse = groupsApi.createGroup(Constants.ACCESS_TOKEN,
-                                                                          groupCreationInfo,
-                                                                          Constants.X_API_USER);
+      GroupCreationResponse groupCreationResponse = groupsApi.createGroup(headers,
+                                                                          groupCreationInfo);
       return groupCreationResponse.getGroupId();
     }
-    catch (Exception e) {
-      System.err.println(Errors.CREATE_GROUP);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CREATE_GROUP, e);
+      return null;
     }
   }
-  
+
+  /**
+   * Create sample group and returns group Id
+   *
+   * @param groupName String containing name of the group.
+   * @param accessToken access token obtained by OAuth 2.0 workflow.
+   * @return String containing id of the group created.
+   * @throws Exception
+   */
+  public static String createGroupWithOAuthWorkflow(String groupName, String accessToken) throws ApiException {
+    try {
+      GroupCreationInfo groupCreationInfo = new GroupCreationInfo();
+      groupCreationInfo.setGroupName(groupName);
+
+      headers.put(ACCESS_TOKEN_KEY, accessToken);
+      GroupCreationResponse groupCreationResponse = groupsApi.createGroup(headers,
+                                                                          groupCreationInfo);
+      return groupCreationResponse.getGroupId();
+    }
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CREATE_GROUP_OAUTH, e);
+      return null;
+    }
+  }
+
   /**
    * Gets all the groups in an account.
    *
    * @return GroupsInfo
    */
-  public static GroupsInfo getGroups() throws Exception {
+  public static GroupsInfo getGroups() throws ApiException {
     try {
-      GroupsInfo groupsInfo = groupsApi.getGroups(Constants.ACCESS_TOKEN,
-                                                  Constants.X_API_USER);
+      GroupsInfo groupsInfo = groupsApi.getGroups(headers);
       return groupsInfo;
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_GROUPS);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_GROUPS, e);
+      return null;
     }
   }
 }

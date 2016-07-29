@@ -23,10 +23,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /**
- * A JSON  that contains both the id of the newly created agreement and URL / embedded code to direct the user to tne next step in the creation process.
+ * A JSON that contains both the id of the newly created agreement and URL / embedded code to direct the user to tne next step in the creation process.
  **/
-@ApiModel(description = "A JSON  that contains both the id of the newly created agreement and URL / embedded code to direct the user to tne next step in the creation process.")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:25:02.764+05:30")
+@ApiModel(description = "A JSON that contains both the id of the newly created agreement and URL / embedded code to direct the user to tne next step in the creation process.")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:09.776+05:30")
 public class AgreementCreationResponse   {
   
   private String agreementId = null;

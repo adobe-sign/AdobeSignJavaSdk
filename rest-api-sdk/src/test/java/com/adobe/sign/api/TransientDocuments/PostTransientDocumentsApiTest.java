@@ -19,12 +19,14 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.TransientDocumentsApi;
 import com.adobe.sign.model.transientDocuments.TransientDocumentResponse;
+import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.TransientDocumentsUtils;
-import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -32,10 +34,15 @@ import org.junit.Test;
  */
 public class PostTransientDocumentsApiTest {
   
-  private TransientDocumentsApi transientDocumentsApi = null;
+  private static TransientDocumentsApi transientDocumentsApi = null;
   
-  @Before
-  public void setup() {
+  @Rule
+  public Retry retry = new Retry();
+  
+  
+  @BeforeClass
+  public static void setup() {
+
     transientDocumentsApi = TransientDocumentsUtils.getTransientDocumentsApi();
   }
   
@@ -49,9 +56,8 @@ public class PostTransientDocumentsApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      transientDocumentsApi.createTransientDocument(TestData.NULL_PARAM,
+      transientDocumentsApi.createTransientDocument(ApiUtils.getNullAccessTokenHeaderParams(),
                                                     TestData.SAMPLE_FILE,
-                                                    TestData.X_API_HEADER,
                                                     TestData.TRANSIENT_DOCUMENT_NAME,
                                                     TestData.VALID_MIME);
     }
@@ -61,9 +67,8 @@ public class PostTransientDocumentsApiTest {
     }
 
     try {
-      transientDocumentsApi.createTransientDocument(TestData.EMPTY_PARAM,
+      transientDocumentsApi.createTransientDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
                                                     TestData.SAMPLE_FILE,
-                                                    TestData.X_API_HEADER,
                                                     TestData.TRANSIENT_DOCUMENT_NAME,
                                                     TestData.VALID_MIME);
     }
@@ -82,9 +87,8 @@ public class PostTransientDocumentsApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      transientDocumentsApi.createTransientDocument(TestData.ACCESS_TOKEN,
+      transientDocumentsApi.createTransientDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
                                                     TestData.SAMPLE_FILE,
-                                                    TestData.EMPTY_PARAM,
                                                     TestData.TRANSIENT_DOCUMENT_NAME,
                                                     TestData.VALID_MIME);
     }
@@ -103,9 +107,8 @@ public class PostTransientDocumentsApiTest {
   @Test
   public void testInvalidFile() throws ApiException {
     try {
-      transientDocumentsApi.createTransientDocument(TestData.ACCESS_TOKEN,
+      transientDocumentsApi.createTransientDocument(ApiUtils.getValidHeaderParams(),
                                                     null,
-                                                    TestData.X_API_HEADER,
                                                     TestData.TRANSIENT_DOCUMENT_NAME,
                                                     TestData.VALID_MIME);
     }
@@ -124,9 +127,8 @@ public class PostTransientDocumentsApiTest {
   @Test
   public void testInvalidFileName() throws ApiException {
     try {
-      transientDocumentsApi.createTransientDocument(TestData.ACCESS_TOKEN,
+      transientDocumentsApi.createTransientDocument(ApiUtils.getValidHeaderParams(),
                                                     TestData.SAMPLE_FILE,
-                                                    TestData.X_API_HEADER,
                                                     TestData.EMPTY_PARAM,
                                                     TestData.VALID_MIME);
     }
@@ -146,9 +148,8 @@ public class PostTransientDocumentsApiTest {
   @Test
   public void testInvalidFileExtensionAndMime() throws ApiException {
     try {
-      transientDocumentsApi.createTransientDocument(TestData.ACCESS_TOKEN,
+      transientDocumentsApi.createTransientDocument(ApiUtils.getValidHeaderParams(),
                                                     TestData.NO_EXTENSION_FILE,
-                                                    TestData.X_API_HEADER,
                                                     TestData.TRANSIENT_DOCUMENT_NAME,
                                                     TestData.EMPTY_MIME);
     }
@@ -166,9 +167,8 @@ public class PostTransientDocumentsApiTest {
   @Test
   public void testCreateTransientDocument() throws ApiException {
     try {
-      TransientDocumentResponse response = transientDocumentsApi.createTransientDocument(TestData.ACCESS_TOKEN,
+      TransientDocumentResponse response = transientDocumentsApi.createTransientDocument(ApiUtils.getValidHeaderParams(),
                                                                                          TestData.SAMPLE_FILE.getAbsoluteFile(),
-                                                                                         TestData.X_API_HEADER,
                                                                                          TestData.TRANSIENT_DOCUMENT_NAME,
                                                                                          TestData.VALID_MIME);
       assertNotNull(response);

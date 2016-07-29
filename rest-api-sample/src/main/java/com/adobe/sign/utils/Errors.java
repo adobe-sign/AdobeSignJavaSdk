@@ -19,8 +19,10 @@ public class Errors {
   public final static String GET_USERS_IN_ACCOUNT = "Failure in fetching users in the account";
 
   public final static String CREATE_GROUP = "Failure in creating the group";
+  public final static String CREATE_GROUP_OAUTH = "Failure in creating the group with OAuth workflow.";
   public final static String GET_GROUPS = "Failure in fetching the groups";
   public final static String CREATE_NEW_GROUP_IN_ACCOUNT = "Failure in creating new group in account";
+  public final static String CREATE_NEW_GROUP_IN_ACCOUNT_OAUTH = "Failure in creating new group in account with OAuth workflow.";
   public final static String GET_GROUPS_IN_ACCOUNT = "Failure in fetching groups in the account";
 
   public final static String CREATE_AGREEMENT = "Failure in creating the agreement";
@@ -32,6 +34,7 @@ public class Errors {
   public final static String GET_COMBINED_DOCUMENT = "Failure in fetching agreement as a file stream";
   public final static String SEND_AGREEMENT_USING_LIBRARY_DOCUMENT = "Failure in sending agreement using library document";
   public final static String SEND_AGREEMENT_USING_TRANSIENT_DOCUMENT = "Failure in sending agreement using transient document";
+  public final static String GET_SIGNING_URL="Failure in fetching signing url";
 
   public final static String CREATE_MEGASIGN = "Failure in creating the megaSign parent agreement";
   public final static String GET_MEGASIGNS = "Failure in fetching the megaSign parent agreements";
@@ -41,6 +44,7 @@ public class Errors {
   public final static String SEND_MEGASIGN_USING_TRANSIENT_DOCUMENT = "Failure in sending megaSign parent agreement using transient document";
 
   public final static String CREATE_ALTERNATE_PARTICIPANT = "Failure in creating alternate participant";
+  public final static String CREATE_ALTERNATE_PARTICIPANT_FOR_AGREEMENT  = "Failure in creating alternate participant for the agreement";
 
   public final static String NO_LIBRARY_DOCUMENTS = "No library documents found";
   public final static String GET_LIBRARY_DOCUMENTS = "Failure in fetching the library documents";
@@ -62,6 +66,7 @@ public class Errors {
   public final static String GET_AUDIT_TRAIL = "Error while fetching the audit trail";
   public final static String DOWNLOAD_AUDIT_TRAIL = "Error while downloading the audit trail of the agreement";
   public final static String FILE_NOT_SAVED = "File not saved";
+  public final static String FILE_NOT_CLOSED = "File not closed ";
   public final static String DOWNLOAD_DOCUMENT = "Failure in downloading documents of agreement";
   public final static String ARCHIVE_AGREEMENT = "Failure in archiving agreements";
   public final static String GET_WIDGET_FORM_DATA = "Failure in getting widget form data";
@@ -80,4 +85,8 @@ public class Errors {
   public final static String CHECK_AGREEMENT_EXIST = "Failure in fetching the agreement with given agreement name";
 
   public final static String SET_BASE_URI = "Error in setting the base uri";
+  public final static String GENERATE_AUTH_CODE_FROM_SERVER = "Generate auth code from local auth code server";
+  public final static String START_HTTPS_SERVER = "Failure in starting the HTTPS server";
+  public final static String OAUTH_HANDLER = "Failure in authorizing for Oauth code";
+  public final static String REDIRECT_HANDLER = "Failure in redirecting to redirect URI";
 }

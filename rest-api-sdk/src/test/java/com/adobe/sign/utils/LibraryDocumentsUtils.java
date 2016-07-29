@@ -15,6 +15,7 @@ package com.adobe.sign.utils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.LibraryDocumentsApi;
 import com.adobe.sign.model.libraryDocuments.DocumentLibraryItem;
@@ -32,6 +33,7 @@ import com.adobe.sign.model.libraryDocuments.URLFileInfo;
 public class LibraryDocumentsUtils {
   
   private static LibraryDocumentsApi libraryDocumentsApi = new LibraryDocumentsApi();
+  private static MultivaluedMap headers = ApiUtils.getValidHeaderParams();
   
   private static String documentId = null;
   private static String libraryDocumentId = null;
@@ -48,9 +50,8 @@ public class LibraryDocumentsUtils {
 
  public static String createLibraryDocument(String name) throws ApiException {
    LibraryCreationInfo libraryCreationInfo = getLibraryCreationInfo(name);
-   LibraryDocumentCreationResponse response =  libraryDocumentsApi.createLibraryDocument(TestData.ACCESS_TOKEN,
-                                                                                         libraryCreationInfo,
-                                                                                         TestData.X_API_HEADER);
+   LibraryDocumentCreationResponse response =  libraryDocumentsApi.createLibraryDocument(headers,
+                                                                                         libraryCreationInfo);
    libraryDocumentId = response.getLibraryDocumentId();
    return libraryDocumentId;
  }
@@ -137,16 +138,14 @@ public class LibraryDocumentsUtils {
  
  private static void setDocumentId(String libraryDocumentId2) throws ApiException {
 
-   Documents documents =  libraryDocumentsApi.getDocuments(TestData.ACCESS_TOKEN,
-                                                           libraryDocumentId,
-                                                           TestData.X_API_HEADER);
+   Documents documents =  libraryDocumentsApi.getDocuments(headers,
+                                                           libraryDocumentId);
    List<OriginalDocument> documentsList = documents.getDocuments();
    documentId = documentsList.get(0).getDocumentId();
  }
 
- private static boolean isExistingLibraryDocument(String name) throws ApiException {
-   DocumentLibraryItems documentLibraryItems = libraryDocumentsApi.getLibraryDocuments(TestData.ACCESS_TOKEN,
-                                                                                       TestData.X_API_HEADER);
+ public static boolean isExistingLibraryDocument(String name) throws ApiException {
+   DocumentLibraryItems documentLibraryItems = libraryDocumentsApi.getLibraryDocuments(headers);
    for (DocumentLibraryItem agr : documentLibraryItems.getLibraryDocumentList()) {
      if(agr.getScope().equals(DocumentLibraryItem.ScopeEnum.PERSONAL) && agr.getName().equals(name)){
        libraryDocumentId = agr.getLibraryDocumentId();

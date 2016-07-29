@@ -14,6 +14,7 @@ package com.adobe.sign.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.WidgetsApi;
 import com.adobe.sign.model.widgets.CounterSignerInfo;
@@ -29,6 +30,7 @@ import com.adobe.sign.model.widgets.WidgetInfo;
 public class WidgetUtils {
 
   private final static WidgetsApi widgetsApi = new WidgetsApi();
+  private final static MultivaluedMap headers = ApiUtils.getHeaderParams();
 
   //Document identifier to identify whether document is library document or transient document
   public enum DocumentIdentifierType {
@@ -54,7 +56,7 @@ public class WidgetUtils {
                                                                      String formFieldDocumentId,
                                                                      DocumentIdentifierType formFieldIdType,
                                                                      String widgetName,
-                                                                     ArrayList<String> counterSignerMemberList) throws Exception {
+                                                                     ArrayList<String> counterSignerMemberList) throws ApiException {
     try {
       WidgetCreationRequest widgetCreationRequest = getWidgetCreationRequest(documentIdentifier,
                                                     documentIdentifierType,
@@ -62,12 +64,13 @@ public class WidgetUtils {
                                                     formFieldIdType,
                                                     widgetName,
                                                     counterSignerMemberList);
-      WidgetCreationResponse widgetCreationResponse = widgetsApi.createWidget(Constants.ACCESS_TOKEN, widgetCreationRequest , Constants.X_API_USER);
+      WidgetCreationResponse widgetCreationResponse = widgetsApi.createWidget(headers,
+                                                                              widgetCreationRequest );
       return widgetCreationResponse;
     }
     catch (ApiException e) {
-      System.err.println(Errors.CREATE_WIDGET);
-      throw new Exception(e);
+      ApiUtils.logException(Errors.CREATE_WIDGET, e);
+      return null;
     }
   }
 
@@ -213,16 +216,15 @@ public class WidgetUtils {
    * @param widgetId The widget identifier.
    * @return byte[]
    */
-  public static byte[] getWidgetFormData(String widgetId) throws Exception {
+  public static byte[] getWidgetFormData(String widgetId) throws ApiException {
     try {
-      byte[] widgetFormaData = widgetsApi.getWidgetFormData(Constants.ACCESS_TOKEN,
-                                                            widgetId,
-                                                            Constants.X_API_USER);
+      byte[] widgetFormaData = widgetsApi.getWidgetFormData(headers,
+                                                            widgetId);
       return widgetFormaData;
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_WIDGET_FORM_DATA);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_WIDGET_FORM_DATA, e);
+      return null;
     }
   }
 
@@ -232,16 +234,15 @@ public class WidgetUtils {
    * @param widgetId The widget identifier.
    * @return WidgetInfo
    */
-  public static WidgetInfo getWidgetInfo(String widgetId) throws Exception {
+  public static WidgetInfo getWidgetInfo(String widgetId) throws ApiException {
     try {
-      WidgetInfo widgetInfo = widgetsApi.getWidgetInfo(Constants.ACCESS_TOKEN,
-                                                       widgetId,
-                                                       Constants.X_API_USER);
+      WidgetInfo widgetInfo = widgetsApi.getWidgetInfo(headers,
+                                                       widgetId);
       return widgetInfo;
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_WIDGET_FORM_DATA);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_WIDGET_FORM_DATA, e);
+      return  null;
     }
   }
 
@@ -250,15 +251,14 @@ public class WidgetUtils {
    *
    * @return UserWidgets
    */
-  public static UserWidgets getWidgets() throws Exception {
+  public static UserWidgets getWidgets() throws ApiException {
     try {
-      UserWidgets userWidgets = widgetsApi.getWidgets(Constants.ACCESS_TOKEN,
-                                                      Constants.X_API_USER);
+      UserWidgets userWidgets = widgetsApi.getWidgets(headers);
       return userWidgets;
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_WIDGETS);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_WIDGETS, e);
+      return null;
     }
   }
 
@@ -267,7 +267,7 @@ public class WidgetUtils {
    *
    * @return String containing id of first widget of the user.
    */
-  public static String getFirstWidgetId() throws Exception{
+  public static String getFirstWidgetId() throws ApiException{
     try {
       //Get the list of user widgets
       UserWidgets userWidgets = getWidgets();
@@ -279,11 +279,10 @@ public class WidgetUtils {
           return userWidget.getWidgetId();
         }
       }
-      return null;
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_FIRST_WIDGET);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_FIRST_WIDGET, e);
     }
+    return null;
   }
 }

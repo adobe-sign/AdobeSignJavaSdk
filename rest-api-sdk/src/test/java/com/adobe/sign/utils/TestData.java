@@ -19,7 +19,7 @@ import java.util.Properties;
 
 public class TestData {
 
-  private static final String CONFIG_PATH = "src/test/java/com/adobe/sign/resources/config.properties";
+  private static final String CONFIG_PATH = ApiUtils.getSdkAbsolutePath() + "src/test/java/com/adobe/sign/resources/config.properties";
   private static Properties properties = ApiUtils.getProperties(CONFIG_PATH);
 
   private static final String FALSE = "false";
@@ -83,6 +83,16 @@ public class TestData {
   private static final String daysBeforeCurrentDate= "daysBeforeCurrentDate";
   private static final String pageSize= "pageSize";
 
+  private static final String REDIRECT_URI_KEY = "redirectUri";
+  private static final String STATE_KEY = "state";
+  private static final String CLIENT_ID_KEY = "clientId";
+  private static final String CLIENT_SECRET_KEY = "clientSecret";
+  private static final String ACCESS_TOKEN_GRANT_TYPE_KEY = "accessTokenGrantType";
+  private static final String REFRESH_TOKEN_GRANT_TYPE_KEY = "refreshTokenGrantType";
+  private static final String RESPONSE_TYPE_KEY = "responseType";
+  private static final String RETRY_COUNT_KEY = "retryCount";
+
+
   // Common Parameters
   public static final String ACCESS_TOKEN = properties.getProperty(ACCESS_TOKEN_KEY).equals("null") ? null : properties.getProperty(ACCESS_TOKEN_KEY);
 
@@ -91,7 +101,10 @@ public class TestData {
 
   public static final String X_API_HEADER = properties.getProperty(X_API_HEADER_KEY).equals("null") ? null : properties.getProperty(X_API_HEADER_KEY);
   public static final String X_USER_EMAIL = properties.getProperty(X_USER_EMAIL_KEY).equals("null") ? null : properties.getProperty(X_USER_EMAIL_KEY);
-
+  
+  // Test Parameters
+  public static final String RETRY_COUNT = properties.getProperty(RETRY_COUNT_KEY).equals("null") ? null : properties.getProperty(RETRY_COUNT_KEY);
+  
   // Group creation details
   public static final String GROUP_NAME_PREFIX = properties.getProperty(GROUP_NAME_SUFFIX_KEY).equals("null") ? null : properties.getProperty(GROUP_NAME_SUFFIX_KEY);
   public static final String GROUP_NAME = properties.getProperty(GROUP_NAME_KEY).equals("null") ? null : properties.getProperty(GROUP_NAME_KEY);
@@ -143,7 +156,7 @@ public class TestData {
 
   // Transient Document Parameters
   public static final String TRANSIENT_DOCUMENT_NAME = properties.getProperty(TRANSIENT_DOCUMENT_NAME_KEY).equals("null") ? null : properties.getProperty(TRANSIENT_DOCUMENT_NAME_KEY);
-  public static final File SAMPLE_FILE = new File(properties.getProperty(SAMPLE_FILE_KEY).equals("null") ? null : properties.getProperty(SAMPLE_FILE_KEY));
+  public static final File SAMPLE_FILE = new File(properties.getProperty(SAMPLE_FILE_KEY).equals("null") ? null : ApiUtils.getSdkAbsolutePath() + properties.getProperty(SAMPLE_FILE_KEY));
   public static final File NO_EXTENSION_FILE = new File(properties.getProperty(NO_EXTENSION_FILE_KEY).equals("null") ? null : properties.getProperty(NO_EXTENSION_FILE_KEY));
   public static final String VALID_MIME =properties.getProperty(VALID_MIME_KEY).equals("null") ? null : properties.getProperty(VALID_MIME_KEY);
   public static final String EMPTY_MIME =properties.getProperty(EMPTY_MIME_KEY).equals("null") ? null : properties.getProperty(EMPTY_MIME_KEY);
@@ -172,5 +185,14 @@ public class TestData {
  public static final String GROUP_ID = properties.getProperty(GROUP_ID_KEY).equals("null") ? null : properties.getProperty(GROUP_ID_KEY);
  public static final String WORKFLOW_ID = properties.getProperty(WORKFLOW_ID_KEY).equals("null") ? null : properties.getProperty(WORKFLOW_ID_KEY);
  public static final String WORKFLOW_RECIPIENT_INFO_NAME = properties.getProperty(WORKFLOW_RECIPIENT_INFO_NAME_KEY).equals("null") ? null : properties.getProperty(WORKFLOW_RECIPIENT_INFO_NAME_KEY);
- 
+
+  //OAuth workflow parameters
+  public static final String REDIRECT_URI = properties.getProperty(REDIRECT_URI_KEY).equals("null") ? null : properties.getProperty(REDIRECT_URI_KEY);
+  public static final String STATE = properties.getProperty(STATE_KEY).equals("null") ? null : properties.getProperty(STATE_KEY);
+  public static final String CLIENT_ID = properties.getProperty(CLIENT_ID_KEY).equals("null") ? null : properties.getProperty(CLIENT_ID_KEY);
+  public static final String CLIENT_SECRET = properties.getProperty(CLIENT_SECRET_KEY).equals("null") ? null : properties.getProperty(CLIENT_SECRET_KEY);
+  public static final String ACCESS_TOKEN_GRANT_TYPE = properties.getProperty(ACCESS_TOKEN_GRANT_TYPE_KEY).equals("null") ? null : properties.getProperty(ACCESS_TOKEN_GRANT_TYPE_KEY);
+  public static final String REFRESH_TOKEN_GRANT_TYPE = properties.getProperty(REFRESH_TOKEN_GRANT_TYPE_KEY).equals("null") ? null : properties.getProperty(REFRESH_TOKEN_GRANT_TYPE_KEY);
+  public static final String RESPONSE_TYPE = properties.getProperty(RESPONSE_TYPE_KEY).equals("null") ? null : properties.getProperty(RESPONSE_TYPE_KEY);
+
 }

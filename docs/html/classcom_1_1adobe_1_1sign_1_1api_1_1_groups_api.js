@@ -1,10 +1,10 @@
 var classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api =
 [
-    [ "GroupsApi", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#a9499a5d7b010160733de58a309fbfda9", null ],
-    [ "createGroup", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#a2d5f4b2851e19b55ab5ea40f70fd1067", null ],
-    [ "deleteGroup", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#a1ba1592c4a1c642e6d12cf88a518935a", null ],
-    [ "getGroupDetails", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#a5db4646585334b170229882c768aa0ec", null ],
-    [ "getGroups", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#a7a1b7f7f8e59b94a46cff2e55ce3307a", null ],
-    [ "getUsersInGroup", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#a09c12998fc6756018e4ce69fedb03a7c", null ],
-    [ "modifyGroup", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#ab39e592a3adb75cacfac86c97c44c1e2", null ]
+    [ "GroupsApi", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#ad2ee2b80bedb78dac5912e34a4acd861", null ],
+    [ "createGroup", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#af5f20006207c2be180834e5f7a690b84", null ],
+    [ "deleteGroup", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#a6d3ed565ad1b6a4728958c6424905180", null ],
+    [ "getGroupDetails", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#affce50822fc03e63d1b511d932615e51", null ],
+    [ "getGroups", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#a517add6a6a266b5a6ae50e8d197611a2", null ],
+    [ "getUsersInGroup", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#aedbbf24a95cc934b73351437fd036d6c", null ],
+    [ "modifyGroup", "classcom_1_1adobe_1_1sign_1_1api_1_1_groups_api.html#a9b30b4421ebff2aca65effbac0ae0ff7", null ]
 ];

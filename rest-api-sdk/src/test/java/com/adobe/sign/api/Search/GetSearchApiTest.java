@@ -19,12 +19,14 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.SearchApi;
 import com.adobe.sign.model.search.AgreementAssetEventGetResponse;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.SearchUtils;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -32,14 +34,18 @@ import org.junit.Test;
  */
 public class GetSearchApiTest {
 
-  private SearchApi searchApi = null;
+  private static SearchApi searchApi = null;
   
-  private String searchId = null;
+  private static String searchId = null;
   
-  private String pageCursor = null;
+  private static String pageCursor = null;
+  
+  @Rule
+  public Retry retry = new Retry();
+  
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     searchApi = SearchUtils.getSearchApi();
     searchId = SearchUtils.getResourceId();
     pageCursor = SearchUtils.getPageCursor();
@@ -56,10 +62,9 @@ public class GetSearchApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      searchApi.getAssetEvent(TestData.NULL_PARAM,
+      searchApi.getAssetEvent(ApiUtils.getNullAccessTokenHeaderParams(),
                               searchId,
                               pageCursor,
-                              TestData.X_API_HEADER,
                               TestData.PAGE_SIZE);
     }
     catch (ApiException e) {
@@ -68,10 +73,9 @@ public class GetSearchApiTest {
     }
 
     try {
-      searchApi.getAssetEvent(TestData.EMPTY_PARAM,
+      searchApi.getAssetEvent(ApiUtils.getEmptyAccessTokenHeaderParams(),
                               searchId,
                               pageCursor,
-                              TestData.X_API_HEADER,
                               TestData.PAGE_SIZE);
     }
     catch (ApiException e) {
@@ -90,10 +94,9 @@ public class GetSearchApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      searchApi.getAssetEvent(TestData.ACCESS_TOKEN,
+      searchApi.getAssetEvent(ApiUtils.getEmptyXApiUserHeaderParams(),
                               searchId,
                               pageCursor,
-                              TestData.EMPTY_PARAM,
                               TestData.PAGE_SIZE);
     }
     catch (ApiException e) {
@@ -112,10 +115,9 @@ public class GetSearchApiTest {
   @Test
   public void testInvalidSearchId() throws ApiException {
     try {
-      searchApi.getAssetEvent(TestData.ACCESS_TOKEN,
+      searchApi.getAssetEvent(ApiUtils.getValidHeaderParams(),
                               TestData.NULL_PARAM,
                               pageCursor,
-                              TestData.X_API_HEADER,
                               TestData.PAGE_SIZE);
     }
     catch (ApiException e) {
@@ -124,10 +126,9 @@ public class GetSearchApiTest {
     }
 
     try {
-      searchApi.getAssetEvent(TestData.ACCESS_TOKEN,
+      searchApi.getAssetEvent(ApiUtils.getValidHeaderParams(),
                               TestData.EMPTY_PARAM,
                               pageCursor,
-                              TestData.X_API_HEADER,
                               TestData.PAGE_SIZE);
     }
     catch (ApiException e) {
@@ -146,10 +147,9 @@ public class GetSearchApiTest {
   @Test
   public void testInvalidPageCursor() throws ApiException {
     try {
-      searchApi.getAssetEvent(TestData.ACCESS_TOKEN,
+      searchApi.getAssetEvent(ApiUtils.getValidHeaderParams(),
                               searchId,
                               TestData.NULL_PARAM,
-                              TestData.X_API_HEADER,
                               TestData.PAGE_SIZE);
     }
     catch (ApiException e) {
@@ -158,10 +158,9 @@ public class GetSearchApiTest {
     }
 
     try {
-      searchApi.getAssetEvent(TestData.ACCESS_TOKEN,
+      searchApi.getAssetEvent(ApiUtils.getValidHeaderParams(),
                               searchId,
                               TestData.EMPTY_PARAM,
-                              TestData.X_API_HEADER,
                               TestData.PAGE_SIZE);
     }
     catch (ApiException e) {
@@ -179,10 +178,9 @@ public class GetSearchApiTest {
   @Test
   public void testGetAssetEvent() throws ApiException {
     try {
-      AgreementAssetEventGetResponse response = searchApi.getAssetEvent(TestData.ACCESS_TOKEN,
+      AgreementAssetEventGetResponse response = searchApi.getAssetEvent(ApiUtils.getValidHeaderParams(),
                                                                         searchId,
                                                                         pageCursor,
-                                                                        TestData.X_API_HEADER,
                                                                         TestData.PAGE_SIZE);
       assertNotNull(response);
     }

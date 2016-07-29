@@ -14,6 +14,7 @@ package com.adobe.sign.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.MegaSignsApi;
 import com.adobe.sign.model.megaSigns.FileInfo;
@@ -28,6 +29,7 @@ import com.adobe.sign.model.megaSigns.RecipientSetInfo;
 public class MegaSignUtils {
 
   private final static MegaSignsApi megaSignsApi = new MegaSignsApi();
+  private final static MultivaluedMap headers = ApiUtils.getHeaderParams();
 
   //Document identifier to identify whether document is library document or transient document
   public enum DocumentIdentifierType {
@@ -41,16 +43,15 @@ public class MegaSignUtils {
    *
    * @return all the megaSign parent agreements of the user
    */
-  public static MegaSigns getMegaSigns() throws Exception {
+  public static MegaSigns getMegaSigns() throws ApiException {
     try {
-      MegaSigns megaSigns = megaSignsApi.getMegaSigns(Constants.ACCESS_TOKEN,
-                                                      Constants.X_API_USER,
+      MegaSigns megaSigns = megaSignsApi.getMegaSigns(headers,
                                                       Constants.QUERY);
       return megaSigns;
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_MEGASIGNS);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_MEGASIGNS, e);
+      return null;
     }
   }
 
@@ -110,7 +111,7 @@ public class MegaSignUtils {
    */
   public static MegaSignCreationResponse createMegaSign(String documentId,
                                                         List<String> recipientSetEmailList,
-                                                        DocumentIdentifierType documentIdentifierType) throws Exception {
+                                                        DocumentIdentifierType documentIdentifierType) throws ApiException {
     try {
       //Get recipient info
       List<RecipientSetInfo> recipientSetInfos = getRecipientSetInfo(recipientSetEmailList);
@@ -126,14 +127,13 @@ public class MegaSignUtils {
                                                                                         fileInfos);
       MegaSignCreationRequest megaSignCreationRequest = new MegaSignCreationRequest();
       megaSignCreationRequest.setMegaSignCreationInfo(megaSignCreationInfo);
-      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(Constants.ACCESS_TOKEN,
-                                                                                      megaSignCreationRequest,
-                                                                                      Constants.X_API_USER);
+      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(headers,
+                                                                                      megaSignCreationRequest);
       return megaSignCreationResponse;
     }
-    catch (Exception e) {
-      System.err.println(Errors.CREATE_MEGASIGN);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CREATE_MEGASIGN, e);
+      return null;
     }
   }
 
@@ -142,16 +142,15 @@ public class MegaSignUtils {
    *
    * @param megaSignId The identifier of the megaSign parent agreement
    */
-  public static MegaSignInfo getMegaSignInfo(String megaSignId) throws Exception {
+  public static MegaSignInfo getMegaSignInfo(String megaSignId) throws ApiException {
     try {
-      MegaSignInfo megaSignInfo = megaSignsApi.getMegaSignInfo(Constants.ACCESS_TOKEN,
-                                                               megaSignId,
-                                                               Constants.X_API_USER);
+      MegaSignInfo megaSignInfo = megaSignsApi.getMegaSignInfo(headers,
+                                                               megaSignId);
       return megaSignInfo;
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_MEGASIGN_DETAILS);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_MEGASIGN_DETAILS, e);
+      return null;
     }
   }
 

@@ -17,6 +17,7 @@ import com.adobe.sign.utils.ApiClient;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Pair;
 import com.adobe.sign.utils.TypeRef;
+import com.adobe.sign.utils.validator.ApiValidatorHelper;
 import com.adobe.sign.utils.validator.GroupsApiValidator;
 
 import com.adobe.sign.model.groups.GroupsInfo;
@@ -27,28 +28,39 @@ import com.adobe.sign.model.groups.GroupModificationInfo;
 import com.adobe.sign.model.groups.GroupModificationResponse;
 import com.adobe.sign.model.groups.UsersInfo;
 
-import java.util.*;
+    import java.util.*;
+import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:24:53.620+05:30")
-public class GroupsApi {
-  private ApiClient apiClient;
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:00.387+05:30")
+    public class GroupsApi {
+    private ApiClient apiClient;
+    private final String CONTENT_TYPE = "Content-Type";
+    private final String ACCEPT = "Accept";
+    private final String ACCESS_TOKEN = "Access-Token";
+    private final String X_API_USER = "x-api-user";
 
-  public GroupsApi() {
+    public GroupsApi() {
     this.apiClient = Context.getDefaultApiClient();
-  }
+    }
 
-  
-  /**
-   * Gets all the groups in an account.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:user_read
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return GroupsInfo
-   */
-  public GroupsInfo getGroups (String accessToken,
-                                                        String xApiUser) throws ApiException {
+    
+    /**
+    * Gets all the groups in an account.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: user_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @return GroupsInfo
+    */
+    public GroupsInfo getGroups (MultivaluedMap headers) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    GroupsApiValidator.getGroupsValidator(accessToken, xApiUser);
+    GroupsApiValidator.getGroupsValidator();
 
     //Create path and map variables
     String path = "/groups".replaceAll("\\{format\\}","json");
@@ -57,43 +69,67 @@ public class GroupsApi {
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<GroupsInfo>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Creates a new group in an account.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:user_write
-   * @param groupCreationInfo 
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return GroupCreationResponse
-   */
-  public GroupCreationResponse createGroup (String accessToken,
-                                                        GroupCreationInfo groupCreationInfo,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Creates a new group in an account.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: user_write 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param groupCreationInfo 
+    * @return GroupCreationResponse
+    */
+    public GroupCreationResponse createGroup (MultivaluedMap headers,
+                                        GroupCreationInfo groupCreationInfo) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    GroupsApiValidator.createGroupValidator(accessToken, groupCreationInfo, xApiUser);
+    GroupsApiValidator.createGroupValidator(groupCreationInfo);
 
     //Create path and map variables
     String path = "/groups".replaceAll("\\{format\\}","json");
@@ -102,213 +138,327 @@ public class GroupsApi {
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<GroupCreationResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Retrieve detailed information about the group.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:user_read
-   * @param groupId The group identifier, as returned by the group creation API or retrieved from the API to fetch groups
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return GroupDetailsInfo
-   */
-  public GroupDetailsInfo getGroupDetails (String accessToken,
-                                                        String groupId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Retrieve detailed information about the group.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: user_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param groupId The group identifier, as provided by the APIs which retrieves groups or creates groups
+    * @return GroupDetailsInfo
+    */
+    public GroupDetailsInfo getGroupDetails (MultivaluedMap headers,
+                                        String groupId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    GroupsApiValidator.getGroupDetailsValidator(accessToken, groupId, xApiUser);
+    GroupsApiValidator.getGroupDetailsValidator(groupId);
 
     //Create path and map variables
     String path = "/groups/{groupId}".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "groupId" + "\\}", apiClient.escapeString(groupId.toString()));
+        .replaceAll("\\{" + "groupId" + "\\}", apiClient.escapeString(groupId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<GroupDetailsInfo>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Update an existing group.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:user_write
-   * @param groupId The group identifier, as returned by the group creation API or retrieved from the API to fetch groups
-   * @param groupModificationInfo 
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return GroupModificationResponse
-   */
-  public GroupModificationResponse modifyGroup (String accessToken,
-                                                        String groupId,
-                                                        GroupModificationInfo groupModificationInfo,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Update an existing group.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: user_write 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param groupId The group identifier, as provided by the APIs which retrieves groups or creates groups
+    * @param groupModificationInfo 
+    * @return GroupModificationResponse
+    */
+    public GroupModificationResponse modifyGroup (MultivaluedMap headers,
+                                        String groupId,
+                                        GroupModificationInfo groupModificationInfo) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    GroupsApiValidator.modifyGroupValidator(accessToken, groupId, groupModificationInfo, xApiUser);
+    GroupsApiValidator.modifyGroupValidator(groupId,groupModificationInfo);
 
     //Create path and map variables
     String path = "/groups/{groupId}".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "groupId" + "\\}", apiClient.escapeString(groupId.toString()));
+        .replaceAll("\\{" + "groupId" + "\\}", apiClient.escapeString(groupId.toString()));
 
     Object postBody = groupModificationInfo;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<GroupModificationResponse>() {};
-    return apiClient.invokeAPI(path, "PUT", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "PUT", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Delete an existing group.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:user_write
-   * @param groupId The group identifier, as returned by the group creation API or retrieved from the API to fetch groups
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return void
-   */
-  public void deleteGroup (String accessToken,
-                                                        String groupId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Delete an existing group.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: user_write 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param groupId The group identifier, as provided by the APIs which retrieves groups or creates groups
+    * @return void
+    */
+    public void deleteGroup (MultivaluedMap headers,
+                                        String groupId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    GroupsApiValidator.deleteGroupValidator(accessToken, groupId, xApiUser);
+    GroupsApiValidator.deleteGroupValidator(groupId);
 
     //Create path and map variables
     String path = "/groups/{groupId}".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "groupId" + "\\}", apiClient.escapeString(groupId.toString()));
+        .replaceAll("\\{" + "groupId" + "\\}", apiClient.escapeString(groupId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
-    apiClient.invokeAPI(path, "DELETE", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, null);
+    apiClient.invokeAPI(path, "DELETE", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, null, true);
     
-  }
-  
-  /**
-   * Gets all the users in a group.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:user_read
-   * @param groupId The group identifier, as returned by the group creation API or retrieved from the API to fetch groups
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return UsersInfo
-   */
-  public UsersInfo getUsersInGroup (String accessToken,
-                                                        String groupId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Gets all the users in a group.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: user_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param groupId The group identifier, as provided by the APIs which retrieves groups or creates groups
+    * @return UsersInfo
+    */
+    public UsersInfo getUsersInGroup (MultivaluedMap headers,
+                                        String groupId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    GroupsApiValidator.getUsersInGroupValidator(accessToken, groupId, xApiUser);
+    GroupsApiValidator.getUsersInGroupValidator(groupId);
 
     //Create path and map variables
     String path = "/groups/{groupId}/users".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "groupId" + "\\}", apiClient.escapeString(groupId.toString()));
+        .replaceAll("\\{" + "groupId" + "\\}", apiClient.escapeString(groupId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<UsersInfo>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
+    
+    }
     
   }
-  
-}

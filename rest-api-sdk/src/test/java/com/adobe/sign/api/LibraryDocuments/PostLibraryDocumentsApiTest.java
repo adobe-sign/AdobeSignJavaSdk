@@ -25,13 +25,15 @@ import com.adobe.sign.model.libraryDocuments.LibraryCreationInfo;
 import com.adobe.sign.model.libraryDocuments.LibraryDocumentCreationInfo;
 import com.adobe.sign.model.libraryDocuments.LibraryDocumentCreationResponse;
 import com.adobe.sign.model.libraryDocuments.URLFileInfo;
+import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.LibraryDocumentsUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.TransientDocumentsUtils;
-import com.adobe.sign.utils.ApiException;
-import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -39,12 +41,15 @@ import org.junit.Test;
  */
 public class PostLibraryDocumentsApiTest {
   
-  private LibraryDocumentsApi libraryDocumentsApi = null;
-  private String libraryDocumentId = null;
-  private String transientDocumentId = null;
+  private static LibraryDocumentsApi libraryDocumentsApi = null;
+  private static String libraryDocumentId = null;
+  private static String transientDocumentId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     libraryDocumentsApi = LibraryDocumentsUtils.getLibraryDocumentsApi();
 
     libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);
@@ -63,9 +68,8 @@ public class PostLibraryDocumentsApiTest {
     LibraryCreationInfo creationInfo = new LibraryCreationInfo();
 
     try {
-      libraryDocumentsApi.createLibraryDocument(TestData.NULL_PARAM,
-                                                creationInfo,
-                                                TestData.X_API_HEADER);
+      libraryDocumentsApi.createLibraryDocument(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                creationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -73,9 +77,8 @@ public class PostLibraryDocumentsApiTest {
     }
 
     try {
-      libraryDocumentsApi.createLibraryDocument(TestData.EMPTY_PARAM,
-                                                creationInfo,
-                                                TestData.X_API_HEADER);
+      libraryDocumentsApi.createLibraryDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                creationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -94,9 +97,8 @@ public class PostLibraryDocumentsApiTest {
     LibraryCreationInfo creationInfo = new LibraryCreationInfo();
 
     try {
-      libraryDocumentsApi.createLibraryDocument(TestData.ACCESS_TOKEN,
-                                                creationInfo,
-                                                TestData.EMPTY_PARAM);
+      libraryDocumentsApi.createLibraryDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                creationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -121,9 +123,8 @@ public class PostLibraryDocumentsApiTest {
     
     // FileInfo with all 4 parameters null.
     try {
-      libraryDocumentsApi.createLibraryDocument(TestData.ACCESS_TOKEN,
-                                                libraryCreationInfo,
-                                                TestData.X_API_HEADER);
+      libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                libraryCreationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -139,9 +140,8 @@ public class PostLibraryDocumentsApiTest {
     
     // Invalid url specified in FileInfo's getDocumentUrl parameter.
     try {
-      libraryDocumentsApi.createLibraryDocument(TestData.ACCESS_TOKEN,
-                                                libraryCreationInfo,
-                                                TestData.X_API_HEADER);
+      libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                libraryCreationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -157,9 +157,8 @@ public class PostLibraryDocumentsApiTest {
     
     // FileInfo with more than 1 parameter non-empty.
     try {
-      libraryDocumentsApi.createLibraryDocument(TestData.ACCESS_TOKEN,
-                                                libraryCreationInfo,
-                                                TestData.X_API_HEADER);
+      libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                libraryCreationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -171,9 +170,8 @@ public class PostLibraryDocumentsApiTest {
     
     // Name null in libraryDocumentCreationInfo
     try {
-      libraryDocumentsApi.createLibraryDocument(TestData.ACCESS_TOKEN,
-                                                libraryCreationInfo,
-                                                TestData.X_API_HEADER);
+      libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                libraryCreationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -186,9 +184,8 @@ public class PostLibraryDocumentsApiTest {
     
     // SharingType null in libraryDocumentCreationInfo
     try {
-      libraryDocumentsApi.createLibraryDocument(TestData.ACCESS_TOKEN,
-                                                libraryCreationInfo,
-                                                TestData.X_API_HEADER);
+      libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                libraryCreationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -201,9 +198,8 @@ public class PostLibraryDocumentsApiTest {
     
     // TemplateType null in libraryDocumentCreationInfo
     try {
-      libraryDocumentsApi.createLibraryDocument(TestData.ACCESS_TOKEN,
-                                                libraryCreationInfo,
-                                                TestData.X_API_HEADER);
+      libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                libraryCreationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -223,9 +219,8 @@ public class PostLibraryDocumentsApiTest {
     LibraryCreationInfo libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(ApiUtils.getLibraryDocumentName());
 
     try {
-      LibraryDocumentCreationResponse response = libraryDocumentsApi.createLibraryDocument(TestData.ACCESS_TOKEN,
-                                                                                           libraryCreationInfo,
-                                                                                           TestData.NULL_PARAM);
+      LibraryDocumentCreationResponse response = libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                                                           libraryCreationInfo);
       assertNotNull(response);
       assertNotNull(response.getLibraryDocumentId());
     }

@@ -17,6 +17,9 @@ import com.adobe.sign.model.agreements.AlternateParticipantResponse;
 import com.adobe.sign.utils.AgreementUtils;
 import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
+import com.adobe.sign.utils.FileUtils;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
 
 /**
  * This sample client creates an alternate signer for the given agreement.
@@ -32,20 +35,21 @@ public class CreateAlternateParticipant {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(CreateAlternateParticipant.class.getName());
     try {
       CreateAlternateParticipant client = new CreateAlternateParticipant();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.CREATE_ALTERNATE_PARTICIPANT);
-    }
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CREATE_ALTERNATE_PARTICIPANT, e);
+     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException{
     //Get agreement ID
     String agreementId = AgreementUtils.getAgreementId(Constants.AGREEMENT_NAME);
 
@@ -54,6 +58,6 @@ public class CreateAlternateParticipant {
                                                                                                           Constants.ALTERNATE_PARTICIPANT_EMAIL,
                                                                                                           Constants.ALTERNATE_PARTICIPANT_MESSAGE);
     //Display information of alternate participant
-    System.out.println("Alternate Participant ID = " + alternateParticipantResponse.getParticipantId());
+    ApiUtils.getLogger().info("Alternate Participant ID = " + alternateParticipantResponse.getParticipantId());
   }
 }

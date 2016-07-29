@@ -13,9 +13,11 @@
 
 package com.adobe.sign.api;
 
+import com.adobe.sign.utils.UserUtils;
 import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
-import com.adobe.sign.utils.UserUtils;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
 
 /**
  * This sample client demonstrates how to create a new user in an account.
@@ -30,27 +32,28 @@ public class CreateNewUserInAccount {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(CreateNewUserInAccount.class.getName());
     try {
       CreateNewUserInAccount client = new CreateNewUserInAccount();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.CREATE_NEW_USER_IN_ACCOUNT);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CREATE_NEW_USER_IN_ACCOUNT, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException{
     //Make API call to create a user
     String userId = UserUtils.createUser(Constants.USER_EMAIL,
                                          Constants.USER_FIRST_NAME,
                                          Constants.USER_LAST_NAME);
 
     //Display user id of the new user
-    System.out.println("User created with User ID = " + userId);
+    ApiUtils.getLogger().info("User created with User ID = " + userId);
   }
 }
 

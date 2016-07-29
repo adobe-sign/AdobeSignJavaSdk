@@ -24,19 +24,13 @@ public class RemindersApiValidator {
   /**
    * Validator for createReminder API that sends a reminder for an agreement.
    *
-   * @param accessToken An OAuth Access Token.
    * @param reminderCreationInfo Information about reminder that needs to be created.
-   * @param xApiUser The userId or email of API caller.
    * @throws ApiException
    */
-  public static void createReminderValidator (String accessToken,
-                                              ReminderCreationInfo reminderCreationInfo,
-                                              String xApiUser) throws ApiException {
-    
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
+  public static void createReminderValidator(ReminderCreationInfo reminderCreationInfo) throws ApiException {
     ApiValidatorHelper.validateParameter(reminderCreationInfo);
-    
-    ApiValidatorHelper.validateParameter(reminderCreationInfo.getAgreementId(), 
+
+    ApiValidatorHelper.validateParameter(reminderCreationInfo.getAgreementId(),
                                          SdkErrorCodes.MUST_PROVIDE_AGREEMENT_ID);
   }
 }

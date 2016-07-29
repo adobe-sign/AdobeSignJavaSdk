@@ -20,21 +20,27 @@ import static org.junit.Assert.fail;
 import com.adobe.sign.api.RemindersApi;
 import com.adobe.sign.model.reminders.ReminderCreationInfo;
 import com.adobe.sign.model.reminders.ReminderCreationResult;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.AgreementsUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.ReminderUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 public class PostRemindersApiTest {
   private static RemindersApi remindersApi = null;
   private static String agreementId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
+  
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
     remindersApi = ReminderUtils.getRemindersApi();
   }
@@ -51,9 +57,8 @@ public class PostRemindersApiTest {
     ReminderCreationInfo reminderCreationInfo = new ReminderCreationInfo();
     reminderCreationInfo.setAgreementId(agreementId);
     try {
-      remindersApi.createReminder(TestData.NULL_PARAM,
-                                  reminderCreationInfo,
-                                  TestData.X_API_HEADER);
+      remindersApi.createReminder(ApiUtils.getNullAccessTokenHeaderParams(),
+                                  reminderCreationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -61,9 +66,8 @@ public class PostRemindersApiTest {
     }
 
     try {
-      remindersApi.createReminder(TestData.EMPTY_PARAM,
-                                  reminderCreationInfo,
-                                  TestData.X_API_HEADER);
+      remindersApi.createReminder(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                  reminderCreationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -82,9 +86,8 @@ public class PostRemindersApiTest {
     ReminderCreationInfo reminderCreationInfo = new ReminderCreationInfo();
     reminderCreationInfo.setAgreementId(agreementId);
     try {
-      remindersApi.createReminder(TestData.ACCESS_TOKEN,
-                                  reminderCreationInfo,
-                                  TestData.EMPTY_PARAM);
+      remindersApi.createReminder(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                  reminderCreationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -103,9 +106,8 @@ public class PostRemindersApiTest {
     ReminderCreationInfo reminderCreationInfo = new ReminderCreationInfo();
     reminderCreationInfo.setAgreementId(TestData.NULL_PARAM);
     try {
-      remindersApi.createReminder(TestData.ACCESS_TOKEN,
-                                  reminderCreationInfo,
-                                  TestData.X_API_HEADER);
+      remindersApi.createReminder(ApiUtils.getValidHeaderParams(),
+                                  reminderCreationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -114,9 +116,8 @@ public class PostRemindersApiTest {
 
     reminderCreationInfo.setAgreementId(TestData.EMPTY_PARAM);
     try {
-      remindersApi.createReminder(TestData.ACCESS_TOKEN,
-                                  reminderCreationInfo,
-                                  TestData.X_API_HEADER);
+      remindersApi.createReminder(ApiUtils.getValidHeaderParams(),
+                                  reminderCreationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -135,9 +136,8 @@ public class PostRemindersApiTest {
     ReminderCreationInfo reminderCreationInfo = new ReminderCreationInfo();
     reminderCreationInfo.setAgreementId(agreementId);
     try {
-      ReminderCreationResult response = remindersApi.createReminder(TestData.ACCESS_TOKEN,
-                                                                    reminderCreationInfo,
-                                                                    TestData.X_API_HEADER);
+      ReminderCreationResult response = remindersApi.createReminder(ApiUtils.getValidHeaderParams(),
+                                                                    reminderCreationInfo);
       assertNotNull(response);
       assertNotNull(response.getResult());
       assertNotNull(response.getParticipantEmailsSet());

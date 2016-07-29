@@ -13,32 +13,34 @@
 
 package com.adobe.sign.api.Agreements;
 
-import static com.adobe.sign.utils.AgreementsUtils.createAgreement;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.AgreementsApi;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.AgreementsUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * Junit test cases for Delete Agreement Documents API.
  */
 public class DeleteAgreementDocumentsApiTest {
-  private AgreementsApi agreementsApi = null;
-  private String agreementId = null;
-  private String documentId = null;
+  private static AgreementsApi agreementsApi = null;
+  private static String agreementId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     agreementsApi = AgreementsUtils.getAgreementsApi();
-    agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
-    documentId = AgreementsUtils.getDocumentId();
+    agreementId = AgreementsUtils.createAgreement(ApiUtils.getAgreementName());
   }
   /**
    * Test for deleting all the documents associated with an agreement through the deleteDocuments endpoint. Negative scenarios covered:
@@ -51,9 +53,8 @@ public class DeleteAgreementDocumentsApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.deleteDocuments(TestData.NULL_PARAM,
-                                    agreementId,
-                                    TestData.X_API_HEADER);
+      agreementsApi.deleteDocuments(ApiUtils.getNullAccessTokenHeaderParams(),
+                                    agreementId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -61,9 +62,8 @@ public class DeleteAgreementDocumentsApiTest {
     }
 
     try {
-      agreementsApi.deleteDocuments(TestData.EMPTY_PARAM,
-                                    agreementId,
-                                    TestData.X_API_HEADER);
+      agreementsApi.deleteDocuments(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                    agreementId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -81,9 +81,8 @@ public class DeleteAgreementDocumentsApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.deleteDocuments(TestData.ACCESS_TOKEN,
-                                    agreementId,
-                                    TestData.EMPTY_PARAM);
+      agreementsApi.deleteDocuments(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                    agreementId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -100,9 +99,8 @@ public class DeleteAgreementDocumentsApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.deleteDocuments(TestData.ACCESS_TOKEN,
-                                    TestData.EMPTY_PARAM,
-                                    TestData.X_API_HEADER);
+      agreementsApi.deleteDocuments(ApiUtils.getValidHeaderParams(),
+                                    TestData.EMPTY_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -110,9 +108,8 @@ public class DeleteAgreementDocumentsApiTest {
     }
 
     try {
-      agreementsApi.deleteDocuments(TestData.ACCESS_TOKEN,
-                                    TestData.NULL_PARAM,
-                                    TestData.X_API_HEADER);
+      agreementsApi.deleteDocuments(ApiUtils.getValidHeaderParams(),
+                                    TestData.NULL_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -129,11 +126,8 @@ public class DeleteAgreementDocumentsApiTest {
   public void testDeleteDocuments() throws ApiException {
 
     try {
-      String agreementId = createAgreement(ApiUtils.getAgreementName());
-
-      agreementsApi.deleteDocuments(TestData.ACCESS_TOKEN,
-                                    agreementId,
-                                    TestData.X_API_HEADER);
+      agreementsApi.deleteDocuments(ApiUtils.getValidHeaderParams(),
+                                    agreementId);
     }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));

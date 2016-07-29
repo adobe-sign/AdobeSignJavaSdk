@@ -15,6 +15,7 @@ package com.adobe.sign.utils;
 import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.UsersApi;
 import com.adobe.sign.model.users.UserCreationInfo;
@@ -26,11 +27,13 @@ import com.adobe.sign.model.users.UsersInfo;
 public class UserUtils {
   
   private static UsersApi usersApi = new UsersApi();
+  private static MultivaluedMap headers = ApiUtils.getValidHeaderParams();
 
   public static String getResourceId(String email) throws ApiException {
     String userId = null;
     
-    UsersInfo userInfos = usersApi.getUsers(TestData.ACCESS_TOKEN,TestData.X_API_HEADER,TestData.X_USER_EMAIL);
+    UsersInfo userInfos = usersApi.getUsers(headers,
+                                            TestData.X_USER_EMAIL);
 
     List<UserInfo> userInfoList = userInfos.getUserInfoList();
 
@@ -63,11 +66,22 @@ public class UserUtils {
                                   String xApiUser) throws ApiException {
     UserCreationInfo userCreationInfo = getUserCreationInfo(firstName, lastName, email);
 
-    UserCreationResponse userCreationResponse = usersApi.createUser(accessToken, userCreationInfo, xApiUser);
+    UserCreationResponse userCreationResponse = usersApi.createUser(headers,
+                                                                    userCreationInfo);
     assertNotNull(userCreationResponse);
     assertNotNull(userCreationResponse.getUserId());
     return userCreationResponse.getUserId();
   }
+
+  // Helper methods
+
+  public static String createUser(String email) throws ApiException {
+    return createUser(TestData.ACCESS_TOKEN,
+                      TestData.FIRST_NAME,
+                      TestData.LAST_NAME,
+                      email,
+                      TestData.X_API_HEADER);
+   }
   
   /**
    * Helper function to create a user and validate that user is actually being created.
@@ -90,14 +104,12 @@ public class UserUtils {
    *
    * @throws ApiException
    */
-  public static UserModificationInfo getUserModificationInfo(String accessToken,
-                                                             String userId,
+  public static UserModificationInfo getUserModificationInfo(String userId,
                                                              String firstName,
                                                              String lastName,
                                                              String email,
                                                              String groupId,
-                                                             List<UserModificationInfo.RolesEnum> roles,
-                                                             String xApiUser) throws ApiException {
+                                                             List<UserModificationInfo.RolesEnum> roles) throws ApiException {
     
     UserModificationInfo userModificationInfo = new UserModificationInfo();
     userModificationInfo.setFirstName(firstName);

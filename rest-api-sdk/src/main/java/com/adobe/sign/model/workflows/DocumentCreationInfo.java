@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:25:02.764+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:09.776+05:30")
 public class DocumentCreationInfo   {
   
   private String callbackInfo = null;
@@ -148,9 +148,9 @@ public enum ReminderFrequencyEnum {
 
   
   /**
-   * The locale associated with this agreement - specifies the language for the signing page and emails, for example en_US or fr_FR.  If none specified, defaults to the language configured for the agreement sender
+   * The locale associated with this agreement - specifies the language for the signing page and emails, for example en_US or fr_FR. If none specified, defaults to the language configured for the agreement sender
    **/
-  @ApiModelProperty(value = "The locale associated with this agreement - specifies the language for the signing page and emails, for example en_US or fr_FR.  If none specified, defaults to the language configured for the agreement sender")
+  @ApiModelProperty(value = "The locale associated with this agreement - specifies the language for the signing page and emails, for example en_US or fr_FR. If none specified, defaults to the language configured for the agreement sender")
   @JsonProperty("locale")
   public String getLocale() {
     return locale;

@@ -13,10 +13,7 @@
 
 package com.adobe.sign.api.Users;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 
@@ -24,12 +21,14 @@ import com.adobe.sign.api.UsersApi;
 import com.adobe.sign.model.users.UserDetailsInfo;
 import com.adobe.sign.model.users.UserModificationInfo;
 import com.adobe.sign.model.users.UserModificationInfo.RolesEnum;
+import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.UserUtils;
-import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -37,17 +36,20 @@ import org.junit.Test;
  */
 public class PutUsersApiTest {
 
-	private UsersApi usersApi = null;
-	private String userId = null;
+	private static UsersApi usersApi = null;
+	private static String userId = null;
+	
+	@Rule
+  public Retry retry = new Retry();
 
 	/**
-	 * Setting up the UsersApi before the tests are run.
+	 * Setting up the UsersApi BeforeClass the tests are run.
 	 *
 	 * @throws ApiException
 	 */
-	@Before
-	public void setup() throws ApiException {
-		userId = UserUtils.getResourceId(TestData.USER_EMAIL);
+	@BeforeClass
+	public static void setup() throws ApiException {
+		userId = UserUtils.createUser(ApiUtils.getUserEmail());
 		usersApi = UserUtils.getUsersApi();
 	}
 
@@ -63,10 +65,9 @@ public class PutUsersApiTest {
 		UserModificationInfo userModificationInfo = new UserModificationInfo();
 
     try {
-      usersApi.modifyUser(TestData.NULL_PARAM,
+      usersApi.modifyUser(ApiUtils.getNullAccessTokenHeaderParams(),
                           userId,
-                          userModificationInfo,
-                          TestData.X_API_HEADER);
+                          userModificationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -74,10 +75,9 @@ public class PutUsersApiTest {
     }
 
     try {
-      usersApi.modifyUser(TestData.EMPTY_PARAM,
+      usersApi.modifyUser(ApiUtils.getEmptyAccessTokenHeaderParams(),
                           userId,
-                          userModificationInfo,
-                          TestData.X_API_HEADER);
+                          userModificationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -96,10 +96,9 @@ public class PutUsersApiTest {
     UserModificationInfo userModificationInfo = new UserModificationInfo();
 
     try {
-      usersApi.modifyUser(TestData.ACCESS_TOKEN,
+      usersApi.modifyUser(ApiUtils.getEmptyXApiUserHeaderParams(),
                           userId,
-                          userModificationInfo,
-                          TestData.EMPTY_PARAM);
+                          userModificationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -116,23 +115,19 @@ public class PutUsersApiTest {
    */
   @Test
   public void testNullAndInvalidUserId() throws ApiException {
-    UserDetailsInfo userDetailsInfo = usersApi.getUserDetail(TestData.ACCESS_TOKEN,
-                                                             userId,
-                                                             TestData.X_API_HEADER);
+    UserDetailsInfo userDetailsInfo = usersApi.getUserDetail(ApiUtils.getValidHeaderParams(),
+                                                             userId);
 
     try {
-      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(TestData.ACCESS_TOKEN,
-                                                                                    TestData.NULL_PARAM,
+      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(TestData.NULL_PARAM,
                                                                                     userDetailsInfo.getFirstName(),
                                                                                     userDetailsInfo.getLastName(),
                                                                                     userDetailsInfo.getEmail(),
                                                                                     userDetailsInfo.getGroupId(),
-                                                                                    Arrays.asList(RolesEnum.NORMAL_USER),
-                                                                                    TestData.X_API_HEADER);
-      usersApi.modifyUser(TestData.ACCESS_TOKEN,
-                          userId,
-                          userModificationInfo,
-                          TestData.X_API_HEADER);
+                                                                                    Arrays.asList(RolesEnum.NORMAL_USER));
+      usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
+                          TestData.NULL_PARAM,
+                          userModificationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -140,18 +135,15 @@ public class PutUsersApiTest {
     }
 
     try {
-      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(TestData.ACCESS_TOKEN,
-                                                                                    TestData.EMPTY_PARAM,
+      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(TestData.EMPTY_PARAM,
                                                                                     userDetailsInfo.getFirstName(),
                                                                                     userDetailsInfo.getLastName(),
                                                                                     userDetailsInfo.getEmail(),
                                                                                     userDetailsInfo.getGroupId(),
-                                                                                    Arrays.asList(RolesEnum.NORMAL_USER),
-                                                                                    TestData.X_API_HEADER);
-      usersApi.modifyUser(TestData.ACCESS_TOKEN,
-                          userId,
-                          userModificationInfo,
-                          TestData.X_API_HEADER);
+                                                                                    Arrays.asList(RolesEnum.NORMAL_USER));
+      usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
+                          TestData.EMPTY_PARAM,
+                          userModificationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -169,23 +161,19 @@ public class PutUsersApiTest {
    */
   @Test
   public void testNullAndInvalidParams() throws ApiException {
-    UserDetailsInfo userDetailsInfo = usersApi.getUserDetail(TestData.ACCESS_TOKEN,
-                                                             userId,
-                                                             TestData.X_API_HEADER);
+    UserDetailsInfo userDetailsInfo = usersApi.getUserDetail(ApiUtils.getValidHeaderParams(),
+                                                             userId);
                                                              
     try {
-      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(TestData.ACCESS_TOKEN,
-                                                                                    userId,
+      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
                                                                                     TestData.NULL_PARAM,
                                                                                     userDetailsInfo.getLastName(),
                                                                                     userDetailsInfo.getEmail(),
                                                                                     userDetailsInfo.getGroupId(),
-                                                                                    Arrays.asList(RolesEnum.NORMAL_USER),
-                                                                                    TestData.X_API_HEADER);
-      usersApi.modifyUser(TestData.ACCESS_TOKEN,
+                                                                                    Arrays.asList(RolesEnum.NORMAL_USER));
+      usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
                           userId,
-                          userModificationInfo,
-                          TestData.X_API_HEADER);
+                          userModificationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -193,18 +181,15 @@ public class PutUsersApiTest {
     }
 
     try {
-      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(TestData.ACCESS_TOKEN,
-                                                                                    userId,
+      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
                                                                                     TestData.EMPTY_PARAM,
                                                                                     userDetailsInfo.getLastName(),
                                                                                     userDetailsInfo.getEmail(),
                                                                                     userDetailsInfo.getGroupId(),
-                                                                                    Arrays.asList(RolesEnum.NORMAL_USER),
-                                                                                    TestData.X_API_HEADER);
-      usersApi.modifyUser(TestData.ACCESS_TOKEN,
+                                                                                    Arrays.asList(RolesEnum.NORMAL_USER));
+      usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
                           userId,
-                          userModificationInfo,
-                          TestData.X_API_HEADER);
+                          userModificationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -212,73 +197,130 @@ public class PutUsersApiTest {
     }
 
     try {
-      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(TestData.ACCESS_TOKEN,
-                                                                                    userId,
+      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
                                                                                     userDetailsInfo.getFirstName(),
                                                                                     TestData.NULL_PARAM,
                                                                                     userDetailsInfo.getEmail(),
                                                                                     userDetailsInfo.getGroupId(),
-                                                                                    Arrays.asList(RolesEnum.NORMAL_USER),
-                                                                                    TestData.X_API_HEADER);
-      usersApi.modifyUser(TestData.ACCESS_TOKEN,
+                                                                                    Arrays.asList(RolesEnum.NORMAL_USER));
+      usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
                           userId,
-                          userModificationInfo,
-                          TestData.X_API_HEADER);
+                          userModificationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
-
     try {
-      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(TestData.ACCESS_TOKEN,
-                                                                                    userId,
+      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
+                                                                                    userDetailsInfo.getFirstName(),
+                                                                                    TestData.EMPTY_PARAM,
+                                                                                    userDetailsInfo.getEmail(),
+                                                                                    userDetailsInfo.getGroupId(),
+                                                                                    Arrays.asList(RolesEnum.NORMAL_USER));
+      usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
+                          userId,
+                          userModificationInfo);
+    }
+    catch (ApiException e) {
+      assertTrue(e.getMessage(),
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+    }
+    try {
+      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
                                                                                     userDetailsInfo.getFirstName(),
                                                                                     userDetailsInfo.getLastName(),
                                                                                     TestData.NULL_PARAM,
                                                                                     userDetailsInfo.getGroupId(),
-                                                                                    Arrays.asList(RolesEnum.NORMAL_USER),
-                                                                                    TestData.X_API_HEADER);
-      usersApi.modifyUser(TestData.ACCESS_TOKEN,
+                                                                                    Arrays.asList(RolesEnum.NORMAL_USER));
+      usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
                           userId,
-                          userModificationInfo,
-                          TestData.X_API_HEADER);
+                          userModificationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
-  }
-
-  /**
-   * Test to modify user details through modifyUser endpoint.
-   */
-  @Test
-  public void testModifyUser() throws ApiException {
-    UserDetailsInfo userDetailsInfo = usersApi.getUserDetail(TestData.ACCESS_TOKEN,
-                                                             userId,
-                                                             TestData.X_API_HEADER);
+    try {
+      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
+                                                                                    userDetailsInfo.getFirstName(),
+                                                                                    userDetailsInfo.getLastName(),
+                                                                                    TestData.EMPTY_PARAM,
+                                                                                    userDetailsInfo.getGroupId(),
+                                                                                    Arrays.asList(RolesEnum.NORMAL_USER));
+      usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
+                          userId,
+                          userModificationInfo);
+    }
+    catch (ApiException e) {
+      assertTrue(e.getMessage(),
+              SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+    }
 
     try {
-      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(TestData.ACCESS_TOKEN,
-                                                                                    userId,
-                                                                                    TestData.MODIFIED_FIRST_NAME,
+      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
+                                                                                    userDetailsInfo.getFirstName(),
+                                                                                    userDetailsInfo.getLastName(),
+                                                                                    TestData.INVALID_EMAIL,
+                                                                                    userDetailsInfo.getGroupId(),
+                                                                                    Arrays.asList(RolesEnum.NORMAL_USER));
+      usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
+                          userId,
+                          userModificationInfo);
+    }
+    catch (ApiException e) {
+      assertTrue(e.getMessage(),
+              SdkErrorCodes.INVALID_EMAIL.getApiCode().equals(e.getApiCode()));
+    }
+
+
+    try {
+          UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
+                                                                                        userDetailsInfo.getFirstName(),
+                                                                                        userDetailsInfo.getLastName(),
+                                                                                        userDetailsInfo.getEmail(),
+                                                                                        TestData.NULL_PARAM,
+                                                                                        Arrays.asList(RolesEnum.NORMAL_USER));
+          usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
+                              userId,
+                              userModificationInfo);
+      }
+      catch (ApiException e) {
+          assertTrue(e.getMessage(),
+                     SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+      }
+
+      try {
+          UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
+                                                                                        userDetailsInfo.getFirstName(),
+                                                                                        userDetailsInfo.getLastName(),
+                                                                                        userDetailsInfo.getEmail(),
+                                                                                        TestData.EMPTY_PARAM,
+                                                                                        Arrays.asList(RolesEnum.NORMAL_USER));
+          usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
+                              userId,
+                              userModificationInfo);
+      }
+      catch (ApiException e) {
+          assertTrue(e.getMessage(),
+                     SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+      }
+    try {
+          UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
+                                                                                    userDetailsInfo.getFirstName(),
                                                                                     userDetailsInfo.getLastName(),
                                                                                     userDetailsInfo.getEmail(),
                                                                                     userDetailsInfo.getGroupId(),
-                                                                                    Arrays.asList(RolesEnum.NORMAL_USER),
-                                                                                    TestData.X_API_HEADER);
-      UserDetailsInfo userDetailsInfoReturned = usersApi.modifyUser(TestData.ACCESS_TOKEN,
-                                                                    userId,
-                                                                    userModificationInfo,
-                                                                    TestData.X_API_HEADER);
-      assertNotNull(userDetailsInfoReturned);
-      assertEquals(userDetailsInfoReturned.getFirstName(),
-                   TestData.MODIFIED_FIRST_NAME);
+                                                                                    null);
+          usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
+                            userId,
+                            userModificationInfo);
     }
     catch (ApiException e) {
-      fail(ApiUtils.getMessage(e));
+          assertTrue(e.getMessage(),
+                     SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
+    
   }
 }
 

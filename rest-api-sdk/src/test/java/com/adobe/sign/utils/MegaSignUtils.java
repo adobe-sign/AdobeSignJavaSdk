@@ -13,6 +13,7 @@
 package com.adobe.sign.utils;
 
 import java.util.ArrayList;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.MegaSignsApi;
 import com.adobe.sign.model.megaSigns.FileInfo;
@@ -28,6 +29,7 @@ import com.adobe.sign.model.megaSigns.URLFileInfo;
 
 public class MegaSignUtils extends ApiUtils{
   private static MegaSignsApi megaSignsApi = new MegaSignsApi();
+  private static MultivaluedMap headers = ApiUtils.getValidHeaderParams();
 
   private static String megaSignId = null;
 
@@ -42,9 +44,8 @@ public class MegaSignUtils extends ApiUtils{
     String megaSignId = null;
     MegaSignCreationRequest megaSignCreationRequest = getMegaSignCreationRequest(name);
 
-    MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(TestData.ACCESS_TOKEN,
-                                                                                      megaSignCreationRequest,
-                                                                                      TestData.X_API_HEADER);
+    MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(headers,
+                                                                                    megaSignCreationRequest);
     megaSignId = megaSignCreationResponse.getMegaSignId();
 
     return megaSignId;
@@ -143,9 +144,8 @@ public class MegaSignUtils extends ApiUtils{
     return megaSignCreationRequest;
   }
 
-  private static boolean isExistingMegaSign(String staticMegaSignName) throws ApiException {
-    MegaSigns megaSigns = megaSignsApi.getMegaSigns(TestData.ACCESS_TOKEN,
-                                                    TestData.X_API_HEADER,
+  public static boolean isExistingMegaSign(String staticMegaSignName) throws ApiException {
+    MegaSigns megaSigns = megaSignsApi.getMegaSigns(headers,
                                                     TestData.MEGASIGN_QUERY);
 
     for (MegaSign megaSign : megaSigns.getMegaSignList()) {

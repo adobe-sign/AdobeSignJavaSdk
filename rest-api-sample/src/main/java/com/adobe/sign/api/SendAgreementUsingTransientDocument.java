@@ -23,6 +23,8 @@ import com.adobe.sign.utils.AgreementUtils;
 import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
 import com.adobe.sign.utils.TransientDocumentUtils;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
 
 
 /**
@@ -43,20 +45,21 @@ public class SendAgreementUsingTransientDocument {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(SendAgreementUsingTransientDocument.class.getName());
     try {
       SendAgreementUsingTransientDocument client = new SendAgreementUsingTransientDocument();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.SEND_AGREEMENT_USING_TRANSIENT_DOCUMENT);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.SEND_AGREEMENT_USING_TRANSIENT_DOCUMENT, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception {
+  private void run() throws ApiException {
     //Create transient document.
     TransientDocumentResponse transientDocumentResponse = TransientDocumentUtils.createTransientDocument(Constants.REQUEST_PATH,
                                                                                                          Constants.INPUT_FILE_NAME);
@@ -78,9 +81,9 @@ public class SendAgreementUsingTransientDocument {
     AgreementInfo agreementInfo = AgreementUtils.getAgreementInfo(agreementCreationResponse.getAgreementId());
 
     //Display agreement details
-    System.out.println("Agreement ID = " + agreementInfo.getAgreementId());
-    System.out.println("Agreement Name = " + agreementInfo.getName());
-    System.out.println("Agreement  Status = " + agreementInfo.getStatus());
+    ApiUtils.getLogger().info("Agreement ID = " + agreementInfo.getAgreementId());
+    ApiUtils.getLogger().info("Agreement Name = " + agreementInfo.getName());
+    ApiUtils.getLogger().info("Agreement  Status = " + agreementInfo.getStatus());
   }
 }
 

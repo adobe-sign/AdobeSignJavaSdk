@@ -20,12 +20,14 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.WidgetsApi;
 import com.adobe.sign.model.widgets.WidgetAgreements;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WidgetUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -33,11 +35,14 @@ import org.junit.Test;
  */
 public class GetWidgetAgreementsApiTest {
 
-  private WidgetsApi widgetsApi = null;
-  private String widgetId = null;
+  private static WidgetsApi widgetsApi = null;
+  private static String widgetId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     widgetId = WidgetUtils.getResourceId(TestData.WIDGET_NAME);
     widgetsApi = WidgetUtils.getWidgetsApi();
   }
@@ -52,9 +57,8 @@ public class GetWidgetAgreementsApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      widgetsApi.getWidgetAgreements(TestData.NULL_PARAM,
-                                     widgetId,
-                                     TestData.X_API_HEADER);
+      widgetsApi.getWidgetAgreements(ApiUtils.getNullAccessTokenHeaderParams(),
+                                     widgetId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -62,9 +66,8 @@ public class GetWidgetAgreementsApiTest {
     }
 
     try {
-      widgetsApi.getWidgetAgreements(TestData.EMPTY_PARAM,
-                                     widgetId,
-                                     TestData.X_API_HEADER);
+      widgetsApi.getWidgetAgreements(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                     widgetId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -81,9 +84,8 @@ public class GetWidgetAgreementsApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      widgetsApi.getWidgetAgreements(TestData.ACCESS_TOKEN,
-                                     widgetId,
-                                     TestData.EMPTY_PARAM);
+      widgetsApi.getWidgetAgreements(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                     widgetId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -100,9 +102,8 @@ public class GetWidgetAgreementsApiTest {
   @Test
   public void testInvalidWidgetId() throws ApiException {
     try {
-      widgetsApi.getWidgetAgreements(TestData.ACCESS_TOKEN,
-                                     TestData.EMPTY_PARAM,
-                                     TestData.X_API_HEADER);
+      widgetsApi.getWidgetAgreements(ApiUtils.getValidHeaderParams(),
+                                     TestData.EMPTY_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -110,9 +111,8 @@ public class GetWidgetAgreementsApiTest {
     }
 
     try {
-      widgetsApi.getWidgetAgreements(TestData.ACCESS_TOKEN,
-                                     TestData.NULL_PARAM,
-                                     TestData.X_API_HEADER);
+      widgetsApi.getWidgetAgreements(ApiUtils.getValidHeaderParams(),
+                                     TestData.NULL_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -129,9 +129,8 @@ public class GetWidgetAgreementsApiTest {
   @Test
   public void testGetAgreements() throws ApiException {
     try {
-      WidgetAgreements widgetAgreements = widgetsApi.getWidgetAgreements(TestData.ACCESS_TOKEN,
-                                                                         widgetId,
-                                                                         TestData.X_API_HEADER);
+      WidgetAgreements widgetAgreements = widgetsApi.getWidgetAgreements(ApiUtils.getValidHeaderParams(),
+                                                                         widgetId);
       assertNotNull(widgetAgreements);
     }
     catch (ApiException e) {

@@ -19,23 +19,28 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.AgreementsApi;
 import com.adobe.sign.model.agreements.DocumentImageUrls;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.AgreementsUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * Junit test cases for Get Agreement Documents Image Urls API.
  */
 public class GetAgreementDocumentsImageUrlsApiTest {
-  private AgreementsApi agreementsApi = null;
-  private String agreementId = null;
+  private static AgreementsApi agreementsApi = null;
+  private static String agreementId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
@@ -50,9 +55,8 @@ public class GetAgreementDocumentsImageUrlsApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(TestData.NULL_PARAM,
+      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getNullAccessTokenHeaderParams(),
                                                  agreementId,
-                                                 TestData.X_API_HEADER,
                                                  TestData.VERSION_ID,
                                                  TestData.PARTICIPANT_EMAIL,
                                                  TestData.IMAGE_SIZE ,
@@ -65,9 +69,8 @@ public class GetAgreementDocumentsImageUrlsApiTest {
     }
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(TestData.EMPTY_PARAM,
+      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getEmptyAccessTokenHeaderParams(),
                                                  agreementId,
-                                                 TestData.X_API_HEADER,
                                                  TestData.VERSION_ID,
                                                  TestData.PARTICIPANT_EMAIL,
                                                  TestData.IMAGE_SIZE ,
@@ -90,9 +93,8 @@ public class GetAgreementDocumentsImageUrlsApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(TestData.ACCESS_TOKEN,
+      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getEmptyXApiUserHeaderParams(),
                                                  agreementId,
-                                                 TestData.EMPTY_PARAM,
                                                  TestData.VERSION_ID,
                                                  TestData.PARTICIPANT_EMAIL,
                                                  TestData.IMAGE_SIZE ,
@@ -115,9 +117,8 @@ public class GetAgreementDocumentsImageUrlsApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(TestData.ACCESS_TOKEN,
+      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getValidHeaderParams(),
                                                  TestData.EMPTY_PARAM,
-                                                 TestData.X_API_HEADER,
                                                  TestData.VERSION_ID,
                                                  TestData.PARTICIPANT_EMAIL,
                                                  TestData.IMAGE_SIZE ,
@@ -130,9 +131,8 @@ public class GetAgreementDocumentsImageUrlsApiTest {
     }
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(TestData.ACCESS_TOKEN,
+      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getValidHeaderParams(),
                                                  TestData.NULL_PARAM,
-                                                 TestData.X_API_HEADER,
                                                  TestData.VERSION_ID,
                                                  TestData.PARTICIPANT_EMAIL,
                                                  TestData.IMAGE_SIZE ,
@@ -156,9 +156,8 @@ public class GetAgreementDocumentsImageUrlsApiTest {
   public void testInvalidVersionId() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(TestData.ACCESS_TOKEN,
+      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getValidHeaderParams(),
                                                  agreementId,
-                                                 TestData.X_API_HEADER,
                                                  TestData.EMPTY_PARAM,
                                                  TestData.PARTICIPANT_EMAIL,
                                                  TestData.IMAGE_SIZE ,
@@ -180,9 +179,8 @@ public class GetAgreementDocumentsImageUrlsApiTest {
   public void testInvalidParticipantEmail() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(TestData.ACCESS_TOKEN,
+      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getValidHeaderParams(),
                                                  agreementId,
-                                                 TestData.X_API_HEADER,
                                                  TestData.VERSION_ID,
                                                  TestData.EMPTY_PARAM,
                                                  TestData.IMAGE_SIZE ,
@@ -204,9 +202,8 @@ public class GetAgreementDocumentsImageUrlsApiTest {
   public void testCombinedDocumentImageUrls() throws ApiException {
 
     try {
-      DocumentImageUrls documentImageUrls = agreementsApi.getCombinedDocumentImageUrls(TestData.ACCESS_TOKEN,
+      DocumentImageUrls documentImageUrls = agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getValidHeaderParams(),
                                                                                        agreementId,
-                                                                                       TestData.X_API_HEADER,
                                                                                        TestData.VERSION_ID,
                                                                                        TestData.PARTICIPANT_EMAIL,
                                                                                        TestData.IMAGE_SIZE ,

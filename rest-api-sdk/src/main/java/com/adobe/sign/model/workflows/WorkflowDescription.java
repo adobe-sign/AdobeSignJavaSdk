@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:25:02.764+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:09.776+05:30")
 public class WorkflowDescription   {
   
   private WorkflowDefaultParams agreementNameInfo = null;
@@ -195,9 +195,9 @@ public enum StatusEnum {
 
   
   /**
-   * Information about locale  field in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow
+   * Information about locale field in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow
    **/
-  @ApiModelProperty(required = true, value = "Information about locale  field in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow")
+  @ApiModelProperty(required = true, value = "Information about locale field in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow")
   @JsonProperty("localeInfo")
   public LocaleFieldInfoDescription getLocaleInfo() {
     return localeInfo;

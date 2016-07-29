@@ -19,12 +19,14 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.MegaSignsApi;
 import com.adobe.sign.model.megaSigns.MegaSignChildAgreements;
-import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.MegaSignUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -32,11 +34,14 @@ import org.junit.Test;
  */
 public class GetMegaSignAgreementsApiTest {
   
-  private MegaSignsApi megaSignsApi = null;
-  private String megaSignId = null;
+  private static MegaSignsApi megaSignsApi = null;
+  private static String megaSignId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     megaSignId = MegaSignUtils.getResourceId(TestData.MEGASIGN_NAME);
     megaSignsApi = MegaSignUtils.getMegaSignsApi();
   }
@@ -52,9 +57,8 @@ public class GetMegaSignAgreementsApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      megaSignsApi.getMegaSignChildAgreements(TestData.NULL_PARAM,
-                                              megaSignId,
-                                              TestData.X_API_HEADER);
+      megaSignsApi.getMegaSignChildAgreements(ApiUtils.getNullAccessTokenHeaderParams(),
+                                              megaSignId);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -62,9 +66,8 @@ public class GetMegaSignAgreementsApiTest {
     }
 
     try {
-      megaSignsApi.getMegaSignChildAgreements(TestData.EMPTY_PARAM,
-                                              megaSignId,
-                                              TestData.X_API_HEADER);
+      megaSignsApi.getMegaSignChildAgreements(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                              megaSignId);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -81,9 +84,8 @@ public class GetMegaSignAgreementsApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      megaSignsApi.getMegaSignChildAgreements(TestData.ACCESS_TOKEN,
-                                              megaSignId,
-                                              TestData.EMPTY_PARAM);
+      megaSignsApi.getMegaSignChildAgreements(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                              megaSignId);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -100,9 +102,8 @@ public class GetMegaSignAgreementsApiTest {
   @Test
   public void testInvalidMegaSignId() throws ApiException {
     try {
-      megaSignsApi.getMegaSignChildAgreements(TestData.ACCESS_TOKEN,
-                                              TestData.EMPTY_PARAM,
-                                              TestData.X_API_HEADER);
+      megaSignsApi.getMegaSignChildAgreements(ApiUtils.getValidHeaderParams(),
+                                              TestData.EMPTY_PARAM);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -110,9 +111,8 @@ public class GetMegaSignAgreementsApiTest {
     }
 
     try {
-      megaSignsApi.getMegaSignChildAgreements(TestData.ACCESS_TOKEN,
-                                              TestData.NULL_PARAM,
-                                              TestData.X_API_HEADER);
+      megaSignsApi.getMegaSignChildAgreements(ApiUtils.getValidHeaderParams(),
+                                              TestData.NULL_PARAM);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -129,9 +129,8 @@ public class GetMegaSignAgreementsApiTest {
   @Test
   public void testGetAgreement() throws ApiException {
     try {
-      MegaSignChildAgreements megaSignChildAgreements = megaSignsApi.getMegaSignChildAgreements(TestData.ACCESS_TOKEN,
-                                                                                                megaSignId,
-                                                                                                TestData.X_API_HEADER);
+      MegaSignChildAgreements megaSignChildAgreements = megaSignsApi.getMegaSignChildAgreements(ApiUtils.getValidHeaderParams(),
+                                                                                                megaSignId);
       assertNotNull(megaSignChildAgreements);
     } 
     catch (ApiException e) {

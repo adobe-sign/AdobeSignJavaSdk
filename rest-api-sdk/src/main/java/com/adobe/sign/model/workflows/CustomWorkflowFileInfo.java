@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:25:02.764+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:09.776+05:30")
 public class CustomWorkflowFileInfo   {
   
   private String name = null;
@@ -44,9 +44,9 @@ public class CustomWorkflowFileInfo   {
 
   
   /**
-   * Transient document identifier obtained from the transient document creation API.
+   * Transient document identifier obtained from the API which creates transient documents.
    **/
-  @ApiModelProperty(required = true, value = "Transient document identifier obtained from the transient document creation API.")
+  @ApiModelProperty(required = true, value = "Transient document identifier obtained from the API which creates transient documents.")
   @JsonProperty("transientDocumentId")
   public String getTransientDocumentId() {
     return transientDocumentId;

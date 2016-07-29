@@ -19,12 +19,14 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.GroupsApi;
 import com.adobe.sign.model.groups.GroupCreationInfo;
+import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.GroupUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -32,10 +34,14 @@ import org.junit.Test;
  */
 public class PostGroupsApiTest {
   
-  private GroupsApi groupsApi = null;
+  private static GroupsApi groupsApi = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() {
+  @BeforeClass
+  public static void setup() {
+
     groupsApi = GroupUtils.getGroupsApi();
   }
 
@@ -52,9 +58,8 @@ public class PostGroupsApiTest {
     groupCreationInfo.setGroupName(ApiUtils.getGroupName());
 
     try {
-      groupsApi.createGroup(TestData.NULL_PARAM,
-                            groupCreationInfo,
-                            TestData.X_API_HEADER);
+      groupsApi.createGroup(ApiUtils.getNullAccessTokenHeaderParams(),
+                            groupCreationInfo);
     }
     catch (ApiException e){
       assertTrue(e.getMessage(),
@@ -62,9 +67,8 @@ public class PostGroupsApiTest {
     }
 
     try {
-      groupsApi.createGroup(TestData.EMPTY_PARAM,
-                            groupCreationInfo,
-                            TestData.X_API_HEADER);
+      groupsApi.createGroup(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                            groupCreationInfo);
     }
     catch (ApiException e){
       assertTrue(e.getMessage(),
@@ -84,9 +88,8 @@ public class PostGroupsApiTest {
     groupCreationInfo.setGroupName(ApiUtils.getGroupName());
 
     try {
-      groupsApi.createGroup(TestData.ACCESS_TOKEN,
-                            groupCreationInfo,
-                            TestData.X_API_HEADER);
+      groupsApi.createGroup(ApiUtils.getValidHeaderParams(),
+                            groupCreationInfo);
     }
     catch (ApiException e){
       assertTrue(e.getMessage(),
@@ -106,14 +109,12 @@ public class PostGroupsApiTest {
     groupCreationInfo.setGroupName(ApiUtils.getGroupName());
 
     try {
-      String groupId = groupsApi.createGroup(TestData.ACCESS_TOKEN,
-                                             groupCreationInfo,
-                                             TestData.X_API_HEADER).getGroupId();
+      String groupId = groupsApi.createGroup(ApiUtils.getValidHeaderParams(),
+                                             groupCreationInfo).getGroupId();
       assertNotNull(groupId);
 
-      groupsApi.deleteGroup(TestData.ACCESS_TOKEN,
-                            groupId,
-                            TestData.X_API_HEADER);
+      groupsApi.deleteGroup(ApiUtils.getValidHeaderParams(),
+                            groupId);
     }
     catch (ApiException e){
       fail(ApiUtils.getMessage(e));
@@ -133,9 +134,8 @@ public class PostGroupsApiTest {
     groupCreationInfo.setGroupName(TestData.EMPTY_PARAM);
 
     try {
-      groupsApi.createGroup(TestData.ACCESS_TOKEN,
-                            groupCreationInfo,
-                            TestData.X_API_HEADER).getGroupId();
+      groupsApi.createGroup(ApiUtils.getValidHeaderParams(),
+                            groupCreationInfo).getGroupId();
     }
     catch (ApiException e){
       assertTrue(e.getMessage(),
@@ -145,9 +145,8 @@ public class PostGroupsApiTest {
     groupCreationInfo.setGroupName(TestData.NULL_PARAM);
 
     try {
-      groupsApi.createGroup(TestData.ACCESS_TOKEN,
-                            groupCreationInfo,
-                            TestData.X_API_HEADER);
+      groupsApi.createGroup(ApiUtils.getValidHeaderParams(),
+                            groupCreationInfo);
     }
     catch (ApiException e){
       assertTrue(e.getMessage(),

@@ -18,6 +18,9 @@ import java.util.List;
 import com.adobe.sign.model.agreements.UserAgreement;
 import com.adobe.sign.model.agreements.UserAgreements;
 import com.adobe.sign.utils.AgreementUtils;
+import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
 import com.adobe.sign.utils.ReminderUtils;
 
@@ -37,21 +40,25 @@ public class SendReminderOnPendingAgreements {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(SendReminderOnPendingAgreements.class.getName());
     try {
       SendReminderOnPendingAgreements client = new SendReminderOnPendingAgreements();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.SEND_REMINDER_PENDING_AGREEMENT);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.SEND_REMINDER_PENDING_AGREEMENT, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
-    //Make API call to get all the agreements of a user.
+  private void run() throws ApiException{   
+    // Set the number of agreements for which reminders are to be sent.
+    int agreementCountLimit = Constants.AGREEMENT_COUNT_LIMIT;
+    
+    //Make API call to get all the agreements of a user.   
     UserAgreements userAgreements = AgreementUtils.getAllAgreements();
 
     //Get list of all the agreements.
@@ -59,10 +66,13 @@ public class SendReminderOnPendingAgreements {
 
     //Check status of all the agreements.
     for(UserAgreement userAgreement : userAgreementList) {
+      if(agreementCountLimit == 0)
+        break;
       if (userAgreement.getStatus().equals(UserAgreement.StatusEnum.OUT_FOR_SIGNATURE)) {
 
         //Send reminder for all the agreements which are out for signature.
         ReminderUtils.sendRemindersForAgreement(userAgreement.getAgreementId());
+        agreementCountLimit--;
       }
     }
   }

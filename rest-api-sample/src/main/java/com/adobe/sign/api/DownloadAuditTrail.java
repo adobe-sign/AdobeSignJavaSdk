@@ -18,6 +18,8 @@ import com.adobe.sign.utils.AgreementUtils;
 import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
 import com.adobe.sign.utils.FileUtils;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
 
 /**
  * This sample client demonstrates how to to download audit trail of the specified agreement.
@@ -31,27 +33,28 @@ public class DownloadAuditTrail {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(DownloadAuditTrail.class.getName());
     try {
       DownloadAuditTrail client = new DownloadAuditTrail();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.DOWNLOAD_AUDIT_TRAIL);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.DOWNLOAD_AUDIT_TRAIL, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException{
     //Get agreement ID
     String agreementId = AgreementUtils.getAgreementId(Constants.AGREEMENT_NAME);
 
     //Display name of the agreement associated with the specified agreement ID.
     AgreementInfo agreementInfo = AgreementUtils.getAgreementInfo(agreementId);
     String agreementName = agreementInfo.getName();
-    System.out.println("Agreement name: " + agreementName);
+    ApiUtils.getLogger().info("Agreement name: " + agreementName);
 
     //Make API call to get audit trail of this agreement.
     byte[] auditStream = AgreementUtils.getAuditTrail(agreementId);

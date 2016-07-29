@@ -19,114 +19,83 @@ import com.adobe.sign.utils.ApiException;
 /**
  * Validator class for GroupsApi endpoints. The main purpose of this class is to check the validity of the parameters passed to the groups api endpoints
  * and throw ApiException with required error messages if the validation fails.
- * 
- * @author agoyal
- * 
+ *
  */
-public class GroupsApiValidator
-{
+public class GroupsApiValidator {
 
   /**
    * Validator for getGroups Api that fetches list of all the groups in the account.
    *
-   * @param accessToken An OAuth Access Token.
-   * @param xApiUser The userId or email of API caller.
    * @throws ApiException
    */
-  public static void getGroupsValidator(String accessToken, 
-                                        String xApiUser) throws ApiException {
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
-  } 
+  public static void getGroupsValidator(
+  ) throws ApiException {
+
+  }
 
   /**
    * Validator for createGroup Api that creates a group in the account.
    *
-   * @param accessToken An OAuth Access Token.
    * @param groupCreationInfo The object that has all the details/ required parameters for creating a group.
-   * @param xApiUser The userId or email of API caller.
    * @throws ApiException
    */
-  public static void createGroupValidator(String accessToken, 
-                                          GroupCreationInfo groupCreationInfo, 
-                                          String xApiUser) throws ApiException {
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
+  public static void createGroupValidator(GroupCreationInfo groupCreationInfo) throws ApiException {
     ApiValidatorHelper.validateParameter(groupCreationInfo);
 
-    ApiValidatorHelper.validateParameter(groupCreationInfo.getGroupName(), 
+    ApiValidatorHelper.validateParameter(groupCreationInfo.getGroupName(),
                                          SdkErrorCodes.INVALID_GROUP_NAME);
   }
 
   /**
    * Validator for getGroupDetails Api that fetches the details of the given group.
    *
-   * @param accessToken An OAuth Access Token.
    * @param groupId The Id of the Group whose details are to be fetched.
-   * @param xApiUser The userId or email of API caller.
    * @throws ApiException
    */
-   public static void getGroupDetailsValidator(String accessToken, 
-                                               String groupId, 
-                                               String xApiUser) throws ApiException {
-     validateCommonGroupParameters(accessToken, xApiUser, groupId);
-   }
+  public static void getGroupDetailsValidator(String groupId) throws ApiException {
+    ApiValidatorHelper.validateId(groupId,
+                                  SdkErrorCodes.INVALID_GROUP_ID);;
+  }
 
   /**
    * Validator for modifyGroup Api that modifies the given group.
    *
-   * @param accessToken An OAuth Access Token.
-   * @param groupId The Id of the Group to be modified.
+   * @param groupId               The Id of the Group to be modified.
    * @param groupModificationInfo The object that has all the details/ required parameters for modifying the group.
-   * @param xApiUser The userId or email of API caller.
    * @throws ApiException
    */
-   public static void modifyGroupValidator(String accessToken, 
-                                           String groupId,
-                                           GroupModificationInfo groupModificationInfo, 
-                                           String xApiUser) throws ApiException {
-     validateCommonGroupParameters(accessToken, xApiUser, groupId);
-     
-     ApiValidatorHelper.validateParameter(groupModificationInfo);
-     ApiValidatorHelper.validateParameter(groupModificationInfo.getGroupName(), 
-                                          SdkErrorCodes.INVALID_GROUP_NAME);
-   }
+  public static void modifyGroupValidator(String groupId,
+                                          GroupModificationInfo groupModificationInfo) throws ApiException {
+    ApiValidatorHelper.validateId(groupId,
+                                  SdkErrorCodes.INVALID_GROUP_ID);;
+
+    ApiValidatorHelper.validateParameter(groupModificationInfo);
+    ApiValidatorHelper.validateParameter(groupModificationInfo.getGroupName(),
+                                         SdkErrorCodes.INVALID_GROUP_NAME);
+  }
 
   /**
    * Validator for deleteGroup Api that deletes the given group.
    *
-   * @param accessToken An OAuth Access Token.
    * @param groupId The Id of the Group to be deleted.
-   * @param xApiUser The userId or email of API caller.
    * @throws ApiException
    */
-   public static void deleteGroupValidator(String accessToken, 
-                                           String groupId, 
-                                           String xApiUser) throws ApiException {
-     validateCommonGroupParameters(accessToken, xApiUser, groupId);
-   }
+  public static void deleteGroupValidator(String groupId) throws ApiException {
+    ApiValidatorHelper.validateId(groupId,
+                                  SdkErrorCodes.INVALID_GROUP_ID);;
+  }
 
   /**
    * Validator for getUsersInGroup Api that fetches all the users in the given group.
    *
-   * @param accessToken An OAuth Access Token .
+   * .
+   *
    * @param groupId The Id of the Group from which the users are to be fetched.
-   * @param xApiUser The userId or email of API caller.
    * @throws ApiException
    */
-   public static void getUsersInGroupValidator(String accessToken, 
-                                               String groupId, 
-                                               String xApiUser) throws ApiException {
-     validateCommonGroupParameters(accessToken, xApiUser, groupId);
-   }
-    
-   /**
-    * Common method that validated the accessToken, xApiUser and groupId
-    */
-   private static void validateCommonGroupParameters(String accessToken, 
-                                                String xApiUser, 
-                                                String groupId) throws ApiException {
-     ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
-     ApiValidatorHelper.validateId(groupId, 
-                                   SdkErrorCodes.INVALID_GROUP_ID);
-   }
+  public static void getUsersInGroupValidator(String groupId) throws ApiException {
+    ApiValidatorHelper.validateId(groupId,
+                                  SdkErrorCodes.INVALID_GROUP_ID);;
+  }
 
 }

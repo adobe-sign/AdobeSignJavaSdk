@@ -14,6 +14,7 @@ package com.adobe.sign.utils;
 
 import java.util.Date;
 import java.util.List;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.RemindersApi;
 import com.adobe.sign.model.agreements.AgreementInfo;
@@ -25,24 +26,24 @@ import com.adobe.sign.model.reminders.ReminderCreationResult;
 public class ReminderUtils {
 
   private final static RemindersApi remindersApi = new RemindersApi();
+  private final static MultivaluedMap headers = ApiUtils.getHeaderParams();
 
   /**
    * Sends a reminder for an agreement.
    * @param agreementId Id of the agreement.
    * @return ReminderCreationResult
    */
-  private static ReminderCreationResult createReminder (String agreementId) throws Exception {
+  private static ReminderCreationResult createReminder (String agreementId) throws ApiException {
     try {
       ReminderCreationInfo reminderCreationInfo = new ReminderCreationInfo();
       reminderCreationInfo.setAgreementId(agreementId);
-      ReminderCreationResult reminderCreationResult = remindersApi.createReminder(Constants.ACCESS_TOKEN,
-                                                                                  reminderCreationInfo,
-                                                                                  Constants.X_API_USER);
+      ReminderCreationResult reminderCreationResult = remindersApi.createReminder(headers,
+                                                                                  reminderCreationInfo);
       return reminderCreationResult;
     }
-    catch (Exception e) {
-      System.err.println(Errors.SEND_REMINDER);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.SEND_REMINDER, e);
+      return null;
     }
   }
   /**
@@ -51,7 +52,7 @@ public class ReminderUtils {
    * @param agreementId id of the agreement.
    * @throws Exception
    */
-  public static void sendRemindersForAgreement(String agreementId) throws Exception {
+  public static void sendRemindersForAgreement(String agreementId) throws ApiException {
     //Get the current system date.
     Date now = new Date();
 
@@ -68,7 +69,7 @@ public class ReminderUtils {
        ReminderCreationResult reminderCreationResult = createReminder(agreementId);
 
        //Display agreement name and result of the operation.
-       System.out.println("Sent a reminder to the next participant in line to sign the agreement '" + agreementInfo.getName()
+       ApiUtils.getLogger().info("Sent a reminder to the next participant in line to sign the agreement '" + agreementInfo.getName()
                           + "'. Result: " + reminderCreationResult.getResult() + ".");
        // All relevant participants have been sent a reminder; no need to check remaining participants.
      }

@@ -20,48 +20,36 @@ import com.adobe.sign.utils.ApiException;
  * and throw ApiException with required error messages if the validation fails.
  */
 public class SearchApiValidator {
-  
+
   /**
    * Validator for createAssetEvent API that creates a search object for agreement asset event.
-   * 
-   * @param accessToken An OAuth Access Token.
+   *
    * @param agreementAssetEventRequest Information about the Agreement Asset Events to be generated.
-   * @param xApiUser The userId or email of API caller.
    * @throws ApiException
    */
-  public static void createAssetEventValidator (String accessToken, 
-                                                AgreementAssetEventRequest agreementAssetEventRequest, 
-                                                String xApiUser) throws ApiException {  
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
-    
+  public static void createAssetEventValidator(AgreementAssetEventRequest agreementAssetEventRequest) throws ApiException {
     ApiValidatorHelper.validateParameter(agreementAssetEventRequest);
-    
-    ApiValidatorHelper.validateStartAndEndDatesParameter(agreementAssetEventRequest.getStartDate(), 
-                                                         agreementAssetEventRequest.getEndDate());   
+
+    ApiValidatorHelper.validateStartAndEndDatesParameter(agreementAssetEventRequest.getStartDate(),
+                                                         agreementAssetEventRequest.getEndDate());
   }
-  
+
   /**
    * Validator for getAssetEvent API that returns the result for the page which is described inside the Page Cursor Info.
-   * 
-   * @param accessToken An OAuth Access Token.
-   * @param searchId The search object identifier.
+   *
+   * @param searchId   The search object identifier.
    * @param pageCursor Page cursor of the page whose result will be fetched.
-   * @param xApiUser The userId or email of API caller.
-   * @param pageSize Count of agreement asset events which will be returned in the response
+   * @param pageSize   Count of agreement asset events which will be returned in the response
    * @throws ApiException
    */
-  public static void getAssetEventValidator (String accessToken, 
-                                             String searchId, 
-                                             String pageCursor, 
-                                             String xApiUser, 
-                                             Integer pageSize) throws ApiException {   
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
-    
-    ApiValidatorHelper.validateId(searchId, 
+  public static void getAssetEventValidator(String searchId,
+                                            String pageCursor ,
+                                            Integer pageSize) throws ApiException {
+    ApiValidatorHelper.validateId(searchId,
                                   SdkErrorCodes.INVALID_SEARCH_ID);
-    
-    ApiValidatorHelper.validateParameter(pageCursor, 
+
+    ApiValidatorHelper.validateParameter(pageCursor,
                                          SdkErrorCodes.INVALID_PAGE_CURSOR);
-    
+
   }
 }

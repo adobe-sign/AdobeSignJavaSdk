@@ -17,8 +17,12 @@ import java.util.List;
 
 import com.adobe.sign.model.megaSigns.MegaSign;
 import com.adobe.sign.model.megaSigns.MegaSigns;
+import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
 import com.adobe.sign.utils.MegaSignUtils;
+
 
 /**
  * This sample client demonstrates how to get status of all the megaSign parent agreements of a user.
@@ -33,29 +37,39 @@ public class GetStatusOfMegaSigns {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(GetStatusOfMegaSigns.class.getName());
     try {
       GetStatusOfMegaSigns client = new GetStatusOfMegaSigns();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.GET_MEGASIGN_STATUS);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_MEGASIGN_STATUS, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException{
+    // Set the number of agreements for which status is to be printed.
+    int agreementCountLimit = Constants.AGREEMENT_COUNT_LIMIT;
+    
     //Make API call to get all the megaSign parent agreements of a user.
     MegaSigns megaSigns = MegaSignUtils.getMegaSigns();
 
     //Display details of each megaSign parent agreement
     List<MegaSign> megaSignList = megaSigns.getMegaSignList();
     for(MegaSign megaSign : megaSignList) {
-      System.out.println("Name = " + megaSign.getName());
-      System.out.println("MegaSign ID = " + megaSign.getMegaSignId());
-      System.out.println("MegaSign Status = " + megaSign.getStatus());
+      
+      if(agreementCountLimit == 0)
+        break;
+      
+      ApiUtils.getLogger().info("Name = " + megaSign.getName());
+      ApiUtils.getLogger().info("MegaSign ID = " + megaSign.getMegaSignId());
+      ApiUtils.getLogger().info("MegaSign Status = " + megaSign.getStatus());
+      
+      agreementCountLimit--;
     }
   }
 }

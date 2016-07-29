@@ -19,12 +19,14 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.UsersApi;
 import com.adobe.sign.model.users.UsersInfo;
-import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.UserUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -32,16 +34,18 @@ import org.junit.Test;
  */
 public class GetUsersApiTest {
   
-  private UsersApi usersApi = null;
-	private String userId = null;
+  private static UsersApi usersApi = null;
+  
+  @Rule
+  public Retry retry = new Retry();
+  
 	/**
-	 * Setting up the UsersApi before the tests are run.
+	 * Setting up the UsersApi BeforeClass the tests are run.
 	 * 
 	 * @throws ApiException
 	 */
-	@Before
-	public void setup() throws ApiException {
-		userId = UserUtils.getResourceId(TestData.USER_EMAIL);
+	@BeforeClass
+	public static void setup() throws ApiException {
 		usersApi = UserUtils.getUsersApi();
 	}
 	
@@ -56,8 +60,7 @@ public class GetUsersApiTest {
 	public void testNullAndEmptyAccessToken() throws ApiException {
 
 		try {
-          usersApi.getUsers(TestData.NULL_PARAM,
-                            TestData.X_API_HEADER,
+          usersApi.getUsers(ApiUtils.getNullAccessTokenHeaderParams(),
                             TestData.X_USER_EMAIL);
 		} 
 		catch (ApiException e) {
@@ -66,8 +69,7 @@ public class GetUsersApiTest {
 		}
 
 		try {
-          usersApi.getUsers(TestData.EMPTY_PARAM,
-                            TestData.X_API_HEADER,
+          usersApi.getUsers(ApiUtils.getEmptyAccessTokenHeaderParams(),
                             TestData.X_USER_EMAIL);
 		} 
 		catch (ApiException e) {
@@ -85,8 +87,7 @@ public class GetUsersApiTest {
 	public void testInvalidXApiUser() throws ApiException {
 
 		try {
-          usersApi.getUsers(TestData.ACCESS_TOKEN,
-                            TestData.EMPTY_PARAM,
+          usersApi.getUsers(ApiUtils.getEmptyXApiUserHeaderParams(),
                             TestData.X_USER_EMAIL);
 		} 
 		catch (ApiException e) {
@@ -103,8 +104,7 @@ public class GetUsersApiTest {
 	public void testGetUsers() throws ApiException {
 
 		try {
-          UsersInfo userInfos = usersApi.getUsers(TestData.ACCESS_TOKEN,
-                                                  TestData.X_API_HEADER,
+          UsersInfo userInfos = usersApi.getUsers(ApiUtils.getValidHeaderParams(),
                                                   TestData.X_USER_EMAIL);
           assertNotNull(userInfos);
 		} 

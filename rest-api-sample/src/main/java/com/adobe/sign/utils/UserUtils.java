@@ -12,6 +12,8 @@
 */
 package com.adobe.sign.utils;
 
+import javax.ws.rs.core.MultivaluedMap;
+
 import com.adobe.sign.api.UsersApi;
 import com.adobe.sign.model.users.UserCreationInfo;
 import com.adobe.sign.model.users.UserCreationResponse;
@@ -20,6 +22,7 @@ import com.adobe.sign.model.users.UsersInfo;
 public class UserUtils {
 
   private final static UsersApi usersApi = new UsersApi();
+  private final static MultivaluedMap headers = ApiUtils.getHeaderParams();
 
   /**
    * Create a sample user in the group.
@@ -32,21 +35,20 @@ public class UserUtils {
    */
   public static String createUser(String userEmail,
                                   String firstName,
-                                  String lastName) throws Exception {
+                                  String lastName) throws ApiException {
     try {
       UserCreationInfo userCreationInfo = new UserCreationInfo();
       userCreationInfo.setEmail(userEmail);
       userCreationInfo.setFirstName(firstName);
       userCreationInfo.setLastName(lastName);
 
-      UserCreationResponse userCreationResponse = usersApi.createUser(Constants.ACCESS_TOKEN,
-                                                                      userCreationInfo,
-                                                                      Constants.X_API_USER);
+      UserCreationResponse userCreationResponse = usersApi.createUser(headers,
+                                                                      userCreationInfo);
       return userCreationResponse.getUserId();
     }
-    catch (Exception e) {
-      System.err.println(Errors.CREATE_USER);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CREATE_USER, e);
+      return null;
     }
   }
 
@@ -55,16 +57,15 @@ public class UserUtils {
    *
    * @return UsersInfo Information about all the users in the account
    */
-  public static UsersInfo getUsers() throws Exception {
+  public static UsersInfo getUsers() throws ApiException {
     try {
-      UsersInfo usersInfo = usersApi.getUsers(Constants.ACCESS_TOKEN,
-                                              Constants.X_API_USER,
+      UsersInfo usersInfo = usersApi.getUsers(headers,
                                               Constants.X_USER_EMAIL);
       return usersInfo;
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_USERS);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_USERS, e);
+      return null;
     }
   }
 }

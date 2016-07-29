@@ -24,14 +24,16 @@ import com.adobe.sign.model.megaSigns.MegaSignCreationRequest;
 import com.adobe.sign.model.megaSigns.MegaSignCreationResponse;
 import com.adobe.sign.model.megaSigns.PostSignOptions;
 import com.adobe.sign.model.megaSigns.URLFileInfo;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.TransientDocumentsUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.MegaSignUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
+import com.adobe.sign.utils.TransientDocumentsUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -39,12 +41,15 @@ import org.junit.Test;
  */
 public class PostMegaSignApiTest {
   
-  private MegaSignsApi megaSignsApi = null;
-  private String libraryDocumentId = null;
-  private String transientDocumentId = null;
+  private static MegaSignsApi megaSignsApi = null;
+  private static String libraryDocumentId = null;
+  private static String transientDocumentId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     megaSignsApi = MegaSignUtils.getMegaSignsApi();
 
     libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);
@@ -63,18 +68,16 @@ public class PostMegaSignApiTest {
     MegaSignCreationRequest megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME);
 
     try {
-      megaSignsApi.createMegaSign(TestData.NULL_PARAM,
-                                  megaSignCreationRequest,
-                                  TestData.X_API_HEADER);
+      megaSignsApi.createMegaSign(ApiUtils.getNullAccessTokenHeaderParams(),
+                                  megaSignCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      megaSignsApi.createMegaSign(TestData.EMPTY_PARAM,
-                                  megaSignCreationRequest,
-                                  TestData.X_API_HEADER);
+      megaSignsApi.createMegaSign(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                  megaSignCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
@@ -95,9 +98,8 @@ public class PostMegaSignApiTest {
   @Test
   public void testInvalidMegaSignCreationInfo() throws ApiException {
     try {
-      megaSignsApi.createMegaSign(TestData.ACCESS_TOKEN,
-                                  null,
-                                  TestData.X_API_HEADER);
+      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                  null);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
@@ -106,9 +108,8 @@ public class PostMegaSignApiTest {
     MegaSignCreationRequest megaSignCreationRequest = getMegaSignCreationRequest(TestData.NULL_PARAM);
 
     try {
-      megaSignsApi.createMegaSign(TestData.ACCESS_TOKEN,
-                                  megaSignCreationRequest,
-                                  TestData.X_API_HEADER);
+      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                  megaSignCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
@@ -118,9 +119,8 @@ public class PostMegaSignApiTest {
     megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME, fileInfo);
 
     try {
-      megaSignsApi.createMegaSign(TestData.ACCESS_TOKEN,
-                                  megaSignCreationRequest,
-                                  TestData.X_API_HEADER);
+      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                  megaSignCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_FILE_INFO.getApiCode().equals(e.getApiCode()));
@@ -133,9 +133,8 @@ public class PostMegaSignApiTest {
     megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME, fileInfo);
 
     try {
-      megaSignsApi.createMegaSign(TestData.ACCESS_TOKEN,
-                                  megaSignCreationRequest,
-                                  TestData.X_API_HEADER);
+      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                  megaSignCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.URL_INVALID.getApiCode().equals(e.getApiCode()));
@@ -148,9 +147,8 @@ public class PostMegaSignApiTest {
     megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME, fileInfo);
 
     try {
-      megaSignsApi.createMegaSign(TestData.ACCESS_TOKEN,
-                                  megaSignCreationRequest,
-                                  TestData.X_API_HEADER);
+      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                  megaSignCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_FILE_INFO.getApiCode().equals(e.getApiCode()));
@@ -162,9 +160,8 @@ public class PostMegaSignApiTest {
     megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME, options);
 
     try {
-      megaSignsApi.createMegaSign(TestData.ACCESS_TOKEN,
-                                  megaSignCreationRequest,
-                                  TestData.X_API_HEADER);
+      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                  megaSignCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.EMPTY_REDIRECT_URL.getApiCode().equals(e.getApiCode()));
@@ -174,9 +171,8 @@ public class PostMegaSignApiTest {
     megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME, options);
 
     try {
-      megaSignsApi.createMegaSign(TestData.ACCESS_TOKEN,
-                                  megaSignCreationRequest,
-                                  TestData.X_API_HEADER);
+      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                  megaSignCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_REDIRECT_URL.getApiCode().equals(e.getApiCode()));
@@ -188,9 +184,8 @@ public class PostMegaSignApiTest {
     megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME, options);
 
     try {
-      megaSignsApi.createMegaSign(TestData.ACCESS_TOKEN,
-                                  megaSignCreationRequest,
-                                  TestData.X_API_HEADER);
+      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                  megaSignCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_REDIRECT_DELAY.getApiCode().equals(e.getApiCode()));
@@ -208,9 +203,8 @@ public class PostMegaSignApiTest {
     MegaSignCreationRequest megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME);
 
     try {
-      megaSignsApi.createMegaSign(TestData.ACCESS_TOKEN,
-                                  megaSignCreationRequest,
-                                  TestData.EMPTY_PARAM);
+      megaSignsApi.createMegaSign(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                  megaSignCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
@@ -228,9 +222,8 @@ public class PostMegaSignApiTest {
     MegaSignCreationRequest megaSignCreationRequest = getMegaSignCreationRequest(ApiUtils.getMegaSignName());
 
     try {
-      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(TestData.ACCESS_TOKEN,
-                                                                                      megaSignCreationRequest,
-                                                                                      TestData.X_API_HEADER);
+      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                                                                      megaSignCreationRequest);
       assertNotNull(megaSignCreationResponse);
       assertNotNull(megaSignCreationResponse.getMegaSignId());
     }

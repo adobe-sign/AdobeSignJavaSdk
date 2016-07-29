@@ -21,12 +21,13 @@ import com.adobe.sign.api.ViewsApi;
 import com.adobe.sign.model.views.TargetViewRequest;
 import com.adobe.sign.model.views.TargetViewRequest.TargetViewEnum;
 import com.adobe.sign.model.views.ViewUrl;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.ViewsUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.ViewsUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -34,10 +35,14 @@ import org.junit.Test;
  */
 public class PostViewSettingsApiTest {
 
-  private ViewsApi viewsApi = null;
+  private static ViewsApi viewsApi = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() {
+  @BeforeClass
+  public static void setup() {
+
     viewsApi = ViewsUtils.getViewsApi();
   }
 
@@ -54,9 +59,8 @@ public class PostViewSettingsApiTest {
     targetViewRequest.setTargetView(TargetViewEnum.USER_PROFILE);
 
     try {
-      viewsApi.createSettingsUrl(TestData.NULL_PARAM,
-                                 targetViewRequest,
-                                 TestData.X_API_HEADER);
+      viewsApi.createSettingsUrl(ApiUtils.getNullAccessTokenHeaderParams(),
+                                 targetViewRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -64,9 +68,8 @@ public class PostViewSettingsApiTest {
     }
 
     try {
-      viewsApi.createSettingsUrl(TestData.EMPTY_PARAM,
-                                 targetViewRequest,
-                                 TestData.X_API_HEADER);
+      viewsApi.createSettingsUrl(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                 targetViewRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -86,9 +89,8 @@ public class PostViewSettingsApiTest {
     targetViewRequest.setTargetView(TargetViewEnum.USER_PROFILE);
 
     try {
-      viewsApi.createSettingsUrl(TestData.ACCESS_TOKEN,
-                                 targetViewRequest,
-                                 TestData.EMPTY_PARAM);
+      viewsApi.createSettingsUrl(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                 targetViewRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -108,9 +110,8 @@ public class PostViewSettingsApiTest {
     targetViewRequest.setTargetView(null);
 
     try {
-      viewsApi.createSettingsUrl(TestData.ACCESS_TOKEN,
-                                 targetViewRequest,
-                                 TestData.X_API_HEADER);
+      viewsApi.createSettingsUrl(ApiUtils.getValidHeaderParams(),
+                                 targetViewRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -130,9 +131,8 @@ public class PostViewSettingsApiTest {
     targetViewRequest.setTargetView(TargetViewEnum.USER_PROFILE);
 
     try {
-      ViewUrl viewUrl = viewsApi.createSettingsUrl(TestData.ACCESS_TOKEN,
-                                                   targetViewRequest,
-                                                   TestData.X_API_HEADER);
+      ViewUrl viewUrl = viewsApi.createSettingsUrl(ApiUtils.getValidHeaderParams(),
+                                                   targetViewRequest);
       assertNotNull(viewUrl);
       assertNotNull(viewUrl.getViewURL());
     }

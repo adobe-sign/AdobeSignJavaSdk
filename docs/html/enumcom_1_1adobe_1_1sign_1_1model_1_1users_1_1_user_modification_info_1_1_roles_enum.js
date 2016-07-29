@@ -1,8 +1,8 @@
 var enumcom_1_1adobe_1_1sign_1_1model_1_1users_1_1_user_modification_info_1_1_roles_enum =
 [
-    [ "RolesEnum", "enumcom_1_1adobe_1_1sign_1_1model_1_1users_1_1_user_modification_info_1_1_roles_enum.html#a36c6a1690acfd66e46d9a5793afe6e10", null ],
-    [ "toString", "enumcom_1_1adobe_1_1sign_1_1model_1_1users_1_1_user_modification_info_1_1_roles_enum.html#a78f79b425eb9ec40ea8d48601415239d", null ],
-    [ "ACCOUNT_ADMIN", "enumcom_1_1adobe_1_1sign_1_1model_1_1users_1_1_user_modification_info_1_1_roles_enum.html#ad852b9dc286ef2c3525032a1f9e9b586", null ],
-    [ "GROUP_ADMIN", "enumcom_1_1adobe_1_1sign_1_1model_1_1users_1_1_user_modification_info_1_1_roles_enum.html#a0a94d96c815d16b9601a81e163e7b125", null ],
-    [ "NORMAL_USER", "enumcom_1_1adobe_1_1sign_1_1model_1_1users_1_1_user_modification_info_1_1_roles_enum.html#a46cbcaef30a5a9ab4e84afa3c22c337c", null ]
+    [ "RolesEnum", "enumcom_1_1adobe_1_1sign_1_1model_1_1users_1_1_user_modification_info_1_1_roles_enum.html#a1280c036f73ab4852c19b315dce6a10d", null ],
+    [ "toString", "enumcom_1_1adobe_1_1sign_1_1model_1_1users_1_1_user_modification_info_1_1_roles_enum.html#ad146fa8579a5f8a876c4688cc5a68520", null ],
+    [ "ACCOUNT_ADMIN", "enumcom_1_1adobe_1_1sign_1_1model_1_1users_1_1_user_modification_info_1_1_roles_enum.html#a28d95e606fcc3dace37924940c7b00b2", null ],
+    [ "GROUP_ADMIN", "enumcom_1_1adobe_1_1sign_1_1model_1_1users_1_1_user_modification_info_1_1_roles_enum.html#ae2474895cd4111d88cbbe53c1c2da906", null ],
+    [ "NORMAL_USER", "enumcom_1_1adobe_1_1sign_1_1model_1_1users_1_1_user_modification_info_1_1_roles_enum.html#a4b240e89995596cc33b7673dca09c6bb", null ]
 ];

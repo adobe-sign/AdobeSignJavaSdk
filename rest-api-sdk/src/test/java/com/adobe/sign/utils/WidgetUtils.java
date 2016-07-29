@@ -14,20 +14,22 @@ package com.adobe.sign.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.WidgetsApi;
-import com.adobe.sign.model.widgets.WidgetDocuments;
 import com.adobe.sign.model.widgets.UserWidget;
 import com.adobe.sign.model.widgets.UserWidgets;
 import com.adobe.sign.model.widgets.WidgetCreationInfo;
 import com.adobe.sign.model.widgets.WidgetCreationRequest;
 import com.adobe.sign.model.widgets.WidgetCreationResponse;
+import com.adobe.sign.model.widgets.WidgetDocuments;
 import com.adobe.sign.model.widgets.WidgetFileInfo;
 import com.adobe.sign.model.widgets.WidgetOriginalDocument;
 import com.adobe.sign.model.widgets.WidgetURLFileInfo;
 
 public class WidgetUtils extends ApiUtils{
   private static WidgetsApi widgetsApi = new WidgetsApi();
+  private static MultivaluedMap headers = ApiUtils.getValidHeaderParams();
 
   private static String documentId = null;
   private static String widgetId = null;
@@ -43,12 +45,11 @@ public class WidgetUtils extends ApiUtils{
 
   // Helper methods
 
-  private static String createWidget(String name) throws ApiException {
+  public static String createWidget(String name) throws ApiException {
     WidgetCreationRequest widgetCreationRequest = getWidgetCreationRequest(name);
 
-    WidgetCreationResponse widgetCreationResponse = widgetsApi.createWidget(TestData.ACCESS_TOKEN,
-                                                                            widgetCreationRequest,
-                                                                            TestData.X_API_HEADER);
+    WidgetCreationResponse widgetCreationResponse = widgetsApi.createWidget(headers,
+                                                                            widgetCreationRequest);
     widgetId = widgetCreationResponse.getWidgetId();
 
     return widgetId;
@@ -119,9 +120,8 @@ public class WidgetUtils extends ApiUtils{
   }
 
 
-  private static boolean isExistingWidget(String staticWidgetName) throws ApiException {
-    UserWidgets userWidgets = widgetsApi.getWidgets(TestData.ACCESS_TOKEN,
-                                                    TestData.X_API_HEADER);
+  public static boolean isExistingWidget(String staticWidgetName) throws ApiException {
+    UserWidgets userWidgets = widgetsApi.getWidgets(headers);
 
     for (UserWidget widget : userWidgets.getUserWidgetList()) {
       if (widget.getName().equals(staticWidgetName) && widget.getStatus().equals(UserWidget.StatusEnum.ENABLED)) {
@@ -135,9 +135,8 @@ public class WidgetUtils extends ApiUtils{
   private static void setDocumentId(String widgetId) throws ApiException {
     WidgetDocuments documentsSubResource = null;
 
-    documentsSubResource = widgetsApi.getWidgetDocuments (TestData.ACCESS_TOKEN,
+    documentsSubResource = widgetsApi.getWidgetDocuments (headers,
                                                           widgetId,
-                                                          TestData.X_API_HEADER,
                                                           TestData.VERSION_ID,
                                                           TestData.PARTICIPANT_EMAIL);
     List<WidgetOriginalDocument> widgetsDocumentsList = documentsSubResource.getDocuments();

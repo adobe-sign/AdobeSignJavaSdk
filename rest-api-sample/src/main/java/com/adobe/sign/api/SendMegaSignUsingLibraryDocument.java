@@ -18,10 +18,12 @@ import java.util.List;
 
 import com.adobe.sign.model.megaSigns.MegaSignCreationResponse;
 import com.adobe.sign.model.megaSigns.MegaSignInfo;
+import com.adobe.sign.utils.MegaSignUtils;
 import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
-import com.adobe.sign.utils.MegaSignUtils;
 import com.adobe.sign.utils.LibraryDocumentUtils;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
 
 /**
  * This sample client demonstrates how to send a new megaSign parent agreement.
@@ -41,24 +43,25 @@ public class SendMegaSignUsingLibraryDocument {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(SendMegaSignUsingLibraryDocument.class.getName());
     try {
       SendMegaSignUsingLibraryDocument client = new SendMegaSignUsingLibraryDocument();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.SEND_MEGASIGN_USING_LIBRARY_DOCUMENT);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.SEND_MEGASIGN_USING_LIBRARY_DOCUMENT, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception {
+  private void run() throws ApiException {
     //Get the id of the first library document of the user.
     String libraryDocumentId = LibraryDocumentUtils.getFirstLibraryDocumentId();
     if(libraryDocumentId == null) {
-      System.err.println(Errors.NO_LIBRARY_DOCUMENTS);
+      ApiUtils.logError(Errors.NO_LIBRARY_DOCUMENTS);
     }
     else {
       //List containing email ids of recipients
@@ -74,9 +77,9 @@ public class SendMegaSignUsingLibraryDocument {
       MegaSignInfo megaSignInfo = MegaSignUtils.getMegaSignInfo(megaSignCreationResponse.getMegaSignId());
 
       //Display the megaSign parent agreement details
-      System.out.println("Name = " + megaSignInfo.getName());
-      System.out.println("MegaSign ID = " + megaSignInfo.getMegaSignId());
-      System.out.println("MegaSign Status = " + megaSignInfo.getStatus());
+      ApiUtils.getLogger().info("Name = " + megaSignInfo.getName());
+      ApiUtils.getLogger().info("MegaSign ID = " + megaSignInfo.getMegaSignId());
+      ApiUtils.getLogger().info("MegaSign Status = " + megaSignInfo.getStatus());
     }
   }
 }

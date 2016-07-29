@@ -12,6 +12,8 @@
 */
 package com.adobe.sign.utils;
 
+import javax.ws.rs.core.MultivaluedMap;
+
 import com.adobe.sign.api.ViewsApi;
 import com.adobe.sign.model.views.AgreementAssetListRequest;
 import com.adobe.sign.model.views.AgreementAssetRequest;
@@ -21,6 +23,7 @@ import com.adobe.sign.model.views.ViewUrl;
 public class ViewUtils {
 
   private final static ViewsApi viewsApi = new ViewsApi();
+  private final static MultivaluedMap headers = ApiUtils.getHeaderParams();
 
   /**
    * Returns the URL for manage page.
@@ -30,18 +33,17 @@ public class ViewUtils {
    * If the user wants to generate a URL that will automatically log the user in then user_login scope is required in the given Oauth Access Token.
    * @return ViewUrl containing URL for manage page.
    */
-  public static ViewUrl getAgreementAssetListUrl (String agreementAssetId) throws Exception {
+  public static ViewUrl getAgreementAssetListUrl (String agreementAssetId) throws ApiException {
     try {
       AgreementAssetListRequest agreementAssetListRequest = new AgreementAssetListRequest();
       agreementAssetListRequest.setAgreementAssetId(agreementAssetId);
-      ViewUrl viewUrl = viewsApi.createAgreementAssetListUrl(Constants.ACCESS_TOKEN,
-                                                          Constants.X_API_USER,
-                                                          agreementAssetListRequest);
+      ViewUrl viewUrl = viewsApi.createAgreementAssetListUrl(headers,
+                                                             agreementAssetListRequest);
       return viewUrl;
     }
-    catch (Exception e) {
-      System.err.println(Errors.URL_FOR_MANAGE_PAGE);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.URL_FOR_MANAGE_PAGE, e);
+      return null;
     }
   }
 
@@ -52,18 +54,17 @@ public class ViewUtils {
    * If the user wants to generate a URL that will automatically log the user in then user_login scope is required in the given Oauth Access Token.
    * @return ViewUrl containing URL which shows the view page of given agreement asset
    */
-  public static ViewUrl getAgreementAssetUrl (String agreementAssetId) throws Exception {
+  public static ViewUrl getAgreementAssetUrl (String agreementAssetId) throws ApiException {
     try {
       AgreementAssetRequest agreementAssetRequest = new AgreementAssetRequest();
       agreementAssetRequest.setAgreementAssetId(agreementAssetId);
-      ViewUrl viewUrl = viewsApi.createAgreementAssetUrl(Constants.ACCESS_TOKEN,
-                                                      agreementAssetRequest,
-                                                      Constants.X_API_USER);
+      ViewUrl viewUrl = viewsApi.createAgreementAssetUrl(headers,
+                                                         agreementAssetRequest);
       return viewUrl;
     }
-    catch (Exception e) {
-      System.err.println(Errors.URL_FOR_VIEW_AGREEMENT_ASSET_PAGE);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.URL_FOR_VIEW_AGREEMENT_ASSET_PAGE, e);
+      return null;
     }
   }
 
@@ -74,18 +75,17 @@ public class ViewUtils {
    * If the user wants to generate a URL that will automatically log the user in then user_login scope is required in the given Oauth Access Token.
    * @return ViewUrl containing URL for settings page
    */
-  public static ViewUrl getSettingsUrl (TargetViewRequest.TargetViewEnum targetView) throws Exception {
+  public static ViewUrl getSettingsUrl (TargetViewRequest.TargetViewEnum targetView) throws ApiException {
     try {
       TargetViewRequest targetViewRequest = new TargetViewRequest();
       targetViewRequest.setTargetView(targetView);
-      ViewUrl viewUrl = viewsApi.createSettingsUrl(Constants.ACCESS_TOKEN,
-                                                targetViewRequest,
-                                                Constants.X_API_USER);
+      ViewUrl viewUrl = viewsApi.createSettingsUrl(headers,
+                                                   targetViewRequest);
       return viewUrl;
     }
-    catch (Exception e) {
-      System.err.println(Errors.URL_FOR_SETTINGS_PAGE);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.URL_FOR_SETTINGS_PAGE, e);
+      return null;
     }
   }
 }

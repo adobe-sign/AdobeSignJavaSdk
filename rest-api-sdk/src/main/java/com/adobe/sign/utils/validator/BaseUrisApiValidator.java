@@ -23,10 +23,8 @@ public class BaseUrisApiValidator {
   /**
    * Validator for getBaseUris API that retrieves the base uri to access other APIs.
    *
-   * @param accessToken An OAuth Access Token.
    * @throws ApiException
    */
-  public static void getBaseUrisValidator(String accessToken) throws ApiException {
-    ApiValidatorHelper.validateAccessToken(accessToken);
+  public static void getBaseUrisValidator() throws ApiException {
   }
 }

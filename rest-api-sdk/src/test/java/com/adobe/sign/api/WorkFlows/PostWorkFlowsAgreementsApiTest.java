@@ -22,14 +22,16 @@ import com.adobe.sign.model.workflows.AgreementCreationResponse;
 import com.adobe.sign.model.workflows.CustomWorkflowAgreementCreationRequest;
 import com.adobe.sign.model.workflows.CustomWorkflowFileInfo;
 import com.adobe.sign.model.workflows.PostSignOptions;
+import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.LibraryDocumentsUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.TransientDocumentsUtils;
 import com.adobe.sign.utils.WorkFlowUtils;
-import com.adobe.sign.utils.ApiException;
-import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -37,13 +39,16 @@ import org.junit.Test;
  */
 public class PostWorkFlowsAgreementsApiTest {
 
-  private WorkflowsApi workflowsApi = null;
-  private String workflowId = null;
-  private String libraryDocumentId = null;
-  private String transientDocumentId = null;
+  private static WorkflowsApi workflowsApi = null;
+  private static String workflowId = null;
+  private static String libraryDocumentId = null;
+  private static String transientDocumentId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     workflowId = WorkFlowUtils.getResourceId();
     workflowsApi = WorkFlowUtils.getWorkflowsApi();
 
@@ -63,10 +68,9 @@ public class PostWorkFlowsAgreementsApiTest {
     CustomWorkflowAgreementCreationRequest creationRequest = new CustomWorkflowAgreementCreationRequest();
 
     try {
-      workflowsApi.createWorkflowAgreement(TestData.NULL_PARAM,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getNullAccessTokenHeaderParams(),
                                            workflowId,
-                                           creationRequest,
-                                           TestData.X_API_HEADER);
+                                           creationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -74,10 +78,9 @@ public class PostWorkFlowsAgreementsApiTest {
     }
 
     try {
-      workflowsApi.createWorkflowAgreement(TestData.EMPTY_PARAM,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getEmptyAccessTokenHeaderParams(),
                                            workflowId,
-                                           creationRequest,
-                                           TestData.X_API_HEADER);
+                                           creationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -96,10 +99,9 @@ public class PostWorkFlowsAgreementsApiTest {
     CustomWorkflowAgreementCreationRequest creationRequest = new CustomWorkflowAgreementCreationRequest();
 
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getEmptyXApiUserHeaderParams(),
                                            workflowId,
-                                           creationRequest,
-                                           TestData.EMPTY_PARAM);
+                                           creationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -119,10 +121,9 @@ public class PostWorkFlowsAgreementsApiTest {
     CustomWorkflowAgreementCreationRequest creationRequest = new CustomWorkflowAgreementCreationRequest();
 
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            TestData.NULL_PARAM,
-                                           creationRequest,
-                                           TestData.X_API_HEADER);
+                                           creationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -130,10 +131,9 @@ public class PostWorkFlowsAgreementsApiTest {
     }
 
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            TestData.EMPTY_PARAM,
-                                           creationRequest,
-                                           TestData.X_API_HEADER);
+                                           creationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -161,10 +161,9 @@ public class PostWorkFlowsAgreementsApiTest {
 
     // Null CustomWorkflowAgreementCreationRequest.
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            workflowId,
-                                           null,
-                                           TestData.X_API_HEADER);
+                                           null);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -177,10 +176,9 @@ public class PostWorkFlowsAgreementsApiTest {
     agreementCreationRequest.getDocumentCreationInfo().setFileInfos(null);
 
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            workflowId,
-                                           agreementCreationRequest,
-                                           TestData.X_API_HEADER);
+                                           agreementCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -195,10 +193,9 @@ public class PostWorkFlowsAgreementsApiTest {
                                                                                        ApiUtils.getAgreementName());
 
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            workflowId,
-                                           agreementCreationRequest,
-                                           TestData.X_API_HEADER);
+                                           agreementCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -213,10 +210,9 @@ public class PostWorkFlowsAgreementsApiTest {
                                                                                        ApiUtils.getAgreementName());
 
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            workflowId,
-                                           agreementCreationRequest,
-                                           TestData.X_API_HEADER);
+                                           agreementCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -230,10 +226,9 @@ public class PostWorkFlowsAgreementsApiTest {
     agreementCreationRequest = WorkFlowUtils.getCustomWorkflowAgreementCreationRequest(fileInfo,
                                                                                        ApiUtils.getAgreementName());
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            workflowId,
-                                           agreementCreationRequest,
-                                           TestData.X_API_HEADER);
+                                           agreementCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -244,10 +239,9 @@ public class PostWorkFlowsAgreementsApiTest {
     agreementCreationRequest = WorkFlowUtils.getCustomWorkflowAgreementCreationRequest(TestData.NULL_PARAM);
 
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            workflowId,
-                                           agreementCreationRequest,
-                                           TestData.X_API_HEADER);
+                                           agreementCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -259,10 +253,9 @@ public class PostWorkFlowsAgreementsApiTest {
     agreementCreationRequest = WorkFlowUtils.getCustomWorkflowAgreementCreationRequest(ApiUtils.getAgreementName(),
                                                                                        options);
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            workflowId,
-                                           agreementCreationRequest,
-                                           TestData.X_API_HEADER);
+                                           agreementCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -274,10 +267,9 @@ public class PostWorkFlowsAgreementsApiTest {
     agreementCreationRequest = WorkFlowUtils.getCustomWorkflowAgreementCreationRequest(ApiUtils.getAgreementName(),
                                                                                        options);
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            workflowId,
-                                           agreementCreationRequest,
-                                           TestData.X_API_HEADER);
+                                           agreementCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -290,10 +282,9 @@ public class PostWorkFlowsAgreementsApiTest {
     agreementCreationRequest = WorkFlowUtils.getCustomWorkflowAgreementCreationRequest(ApiUtils.getAgreementName(),
                                                                                        options);
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            workflowId,
-                                           agreementCreationRequest,
-                                           TestData.X_API_HEADER);
+                                           agreementCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -305,14 +296,13 @@ public class PostWorkFlowsAgreementsApiTest {
                                                                                        TestData.NULL_PARAM,
                                                                                        TestData.NULL_PARAM);
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            workflowId,
-                                           agreementCreationRequest,
-                                           TestData.X_API_HEADER);
+                                           agreementCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
-                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MIN_ADDRESSES_NOT_MET.getApiCode().equals(e.getApiCode()));
     }
 
     // Wrong email set in recipientInfo.
@@ -320,10 +310,9 @@ public class PostWorkFlowsAgreementsApiTest {
                                                                                        TestData.INVALID_EMAIL,
                                                                                        TestData.NULL_PARAM);
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            workflowId,
-                                           agreementCreationRequest,
-                                           TestData.X_API_HEADER);
+                                           agreementCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -335,10 +324,9 @@ public class PostWorkFlowsAgreementsApiTest {
                                                                                        TestData.POST_EMAIL,
                                                                                        TestData.POST_FAX);
     try {
-      workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                            workflowId,
-                                           agreementCreationRequest,
-                                           TestData.X_API_HEADER);
+                                           agreementCreationRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -355,10 +343,9 @@ public class PostWorkFlowsAgreementsApiTest {
     CustomWorkflowAgreementCreationRequest agreementCreationRequest = WorkFlowUtils.getCustomWorkflowAgreementCreationRequest(ApiUtils.getAgreementName());
 
     try {
-      AgreementCreationResponse response = workflowsApi.createWorkflowAgreement(TestData.ACCESS_TOKEN,
+      AgreementCreationResponse response = workflowsApi.createWorkflowAgreement(ApiUtils.getValidHeaderParams(),
                                                                                 workflowId,
-                                                                                agreementCreationRequest,
-                                                                                TestData.X_API_HEADER);
+                                                                                agreementCreationRequest);
       assertNotNull(response);
       assertNotNull(response.getAgreementId());
     }

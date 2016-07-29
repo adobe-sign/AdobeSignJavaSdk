@@ -19,23 +19,28 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.AgreementsApi;
 import com.adobe.sign.model.agreements.CombinedDocumentPagesInfo;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.AgreementsUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * Junit test cases for Get Agreement Combined Document Pages Info API.
  */
 public class GetAgreementCombinedDocPagesInfoApiTest {
-  private AgreementsApi agreementsApi = null;
-  private String agreementId = null;
+  private static AgreementsApi agreementsApi = null;
+  private static String agreementId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
@@ -50,9 +55,8 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentPagesInfo(TestData.NULL_PARAM,
+      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getNullAccessTokenHeaderParams(),
                                                  agreementId,
-                                                 TestData.X_API_HEADER,
                                                  TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
     }
     catch (ApiException e) {
@@ -61,9 +65,8 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
     }
 
     try {
-      agreementsApi.getCombinedDocumentPagesInfo(TestData.EMPTY_PARAM,
+      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getEmptyAccessTokenHeaderParams(),
                                                  agreementId,
-                                                 TestData.X_API_HEADER,
                                                  TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
     }
     catch (ApiException e) {
@@ -81,9 +84,8 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentPagesInfo(TestData.ACCESS_TOKEN,
+      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getEmptyXApiUserHeaderParams(),
                                                  agreementId,
-                                                 TestData.EMPTY_PARAM,
                                                  TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
     }
     catch (ApiException e) {
@@ -101,9 +103,8 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentPagesInfo(TestData.ACCESS_TOKEN,
+      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getValidHeaderParams(),
                                                  TestData.EMPTY_PARAM,
-                                                 TestData.X_API_HEADER,
                                                  TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
     }
     catch (ApiException e) {
@@ -112,9 +113,8 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
     }
 
     try {
-      agreementsApi.getCombinedDocumentPagesInfo(TestData.ACCESS_TOKEN,
+      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getValidHeaderParams(),
                                                  TestData.NULL_PARAM,
-                                                 TestData.X_API_HEADER,
                                                  TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
     }
     catch (ApiException e) {
@@ -132,9 +132,8 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
   public void testInvalidDocumentId() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentPagesInfo(TestData.ACCESS_TOKEN,
+      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getValidHeaderParams(),
                                                  agreementId,
-                                                 TestData.X_API_HEADER,
                                                  TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
     }
     catch (ApiException e) {
@@ -143,9 +142,8 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
     }
 
     try {
-      agreementsApi.getCombinedDocumentPagesInfo(TestData.ACCESS_TOKEN,
+      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getValidHeaderParams(),
                                                  agreementId,
-                                                 TestData.X_API_HEADER,
                                                  TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
     }
     catch (ApiException e) {
@@ -163,9 +161,8 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
   public void testGetCombinedDocumentPagesInfo() throws ApiException {
 
     try {
-      CombinedDocumentPagesInfo combinedDocumentPagesInfo = agreementsApi.getCombinedDocumentPagesInfo(TestData.ACCESS_TOKEN,
+      CombinedDocumentPagesInfo combinedDocumentPagesInfo = agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getValidHeaderParams(),
                                                                                                        agreementId,
-                                                                                                       TestData.X_API_HEADER,
                                                                                                        TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
       assertNotNull(combinedDocumentPagesInfo);
     }

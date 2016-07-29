@@ -19,24 +19,27 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.MegaSignsApi;
 import com.adobe.sign.model.megaSigns.MegaSigns;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.MegaSignUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 /**
  * Junit test cases for Get MegaSigns APIs.
  */
 public class GetMegasignsApiTest {
 
-  private MegaSignsApi megaSignsApi = null;
-  private String megaSignId = null;
+  private static MegaSignsApi megaSignsApi = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
-    megaSignId = MegaSignUtils.getResourceId(TestData.MEGASIGN_NAME);
+  @BeforeClass
+  public static void setup() throws ApiException {
     megaSignsApi = MegaSignUtils.getMegaSignsApi();
   }
 
@@ -50,8 +53,7 @@ public class GetMegasignsApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      megaSignsApi.getMegaSigns(TestData.NULL_PARAM,
-                                TestData.X_API_HEADER,
+      megaSignsApi.getMegaSigns(ApiUtils.getNullAccessTokenHeaderParams(),
                                 TestData.MEGASIGN_QUERY);
     }
     catch (ApiException e) {
@@ -59,8 +61,7 @@ public class GetMegasignsApiTest {
     }
 
     try {
-      megaSignsApi.getMegaSigns(TestData.EMPTY_PARAM,
-                                TestData.X_API_HEADER,
+      megaSignsApi.getMegaSigns(ApiUtils.getEmptyAccessTokenHeaderParams(),
                                 TestData.MEGASIGN_QUERY);
     }
     catch (ApiException e) {
@@ -77,8 +78,7 @@ public class GetMegasignsApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      megaSignsApi.getMegaSigns(TestData.ACCESS_TOKEN,
-                                TestData.EMPTY_PARAM,
+      megaSignsApi.getMegaSigns(ApiUtils.getEmptyXApiUserHeaderParams(),
                                 TestData.MEGASIGN_QUERY);
     }
     catch (ApiException e) {
@@ -95,8 +95,7 @@ public class GetMegasignsApiTest {
   @Test
   public void testMegaSigns() throws ApiException {
     try {
-      MegaSigns megaSigns = megaSignsApi.getMegaSigns(TestData.ACCESS_TOKEN,
-                                                      TestData.X_API_HEADER,
+      MegaSigns megaSigns = megaSignsApi.getMegaSigns(ApiUtils.getValidHeaderParams(),
                                                       TestData.MEGASIGN_QUERY);
       assertNotNull(megaSigns);
     }

@@ -18,23 +18,28 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.AgreementsApi;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.AgreementsUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * Junit test cases for Get Agreement Audit API.
  */
 public class GetAgreementAuditApiTest {
-  private AgreementsApi agreementsApi = null;
-  private String agreementId = null;
+  private static AgreementsApi agreementsApi = null;
+  private static String agreementId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
@@ -49,9 +54,8 @@ public class GetAgreementAuditApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getAuditTrail(TestData.NULL_PARAM,
-                                  agreementId,
-                                  TestData.X_API_HEADER);
+      agreementsApi.getAuditTrail(ApiUtils.getNullAccessTokenHeaderParams(),
+                                  agreementId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -59,9 +63,8 @@ public class GetAgreementAuditApiTest {
     }
 
     try {
-      agreementsApi.getAuditTrail(TestData.EMPTY_PARAM,
-                                  agreementId,
-                                  TestData.X_API_HEADER);
+      agreementsApi.getAuditTrail(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                  agreementId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -78,9 +81,8 @@ public class GetAgreementAuditApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getAuditTrail(TestData.ACCESS_TOKEN,
-                                  agreementId,
-                                  TestData.EMPTY_PARAM);
+      agreementsApi.getAuditTrail(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                  agreementId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -97,9 +99,8 @@ public class GetAgreementAuditApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getAuditTrail(TestData.ACCESS_TOKEN,
-                                  TestData.EMPTY_PARAM,
-                                  TestData.X_API_HEADER);
+      agreementsApi.getAuditTrail(ApiUtils.getValidHeaderParams(),
+                                  TestData.EMPTY_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -107,9 +108,8 @@ public class GetAgreementAuditApiTest {
     }
 
     try {
-      agreementsApi.getAuditTrail(TestData.ACCESS_TOKEN,
-                                  TestData.NULL_PARAM,
-                                  TestData.X_API_HEADER);
+      agreementsApi.getAuditTrail(ApiUtils.getValidHeaderParams(),
+                                  TestData.NULL_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -123,9 +123,8 @@ public class GetAgreementAuditApiTest {
   public void testGetAuditTrail() throws ApiException {
 
     try {
-      byte[] audit = agreementsApi.getAuditTrail(TestData.ACCESS_TOKEN,
-                                                 agreementId,
-                                                 TestData.X_API_HEADER);
+      byte[] audit = agreementsApi.getAuditTrail(ApiUtils.getValidHeaderParams(),
+                                                 agreementId);
       assertNotNull(audit);
     }
     catch (ApiException e) {

@@ -18,37 +18,31 @@ import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.StringUtil;
 
 /**
- * Validator class for TransientDocumentsApi. The main purpose of this class is to check the validity of the parameters passed to 
+ * Validator class for TransientDocumentsApi. The main purpose of this class is to check the validity of the parameters passed to
  * the transientDocuments API and throw ApiException with required error messages if the validation fails.
  */
 public class TransientDocumentsApiValidator {
-  
+
   /**
    * Validator for createTransientDocument API that Uploads a document and obtains the document's ID.
-   * 
-   * @param accessToken An OAuth Access Token.
-   * @param file The uploaded file.
-   * @param xApiUser The userId or email of API caller.
+   *
    * @param fileName Name of the uploaded file.
    * @param mimeType The mime type of the document being uploaded.
+   * @param file     The uploaded file.
    * @throws ApiException
    */
-  public static void createTransientDocumentValidator (String accessToken, 
-                                                       File file, 
-                                                       String xApiUser, 
-                                                       String fileName, 
-                                                       String mimeType) throws ApiException {
-    
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);    
-    ApiValidatorHelper.validateParameter(fileName, 
+  public static void createTransientDocumentValidator(String fileName,
+                                                      String mimeType,
+                                                      File file) throws ApiException {
+    ApiValidatorHelper.validateParameter(fileName,
                                          SdkErrorCodes.NO_FILE_NAME);
-    
-    ApiValidatorHelper.validateParameter(file, 
-                                      SdkErrorCodes.NO_FILE_CONTENT);
-    
+
+    ApiValidatorHelper.validateParameter(file,
+                                         SdkErrorCodes.NO_FILE_CONTENT);
+
     int extensionPos = file.getName().lastIndexOf(".");
-   
-    if(extensionPos < 0 && StringUtil.isEmpty(mimeType))
+
+    if (extensionPos < 0 && StringUtil.isEmpty(mimeType))
       throw new ApiException(SdkErrorCodes.NO_MEDIA_TYPE);
   }
 

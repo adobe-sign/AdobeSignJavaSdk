@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:24:55.658+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:02.594+05:30")
 public class DocumentCreationInfo   {
   
   private String callbackInfo = null;
@@ -201,9 +201,9 @@ public enum SignatureTypeEnum {
 
   
   /**
-   * The locale associated with this agreement - specifies the language for the signing page and emails, for example en_US or fr_FR.  If none specified, defaults to the language configured for the agreement sender
+   * The locale associated with this agreement - specifies the language for the signing page and emails, for example en_US or fr_FR. If none specified, defaults to the language configured for the agreement sender
    **/
-  @ApiModelProperty(value = "The locale associated with this agreement - specifies the language for the signing page and emails, for example en_US or fr_FR.  If none specified, defaults to the language configured for the agreement sender")
+  @ApiModelProperty(value = "The locale associated with this agreement - specifies the language for the signing page and emails, for example en_US or fr_FR. If none specified, defaults to the language configured for the agreement sender")
   @JsonProperty("locale")
   public String getLocale() {
     return locale;
@@ -305,9 +305,9 @@ public enum SignatureTypeEnum {
 
   
   /**
-   * Selects the workflow you would like to use - whether the sender needs to sign only, before the recipient, after the recipient, or not at all. The possible values for this variable are SENDER_SIGNATURE_NOT_REQUIRED, SENDER_SIGNS_LAST, SENDER_SIGNS_FIRST, SEQUENTIAL, PARALLEL or SENDER_SIGNS_ONLY.  Note: leave unspecified for hybrid routing
+   * Selects the workflow you would like to use - whether the sender needs to sign only, before the recipient, after the recipient, or not at all. The possible values for this variable are SENDER_SIGNATURE_NOT_REQUIRED, SENDER_SIGNS_LAST, SENDER_SIGNS_FIRST, SEQUENTIAL, PARALLEL or SENDER_SIGNS_ONLY. Note: leave unspecified for hybrid routing
    **/
-  @ApiModelProperty(value = "Selects the workflow you would like to use - whether the sender needs to sign only, before the recipient, after the recipient, or not at all. The possible values for this variable are SENDER_SIGNATURE_NOT_REQUIRED, SENDER_SIGNS_LAST, SENDER_SIGNS_FIRST, SEQUENTIAL, PARALLEL or SENDER_SIGNS_ONLY.  Note: leave unspecified for hybrid routing")
+  @ApiModelProperty(value = "Selects the workflow you would like to use - whether the sender needs to sign only, before the recipient, after the recipient, or not at all. The possible values for this variable are SENDER_SIGNATURE_NOT_REQUIRED, SENDER_SIGNS_LAST, SENDER_SIGNS_FIRST, SEQUENTIAL, PARALLEL or SENDER_SIGNS_ONLY. Note: leave unspecified for hybrid routing")
   @JsonProperty("signatureFlow")
   public SignatureFlowEnum getSignatureFlow() {
     return signatureFlow;

@@ -18,6 +18,7 @@ import java.util.TimeZone;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response.Status.Family;
 
+import com.adobe.sign.model.baseUris.BaseUriInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -26,17 +27,14 @@ import com.sun.jersey.api.client.filter.LoggingFilter;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 
-import com.adobe.sign.model.baseUris.BaseUriInfo;
-
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-04-05T18:03:59.501+05:30")
 public class ApiClient {
 
   private Map<String, Client> hostMap = new HashMap<String, Client>();
   private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
   private boolean debugging = false;
-  private String baseUri = "https://secure.na1.echosign.com";
+  private String basePath = "https://secure.na1.echosign.com";
   private String subPath = "/api/rest/v5";
-  private String basePath = "";
   private boolean queryBaseUrl = true;
   private JSON json = new JSON();
 
@@ -56,20 +54,17 @@ public class ApiClient {
     // Set default User-Agent.
     setUserAgent("Adobe Sign Java SDK 1.0");
 
-    // Set base Path
-    setBasePath(baseUri + subPath);
   }
 
   public String getBaseUri() {
     if (queryBaseUrl)
       return null;
 
-    return baseUri;
+    return basePath;
   }
 
   public void setBaseUri(String baseUri) {
-    this.baseUri = baseUri;
-    setBasePath(baseUri + subPath);
+    this.basePath = baseUri;
     queryBaseUrl = false;
   }
 
@@ -78,9 +73,6 @@ public class ApiClient {
     return basePath;
   }
 
-  public void setBasePath(String basePath) {
-    this.basePath = basePath;
-  }
 
   /**
    * Gets the status code of the previous request
@@ -284,8 +276,10 @@ public class ApiClient {
    * JSON will be used.
    */
   public String selectHeaderContentType(String[] contentTypes) {
+
     if (contentTypes.length == 0)
       return "application/json";
+
     if (StringUtil.containsIgnoreCase(contentTypes,
                                       "application/json"))
       return "application/json";
@@ -424,7 +418,6 @@ public class ApiClient {
     else if (contentType.startsWith("application/x-www-form-urlencoded")) {
       encodedFormParams = this.getXWWWFormUrlencodedParams(formParams);
     }
-
     ClientResponse response = null;
 
     if ("GET".equals(method)) {
@@ -536,7 +529,7 @@ public class ApiClient {
     if (response.getStatusInfo().getFamily() == Family.SUCCESSFUL) {
       BaseUriInfo baseUriInfo = deserialize(response,
                                             returnType);
-      return baseUriInfo.getApiAccessPoint() + subPath;
+      return baseUriInfo.getApiAccessPoint();
     }
     return basePath;
   }
@@ -565,12 +558,16 @@ public class ApiClient {
                          Map<String, Object> formParams,
                          String accept,
                          String contentType,
-                         TypeRef returnType) throws ApiException {
+                         TypeRef returnType,
+                         boolean addSubPath) throws ApiException {
 
     String baseUrl = basePath;
     if (queryBaseUrl) {
       baseUrl = getBaseUrl(headerParams.get("Access-Token"));
     }
+
+    if (addSubPath)
+      baseUrl += subPath;
 
     ClientResponse response = getAPIResponse(baseUrl,
                                              path,
@@ -599,28 +596,47 @@ public class ApiClient {
     else {
       String message = "error";
       String respBody = null;
-      RestException exception = null;
-      if (response.hasEntity()) {
-        try {
-          respBody = String.valueOf(response.getEntity(String.class));
-          message = respBody;
 
-          exception = getRestException(message);
-        }
-        catch (RuntimeException e) {
-          //e.printStackTrace();
-        }
-        catch (IOException e) {
-          //e.printStackTrace();
-        }
+      if (addSubPath) {
+        throwApiException(message, response, respBody, RestException.class);
       }
-
-      throw new ApiException(response.getStatusInfo().getStatusCode(),
-                             exception == null ? message : exception.getMessage(),
-                             exception == null ? null : exception.getCode(),
-                             response.getHeaders(),
-                             respBody);
+      else {
+        throwApiException(message, response, respBody, OAuthException.class);
+      }
     }
+    return null;
+  }
+
+  private <T> void throwApiException(String message, ClientResponse response, String respBody, Class<T> clazz) throws ApiException {
+    T exception = null;
+    if (response.hasEntity()) {
+      try {
+        message = String.valueOf(response.getEntity(String.class));
+        exception = getRestException(message, clazz);
+      }
+      catch (RuntimeException e) {
+        //e.printStackTrace();
+      }
+      catch (IOException e) {
+        //e.printStackTrace();
+      }
+    }
+
+    String code = null;
+    if(exception instanceof OAuthException) {
+      code = ((OAuthException) exception).getCode();
+      message = ((OAuthException) exception).getMessage();
+    }
+    else {
+      code = ((RestException) exception).getCode();
+      message = ((RestException) exception).getMessage();
+
+    }
+    throw new ApiException(response.getStatusInfo().getStatusCode(),
+                           message,
+                           code,
+                           response.getHeaders(),
+                           respBody);
   }
 
   /**
@@ -645,12 +661,16 @@ public class ApiClient {
                                 Map<String, String> headerParams,
                                 Map<String, Object> formParams,
                                 String accept,
-                                String contentType) throws ApiException {
+                                String contentType,
+                                boolean addSubPath) throws ApiException {
 
     String baseUrl = basePath;
     if (queryBaseUrl) {
       baseUrl = getBaseUrl(headerParams.get("Access-Token"));
     }
+
+    if (addSubPath)
+      baseUrl += subPath;
 
     ClientResponse response = getAPIResponse(baseUrl,
                                              path,
@@ -685,11 +705,12 @@ public class ApiClient {
     }
     else {
       String message = "error";
+
       RestException exception = null;
       if (response.hasEntity()) {
         try {
           message = String.valueOf(response.getEntity(String.class));
-          exception = getRestException(message);
+          exception = getRestException(message, RestException.class);
         }
         catch (RuntimeException e) {
           //e.printStackTrace();
@@ -700,22 +721,24 @@ public class ApiClient {
       }
 
       throw new ApiException(response.getStatusInfo().getStatusCode(),
-                             exception == null ? null : exception.getCode(),
-                             exception == null ? message : exception.getMessage());
+        exception == null ? null : exception.getCode(),
+        exception == null ? message : exception.getMessage());
     }
   }
 
   /**
-   * Retreives the error message and ApiCode from corresponding REST exception.
+   * Retreives the error message and error code from corresponding REST exception.
    *
    * @param message The REST exception.
-   * @return RestException
+   * @param clazz The exception class.
+   * @return The exception object.
    * @throws IOException
    */
-  private RestException getRestException(String message) throws IOException {
+
+  private <T> T getRestException(String message, Class<T> clazz) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     return mapper.readValue(message,
-                            RestException.class);
+                            clazz);
   }
 
   /**
@@ -762,4 +785,6 @@ public class ApiClient {
     }
     return hostMap.get(baseUrl);
   }
+
+
 }

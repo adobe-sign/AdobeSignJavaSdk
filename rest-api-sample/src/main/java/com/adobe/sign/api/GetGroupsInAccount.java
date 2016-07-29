@@ -17,8 +17,11 @@ import java.util.List;
 
 import com.adobe.sign.model.groups.GroupInfo;
 import com.adobe.sign.model.groups.GroupsInfo;
-import com.adobe.sign.utils.Errors;
 import com.adobe.sign.utils.GroupUtils;
+import com.adobe.sign.utils.Errors;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
+
 
 /**
  * This sample client demonstrates how to get all the groups in an account.
@@ -33,28 +36,29 @@ public class GetGroupsInAccount {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(GetGroupsInAccount.class.getName());
     try {
       GetGroupsInAccount client = new GetGroupsInAccount();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.GET_GROUPS_IN_ACCOUNT);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_GROUPS_IN_ACCOUNT, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException{
     //Make API call to get list of all the groups in the account.
     GroupsInfo groupsInfo = GroupUtils.getGroups();
 
     //Display group ID and name of each group.
     List<GroupInfo> groupInfos = groupsInfo.getGroupInfoList();
     for(GroupInfo groupInfo : groupInfos) {
-      System.out.println("Group ID : " + groupInfo.getGroupId());
-      System.out.println("Group Name : " + groupInfo.getGroupName());
+      ApiUtils.getLogger().info("Group ID : " + groupInfo.getGroupId());
+      ApiUtils.getLogger().info("Group Name : " + groupInfo.getGroupName());
     }
   }
 }

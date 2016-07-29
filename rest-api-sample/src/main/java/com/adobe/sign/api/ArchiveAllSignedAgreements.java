@@ -19,6 +19,8 @@ import com.adobe.sign.model.agreements.AgreementInfo;
 import com.adobe.sign.model.agreements.UserAgreement;
 import com.adobe.sign.model.agreements.UserAgreements;
 import com.adobe.sign.utils.AgreementUtils;
+import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
 import com.adobe.sign.utils.FileUtils;
@@ -36,33 +38,40 @@ public class ArchiveAllSignedAgreements {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(ArchiveAllSignedAgreements.class.getName());
     try {
       ArchiveAllSignedAgreements client = new ArchiveAllSignedAgreements();
       client.run();
-    }
-    catch (Exception e) {
-      throw new AssertionError(Errors.ARCHIVE_AGREEMENT);
+    } catch (ApiException e) {
+      ApiUtils.logException(Errors.ARCHIVE_AGREEMENT, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException {
+    // Set the number of agreements which is to be archived.
+    int agreementCountLimit = Constants.AGREEMENT_COUNT_LIMIT;
+
     //Make API call to get all the agreements of a user.
     UserAgreements userAgreements = AgreementUtils.getAllAgreements();
 
     //Get list of agreements
     List<UserAgreement> userAgreementList = userAgreements.getUserAgreementList();
     for(UserAgreement userAgreement : userAgreementList) {
+      
+      if(agreementCountLimit == 0)
+        break;
       //Check if the agreement is signed
       if (userAgreement.getStatus().equals(UserAgreement.StatusEnum.SIGNED) && (userAgreement.getEsign().equals(Boolean.TRUE))) {
 
         //Display name of the agreement associated with the specified agreement ID.
         AgreementInfo agreementInfo = AgreementUtils.getAgreementInfo(userAgreement.getAgreementId());
         String agreementName = agreementInfo.getName();
-        System.out.println("Agreement name: " + agreementName);
+
+        ApiUtils.getLogger().info("Agreement name: " + agreementName);
 
         //Make API call to get combined documents of this agreement.
         byte auditStream[] = AgreementUtils.getAgreementCombinedDocument(userAgreement.getAgreementId());
@@ -76,6 +85,7 @@ public class ArchiveAllSignedAgreements {
                                Constants.OUTPUT_PATH + Constants.ARCHIVE ,
                                fileName);
         }
+        agreementCountLimit--;
       }
     }
   }

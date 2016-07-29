@@ -18,8 +18,12 @@ import java.util.List;
 import com.adobe.sign.model.agreements.UserAgreement;
 import com.adobe.sign.model.agreements.UserAgreements;
 import com.adobe.sign.utils.AgreementUtils;
+import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.BaseUriUtils;
+import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
+
 
 /**
  * This sample client demonstrates how to get status of all the agreements of a user.
@@ -34,20 +38,24 @@ public class GetStatusOfAgreements {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(GetStatusOfAgreements.class.getName());
     try {
       GetStatusOfAgreements client = new GetStatusOfAgreements();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.GET_AGREEMENT_STATUS);
-    }
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_AGREEMENT_STATUS, e);
+   }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException{
+    // Set the number of agreements for which status is to be printed.
+    int agreementCountLimit = Constants.AGREEMENT_COUNT_LIMIT;
+    
     BaseUriUtils.setBaseUri();
 
     //Make API call to get all the agreements of a user.
@@ -56,9 +64,15 @@ public class GetStatusOfAgreements {
     //Display details of each agreement.
     List<UserAgreement> userAgreementList = userAgreements.getUserAgreementList();
     for(UserAgreement userAgreement : userAgreementList) {
-      System.out.println("Agreement Name = " + userAgreement.getName());
-      System.out.println("Agreement Id = " + userAgreement.getAgreementId());
-      System.out.println("Agreement Status = " + userAgreement.getStatus());
+      
+      if(agreementCountLimit == 0)
+        break;
+      
+      ApiUtils.getLogger().info("Agreement Name = " + userAgreement.getName());
+      ApiUtils.getLogger().info("Agreement Id = " + userAgreement.getAgreementId());
+      ApiUtils.getLogger().info("Agreement Status = " + userAgreement.getStatus());
+      
+      agreementCountLimit--;
     }
   }
 }

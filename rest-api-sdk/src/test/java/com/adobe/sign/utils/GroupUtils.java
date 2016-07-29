@@ -13,6 +13,7 @@
 package com.adobe.sign.utils;
 
 import java.util.List;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.GroupsApi;
 import com.adobe.sign.model.groups.GroupCreationInfo;
@@ -23,6 +24,7 @@ import com.adobe.sign.model.groups.GroupsInfo;
 public class GroupUtils {
   
   private static GroupsApi groupsApi = new GroupsApi();
+  private static MultivaluedMap headers = ApiUtils.getValidHeaderParams();
 
   public static String getResourceId(String groupName) throws ApiException {
     String groupId = null;
@@ -31,7 +33,7 @@ public class GroupUtils {
       return groupId;
     }
 
-    GroupsInfo groupsInfos = groupsApi.getGroups(TestData.ACCESS_TOKEN, TestData.X_API_HEADER);
+    GroupsInfo groupsInfos = groupsApi.getGroups(headers);
 
     List<GroupInfo> groupInfoList = groupsInfos.getGroupInfoList();
 
@@ -44,8 +46,7 @@ public class GroupUtils {
 
     if(groupId == null) {
         groupId = createGroup(groupName,
-                              TestData.ACCESS_TOKEN,
-                              TestData.X_API_HEADER);
+                              headers);
 
     }
 
@@ -55,21 +56,37 @@ public class GroupUtils {
 
   //Helper method to create a Group
   public static String createGroup(String groupName,
-                                    String validAccessToken,
-                                    String xApiUser) throws ApiException {
+                                   MultivaluedMap headers) throws ApiException {
 
     GroupCreationInfo groupCreationInfo = new GroupCreationInfo();
     groupCreationInfo.setGroupName(groupName);
     GroupCreationResponse groupCreationResponse = null;
 
-    groupCreationResponse= groupsApi.createGroup(validAccessToken,
-                                                 groupCreationInfo,
-                                                 xApiUser);
+
+    groupCreationResponse= groupsApi.createGroup(headers,
+                                                 groupCreationInfo);
     return groupCreationResponse.getGroupId();
   }
 
+  public static String createGroup(String groupName) throws ApiException {
+    return createGroup(groupName,
+                       headers);
+  }
   public static GroupsApi getGroupsApi() {
     return groupsApi;
   }
 
+  public static String isExistingGroup(String staticGroupName) throws ApiException {
+
+    GroupsInfo groupsInfos = groupsApi.getGroups(headers);
+
+    List<GroupInfo> groupInfoList = groupsInfos.getGroupInfoList();
+
+    for(GroupInfo groupInfo : groupInfoList) {
+      if(groupInfo.getGroupName().equalsIgnoreCase(staticGroupName)) {
+        return groupInfo.getGroupId();
+      }
+    }
+    return null;
+  }
 }

@@ -33,182 +33,144 @@ public class WidgetsApiValidator {
   /**
    * Validator for getWidgets API that retrieves widgets for the user.
    *
-   * @param accessToken An OAuth Access Token.
-   * @param xApiUser The userId or email of API caller.
    * @throws ApiException
    */
-  public static void getWidgetsValidator(String accessToken,
-                                         String xApiUser) throws ApiException {
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
+  public static void getWidgetsValidator() throws ApiException {
   }
 
- /**
-  * Validator for createWidget API that Creates a widget and returns the Javascript snippet and URL 
-  * to access the widget and widgetID in response to the client.
-  * 
-  * @param accessToken An OAuth Access Token
-  * @param widgetCreationRequest Information about the widget that is to be created.
-  * @param xApiUser The userId or email of API caller.
-  * @throws ApiException
-  */
-  public static void createWidgetValidator(String accessToken,
-                                           WidgetCreationRequest widgetCreationRequest,
-                                           String xApiUser) throws ApiException {
-    
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
+  /**
+   * Validator for createWidget API that Creates a widget and returns the Javascript snippet and URL
+   * to access the widget and widgetID in response to the client.
+   *
+   * @param widgetCreationRequest Information about the widget that is to be created.
+   * @throws ApiException
+   */
+  public static void createWidgetValidator(WidgetCreationRequest widgetCreationRequest) throws ApiException {
+
+
     ApiValidatorHelper.validateParameter(widgetCreationRequest);
-    
+
     WidgetCreationInfo widgetCreationInfo = widgetCreationRequest.getWidgetCreationInfo();
     ApiValidatorHelper.validateParameter(widgetCreationInfo);
-    
+
     List<WidgetFileInfo> fileInfos = widgetCreationInfo.getFileInfos();
     validateFileInfo(fileInfos);
-    
+
     ApiValidatorHelper.validateParameter(widgetCreationInfo.getName());
-    
-    if(widgetCreationInfo.getSignatureFlow() != null)
-      ApiValidatorHelper.validateParameter(widgetCreationInfo.getSignatureFlow(), 
-                                        SdkErrorCodes.INVALID_SIGNATURE_FLOW);
-    
+
+    if (widgetCreationInfo.getSignatureFlow() != null)
+      ApiValidatorHelper.validateParameter(widgetCreationInfo.getSignatureFlow(),
+                                           SdkErrorCodes.INVALID_SIGNATURE_FLOW);
+
     List<CounterSignerSetInfo> counterSignerSetInfo = widgetCreationInfo.getCounterSignerSetInfos();
-    if(counterSignerSetInfo != null) 
-      validateCounterSignerSetInfo(counterSignerSetInfo);   
+    if (counterSignerSetInfo != null)
+      validateCounterSignerSetInfo(counterSignerSetInfo);
   }
 
   /**
    * Validator for getWidgetInfo API that retrieves the detailed information of a widget.
    *
-   * @param accessToken An OAuth Access Token.
-   * @param widgetId    The Id of the widget whose status is to be retrieved.
-   * @param xApiUser    The userId or email of API caller.
+   * @param widgetId The Id of the widget whose status is to be retrieved.
    * @throws ApiException
    */
-  public static void getWidgetInfoValidator(String accessToken,
-                                            String widgetId,
-                                            String xApiUser) throws ApiException {
-    validateCommonWidgetParameters(accessToken, widgetId, xApiUser);
+  public static void getWidgetInfoValidator(String widgetId) throws ApiException {
+    ApiValidatorHelper.validateId(widgetId,
+                                  SdkErrorCodes.INVALID_WIDGET_ID);
   }
 
   /**
    * Validator for getWidgetAgreements API that retrieves the agreements of a widget.
    *
-   * @param accessToken An OAuth Access Token.
-   * @param widgetId    The Id of the widget whose agreements are to be retrieved.
-   * @param xApiUser    The userId or email of API caller.
+   * @param widgetId The Id of the widget whose agreements are to be retrieved.
    * @throws ApiException
    */
-  public static void getWidgetAgreementsValidator(String accessToken,
-                                                  String widgetId,
-                                                  String xApiUser) throws ApiException {
-    validateCommonWidgetParameters(accessToken, widgetId, xApiUser);
+  public static void getWidgetAgreementsValidator(String widgetId) throws ApiException {
+    ApiValidatorHelper.validateId(widgetId,
+                                  SdkErrorCodes.INVALID_WIDGET_ID);
   }
 
   /**
    * Validator for getWidgetAuditTrail API that retrieves the audit trail of the widget identified by widgetId.
    *
-   * @param accessToken An OAuth Access Token.
-   * @param widgetId    The Id of the widget whose audit trail is to be retrieved.
-   * @param xApiUser    The userId or email of API caller.
+   * @param widgetId The Id of the widget whose audit trail is to be retrieved.
    * @throws ApiException
    */
-  public static void getWidgetAuditTrailValidator(String accessToken,
-                                                  String widgetId,
-                                                  String xApiUser) throws ApiException {
-    validateCommonWidgetParameters(accessToken, widgetId, xApiUser);
+  public static void getWidgetAuditTrailValidator(String widgetId) throws ApiException {
+    ApiValidatorHelper.validateId(widgetId,
+                                  SdkErrorCodes.INVALID_WIDGET_ID);
   }
 
   /**
    * Validator for getWidgetCombinedDocument API that gets a single combined PDF document for the documents associated with a widget.
    *
-   * @param accessToken
-   *          An OAuth Access Token.
-   * @param widgetId
-   *          The Id of widget whose combined document stream is requested.
-   * @param xApiUser
-   *          The userId or email of API caller.
-   * @param versionId
-   *          The version identifier of widget as provided by getWidgetInfo API. If not provided then latest version will be used.
-   * @param participantEmail
-   *          The email address of the participant to be used to retrieve documents.
-   * @param auditReport
-   *          When set to YES, attach an audit report to the signed Widget PDF. Default value is false
+   * @param widgetId         The Id of widget whose combined document stream is requested.
+   * @param versionId        The version identifier of widget as provided by getWidgetInfo API. If not provided then latest version will be used.
+   * @param participantEmail The email address of the participant to be used to retrieve documents.
+   * @param auditReport      When set to YES, attach an audit report to the signed Widget PDF. Default value is false
    * @throws ApiException
    */
-  public static void getWidgetCombinedDocumentValidator(String accessToken,
-                                                        String widgetId,
-                                                        String xApiUser,
+  public static void getWidgetCombinedDocumentValidator(String widgetId,
                                                         String versionId,
                                                         String participantEmail,
                                                         Boolean auditReport) throws ApiException {
-    validateCommonWidgetParameters(accessToken, widgetId, xApiUser);
+    ApiValidatorHelper.validateId(widgetId,
+                                  SdkErrorCodes.INVALID_WIDGET_ID);
     ApiValidatorHelper.validateVersionIdAndParticipantEmail(versionId, participantEmail);
   }
 
   /**
    * Validator for getWidgetDocuments API that retrieves the IDs of all the main and supporting documents of a widget identified by widgetId.
    *
-   * @param accessToken      An OAuth Access Token.
    * @param widgetId         The Id of widget whose documents are requested.
-   * @param xApiUser         The userId or email of API caller.
    * @param versionId        The version identifier of agreement as provided by getWidgetInfo API. If not provided then latest version will be used.
    * @param participantEmail The email address of the participant to be used to retrieve documents.
    * @throws ApiException
    */
-  public static void getWidgetDocumentsValidator(String accessToken,
-                                                 String widgetId,
-                                                 String xApiUser,
+  public static void getWidgetDocumentsValidator(String widgetId,
                                                  String versionId,
                                                  String participantEmail) throws ApiException {
-    validateCommonWidgetParameters(accessToken, widgetId, xApiUser);
+    ApiValidatorHelper.validateId(widgetId,
+                                  SdkErrorCodes.INVALID_WIDGET_ID);
     ApiValidatorHelper.validateVersionIdAndParticipantEmail(versionId, participantEmail);
   }
 
   /**
    * Validator for getWidgetDocumentInfo API that retrieves the file stream of the given document of a widget identified by widgetId.
    *
-   * @param accessToken An OAuth Access Token.
-   * @param widgetId    The Id of widget which contains the document whose file stream is requested.
-   * @param documentId  The Id of the document whose file stream is requested.
-   * @param xApiUser    The userId or email of API caller.
+   * @param widgetId   The Id of widget which contains the document whose file stream is requested.
+   * @param documentId The Id of the document whose file stream is requested.
    * @throws ApiException
    */
-  public static void getWidgetDocumentInfoValidator(String accessToken,
-                                                    String widgetId,
-                                                    String documentId,
-                                                    String xApiUser) throws ApiException {
-    validateCommonWidgetParameters(accessToken, widgetId, xApiUser);
-    ApiValidatorHelper.validateId(documentId, 
+  public static void getWidgetDocumentInfoValidator(String widgetId,
+                                                    String documentId) throws ApiException {
+    ApiValidatorHelper.validateId(widgetId,
+                                  SdkErrorCodes.INVALID_WIDGET_ID);
+    ApiValidatorHelper.validateId(documentId,
                                   SdkErrorCodes.INVALID_DOCUMENT_ID);
   }
 
   /**
    * Validator for getWidgetFormData API that retrieves data entered by the user into interactive form fields at the time they signed the widget.
    *
-   * @param accessToken An OAuth Access Token.
-   * @param widgetId    The Id of widget whose form data is to be retrieved.
-   * @param xApiUser    The userId or email of API caller.
+   * @param widgetId The Id of widget whose form data is to be retrieved.
    * @throws ApiException
    */
-  public static void getWidgetFormDataValidator(String accessToken,
-                                                String widgetId,
-                                                String xApiUser) throws ApiException {
-    validateCommonWidgetParameters(accessToken, widgetId, xApiUser);
+  public static void getWidgetFormDataValidator(String widgetId) throws ApiException {
+    ApiValidatorHelper.validateId(widgetId,
+                                  SdkErrorCodes.INVALID_WIDGET_ID);
   }
 
   /**
    * Validator for updateWidgetPersonalize API that personalize the widget to a signable document for a specific known user.
    *
-   * @param accessToken               An OAuth Access Token.
    * @param widgetId                  The Id of widget that has to be personalized.
    * @param widgetPersonalizationInfo Widget personalization information object.
-   * @param xApiUser                  The userId or email of API caller.
    * @throws ApiException
    */
-  public static void updateWidgetPersonalizeValidator(String accessToken,
-                                                      String widgetId,
-                                                      WidgetPersonalizationInfo widgetPersonalizationInfo,
-                                                      String xApiUser) throws ApiException {
-    validateCommonWidgetParameters(accessToken, widgetId, xApiUser);
+  public static void updateWidgetPersonalizeValidator(String widgetId,
+                                                      WidgetPersonalizationInfo widgetPersonalizationInfo) throws ApiException {
+    ApiValidatorHelper.validateId(widgetId,
+                                  SdkErrorCodes.INVALID_WIDGET_ID);
     ApiValidatorHelper.validateParameter(widgetPersonalizationInfo);
     ApiValidatorHelper.validateEmailParamater(widgetPersonalizationInfo.getEmail());
   }
@@ -216,20 +178,17 @@ public class WidgetsApiValidator {
   /**
    * Validator for updateWidgetStatus API that enables or disables a widget.
    *
-   * @param accessToken            An OAuth Access Token.
    * @param widgetId               The Id of widget that has to be updated.
    * @param widgetStatusUpdateInfo Widget status update information object.
-   * @param xApiUser               The userId or email of API caller.
    * @throws ApiException
    */
-  public static void updateWidgetStatusValidator(String accessToken,
-                                                 String widgetId,
-                                                 WidgetStatusUpdateInfo widgetStatusUpdateInfo,
-                                                 String xApiUser) throws ApiException {
-    validateCommonWidgetParameters(accessToken, widgetId, xApiUser);
+  public static void updateWidgetStatusValidator(String widgetId,
+                                                 WidgetStatusUpdateInfo widgetStatusUpdateInfo) throws ApiException {
+    ApiValidatorHelper.validateId(widgetId,
+                                  SdkErrorCodes.INVALID_WIDGET_ID);
     ApiValidatorHelper.validateParameter(widgetStatusUpdateInfo);
-    ApiValidatorHelper.validateParameter(widgetStatusUpdateInfo.getValue(), 
-                                      SdkErrorCodes.MUST_PROVIDE_VALID_WIDGET_STATUS);
+    ApiValidatorHelper.validateParameter(widgetStatusUpdateInfo.getValue(),
+                                         SdkErrorCodes.MUST_PROVIDE_VALID_WIDGET_STATUS);
 
     //validate the message and redirectUrl combination.
     String message = widgetStatusUpdateInfo.getMessage();
@@ -242,59 +201,46 @@ public class WidgetsApiValidator {
       throw new ApiException(SdkErrorCodes.NO_ACTION_SPECIFIED);
 
     if (!StringUtil.isEmpty(redirectUrl))
-      ApiValidatorHelper.validateUrlParameter(redirectUrl, 
+      ApiValidatorHelper.validateUrlParameter(redirectUrl,
                                               SdkErrorCodes.INVALID_URL);
   }
 
-  // Helper methods
-
-  /**
-   * Common method for validating accessToken, widgetId and xApiUser.
-   */
-  private static void validateCommonWidgetParameters(String accessToken,
-                                                     String widgetId,
-                                                     String xApiUser) throws ApiException {
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
-    ApiValidatorHelper.validateId(widgetId, 
-                                  SdkErrorCodes.INVALID_WIDGET_ID);
-  }
-  
   /**
    * Helper method that takes a list of FileInfo objects and validates them.
    */
   private static void validateFileInfo(List<WidgetFileInfo> fileInfos) throws ApiException {
-    if(fileInfos == null)
+    if (fileInfos == null)
       throw new ApiException(SdkErrorCodes.INVALID_FILE_INFO);
-    
-    for(WidgetFileInfo fileInfo : fileInfos) {
+
+    for (WidgetFileInfo fileInfo : fileInfos) {
       // Validating the FileInfo object.
-      if(fileInfo == null)
+      if (fileInfo == null)
         throw new ApiException(SdkErrorCodes.INVALID_FILE_INFO);
-      
-      String url = fileInfo.getDocumentURL() == null? null: fileInfo.getDocumentURL().getUrl();
-      ApiValidatorHelper.validateFileInfo(fileInfo.getDocumentURL(), 
-                                          fileInfo.getLibraryDocumentId(), 
-                                          fileInfo.getLibraryDocumentName(), 
-                                          fileInfo.getTransientDocumentId(), 
+
+      String url = fileInfo.getDocumentURL() == null ? null : fileInfo.getDocumentURL().getUrl();
+      ApiValidatorHelper.validateFileInfo(fileInfo.getDocumentURL(),
+                                          fileInfo.getLibraryDocumentId(),
+                                          fileInfo.getLibraryDocumentName(),
+                                          fileInfo.getTransientDocumentId(),
                                           url);
     }
   }
-  
+
   /**
    * Helper method to validate recipient set.
    */
-  private static void validateCounterSignerSetInfo(List<CounterSignerSetInfo> counterSignerSetInfos) throws ApiException {   
-    for(CounterSignerSetInfo counterSignerSetInfo : counterSignerSetInfos) {
-      
-      ApiValidatorHelper.validateParameter(counterSignerSetInfo.getCounterSignerSetMemberInfos());   
+  private static void validateCounterSignerSetInfo(List<CounterSignerSetInfo> counterSignerSetInfos) throws ApiException {
+    for (CounterSignerSetInfo counterSignerSetInfo : counterSignerSetInfos) {
+
+      ApiValidatorHelper.validateParameter(counterSignerSetInfo.getCounterSignerSetMemberInfos());
       List<CounterSignerInfo> counterSignerInfos = counterSignerSetInfo.getCounterSignerSetMemberInfos();
-      int numberOfRecipients = counterSignerInfos.size(); 
-      
-      for( CounterSignerInfo counterSignerInfo : counterSignerInfos)  
+      int numberOfRecipients = counterSignerInfos.size();
+
+      for (CounterSignerInfo counterSignerInfo : counterSignerInfos)
         ApiValidatorHelper.validateRecipientSetInfos(counterSignerInfo.getEmail(), null, numberOfRecipients);
-      
+
       ApiValidatorHelper.validateParameter(counterSignerSetInfo.getCounterSignerSetRole());
-    }    
+    }
   }
 
 }

@@ -17,12 +17,14 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.LibraryDocumentsApi;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -30,13 +32,16 @@ import org.junit.Test;
  */
 public class DeleteLibraryDocumentApiTest {
 
-  private LibraryDocumentsApi libraryDocumentsApi = null;
-  private String libraryDocumentId = null;
+  private static LibraryDocumentsApi libraryDocumentsApi = null;
+  private static String libraryDocumentId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     libraryDocumentsApi = LibraryDocumentsUtils.getLibraryDocumentsApi();
-    libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);
+    libraryDocumentId = LibraryDocumentsUtils.createLibraryDocument(ApiUtils.getLibraryDocumentName());
   }
   
   /**
@@ -49,9 +54,8 @@ public class DeleteLibraryDocumentApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      libraryDocumentsApi.deleteLibraryDocument(TestData.NULL_PARAM,
-                                                libraryDocumentId,
-                                                TestData.X_API_HEADER);
+      libraryDocumentsApi.deleteLibraryDocument(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                libraryDocumentId);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -59,9 +63,8 @@ public class DeleteLibraryDocumentApiTest {
     }
 
     try {
-      libraryDocumentsApi.deleteLibraryDocument(TestData.EMPTY_PARAM,
-                                                libraryDocumentId,
-                                                TestData.X_API_HEADER);
+      libraryDocumentsApi.deleteLibraryDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                libraryDocumentId);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -78,9 +81,8 @@ public class DeleteLibraryDocumentApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      libraryDocumentsApi.deleteLibraryDocument(TestData.ACCESS_TOKEN,
-                                                libraryDocumentId,
-                                                TestData.EMPTY_PARAM);
+      libraryDocumentsApi.deleteLibraryDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                libraryDocumentId);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -97,9 +99,8 @@ public class DeleteLibraryDocumentApiTest {
   @Test
   public void testInvalidLibraryDocumentId() throws ApiException {
     try {
-      libraryDocumentsApi.deleteLibraryDocument(TestData.ACCESS_TOKEN,
-                                                TestData.EMPTY_PARAM,
-                                                TestData.X_API_HEADER);
+      libraryDocumentsApi.deleteLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                TestData.EMPTY_PARAM);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -107,9 +108,8 @@ public class DeleteLibraryDocumentApiTest {
     }
 
     try {
-      libraryDocumentsApi.deleteLibraryDocument(TestData.ACCESS_TOKEN,
-                                                TestData.NULL_PARAM,
-                                                TestData.X_API_HEADER);
+      libraryDocumentsApi.deleteLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                TestData.NULL_PARAM);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -125,12 +125,10 @@ public class DeleteLibraryDocumentApiTest {
    */
   @Test
   public void testDeleteLibraryDocument() throws ApiException {
-    String libraryDocumentId = LibraryDocumentsUtils.createLibraryDocument(TestData.LIBRARY_DOCUMENT_NAME);
 
     try {
-      libraryDocumentsApi.deleteLibraryDocument(TestData.ACCESS_TOKEN,
-                                                libraryDocumentId,
-                                                TestData.X_API_HEADER);
+      libraryDocumentsApi.deleteLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                libraryDocumentId);
     } 
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));

@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:24:55.658+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:02.594+05:30")
 public class FileInfo   {
   
   private URLFileInfo documentURL = null;
@@ -72,9 +72,9 @@ public class FileInfo   {
 
   
   /**
-   * The documentID as returned from the transient document creation API
+   * The documentID as returned from the API which creates a transient document
    **/
-  @ApiModelProperty(value = "The documentID as returned from the transient document creation API")
+  @ApiModelProperty(value = "The documentID as returned from the API which creates a transient document")
   @JsonProperty("transientDocumentId")
   public String getTransientDocumentId() {
     return transientDocumentId;

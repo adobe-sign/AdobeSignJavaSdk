@@ -13,6 +13,7 @@
 package com.adobe.sign.utils;
 
 import java.util.Date;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.SearchApi;
 import com.adobe.sign.model.search.AgreementAssetEventPostResponse;
@@ -21,6 +22,7 @@ import com.adobe.sign.model.search.AgreementAssetEventRequest;
 public class SearchUtils extends ApiUtils {
 
   private static SearchApi searchApi = new SearchApi();
+  private static MultivaluedMap headers = ApiUtils.getValidHeaderParams();
 
   private static String searchId = null;
   
@@ -36,9 +38,8 @@ public class SearchUtils extends ApiUtils {
   public static String createSearch(Date startDate, Date endDate) throws ApiException {
     AgreementAssetEventRequest request = getAgreementAssetEventRequest(startDate, 
                                                                        endDate);
-    AgreementAssetEventPostResponse response = searchApi.createAssetEvent(TestData.ACCESS_TOKEN, 
-                                                                          request, 
-                                                                          TestData.X_API_HEADER);
+    AgreementAssetEventPostResponse response = searchApi.createAssetEvent(headers,
+                                                                          request);
     searchId = response.getSearchId();
     pageCursor = response.getCurrentPageCursor();
      

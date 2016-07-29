@@ -12,14 +12,26 @@
 */
 package com.adobe.sign.utils;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.lf5.util.StreamUtils;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
+import javax.ws.rs.core.MultivaluedMap;
+
+import com.sun.jersey.core.util.MultivaluedMapImpl;
 
 public class ApiUtils {
+  private static Logger log = null;
+  private final static String ACCESS_TOKEN_KEY= "Access-Token";
+  private final static String X_API_USER_KEY = "x-api-user";
+  private static final String BUILD_SEPERATOR = "build";
 
   public static Properties getProperties(String configPath) {
     Properties prop = new Properties();
@@ -29,7 +41,7 @@ public class ApiUtils {
       prop.load(input);
     }
     catch (IOException ex) {
-      System.err.println(Errors.GET_PROPERTIES);
+      log.error(Errors.GET_PROPERTIES, ex);
     }
     return prop;
   }
@@ -60,6 +72,11 @@ public class ApiUtils {
     return getDate(0);
   }
 
+  public static Logger getLogger()
+  {
+    return log;
+  }
+
   private static Date getDate(int offset){
     Calendar cal = Calendar.getInstance();
     cal.add(Calendar.DATE, offset);
@@ -69,5 +86,34 @@ public class ApiUtils {
   public static int getMilliSecsPerDay() {
     int millisecsPerDay = 24 * 60 * 60 * 10000;
     return millisecsPerDay;
+  }
+
+  public static String getSampleAbsolutePath() {
+    String path = ApiUtils.class.getClassLoader().getResource(".").getPath();
+    return path.substring(0, path.indexOf(BUILD_SEPERATOR));
+  }
+
+  public static MultivaluedMap getHeaderParams() {
+    MultivaluedMap headers = new MultivaluedMapImpl();
+    //Add headers
+    headers.put(ACCESS_TOKEN_KEY, Constants.ACCESS_TOKEN);
+    headers.put(X_API_USER_KEY, Constants.X_API_USER);
+
+    return headers;
+  }
+  public static void configureLogProperty(String className){
+    log = LogManager.getLogger(className);
+    Properties properties=getProperties(Constants.LOG_CONFIG_PATH);
+    properties.setProperty(Constants.LOG_KEY,getSampleAbsolutePath()+Constants.LOG);
+    PropertyConfigurator.configure(properties);
+  }
+  public static void logException(String error,Exception e) throws ApiException {
+    log.error(error, e);
+    System.err.println(error);
+    throw new ApiException(error);
+  }
+  public static void logError(String error) {
+    log.error(error);
+    System.err.println(error);
   }
 }

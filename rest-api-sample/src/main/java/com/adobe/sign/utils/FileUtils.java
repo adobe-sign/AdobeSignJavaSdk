@@ -14,7 +14,10 @@ package com.adobe.sign.utils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.FileOutputStream;
+
 
 public class FileUtils {
   /**
@@ -25,7 +28,7 @@ public class FileUtils {
    * @param fileName File name with which the file is to be saved.
    * @throws Exception
    */
-  public static void saveToFile(byte[] fileData, String dirPath, String fileName) throws Exception {
+  public static void saveToFile(byte[] fileData, String dirPath, String fileName) throws ApiException {
     BufferedOutputStream outStream = null;
     try {
       //Check if directory exist, if not then create it.
@@ -35,22 +38,25 @@ public class FileUtils {
       }
 
       //Print file name.
-      System.out.println("Saving result in '" + fileName + "'.");
+      ApiUtils.getLogger().info("Saving result in '" + fileName + "'.");
 
       //Create file and write data into the file.
       outStream = new BufferedOutputStream(new FileOutputStream(dirPath + fileName));
       outStream.write(fileData,
               Constants.FILE_OFFSET,
               fileData.length);
-      System.out.println("Successfully saved document in '" + dirPath + "'.");
+      ApiUtils.getLogger().info("Successfully saved document in '" + dirPath + "'.");
     }
-    catch (Exception e) {
-      System.err.println(Errors.FILE_NOT_SAVED);
-      throw new Exception(e);
+    catch (IOException e) {
+      ApiUtils.logException(Errors.FILE_NOT_SAVED, e);
     }
     finally {
       if(outStream != null)
-        outStream.close();
+        try {
+          outStream.close();
+        } catch (IOException e) {
+          ApiUtils.logException(Errors.FILE_NOT_CLOSED, e);
+        }
     }
   }
 }

@@ -1,14 +1,14 @@
 var enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum =
 [
-    [ "RolesEnum", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a513e104f19b1eb43bcf5f1c8e84869fa", null ],
-    [ "toString", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a9a96bb9f3d400fa58f10fd4b6e283626", null ],
-    [ "APPROVER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#ad8639e5033c346cd7a197cc54b91905a", null ],
-    [ "CC", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a2f138a337b0fecc6268d40d73f709cd8", null ],
-    [ "DELEGATE", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a616b92f749f33b0dccdac803f0df5eb2", null ],
-    [ "DELEGATE_TO_APPROVER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a6ad37a5912382af5055fedfaf7e038a3", null ],
-    [ "DELEGATE_TO_SIGNER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a37e7b763168976b815ff5c1dc43519a9", null ],
-    [ "OTHER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a5b5045b5a60d3cff418859574c153132", null ],
-    [ "SENDER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a1f50c3dbbed38a723cecd29a6b7d11c0", null ],
-    [ "SHARE", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a7797c9e43d7386dc33cb94c0c296b03f", null ],
-    [ "SIGNER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a492674e7c157485a3d184acd9754a710", null ]
+    [ "RolesEnum", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a1280c036f73ab4852c19b315dce6a10d", null ],
+    [ "toString", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#ad146fa8579a5f8a876c4688cc5a68520", null ],
+    [ "APPROVER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#ab294ba328295882579000a44692ddfa3", null ],
+    [ "CC", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#ab41c1949bef0cb7c83998d0a5d83bcc2", null ],
+    [ "DELEGATE", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#afb6958d3e70f4b663f411a93b0c2cea4", null ],
+    [ "DELEGATE_TO_APPROVER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#af10cf0e3975d64cf9bc085ff82524bee", null ],
+    [ "DELEGATE_TO_SIGNER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a563740e07e1ef108a0f8d22d63db364e", null ],
+    [ "OTHER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#ac4d216d824b98f736f89c043a164d4c7", null ],
+    [ "SENDER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a8f303bdf67afaa9f9f6d0f71edbe6c0b", null ],
+    [ "SHARE", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#a6eb29c179f6aea05c5fcc948deec61b3", null ],
+    [ "SIGNER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_lib_doc_participant_info_1_1_roles_enum.html#ab590abf8b505df1b08f196d216761644", null ]
 ];

@@ -17,11 +17,13 @@ import static org.junit.Assert.assertTrue;
 
 import com.adobe.sign.api.UsersApi;
 import com.adobe.sign.model.users.UserStatusUpdateInfo;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.UserUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -29,17 +31,20 @@ import org.junit.Test;
  */
 public class PutUserStatusApiTest{
 
-	private UsersApi usersApi = null;
-	private String userId = null;
+	private static UsersApi usersApi = null;
+	private static String userId = null;
+	
+	@Rule
+  public Retry retry = new Retry();
 
 	/**
-	 * Setting up the UsersApi before the tests are run.
+	 * Setting up the UsersApi BeforeClass the tests are run.
 	 *
 	 * @throws ApiException
 	 */
-	@Before
-	public void setup() throws ApiException {
-		userId = UserUtils.getResourceId(TestData.USER_EMAIL);
+	@BeforeClass
+	public static void setup() throws ApiException {
+		userId = UserUtils.createUser(ApiUtils.getUserEmail());
 		usersApi = UserUtils.getUsersApi();
 	}
 
@@ -56,10 +61,9 @@ public class PutUserStatusApiTest{
 		updateInfo.setUserStatus(null);
 
 		try {
-			usersApi.modifyUserStatus(TestData.ACCESS_TOKEN,
+			usersApi.modifyUserStatus(ApiUtils.getValidHeaderParams(),
 				userId,
-				updateInfo,
-				TestData.X_API_HEADER);
+				updateInfo);
 		}
 		catch (ApiException e) {
 			assertTrue(e.getMessage(),

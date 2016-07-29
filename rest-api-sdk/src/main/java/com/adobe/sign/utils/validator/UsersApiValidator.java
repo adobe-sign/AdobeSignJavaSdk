@@ -22,128 +22,95 @@ import com.adobe.sign.utils.ApiException;
 /**
  * Validator class for UsersApi endpoints. The main purpose of this class is to check the validity of the parameters passed to the user api endpoints
  * and throw ApiException with required error messages if the validation fails.
- * 
- * @author schatter
- * 
+ *
  */
 public class UsersApiValidator {
-  
+
   /**
    * Validator for getUsers Api that fetches list of all users in the account of the user invoking this api.
-   * 
-   * @param accessToken An OAuth Access Token.
-   * @param xApiUser The userId or email of API caller.
+   *
    * @param xUserEmail The email address of the user whose details are being requested.
    * @throws ApiException
    */
-  public static void getUsersValidator(String accessToken, 
-                                       String xApiUser, 
-                                       String xUserEmail) throws ApiException {
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
+  public static void getUsersValidator(String xUserEmail) throws ApiException {
   }
-  
+
   /**
    * Validator for createUsers Api that creates a new user in the account of the user invoking this api.
-   * 
-   * @param accessToken An OAuth Access Token.
+   *
    * @param userCreationInfo The object that has all the details/ required parameters for creating a new user.
-   * @param xApiUser The userId or email of API caller.
    * @throws ApiException
    */
-  public static void createUserValidator(String accessToken, 
-                                         UserCreationInfo userCreationInfo, 
-                                         String xApiUser) throws ApiException {  
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
-    
+  public static void createUserValidator(UserCreationInfo userCreationInfo) throws ApiException {
+
     // Null and empty check for required params.
     ApiValidatorHelper.validateParameter(userCreationInfo);
-    
+
     ArrayList parameterList = new ArrayList();
     parameterList.add(userCreationInfo.getFirstName());
     parameterList.add(userCreationInfo.getLastName());
     ApiValidatorHelper.validateRequiredParameters(parameterList);
-     
-    ApiValidatorHelper.validateParameter(userCreationInfo.getEmail(), 
-                                         SdkErrorCodes.MUST_PROVIDE_EMAIL); 
+
+    ApiValidatorHelper.validateParameter(userCreationInfo.getEmail(),
+                                         SdkErrorCodes.MUST_PROVIDE_EMAIL);
     ApiValidatorHelper.validateEmailParamater(userCreationInfo.getEmail());
   }
-  
+
   /**
    * Validator for getUserInfo Api that fetches the information of a user whose userId is provided.
-   * 
-   * @param accessToken An OAuth Access Token.
+   *
    * @param userId The userId of the user whose details are to be fetched.
-   * @param xApiUser The userId or email of API caller.
    * @throws ApiException
    */
-  public static void getUserDetailValidator(String accessToken, 
-                                            String userId, 
-                                            String xApiUser) throws ApiException {
-    validateCommonUserParameters(accessToken, xApiUser, userId);    
-  }
-  
-  /**
-   * Validator for modifyUser Api that modifies the information of a user whose userId is provided.
-   * 
-   * @param accessToken An OAuth Access Token.
-   * @param userId The userId of the user whose details are to be modified.
-   * @param userModificationInfo The object that has all the details/ required parameters for modifying the user's details.
-   * @param xApiUser The userId or email of API caller.
-   * @throws ApiException
-   */
-  public static void modifyUserValidator(String accessToken, 
-                                         String userId, 
-                                         UserModificationInfo userModificationInfo, 
-                                         String xApiUser) throws ApiException {
-    validateCommonUserParameters(accessToken, xApiUser, userId);
-    ApiValidatorHelper.validateParameter(userModificationInfo);
-    
-    ArrayList parameterList = new ArrayList();
-    parameterList.add(userModificationInfo.getFirstName());
-    parameterList.add(userModificationInfo.getLastName()); 
-    parameterList.add(userModificationInfo.getEmail()); 
-    ApiValidatorHelper.validateRequiredParameters(parameterList);
-
-    ApiValidatorHelper.validateId(userModificationInfo.getGroupId(), 
-                                  SdkErrorCodes.INVALID_GROUP_ID);
-    
-    ApiValidatorHelper.validateEmailParamater(userModificationInfo.getEmail());
-
-    ApiValidatorHelper.validateParameter(userModificationInfo.getRoles());  
-  }
-  
-  /**
-   * 
-   * Validator for modifyUserStatus Api that modifies the status of the user whose userId is provided.
-   * 
-   * @param accessToken An OAuth Access Token.
-   * @param userId The userId of the user whose details are to be modified.
-   * @param userStatusUpdateInfo The object containing the User's status.
-   * @param xApiUser The userId or email of API caller.
-   * @throws ApiException
-   */
-  public static void modifyUserStatusValidator(String accessToken, 
-                                               String userId, 
-                                               UserStatusUpdateInfo userStatusUpdateInfo, 
-                                               String xApiUser) throws ApiException {
-    validateCommonUserParameters(accessToken, xApiUser, userId);
-    
-    ApiValidatorHelper.validateParameter(userStatusUpdateInfo);
-    
-    ApiValidatorHelper.validateParameter(userStatusUpdateInfo.getUserStatus(), 
-                                      SdkErrorCodes.MUST_PROVIDE_VALID_USER_STATUS); 
-  } 
-  
- 
-  /**
-   * Common method that validated the accessToken, xApiUser and userId
-   */
-  private static void validateCommonUserParameters(String accessToken, 
-                                                   String xApiUser, 
-                                                   String userId) throws ApiException {
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
-    ApiValidatorHelper.validateId(userId, 
+  public static void getUserDetailValidator(String userId) throws ApiException {
+    ApiValidatorHelper.validateId(userId,
                                   SdkErrorCodes.INVALID_USER_ID);
   }
-  
+
+  /**
+   * Validator for modifyUser Api that modifies the information of a user whose userId is provided.
+   *
+   * @param userId               The userId of the user whose details are to be modified.
+   * @param userModificationInfo The object that has all the details/ required parameters for modifying the user's details.
+   * @throws ApiException
+   */
+  public static void modifyUserValidator(String userId,
+                                         UserModificationInfo userModificationInfo) throws ApiException {
+    ApiValidatorHelper.validateId(userId,
+                                  SdkErrorCodes.INVALID_USER_ID);
+    ApiValidatorHelper.validateParameter(userModificationInfo);
+
+    ArrayList parameterList = new ArrayList();
+    parameterList.add(userModificationInfo.getFirstName());
+    parameterList.add(userModificationInfo.getLastName());
+    parameterList.add(userModificationInfo.getEmail());
+    parameterList.add(userModificationInfo.getGroupId());
+    ApiValidatorHelper.validateRequiredParameters(parameterList);
+
+    ApiValidatorHelper.validateId(userModificationInfo.getGroupId(),
+                                  SdkErrorCodes.INVALID_GROUP_ID);
+
+    ApiValidatorHelper.validateEmailParamater(userModificationInfo.getEmail());
+
+    ApiValidatorHelper.validateParameter(userModificationInfo.getRoles());
+  }
+
+  /**
+   * Validator for modifyUserStatus Api that modifies the status of the user whose userId is provided.
+   *
+   * @param userId               The userId of the user whose details are to be modified.
+   * @param userStatusUpdateInfo The object containing the User's status.
+   * @throws ApiException
+   */
+  public static void modifyUserStatusValidator(String userId,
+                                               UserStatusUpdateInfo userStatusUpdateInfo) throws ApiException {
+    ApiValidatorHelper.validateId(userId,
+                                  SdkErrorCodes.INVALID_USER_ID);
+
+    ApiValidatorHelper.validateParameter(userStatusUpdateInfo);
+
+    ApiValidatorHelper.validateParameter(userStatusUpdateInfo.getUserStatus(),
+                                         SdkErrorCodes.MUST_PROVIDE_VALID_USER_STATUS);
+  }
+
 }

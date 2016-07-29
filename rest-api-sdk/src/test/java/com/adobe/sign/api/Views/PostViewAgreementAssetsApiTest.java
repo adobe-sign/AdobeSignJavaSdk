@@ -20,13 +20,15 @@ import static org.junit.Assert.fail;
 import com.adobe.sign.api.ViewsApi;
 import com.adobe.sign.model.views.AgreementAssetRequest;
 import com.adobe.sign.model.views.ViewUrl;
-import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ViewsUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -34,11 +36,14 @@ import org.junit.Test;
  */
 public class PostViewAgreementAssetsApiTest {
   
-  private ViewsApi viewsApi = null;
-  private String libraryDocumentId = null;
+  private static ViewsApi viewsApi = null;
+  private static String libraryDocumentId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     viewsApi = ViewsUtils.getViewsApi();
     libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);
   }
@@ -57,9 +62,8 @@ public class PostViewAgreementAssetsApiTest {
     agreementAssetRequest.setAgreementAssetId(libraryDocumentId);
 
     try {
-      viewsApi.createAgreementAssetUrl(TestData.NULL_PARAM,
-                                       agreementAssetRequest,
-                                       TestData.X_API_HEADER);
+      viewsApi.createAgreementAssetUrl(ApiUtils.getNullAccessTokenHeaderParams(),
+                                       agreementAssetRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -67,9 +71,8 @@ public class PostViewAgreementAssetsApiTest {
     }
 
     try {
-      viewsApi.createAgreementAssetUrl(TestData.EMPTY_PARAM,
-                                       agreementAssetRequest,
-                                       TestData.X_API_HEADER);
+      viewsApi.createAgreementAssetUrl(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                       agreementAssetRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -90,9 +93,8 @@ public class PostViewAgreementAssetsApiTest {
     agreementAssetRequest.setAgreementAssetId(libraryDocumentId);
 
     try {
-      viewsApi.createAgreementAssetUrl(TestData.ACCESS_TOKEN,
-                                       agreementAssetRequest,
-                                       TestData.EMPTY_PARAM);
+      viewsApi.createAgreementAssetUrl(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                       agreementAssetRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -113,9 +115,8 @@ public class PostViewAgreementAssetsApiTest {
     agreementAssetRequest.setAgreementAssetId(TestData.NULL_PARAM);
 
     try {
-      viewsApi.createAgreementAssetUrl(TestData.ACCESS_TOKEN,
-                                       agreementAssetRequest,
-                                       TestData.X_API_HEADER);
+      viewsApi.createAgreementAssetUrl(ApiUtils.getValidHeaderParams(),
+                                       agreementAssetRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -125,9 +126,8 @@ public class PostViewAgreementAssetsApiTest {
     agreementAssetRequest.setAgreementAssetId(TestData.EMPTY_PARAM);
 
     try {
-      viewsApi.createAgreementAssetUrl(TestData.ACCESS_TOKEN,
-                                       agreementAssetRequest,
-                                       TestData.X_API_HEADER);
+      viewsApi.createAgreementAssetUrl(ApiUtils.getValidHeaderParams(),
+                                       agreementAssetRequest);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -147,9 +147,8 @@ public class PostViewAgreementAssetsApiTest {
     agreementAssetRequest.setAgreementAssetId(libraryDocumentId);
 
     try {
-      ViewUrl viewUrl = viewsApi.createAgreementAssetUrl(TestData.ACCESS_TOKEN,
-                                                         agreementAssetRequest,
-                                                         TestData.X_API_HEADER);
+      ViewUrl viewUrl = viewsApi.createAgreementAssetUrl(ApiUtils.getValidHeaderParams(),
+                                                         agreementAssetRequest);
       assertNotNull(viewUrl);
       assertNotNull(viewUrl.getViewURL());
     }

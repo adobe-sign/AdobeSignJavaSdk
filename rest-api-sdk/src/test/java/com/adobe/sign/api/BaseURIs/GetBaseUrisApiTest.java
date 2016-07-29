@@ -19,12 +19,13 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.BaseUrisApi;
 import com.adobe.sign.model.baseUris.BaseUriInfo;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.BaseUrisUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -32,10 +33,13 @@ import org.junit.Test;
  */
 public class GetBaseUrisApiTest {
 
-  private BaseUrisApi baseurisApi = null;
+  private static BaseUrisApi baseurisApi = null;
   
-  @Before
-  public void setup() {
+  @Rule
+  public Retry retry = new Retry();
+  
+  @BeforeClass
+  public static void setup() {
     baseurisApi = BaseUrisUtils.getBaseUrisApi();
     
   }
@@ -50,7 +54,7 @@ public class GetBaseUrisApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      baseurisApi.getBaseUris(TestData.NULL_PARAM);
+      baseurisApi.getBaseUris(ApiUtils.getNullAccessTokenHeaderParams());
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -58,7 +62,7 @@ public class GetBaseUrisApiTest {
     }
 
     try {
-      baseurisApi.getBaseUris(TestData.EMPTY_PARAM);
+      baseurisApi.getBaseUris(ApiUtils.getEmptyAccessTokenHeaderParams());
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -75,7 +79,7 @@ public class GetBaseUrisApiTest {
   @Test
   public void testGetBaseUri() throws ApiException {
     try {
-      BaseUriInfo baseUriInfo = baseurisApi.getBaseUris(TestData.ACCESS_TOKEN);
+      BaseUriInfo baseUriInfo = baseurisApi.getBaseUris(ApiUtils.getValidHeaderParams());
       assertNotNull(baseUriInfo);
     }
     catch (ApiException e) {

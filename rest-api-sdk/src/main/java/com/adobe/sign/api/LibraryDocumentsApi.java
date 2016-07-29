@@ -17,6 +17,7 @@ import com.adobe.sign.utils.ApiClient;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Pair;
 import com.adobe.sign.utils.TypeRef;
+import com.adobe.sign.utils.validator.ApiValidatorHelper;
 import com.adobe.sign.utils.validator.LibraryDocumentsApiValidator;
 
 import com.adobe.sign.model.libraryDocuments.DocumentLibraryItems;
@@ -25,28 +26,39 @@ import com.adobe.sign.model.libraryDocuments.LibraryCreationInfo;
 import com.adobe.sign.model.libraryDocuments.LibraryDocumentInfo;
 import com.adobe.sign.model.libraryDocuments.Documents;
 
-import java.util.*;
+    import java.util.*;
+import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:24:58.451+05:30")
-public class LibraryDocumentsApi {
-  private ApiClient apiClient;
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:05.613+05:30")
+    public class LibraryDocumentsApi {
+    private ApiClient apiClient;
+    private final String CONTENT_TYPE = "Content-Type";
+    private final String ACCEPT = "Accept";
+    private final String ACCESS_TOKEN = "Access-Token";
+    private final String X_API_USER = "x-api-user";
 
-  public LibraryDocumentsApi() {
+    public LibraryDocumentsApi() {
     this.apiClient = Context.getDefaultApiClient();
-  }
+    }
 
-  
-  /**
-   * Retrieves library documents for a user.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:library_read
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return DocumentLibraryItems
-   */
-  public DocumentLibraryItems getLibraryDocuments (String accessToken,
-                                                        String xApiUser) throws ApiException {
+    
+    /**
+    * Retrieves library documents for a user.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: library_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @return DocumentLibraryItems
+    */
+    public DocumentLibraryItems getLibraryDocuments (MultivaluedMap headers) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    LibraryDocumentsApiValidator.getLibraryDocumentsValidator(accessToken, xApiUser);
+    LibraryDocumentsApiValidator.getLibraryDocumentsValidator();
 
     //Create path and map variables
     String path = "/libraryDocuments".replaceAll("\\{format\\}","json");
@@ -55,43 +67,67 @@ public class LibraryDocumentsApi {
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<DocumentLibraryItems>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Creates a template that is placed in the library of the user for reuse.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:library_writeuser_login - Required additionally if the autoLoginUser parameter is set to true
-   * @param libraryCreationInfo Information about the library document that you want to create and authoring options that you want to apply at the time of creation.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return LibraryDocumentCreationResponse
-   */
-  public LibraryDocumentCreationResponse createLibraryDocument (String accessToken,
-                                                        LibraryCreationInfo libraryCreationInfo,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Creates a template that is placed in the library of the user for reuse.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: library_write user_login - Required additionally if the autoLoginUser parameter is set to true 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param libraryCreationInfo Information about the library document that you want to create and authoring options that you want to apply at the time of creation.
+    * @return LibraryDocumentCreationResponse
+    */
+    public LibraryDocumentCreationResponse createLibraryDocument (MultivaluedMap headers,
+                                        LibraryCreationInfo libraryCreationInfo) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    LibraryDocumentsApiValidator.createLibraryDocumentValidator(accessToken, libraryCreationInfo, xApiUser);
+    LibraryDocumentsApiValidator.createLibraryDocumentValidator(libraryCreationInfo);
 
     //Create path and map variables
     String path = "/libraryDocuments".replaceAll("\\{format\\}","json");
@@ -100,307 +136,472 @@ public class LibraryDocumentsApi {
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<LibraryDocumentCreationResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Retrieves the details of a library document.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:library_read
-   * @param libraryDocumentId The document identifier, as retrieved from the API to fetch library documents..
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return LibraryDocumentInfo
-   */
-  public LibraryDocumentInfo getLibraryDocumentInfo (String accessToken,
-                                                        String libraryDocumentId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Retrieves the details of a library document.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: library_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param libraryDocumentId The document identifier, as provided by the API to retrieve library documents.
+    * @return LibraryDocumentInfo
+    */
+    public LibraryDocumentInfo getLibraryDocumentInfo (MultivaluedMap headers,
+                                        String libraryDocumentId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    LibraryDocumentsApiValidator.getLibraryDocumentInfoValidator(accessToken, libraryDocumentId, xApiUser);
+    LibraryDocumentsApiValidator.getLibraryDocumentInfoValidator(libraryDocumentId);
 
     //Create path and map variables
     String path = "/libraryDocuments/{libraryDocumentId}".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "libraryDocumentId" + "\\}", apiClient.escapeString(libraryDocumentId.toString()));
+        .replaceAll("\\{" + "libraryDocumentId" + "\\}", apiClient.escapeString(libraryDocumentId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<LibraryDocumentInfo>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Deletes a library document. Library document will no longer be visible in the Manage Page of the user.
-   * This API will delete the library document. However, the agreements created using this library document will not be impacted.
-   * @param accessToken An OAuth Access Token with scopes:library_retention
-   * @param libraryDocumentId The document identifier, as retrieved from the API to fetch library documents..
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return void
-   */
-  public void deleteLibraryDocument (String accessToken,
-                                                        String libraryDocumentId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Deletes a library document. Library document will no longer be visible in the Manage Page of the user.
+    * This API will delete the library document. However, the agreements created using this library document will not be impacted.
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: library_retention 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param libraryDocumentId The document identifier, as provided by the API to retrieve library documents.
+    * @return void
+    */
+    public void deleteLibraryDocument (MultivaluedMap headers,
+                                        String libraryDocumentId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    LibraryDocumentsApiValidator.deleteLibraryDocumentValidator(accessToken, libraryDocumentId, xApiUser);
+    LibraryDocumentsApiValidator.deleteLibraryDocumentValidator(libraryDocumentId);
 
     //Create path and map variables
     String path = "/libraryDocuments/{libraryDocumentId}".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "libraryDocumentId" + "\\}", apiClient.escapeString(libraryDocumentId.toString()));
+        .replaceAll("\\{" + "libraryDocumentId" + "\\}", apiClient.escapeString(libraryDocumentId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
-    apiClient.invokeAPI(path, "DELETE", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, null);
+    apiClient.invokeAPI(path, "DELETE", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, null, true);
     
-  }
-  
-  /**
-   * Retrieves the audit trail associated with a library document.
-   * File Stream of PDF file
-   * @param accessToken An OAuth Access Token with scopes:library_read
-   * @param libraryDocumentId The document identifier, as retrieved from the API to fetch library documents..
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return byte[]
-   */
-  public byte[] getLibraryDocumentAuditTrail (String accessToken,
-                                                        String libraryDocumentId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Retrieves the audit trail associated with a library document.
+    * File Stream of PDF file
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: library_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param libraryDocumentId The document identifier, as provided by the API to retrieve library documents.
+    * @return byte[]
+    */
+    public byte[] getLibraryDocumentAuditTrail (MultivaluedMap headers,
+                                        String libraryDocumentId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    LibraryDocumentsApiValidator.getLibraryDocumentAuditTrailValidator(accessToken, libraryDocumentId, xApiUser);
+    LibraryDocumentsApiValidator.getLibraryDocumentAuditTrailValidator(libraryDocumentId);
 
     //Create path and map variables
     String path = "/libraryDocuments/{libraryDocumentId}/auditTrail".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "libraryDocumentId" + "\\}", apiClient.escapeString(libraryDocumentId.toString()));
+        .replaceAll("\\{" + "libraryDocumentId" + "\\}", apiClient.escapeString(libraryDocumentId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/pdf");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/pdf"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
-    return apiClient.invokeBinaryAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType);
+    return apiClient.invokeBinaryAPI(path, "GET", queryParams, 
+    postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, true);
     
-  }
-  
-  /**
-   * Retrieves the combined document associated with a library document.
-   * File Stream of PDF file
-   * @param accessToken An OAuth Access Token with scopes:library_read
-   * @param libraryDocumentId The document identifier, as retrieved from the API to fetch library documents..
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @param auditReport When set to YES attach an audit report to the library document PDF. Default value will be false.
-   * @return byte[]
-   */
-  public byte[] getCombinedDocument (String accessToken,
-                                                        String libraryDocumentId,
-                                                        String xApiUser,
-                                                        Boolean auditReport) throws ApiException {
+    }
+    
+    /**
+    * Retrieves the combined document associated with a library document.
+    * File Stream of PDF file
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: library_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param libraryDocumentId The document identifier, as provided by the API to retrieve library documents.
+    * @param auditReport When set to YES attach an audit report to the library document PDF. Default value will be false.
+    * @return byte[]
+    */
+    public byte[] getCombinedDocument (MultivaluedMap headers,
+                                        String libraryDocumentId,
+                                        Boolean auditReport) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    LibraryDocumentsApiValidator.getCombinedDocumentValidator(accessToken, libraryDocumentId, xApiUser, auditReport);
+    LibraryDocumentsApiValidator.getCombinedDocumentValidator(libraryDocumentId,auditReport);
 
     //Create path and map variables
     String path = "/libraryDocuments/{libraryDocumentId}/combinedDocument".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "libraryDocumentId" + "\\}", apiClient.escapeString(libraryDocumentId.toString()));
+        .replaceAll("\\{" + "libraryDocumentId" + "\\}", apiClient.escapeString(libraryDocumentId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/pdf");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     queryParams.addAll(apiClient.parameterToPairs("", "auditReport", auditReport));
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/pdf"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
-    return apiClient.invokeBinaryAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType);
+    return apiClient.invokeBinaryAPI(path, "GET", queryParams, 
+    postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, true);
     
-  }
-  
-  /**
-   * Retrieves the ID of the document associated with library document.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:library_read
-   * @param libraryDocumentId The document identifier, as retrieved from the API to fetch library documents..
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return Documents
-   */
-  public Documents getDocuments (String accessToken,
-                                                        String libraryDocumentId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Retrieves the ID of the document associated with library document.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: library_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param libraryDocumentId The document identifier, as provided by the API to retrieve library documents.
+    * @return Documents
+    */
+    public Documents getDocuments (MultivaluedMap headers,
+                                        String libraryDocumentId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    LibraryDocumentsApiValidator.getDocumentsValidator(accessToken, libraryDocumentId, xApiUser);
+    LibraryDocumentsApiValidator.getDocumentsValidator(libraryDocumentId);
 
     //Create path and map variables
     String path = "/libraryDocuments/{libraryDocumentId}/documents".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "libraryDocumentId" + "\\}", apiClient.escapeString(libraryDocumentId.toString()));
+        .replaceAll("\\{" + "libraryDocumentId" + "\\}", apiClient.escapeString(libraryDocumentId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<Documents>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Retrieves the file stream of a library document.
-   * Raw stream of the file
-   * @param accessToken An OAuth Access Token with scopes:library_read
-   * @param libraryDocumentId The document identifier, as retrieved from the API to fetch library documents..
-   * @param documentId The document identifier, as retrieved from the API which fetches the documents of a specified library document
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return byte[]
-   */
-  public byte[] getLibraryDocument (String accessToken,
-                                                        String libraryDocumentId,
-                                                        String documentId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Retrieves the file stream of a library document.
+    * Raw stream of the file
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: library_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param libraryDocumentId The document identifier, as provided by the API to retrieve library documents.
+    * @param documentId The document identifier, as provided by the API to retrieve library documents/{libraryDocumentId}/documents
+    * @return byte[]
+    */
+    public byte[] getLibraryDocument (MultivaluedMap headers,
+                                        String libraryDocumentId,
+                                        String documentId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    LibraryDocumentsApiValidator.getLibraryDocumentValidator(accessToken, libraryDocumentId, documentId, xApiUser);
+    LibraryDocumentsApiValidator.getLibraryDocumentValidator(libraryDocumentId,documentId);
 
     //Create path and map variables
     String path = "/libraryDocuments/{libraryDocumentId}/documents/{documentId}".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "libraryDocumentId" + "\\}", apiClient.escapeString(libraryDocumentId.toString()))
-      .replaceAll("\\{" + "documentId" + "\\}", apiClient.escapeString(documentId.toString()));
+        .replaceAll("\\{" + "libraryDocumentId" + "\\}", apiClient.escapeString(libraryDocumentId.toString()))
+        .replaceAll("\\{" + "documentId" + "\\}", apiClient.escapeString(documentId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add(" */* ");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "   */*   "
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
-    return apiClient.invokeBinaryAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType);
+    return apiClient.invokeBinaryAPI(path, "GET", queryParams, 
+    postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, true);
+    
+    }
     
   }
-  
-}

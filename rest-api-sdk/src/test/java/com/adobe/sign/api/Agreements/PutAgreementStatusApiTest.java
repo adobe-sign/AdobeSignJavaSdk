@@ -20,25 +20,30 @@ import static org.junit.Assert.fail;
 import com.adobe.sign.api.AgreementsApi;
 import com.adobe.sign.model.agreements.AgreementStatusUpdateInfo;
 import com.adobe.sign.model.agreements.AgreementStatusUpdateResponse;
-import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.AgreementsUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * Junit test cases for Put Agreement Status API.
  */
 public class PutAgreementStatusApiTest {
-  private AgreementsApi agreementsApi = null;
-  private String agreementId = null;
+  private static AgreementsApi agreementsApi = null;
+  private static String agreementId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     agreementsApi = AgreementsUtils.getAgreementsApi();
-    agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
+    agreementId = AgreementsUtils.createAgreement(ApiUtils.getAgreementName());
   }
   /**
    * Test for modifying an agreement's status through the updateStatus endpoint. Negative scenarios covered:
@@ -53,10 +58,9 @@ public class PutAgreementStatusApiTest {
     updateInfo.setValue(AgreementStatusUpdateInfo.ValueEnum.CANCEL);
 
     try {
-      agreementsApi.updateStatus(TestData.NULL_PARAM,
+      agreementsApi.updateStatus(ApiUtils.getNullAccessTokenHeaderParams(),
                                  agreementId,
-                                 updateInfo,
-                                 TestData.X_API_HEADER);
+                                 updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -64,10 +68,9 @@ public class PutAgreementStatusApiTest {
     }
 
     try {
-      agreementsApi.updateStatus(TestData.EMPTY_PARAM,
+      agreementsApi.updateStatus(ApiUtils.getEmptyAccessTokenHeaderParams(),
                                  agreementId,
-                                 updateInfo,
-                                 TestData.X_API_HEADER);
+                                 updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -87,10 +90,9 @@ public class PutAgreementStatusApiTest {
     updateInfo.setValue(AgreementStatusUpdateInfo.ValueEnum.CANCEL);
 
     try {
-      agreementsApi.updateStatus(TestData.ACCESS_TOKEN,
+      agreementsApi.updateStatus(ApiUtils.getEmptyXApiUserHeaderParams(),
                                  agreementId,
-                                 updateInfo,
-                                 TestData.EMPTY_PARAM);
+                                 updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -109,10 +111,9 @@ public class PutAgreementStatusApiTest {
     updateInfo.setValue(AgreementStatusUpdateInfo.ValueEnum.CANCEL);
 
     try {
-      agreementsApi.updateStatus(TestData.ACCESS_TOKEN,
+      agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
                                  TestData.EMPTY_PARAM,
-                                 updateInfo,
-                                 TestData.X_API_HEADER);
+                                 updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -120,10 +121,9 @@ public class PutAgreementStatusApiTest {
     }
 
     try {
-      agreementsApi.updateStatus(TestData.ACCESS_TOKEN,
+      agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
                                  TestData.NULL_PARAM,
-                                 updateInfo,
-                                 TestData.X_API_HEADER);
+                                 updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -141,10 +141,9 @@ public class PutAgreementStatusApiTest {
   public void testInvalidAgreementStatus() throws ApiException {
 
     try {
-      agreementsApi.updateStatus(TestData.ACCESS_TOKEN,
+      agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
                                  agreementId,
-                                 null,
-                                 TestData.X_API_HEADER);
+                                 null);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -155,10 +154,9 @@ public class PutAgreementStatusApiTest {
     updateInfo.setValue(null);
 
     try {
-      agreementsApi.updateStatus(TestData.ACCESS_TOKEN,
+      agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
                                  agreementId,
-                                 updateInfo,
-                                 TestData.X_API_HEADER);
+                                 updateInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -174,10 +172,9 @@ public class PutAgreementStatusApiTest {
     updateInfo.setValue(AgreementStatusUpdateInfo.ValueEnum.CANCEL);
 
     try {
-      AgreementStatusUpdateResponse response = agreementsApi.updateStatus(TestData.ACCESS_TOKEN,
+      AgreementStatusUpdateResponse response = agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
                                                                           agreementId,
-                                                                          updateInfo,
-                                                                          TestData.X_API_HEADER);
+                                                                          updateInfo);
       assertNotNull(response);
     }
     catch (ApiException e) {

@@ -17,6 +17,7 @@ import com.adobe.sign.utils.ApiClient;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Pair;
 import com.adobe.sign.utils.TypeRef;
+import com.adobe.sign.utils.validator.ApiValidatorHelper;
 import com.adobe.sign.utils.validator.AgreementsApiValidator;
 
 import com.adobe.sign.model.agreements.UserAgreements;
@@ -34,36 +35,47 @@ import com.adobe.sign.model.agreements.SigningUrlResponse;
 import com.adobe.sign.model.agreements.AgreementStatusUpdateResponse;
 import com.adobe.sign.model.agreements.AgreementStatusUpdateInfo;
 
-import java.util.*;
+    import java.util.*;
+import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:24:55.658+05:30")
-public class AgreementsApi {
-  private ApiClient apiClient;
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:02.594+05:30")
+    public class AgreementsApi {
+    private ApiClient apiClient;
+    private final String CONTENT_TYPE = "Content-Type";
+    private final String ACCEPT = "Accept";
+    private final String ACCESS_TOKEN = "Access-Token";
+    private final String X_API_USER = "x-api-user";
 
-  public AgreementsApi() {
+    public AgreementsApi() {
     this.apiClient = Context.getDefaultApiClient();
-  }
+    }
 
-  
-  /**
-   * Retrieves agreements for the user.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @param query The query string used for the search. Multiple search terms can be provided, separated by spaces. Some of the search terms include document name, participant name or company, and form data
-   * @param externalId ExternalID for which you would like to retrieve agreement information. ExternalId is passed in the call to the agreement creation API
-   * @param externalGroup ExternalGroup for which you would like to retrieve agreement information. ExternalGroup is passed in the call to the agreement creation API. You must pass ExternalId if passing ExternalGroup parameter
-   * @param externalNamespace ExternalNameSpace for which you would like to retrieve agreement information. ExternalNameSpace is passed in the call to the agreement creation API. You must pass ExternalId if passing ExternalNameSpace parameter
-   * @return UserAgreements
-   */
-  public UserAgreements getAgreements (String accessToken,
-                                                        String xApiUser,
-                                                        String query,
-                                                        String externalId,
-                                                        String externalGroup,
-                                                        String externalNamespace) throws ApiException {
+    
+    /**
+    * Retrieves agreements for the user.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param query The query string used for the search. Multiple search terms can be provided, separated by spaces. Some of the search terms include document name, participant name or company, and form data
+    * @param externalId ExternalID for which you would like to retrieve agreement information. ExternalId is passed in the call to the API which creates an agreement
+    * @param externalGroup ExternalGroup for which you would like to retrieve agreement information. ExternalGroup is passed in the call to the API which creates an agreement. You must pass ExternalId if passing ExternalGroup parameter
+    * @param externalNamespace ExternalNameSpace for which you would like to retrieve agreement information. ExternalNameSpace is passed in the call to the API which creates an agreement. You must pass ExternalId if passing ExternalNameSpace parameter
+    * @return UserAgreements
+    */
+    public UserAgreements getAgreements (MultivaluedMap headers,
+                                        String query,
+                                        String externalId,
+                                        String externalGroup,
+                                        String externalNamespace) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.getAgreementsValidator(accessToken, xApiUser, query, externalId, externalGroup, externalNamespace);
+    AgreementsApiValidator.getAgreementsValidator(query, externalId, externalGroup, externalNamespace);
 
     //Create path and map variables
     String path = "/agreements".replaceAll("\\{format\\}","json");
@@ -72,11 +84,29 @@ public class AgreementsApi {
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     queryParams.addAll(apiClient.parameterToPairs("", "query", query));
@@ -89,34 +119,40 @@ public class AgreementsApi {
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<UserAgreements>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Creates an agreement. Sends it out for signatures, and returns the agreementID in the response to the client.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_send - If both authoringRequested and sendThroughWeb parameter are set to falseagreement_write - If any of the authoringRequested or sendThroughWeb parameter is set to trueuser_login - Required additionally if the autoLoginUser parameter is set to true
-   * @param agreementCreationInfo Information about the agreement that you want to send and authoring options that you want to apply at the time of sending.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return AgreementCreationResponse
-   */
-  public AgreementCreationResponse createAgreement (String accessToken,
-                                                        AgreementCreationInfo agreementCreationInfo,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Creates an agreement. Sends it out for signatures, and returns the agreementID in the response to the client.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_send - If both authoringRequested and sendThroughWeb parameter are set to false agreement_write - If any of the authoringRequested or sendThroughWeb parameter is set to true user_login - Required additionally if the autoLoginUser parameter is set to true 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementCreationInfo Information about the agreement that you want to send and authoring options that you want to apply at the time of sending.
+    * @return AgreementCreationResponse
+    */
+    public AgreementCreationResponse createAgreement (MultivaluedMap headers,
+                                        AgreementCreationInfo agreementCreationInfo) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.createAgreementValidator(accessToken, agreementCreationInfo, xApiUser);
+    AgreementsApiValidator.createAgreementValidator(agreementCreationInfo);
 
     //Create path and map variables
     String path = "/agreements".replaceAll("\\{format\\}","json");
@@ -125,201 +161,316 @@ public class AgreementsApi {
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<AgreementCreationResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Retrieves the latest status of an agreement.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return AgreementInfo
-   */
-  public AgreementInfo getAgreementInfo (String accessToken,
-                                                        String agreementId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Retrieves the latest status of an agreement.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @return AgreementInfo
+    */
+    public AgreementInfo getAgreementInfo (MultivaluedMap headers,
+                                        String agreementId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.getAgreementInfoValidator(accessToken, agreementId, xApiUser);
+    AgreementsApiValidator.getAgreementInfoValidator(agreementId);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<AgreementInfo>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Deletes an agreement. Agreement will no longer be visible in the Manage Page of the user.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_retention
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return void
-   */
-  public void deleteAgreement (String accessToken,
-                                                        String agreementId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Deletes an agreement. Agreement will no longer be visible in the Manage Page of the user.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_retention 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @return void
+    */
+    public void deleteAgreement (MultivaluedMap headers,
+                                        String agreementId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.deleteAgreementValidator(accessToken, agreementId, xApiUser);
+    AgreementsApiValidator.deleteAgreementValidator(agreementId);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
-    apiClient.invokeAPI(path, "DELETE", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, null);
+    apiClient.invokeAPI(path, "DELETE", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, null, true);
     
-  }
-  
-  /**
-   * Retrieves the audit trail of an agreement identified by agreementid.
-   * PDF file stream containing audit trail information
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return byte[]
-   */
-  public byte[] getAuditTrail (String accessToken,
-                                                        String agreementId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Retrieves the audit trail of an agreement identified by agreementid.
+    * PDF file stream containing audit trail information
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @return byte[]
+    */
+    public byte[] getAuditTrail (MultivaluedMap headers,
+                                        String agreementId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.getAuditTrailValidator(accessToken, agreementId, xApiUser);
+    AgreementsApiValidator.getAuditTrailValidator(agreementId);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/auditTrail".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add(" */* ");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "   */*   "
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
-    return apiClient.invokeBinaryAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType);
+    return apiClient.invokeBinaryAPI(path, "GET", queryParams, 
+    postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, true);
     
-  }
-  
-  /**
-   * Gets a single combined PDF document for the documents associated with an agreement.
-   * A File Stream of combined PDF document
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @param versionId The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used.
-   * @param participantEmail The email address of the participant to be used to retrieve documents.
-   * @param attachSupportingDocuments When set to true, attach corresponding supporting documents to the signed agreement PDF. Default value of this parameter is true.
-   * @param auditReport When set to true, attach an audit report to the signed agreement PDF. Default value is false
-   * @return byte[]
-   */
-  public byte[] getCombinedDocument (String accessToken,
-                                                        String agreementId,
-                                                        String xApiUser,
-                                                        String versionId,
-                                                        String participantEmail,
-                                                        Boolean attachSupportingDocuments,
-                                                        Boolean auditReport) throws ApiException {
+    }
+    
+    /**
+    * Gets a single combined PDF document for the documents associated with an agreement.
+    * A File Stream of combined PDF document
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @param versionId The version identifier of agreement as provided by the API which retrieves an agreement. If not provided then latest version will be used.
+    * @param participantEmail The email address of the participant to be used to retrieve documents.
+    * @param attachSupportingDocuments When set to true, attach corresponding supporting documents to the signed agreement PDF. Default value of this parameter is true.
+    * @param auditReport When set to true, attach an audit report to the signed agreement PDF. Default value is false
+    * @return byte[]
+    */
+    public byte[] getCombinedDocument (MultivaluedMap headers,
+                                        String agreementId,
+                                        String versionId,
+                                        String participantEmail,
+                                        Boolean attachSupportingDocuments,
+                                        Boolean auditReport) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.getCombinedDocumentValidator(accessToken, agreementId, xApiUser, versionId, participantEmail, attachSupportingDocuments, auditReport);
+    AgreementsApiValidator.getCombinedDocumentValidator(agreementId,versionId, participantEmail, attachSupportingDocuments, auditReport);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/combinedDocument".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add(" */* ");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     queryParams.addAll(apiClient.parameterToPairs("", "versionId", versionId));
@@ -332,105 +483,154 @@ public class AgreementsApi {
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "   */*   "
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
-    return apiClient.invokeBinaryAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType);
+    return apiClient.invokeBinaryAPI(path, "GET", queryParams, 
+    postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, true);
     
-  }
-  
-  /**
-   * Retrieves info of all pages of a combined PDF document for the documents associated with an agreement.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @param includeSupportingDocumentsPagesInfo When set to true, returns info of all pages of supporting documents as well. Else, return the page info of only the original document.
-   * @return CombinedDocumentPagesInfo
-   */
-  public CombinedDocumentPagesInfo getCombinedDocumentPagesInfo (String accessToken,
-                                                        String agreementId,
-                                                        String xApiUser,
-                                                        Boolean includeSupportingDocumentsPagesInfo) throws ApiException {
+    }
+    
+    /**
+    * Retrieves info of all pages of a combined PDF document for the documents associated with an agreement.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @param includeSupportingDocumentsPagesInfo When set to true, returns info of all pages of supporting documents as well. Else, return the page info of only the original document.
+    * @return CombinedDocumentPagesInfo
+    */
+    public CombinedDocumentPagesInfo getCombinedDocumentPagesInfo (MultivaluedMap headers,
+                                        String agreementId,
+                                        Boolean includeSupportingDocumentsPagesInfo) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.getCombinedDocumentPagesInfoValidator(accessToken, agreementId, xApiUser, includeSupportingDocumentsPagesInfo);
+    AgreementsApiValidator.getCombinedDocumentPagesInfoValidator(agreementId,includeSupportingDocumentsPagesInfo);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/combinedDocument/pagesInfo".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     queryParams.addAll(apiClient.parameterToPairs("", "includeSupportingDocumentsPagesInfo", includeSupportingDocumentsPagesInfo));
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<CombinedDocumentPagesInfo>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Retrieves url of all visible pages of all the documents associated with an agreement.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @param versionId The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used.
-   * @param participantEmail The email address of the participant to be used to retrieve its document url.
-   * @param attachSupportingDocuments When set to true, attach corresponding supporting documents to the signed agreement PDF. Default value of this parameter is true.
-   * @param auditReport When set to true, attach an audit report to the signed agreement PDF. Default value is false
-   * @return DocumentUrl
-   */
-  public DocumentUrl getCombinedDocumentUrl (String accessToken,
-                                                        String agreementId,
-                                                        String xApiUser,
-                                                        String versionId,
-                                                        String participantEmail,
-                                                        Boolean attachSupportingDocuments,
-                                                        Boolean auditReport) throws ApiException {
+    }
+    
+    /**
+    * Retrieves url of all visible pages of all the documents associated with an agreement.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @param versionId The version identifier of agreement as provided by the API which retrieves an agreement. If not provided then latest version will be used.
+    * @param participantEmail The email address of the participant to be used to retrieve its document url.
+    * @param attachSupportingDocuments When set to true, attach corresponding supporting documents to the signed agreement PDF. Default value of this parameter is true.
+    * @param auditReport When set to true, attach an audit report to the signed agreement PDF. Default value is false
+    * @return DocumentUrl
+    */
+    public DocumentUrl getCombinedDocumentUrl (MultivaluedMap headers,
+                                        String agreementId,
+                                        String versionId,
+                                        String participantEmail,
+                                        Boolean attachSupportingDocuments,
+                                        Boolean auditReport) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.getCombinedDocumentUrlValidator(accessToken, agreementId, xApiUser, versionId, participantEmail, attachSupportingDocuments, auditReport);
+    AgreementsApiValidator.getCombinedDocumentUrlValidator(agreementId,versionId, participantEmail, attachSupportingDocuments, auditReport);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/combinedDocument/url".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     queryParams.addAll(apiClient.parameterToPairs("", "versionId", versionId));
@@ -443,54 +643,78 @@ public class AgreementsApi {
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<DocumentUrl>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Retrieves the IDs of all the main and supporting documents of an agreement identified by agreementid.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @param versionId The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used.
-   * @param participantEmail The email address of the participant to be used to retrieve documents.
-   * @param supportingDocumentContentFormat Content format of the supported documents. It can have two possible values ORIGINAL or CONVERTED_PDF.
-   * @return AgreementDocuments
-   */
-  public AgreementDocuments getAllDocuments (String accessToken,
-                                                        String agreementId,
-                                                        String xApiUser,
-                                                        String versionId,
-                                                        String participantEmail,
-                                                        String supportingDocumentContentFormat) throws ApiException {
+    }
+    
+    /**
+    * Retrieves the IDs of all the main and supporting documents of an agreement identified by agreementid.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @param versionId The version identifier of agreement as provided by the API which retrieves an agreement. If not provided then latest version will be used.
+    * @param participantEmail The email address of the participant to be used to retrieve documents.
+    * @param supportingDocumentContentFormat Content format of the supported documents. It can have two possible values ORIGINAL or CONVERTED_PDF.
+    * @return AgreementDocuments
+    */
+    public AgreementDocuments getAllDocuments (MultivaluedMap headers,
+                                        String agreementId,
+                                        String versionId,
+                                        String participantEmail,
+                                        String supportingDocumentContentFormat) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.getAllDocumentsValidator(accessToken, agreementId, xApiUser, versionId, participantEmail, supportingDocumentContentFormat);
+    AgreementsApiValidator.getAllDocumentsValidator(agreementId,versionId, participantEmail, supportingDocumentContentFormat);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/documents".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     queryParams.addAll(apiClient.parameterToPairs("", "versionId", versionId));
@@ -501,103 +725,151 @@ public class AgreementsApi {
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<AgreementDocuments>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Deletes all the documents of an agreement. Agreement will be visible in the Manage Page of the user.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_retention
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return void
-   */
-  public void deleteDocuments (String accessToken,
-                                                        String agreementId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Deletes all the documents of an agreement. Agreement will be visible in the Manage Page of the user.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_retention 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @return void
+    */
+    public void deleteDocuments (MultivaluedMap headers,
+                                        String agreementId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.deleteDocumentsValidator(accessToken, agreementId, xApiUser);
+    AgreementsApiValidator.deleteDocumentsValidator(agreementId);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/documents".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
-    apiClient.invokeAPI(path, "DELETE", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, null);
+    apiClient.invokeAPI(path, "DELETE", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, null, true);
     
-  }
-  
-  /**
-   * Retrieves image urls of all visible pages of all the documents associated with an agreement.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @param versionId The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used.
-   * @param participantEmail The email address of the participant to be used to retrieve its visible document pages&#39; image urls.
-   * @param imageSizes A comma separated list of image sizes i.e. {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT}. Default sizes returned are {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT}.
-   * @param includeSupportingDocumentsImageUrls When set to true, returns image urls of supporting documents as well. Else, return the image url of only the original document.
-   * @param showImageAvailabilityOnly When set to true, returns only image availability. Else, returns both image urls and its availability.
-   * @return DocumentImageUrls
-   */
-  public DocumentImageUrls getCombinedDocumentImageUrls (String accessToken,
-                                                        String agreementId,
-                                                        String xApiUser,
-                                                        String versionId,
-                                                        String participantEmail,
-                                                        String imageSizes,
-                                                        Boolean includeSupportingDocumentsImageUrls,
-                                                        Boolean showImageAvailabilityOnly) throws ApiException {
+    }
+    
+    /**
+    * Retrieves image urls of all visible pages of all the documents associated with an agreement.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @param versionId The version identifier of agreement as provided by the API which retrieves an agreement. If not provided then latest version will be used.
+    * @param participantEmail The email address of the participant to be used to retrieve its visible document pages&#39; image urls.
+    * @param imageSizes A comma separated list of image sizes i.e. {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT}. Default sizes returned are {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT}.
+    * @param includeSupportingDocumentsImageUrls When set to true, returns image urls of supporting documents as well. Else, return the image url of only the original document.
+    * @param showImageAvailabilityOnly When set to true, returns only image availability. Else, returns both image urls and its availability.
+    * @return DocumentImageUrls
+    */
+    public DocumentImageUrls getCombinedDocumentImageUrls (MultivaluedMap headers,
+                                        String agreementId,
+                                        String versionId,
+                                        String participantEmail,
+                                        String imageSizes,
+                                        Boolean includeSupportingDocumentsImageUrls,
+                                        Boolean showImageAvailabilityOnly) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.getCombinedDocumentImageUrlsValidator(accessToken, agreementId, xApiUser, versionId, participantEmail, imageSizes, includeSupportingDocumentsImageUrls, showImageAvailabilityOnly);
+    AgreementsApiValidator.getCombinedDocumentImageUrlsValidator(agreementId,versionId, participantEmail, imageSizes, includeSupportingDocumentsImageUrls, showImageAvailabilityOnly);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/documents/imageUrls".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     queryParams.addAll(apiClient.parameterToPairs("", "versionId", versionId));
@@ -612,111 +884,160 @@ public class AgreementsApi {
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<DocumentImageUrls>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Retrieves the file stream of a document of an agreement.
-   * Raw stream of the file
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param documentId The document identifier, as provided by the API which fetches the documents of a specified agreement
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return byte[]
-   */
-  public byte[] getDocument (String accessToken,
-                                                        String agreementId,
-                                                        String documentId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Retrieves the file stream of a document of an agreement.
+    * Raw stream of the file
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @param documentId The document identifier, as provided by the API which retrieves an agreement/documents
+    * @return byte[]
+    */
+    public byte[] getDocument (MultivaluedMap headers,
+                                        String agreementId,
+                                        String documentId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.getDocumentValidator(accessToken, agreementId, documentId, xApiUser);
+    AgreementsApiValidator.getDocumentValidator(agreementId,documentId);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/documents/{documentId}".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()))
-      .replaceAll("\\{" + "documentId" + "\\}", apiClient.escapeString(documentId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()))
+        .replaceAll("\\{" + "documentId" + "\\}", apiClient.escapeString(documentId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add(" */* ");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "   */*   "
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
-    return apiClient.invokeBinaryAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType);
+    return apiClient.invokeBinaryAPI(path, "GET", queryParams, 
+    postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, true);
     
-  }
-  
-  /**
-   * Retrieves image urls of all visible pages of a document associated with an agreement.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param documentId The document identifier, as provided by the API which fetches the documents of a specified agreement
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @param versionId The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used.
-   * @param participantEmail The email address of the participant to be used to retrieve its visible document pages&#39; image urls.
-   * @param imageSizes A comma separated list of image sizes i.e. {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT}. Default sizes returned are {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT}.
-   * @param showImageAvailabilityOnly When set to true, returns only image availability. Else, returns both image urls and its availability.
-   * @param startPage Start of page number range for which imageUrls are requested. Starting page number should be greater than 0.
-   * @param endPage End of page number range for which imageUrls are requested.
-   * @return DocumentImageUrl
-   */
-  public DocumentImageUrl getDocumentImageUrls (String accessToken,
-                                                        String agreementId,
-                                                        String documentId,
-                                                        String xApiUser,
-                                                        String versionId,
-                                                        String participantEmail,
-                                                        String imageSizes,
-                                                        Boolean showImageAvailabilityOnly,
-                                                        Integer startPage,
-                                                        Integer endPage) throws ApiException {
+    }
+    
+    /**
+    * Retrieves image urls of all visible pages of a document associated with an agreement.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @param documentId The document identifier, as provided by the API which retrieves an agreement/documents
+    * @param versionId The version identifier of agreement as provided by the API which retrieves an agreement. If not provided then latest version will be used.
+    * @param participantEmail The email address of the participant to be used to retrieve its visible document pages&#39; image urls.
+    * @param imageSizes A comma separated list of image sizes i.e. {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT}. Default sizes returned are {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT}.
+    * @param showImageAvailabilityOnly When set to true, returns only image availability. Else, returns both image urls and its availability.
+    * @param startPage Start of page number range for which imageUrls are requested. Starting page number should be greater than 0.
+    * @param endPage End of page number range for which imageUrls are requested.
+    * @return DocumentImageUrl
+    */
+    public DocumentImageUrl getDocumentImageUrls (MultivaluedMap headers,
+                                        String agreementId,
+                                        String documentId,
+                                        String versionId,
+                                        String participantEmail,
+                                        String imageSizes,
+                                        Boolean showImageAvailabilityOnly,
+                                        Integer startPage,
+                                        Integer endPage) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.getDocumentImageUrlsValidator(accessToken, agreementId, documentId, xApiUser, versionId, participantEmail, imageSizes, showImageAvailabilityOnly, startPage, endPage);
+    AgreementsApiValidator.getDocumentImageUrlsValidator(agreementId,documentId,versionId, participantEmail, imageSizes, showImageAvailabilityOnly, startPage, endPage);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/documents/{documentId}/imageUrls".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()))
-      .replaceAll("\\{" + "documentId" + "\\}", apiClient.escapeString(documentId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()))
+        .replaceAll("\\{" + "documentId" + "\\}", apiClient.escapeString(documentId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     queryParams.addAll(apiClient.parameterToPairs("", "versionId", versionId));
@@ -733,55 +1054,79 @@ public class AgreementsApi {
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<DocumentImageUrl>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Retrieves the url of the document
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param documentId The document identifier, as provided by the API which fetches the documents of a specified agreement
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @param versionId The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used.
-   * @param participantEmail The email address of the participant to be used to retrieve its document url.
-   * @return DocumentUrl
-   */
-  public DocumentUrl getDocumentUrl (String accessToken,
-                                                        String agreementId,
-                                                        String documentId,
-                                                        String xApiUser,
-                                                        String versionId,
-                                                        String participantEmail) throws ApiException {
+    }
+    
+    /**
+    * Retrieves the url of the document
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @param documentId The document identifier, as provided by the API which retrieves an agreement/documents
+    * @param versionId The version identifier of agreement as provided by the API which retrieves an agreement. If not provided then latest version will be used.
+    * @param participantEmail The email address of the participant to be used to retrieve its document url.
+    * @return DocumentUrl
+    */
+    public DocumentUrl getDocumentUrl (MultivaluedMap headers,
+                                        String agreementId,
+                                        String documentId,
+                                        String versionId,
+                                        String participantEmail) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.getDocumentUrlValidator(accessToken, agreementId, documentId, xApiUser, versionId, participantEmail);
+    AgreementsApiValidator.getDocumentUrlValidator(agreementId,documentId,versionId, participantEmail);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/documents/{documentId}/url".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()))
-      .replaceAll("\\{" + "documentId" + "\\}", apiClient.escapeString(documentId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()))
+        .replaceAll("\\{" + "documentId" + "\\}", apiClient.escapeString(documentId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     queryParams.addAll(apiClient.parameterToPairs("", "versionId", versionId));
@@ -790,212 +1135,309 @@ public class AgreementsApi {
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<DocumentUrl>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Retrieves data entered by the user into interactive form fields at the time they signed the agreement
-   * CSV file stream containing form data information
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return byte[]
-   */
-  public byte[] getFormData (String accessToken,
-                                                        String agreementId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Retrieves data entered by the user into interactive form fields at the time they signed the agreement
+    * CSV file stream containing form data information
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @return byte[]
+    */
+    public byte[] getFormData (MultivaluedMap headers,
+                                        String agreementId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.getFormDataValidator(accessToken, agreementId, xApiUser);
+    AgreementsApiValidator.getFormDataValidator(agreementId);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/formData".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("text/csv");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "text/csv"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
-    return apiClient.invokeBinaryAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType);
+    return apiClient.invokeBinaryAPI(path, "GET", queryParams, 
+    postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, true);
     
-  }
-  
-  /**
-   * Creates a new alternate participant
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_write
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param participantSetId The participant set identifier
-   * @param participantId The participant identifier
-   * @param alternateParticipantInfo Information about the alternate participant
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return AlternateParticipantResponse
-   */
-  public AlternateParticipantResponse createAlternateParticipant (String accessToken,
-                                                        String agreementId,
-                                                        String participantSetId,
-                                                        String participantId,
-                                                        AlternateParticipantInfo alternateParticipantInfo,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Creates a new alternate participant
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_write 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @param participantSetId The participant set identifier
+    * @param participantId The participant identifier
+    * @param alternateParticipantInfo Information about the alternate participant
+    * @return AlternateParticipantResponse
+    */
+    public AlternateParticipantResponse createAlternateParticipant (MultivaluedMap headers,
+                                        String agreementId,
+                                        String participantSetId,
+                                        String participantId,
+                                        AlternateParticipantInfo alternateParticipantInfo) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.createAlternateParticipantValidator(accessToken, agreementId, participantSetId, participantId, alternateParticipantInfo, xApiUser);
+    AgreementsApiValidator.createAlternateParticipantValidator(agreementId,participantSetId,participantId,alternateParticipantInfo);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/participantSets/{participantSetId}/participants/{participantId}/alternateParticipants".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()))
-      .replaceAll("\\{" + "participantSetId" + "\\}", apiClient.escapeString(participantSetId.toString()))
-      .replaceAll("\\{" + "participantId" + "\\}", apiClient.escapeString(participantId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()))
+        .replaceAll("\\{" + "participantSetId" + "\\}", apiClient.escapeString(participantSetId.toString()))
+        .replaceAll("\\{" + "participantId" + "\\}", apiClient.escapeString(participantId.toString()));
 
     Object postBody = alternateParticipantInfo;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<AlternateParticipantResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Retrieves the URL for the e-sign page for the current signer(s) of an agreement.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_write
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return SigningUrlResponse
-   */
-  public SigningUrlResponse getSigningUrl (String accessToken,
-                                                        String agreementId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Retrieves the URL for the e-sign page for the current signer(s) of an agreement.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_write 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @return SigningUrlResponse
+    */
+    public SigningUrlResponse getSigningUrl (MultivaluedMap headers,
+                                        String agreementId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.getSigningUrlValidator(accessToken, agreementId, xApiUser);
+    AgreementsApiValidator.getSigningUrlValidator(agreementId);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/signingUrls".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<SigningUrlResponse>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Cancels an agreement.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_write
-   * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-   * @param agreementStatusUpdateInfo Agreement status update information object.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return AgreementStatusUpdateResponse
-   */
-  public AgreementStatusUpdateResponse updateStatus (String accessToken,
-                                                        String agreementId,
-                                                        AgreementStatusUpdateInfo agreementStatusUpdateInfo,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Cancels an agreement.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_write 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementId The agreement identifier, as provided by the APIs which retrieves agreements or creates agreements.
+    * @param agreementStatusUpdateInfo Agreement status update information object.
+    * @return AgreementStatusUpdateResponse
+    */
+    public AgreementStatusUpdateResponse updateStatus (MultivaluedMap headers,
+                                        String agreementId,
+                                        AgreementStatusUpdateInfo agreementStatusUpdateInfo) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    AgreementsApiValidator.updateStatusValidator(accessToken, agreementId, agreementStatusUpdateInfo, xApiUser);
+    AgreementsApiValidator.updateStatusValidator(agreementId,agreementStatusUpdateInfo);
 
     //Create path and map variables
     String path = "/agreements/{agreementId}/status".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
+        .replaceAll("\\{" + "agreementId" + "\\}", apiClient.escapeString(agreementId.toString()));
 
     Object postBody = agreementStatusUpdateInfo;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<AgreementStatusUpdateResponse>() {};
-    return apiClient.invokeAPI(path, "PUT", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "PUT", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
+    
+    }
     
   }
-  
-}

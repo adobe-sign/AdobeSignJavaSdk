@@ -20,22 +20,27 @@ import static org.junit.Assert.fail;
 import com.adobe.sign.api.AgreementsApi;
 import com.adobe.sign.model.agreements.AgreementInfo;
 import com.adobe.sign.utils.AgreementsUtils;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * Junit test cases for Get Agreement Info API.
  */
 public class GetAgreementInfoApiTest {
-  private AgreementsApi agreementsApi = null;
-  private String agreementId = null;
+  private static AgreementsApi agreementsApi = null;
+  private static String agreementId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
@@ -50,9 +55,8 @@ public class GetAgreementInfoApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getAgreementInfo(TestData.NULL_PARAM,
-                                     agreementId,
-                                     TestData.X_API_HEADER);
+      agreementsApi.getAgreementInfo(ApiUtils.getNullAccessTokenHeaderParams(),
+                                     agreementId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -60,9 +64,8 @@ public class GetAgreementInfoApiTest {
     }
 
     try {
-      agreementsApi.getAgreementInfo(TestData.EMPTY_PARAM,
-                                     agreementId,
-                                     TestData.X_API_HEADER);
+      agreementsApi.getAgreementInfo(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                     agreementId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -80,9 +83,8 @@ public class GetAgreementInfoApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getAgreementInfo(TestData.ACCESS_TOKEN,
-                                     agreementId,
-                                     TestData.EMPTY_PARAM);
+      agreementsApi.getAgreementInfo(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                     agreementId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -99,9 +101,8 @@ public class GetAgreementInfoApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getAgreementInfo(TestData.ACCESS_TOKEN,
-                                     TestData.EMPTY_PARAM,
-                                     TestData.X_API_HEADER);
+      agreementsApi.getAgreementInfo(ApiUtils.getValidHeaderParams(),
+                                     TestData.EMPTY_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -109,9 +110,8 @@ public class GetAgreementInfoApiTest {
     }
 
     try {
-      agreementsApi.getAgreementInfo(TestData.ACCESS_TOKEN,
-                                     TestData.NULL_PARAM,
-                                     TestData.X_API_HEADER);
+      agreementsApi.getAgreementInfo(ApiUtils.getValidHeaderParams(),
+                                     TestData.NULL_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -125,9 +125,8 @@ public class GetAgreementInfoApiTest {
   public void testAgreementInfo() throws ApiException {
 
     try {
-      AgreementInfo agreementInfo = agreementsApi.getAgreementInfo(TestData.ACCESS_TOKEN,
-                                                                   agreementId,
-                                                                   TestData.X_API_HEADER);
+      AgreementInfo agreementInfo = agreementsApi.getAgreementInfo(ApiUtils.getValidHeaderParams(),
+                                                                   agreementId);
       assertNotNull(agreementInfo);
     }
     catch (ApiException e) {

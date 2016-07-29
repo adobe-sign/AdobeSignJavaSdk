@@ -17,36 +17,48 @@ import com.adobe.sign.utils.ApiClient;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Pair;
 import com.adobe.sign.utils.TypeRef;
+import com.adobe.sign.utils.validator.ApiValidatorHelper;
 import com.adobe.sign.utils.validator.SearchApiValidator;
 
 import com.adobe.sign.model.search.AgreementAssetEventRequest;
 import com.adobe.sign.model.search.AgreementAssetEventPostResponse;
 import com.adobe.sign.model.search.AgreementAssetEventGetResponse;
 
-import java.util.*;
+    import java.util.*;
+import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:25:00.811+05:30")
-public class SearchApi {
-  private ApiClient apiClient;
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:07.906+05:30")
+    public class SearchApi {
+    private ApiClient apiClient;
+    private final String CONTENT_TYPE = "Content-Type";
+    private final String ACCEPT = "Accept";
+    private final String ACCESS_TOKEN = "Access-Token";
+    private final String X_API_USER = "x-api-user";
 
-  public SearchApi() {
+    public SearchApi() {
     this.apiClient = Context.getDefaultApiClient();
-  }
+    }
 
-  
-  /**
-   * Create a search object for agreement asset event . It will return the result for the first page and search Id to fetch results for further pages.
-   * The agreement asset refers to any asset through which an agreement can be created for instance library document,widget and agreement itself. To search for Agreement Asset Events, first make a POST request to POST /search/agreementAssetEvents with relevant search parameters. Response will be the first page of results along with a search Id param and next page cursor. These can be used to fetch further page results if they are  available using the API which retrieves a list of AgreementAssetEvents using a searchId
-   * @param accessToken An OAuth Access Token with scopes:agreement_readwidget_readlibrary_read
-   * @param agreementAssetEventRequest Information about the Agreement Asset Events to be generated
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return AgreementAssetEventPostResponse
-   */
-  public AgreementAssetEventPostResponse createAssetEvent (String accessToken,
-                                                        AgreementAssetEventRequest agreementAssetEventRequest,
-                                                        String xApiUser) throws ApiException {
+    
+    /**
+    * Create a search object for agreement asset event . It will return the result for the first page and search Id to fetch results for further pages.
+    * The agreement asset refers to any asset through which an agreement can be created for instance library document,widget and agreement itself. To search for Agreement Asset Events, first make a POST request to POST /search/agreementAssetEvents with relevant search parameters. Response will be the first page of results along with a search Id param and next page cursor. These can be used to fetch further page results if they are available using the API which retrieves a list of AgreementAssetEvents using a searchId
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read widget_read library_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param agreementAssetEventRequest Information about the Agreement Asset Events to be generated
+    * @return AgreementAssetEventPostResponse
+    */
+    public AgreementAssetEventPostResponse createAssetEvent (MultivaluedMap headers,
+                                        AgreementAssetEventRequest agreementAssetEventRequest) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    SearchApiValidator.createAssetEventValidator(accessToken, agreementAssetEventRequest, xApiUser);
+    SearchApiValidator.createAssetEventValidator(agreementAssetEventRequest);
 
     //Create path and map variables
     String path = "/search/agreementAssetEvents".replaceAll("\\{format\\}","json");
@@ -55,61 +67,103 @@ public class SearchApi {
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<AgreementAssetEventPostResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Return the result for the page which is described inside the Page Cursor Info.
-   * The agreement asset refers to any asset through which an agreement can be created for instance library document,widget and agreement itself. Provide the searchId obtained from POST /search/agreementAssetEvents request and the next page cursor id from the original call to the API which creates a search object for an agreementAssetEvent or a previous call to the API which retrieves a list of agreementAssetEvents for a searchId.
-   * @param accessToken An OAuth Access Token with scopes:agreement_readwidget_readlibrary_read
-   * @param searchId The search object identifier, as returned by the agreementAssetEvent creation API .
-   * @param pageCursor Page cursor of the page whose result will be fetched
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @param pageSize Count of agreement asset events which will be returned in the response. If the pageSize is left blank, then the pageSize which is mentioned while making POST request to /search/agreementAssetEvents will be used. Maximum page size is 500.
-   * @return AgreementAssetEventGetResponse
-   */
-  public AgreementAssetEventGetResponse getAssetEvent (String accessToken,
-                                                        String searchId,
-                                                        String pageCursor,
-                                                        String xApiUser,
-                                                        Integer pageSize) throws ApiException {
+    }
+    
+    /**
+    * Return the result for the page which is described inside the Page Cursor Info.
+    * The agreement asset refers to any asset through which an agreement can be created for instance library document,widget and agreement itself. Provide the searchId obtained from POST /search/agreementAssetEvents request and the next page cursor id from the original call to the API which creates a search object for an agreementAssetEvent or a previous call to the API which retrieves a list of agreementAssetEvents for a searchId.
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read widget_read library_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param searchId The search object identifier, as provided by the API which creates a search object for an agreement asset event .
+    * @param pageCursor Page cursor of the page whose result will be fetched
+    * @param pageSize Count of agreement asset events which will be returned in the response. If the pageSize is left blank, then the pageSize which is mentioned while making POST request to /search/agreementAssetEvents will be used. Maximum page size is 500.
+    * @return AgreementAssetEventGetResponse
+    */
+    public AgreementAssetEventGetResponse getAssetEvent (MultivaluedMap headers,
+                                        String searchId,
+                                        String pageCursor,
+                                        Integer pageSize) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    SearchApiValidator.getAssetEventValidator(accessToken, searchId, pageCursor, xApiUser, pageSize);
+    SearchApiValidator.getAssetEventValidator(searchId,pageCursor, pageSize);
 
     //Create path and map variables
     String path = "/search/agreementAssetEvents/{searchId}".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "searchId" + "\\}", apiClient.escapeString(searchId.toString()));
+        .replaceAll("\\{" + "searchId" + "\\}", apiClient.escapeString(searchId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     queryParams.addAll(apiClient.parameterToPairs("", "pageCursor", pageCursor));
@@ -118,19 +172,19 @@ public class SearchApi {
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<AgreementAssetEventGetResponse>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
+    
+    }
     
   }
-  
-}

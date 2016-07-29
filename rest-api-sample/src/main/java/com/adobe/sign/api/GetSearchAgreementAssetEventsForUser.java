@@ -18,6 +18,8 @@ import com.adobe.sign.model.search.AgreementAssetEventPostResponse;
 import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
 import com.adobe.sign.utils.SearchUtils;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
 
 /**
  * This sample client demonstrates how to begin searching for agreement asset events for the user.
@@ -32,20 +34,21 @@ public class GetSearchAgreementAssetEventsForUser {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(GetSearchAgreementAssetEventsForUser.class.getName());
     try {
       GetSearchAgreementAssetEventsForUser client = new GetSearchAgreementAssetEventsForUser();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.SEARCH_AGREEMENT_ASSET_EVENT_FOR_USER);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.SEARCH_AGREEMENT_ASSET_EVENT_FOR_USER, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException{
 
     //Make API call to create the search for agreementAssetEvent
     AgreementAssetEventPostResponse agreementAssetEventPostResponse = SearchUtils.createSearchForAgreementAssetEvent(Constants.START_DATE,

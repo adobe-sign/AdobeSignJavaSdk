@@ -19,24 +19,29 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.AgreementsApi;
 import com.adobe.sign.model.agreements.DocumentUrl;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.AgreementsUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * Junit test cases for Get Agreement Document Url API.
  */
 public class GetAgreementDocumentUrlApiTest {
-  private AgreementsApi agreementsApi = null;
-  private String agreementId = null;
-  private String documentId = null;
+  private static AgreementsApi agreementsApi = null;
+  private static String agreementId = null;
+  private static String documentId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
     documentId = AgreementsUtils.getDocumentId();
@@ -52,10 +57,9 @@ public class GetAgreementDocumentUrlApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getDocumentUrl(TestData.NULL_PARAM,
+      agreementsApi.getDocumentUrl(ApiUtils.getNullAccessTokenHeaderParams(),
                                    agreementId,
                                    documentId,
-                                   TestData.X_API_HEADER,
                                    TestData.VERSION_ID,
                                    TestData.PARTICIPANT_EMAIL);
     }
@@ -65,10 +69,9 @@ public class GetAgreementDocumentUrlApiTest {
     }
 
     try {
-      agreementsApi.getDocumentUrl(TestData.EMPTY_PARAM,
+      agreementsApi.getDocumentUrl(ApiUtils.getEmptyAccessTokenHeaderParams(),
                                    agreementId,
                                    documentId,
-                                   TestData.X_API_HEADER,
                                    TestData.VERSION_ID,
                                    TestData.PARTICIPANT_EMAIL);
     }
@@ -87,10 +90,9 @@ public class GetAgreementDocumentUrlApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getDocumentUrl(TestData.ACCESS_TOKEN,
+      agreementsApi.getDocumentUrl(ApiUtils.getEmptyXApiUserHeaderParams(),
                                    agreementId,
                                    documentId,
-                                   TestData.EMPTY_PARAM,
                                    TestData.VERSION_ID,
                                    TestData.PARTICIPANT_EMAIL);
     }
@@ -109,10 +111,9 @@ public class GetAgreementDocumentUrlApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getDocumentUrl(TestData.ACCESS_TOKEN,
+      agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
                                    TestData.EMPTY_PARAM,
                                    documentId,
-                                   TestData.X_API_HEADER,
                                    TestData.VERSION_ID,
                                    TestData.PARTICIPANT_EMAIL);
     }
@@ -122,10 +123,9 @@ public class GetAgreementDocumentUrlApiTest {
     }
 
     try {
-      agreementsApi.getDocumentUrl(TestData.ACCESS_TOKEN,
+      agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
                                    TestData.NULL_PARAM,
                                    documentId,
-                                   TestData.X_API_HEADER,
                                    TestData.VERSION_ID,
                                    TestData.PARTICIPANT_EMAIL);
     }
@@ -144,10 +144,9 @@ public class GetAgreementDocumentUrlApiTest {
   public void testInvalidDocumentId() throws ApiException {
 
     try {
-      agreementsApi.getDocumentUrl(TestData.ACCESS_TOKEN,
+      agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
                                    agreementId,
                                    TestData.EMPTY_PARAM,
-                                   TestData.X_API_HEADER,
                                    TestData.VERSION_ID,
                                    TestData.PARTICIPANT_EMAIL);
     }
@@ -157,10 +156,9 @@ public class GetAgreementDocumentUrlApiTest {
     }
 
     try {
-      agreementsApi.getDocumentUrl(TestData.ACCESS_TOKEN,
+      agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
                                    agreementId,
                                    TestData.NULL_PARAM,
-                                   TestData.X_API_HEADER,
                                    TestData.VERSION_ID,
                                    TestData.PARTICIPANT_EMAIL);
     }
@@ -179,10 +177,9 @@ public class GetAgreementDocumentUrlApiTest {
   public void testInvalidVersionId() throws ApiException {
 
     try {
-      agreementsApi.getDocumentUrl(TestData.ACCESS_TOKEN,
+      agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
                                    agreementId,
                                    documentId,
-                                   TestData.X_API_HEADER,
                                    TestData.EMPTY_PARAM,
                                    TestData.PARTICIPANT_EMAIL);
     }
@@ -201,10 +198,9 @@ public class GetAgreementDocumentUrlApiTest {
   public void testInvalidParticipantEmail() throws ApiException {
 
     try {
-      agreementsApi.getDocumentUrl(TestData.ACCESS_TOKEN,
+      agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
                                    agreementId,
                                    documentId,
-                                   TestData.X_API_HEADER,
                                    TestData.VERSION_ID,
                                    TestData.EMPTY_PARAM);
     }
@@ -223,10 +219,9 @@ public class GetAgreementDocumentUrlApiTest {
   public void testDocumentUrl() throws ApiException {
 
     try {
-      DocumentUrl documentUrl =  agreementsApi.getDocumentUrl(TestData.ACCESS_TOKEN,
+      DocumentUrl documentUrl =  agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
                                                               agreementId,
                                                               documentId,
-                                                              TestData.X_API_HEADER,
                                                               TestData.VERSION_ID,
                                                               TestData.PARTICIPANT_EMAIL);
       assertNotNull(documentUrl);

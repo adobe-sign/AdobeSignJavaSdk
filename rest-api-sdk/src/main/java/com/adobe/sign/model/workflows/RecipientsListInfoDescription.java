@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:25:02.764+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:09.776+05:30")
 public class RecipientsListInfoDescription   {
   
   private Boolean allowfax = null;
@@ -96,9 +96,9 @@ public enum AuthenticationMethodEnum {
 
   
   /**
-   * A default  email or fax number
+   * A default email or fax number
    **/
-  @ApiModelProperty(required = true, value = "A default  email or fax number")
+  @ApiModelProperty(required = true, value = "A default email or fax number")
   @JsonProperty("defaultValue")
   public String getDefaultValue() {
     return defaultValue;

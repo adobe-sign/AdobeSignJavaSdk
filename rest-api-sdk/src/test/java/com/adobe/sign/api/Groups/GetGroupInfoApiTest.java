@@ -19,12 +19,14 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.GroupsApi;
 import com.adobe.sign.model.groups.GroupDetailsInfo;
+import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.GroupUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -32,11 +34,14 @@ import org.junit.Test;
  */
 public class GetGroupInfoApiTest {
   
-  private String groupId = null;
-  private GroupsApi groupsApi = null;
+  private static String groupId = null;
+  private static GroupsApi groupsApi = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     groupId = GroupUtils.getResourceId(TestData.GROUP_NAME);
     groupsApi = GroupUtils.getGroupsApi();
   }
@@ -52,9 +57,8 @@ public class GetGroupInfoApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      groupsApi.getGroupDetails(TestData.NULL_PARAM,
-                                groupId,
-                                TestData.X_API_HEADER);
+      groupsApi.getGroupDetails(ApiUtils.getNullAccessTokenHeaderParams(),
+                                groupId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -62,9 +66,8 @@ public class GetGroupInfoApiTest {
     }
 
     try {
-      groupsApi.getGroupDetails(TestData.EMPTY_PARAM,
-                                groupId,
-                                TestData.X_API_HEADER);
+      groupsApi.getGroupDetails(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                groupId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -82,9 +85,8 @@ public class GetGroupInfoApiTest {
   public void testInvalidXApiHeader() throws ApiException {
 
     try {
-      groupsApi.getGroupDetails(TestData.ACCESS_TOKEN,
-                                groupId,
-                                TestData.EMPTY_PARAM);
+      groupsApi.getGroupDetails(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                groupId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -102,9 +104,8 @@ public class GetGroupInfoApiTest {
   public void testGetGroupDetails() throws ApiException {
 
     try {
-      GroupDetailsInfo groupDetailsInfo = groupsApi.getGroupDetails(TestData.ACCESS_TOKEN, 
-                                                                    groupId, 
-                                                                    TestData.X_API_HEADER);
+      GroupDetailsInfo groupDetailsInfo = groupsApi.getGroupDetails(ApiUtils.getValidHeaderParams(),
+                                                                    groupId);
       assertNotNull(groupDetailsInfo);
       assertNotNull(groupDetailsInfo.getGroupId());
     }
@@ -123,9 +124,8 @@ public class GetGroupInfoApiTest {
   public void testNullAndInvalidGroupId() throws ApiException {
 
     try {
-      groupsApi.getGroupDetails(TestData.ACCESS_TOKEN,
-                                TestData.EMPTY_PARAM,
-                                TestData.X_API_HEADER);
+      groupsApi.getGroupDetails(ApiUtils.getValidHeaderParams(),
+                                TestData.EMPTY_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -133,9 +133,8 @@ public class GetGroupInfoApiTest {
     }
 
     try {
-      groupsApi.getGroupDetails(TestData.ACCESS_TOKEN,
-                                TestData.NULL_PARAM,
-                                TestData.X_API_HEADER);
+      groupsApi.getGroupDetails(ApiUtils.getValidHeaderParams(),
+                                TestData.NULL_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),

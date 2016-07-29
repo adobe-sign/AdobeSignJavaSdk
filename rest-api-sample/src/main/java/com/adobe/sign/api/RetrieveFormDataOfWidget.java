@@ -14,10 +14,12 @@
 package com.adobe.sign.api;
 
 import com.adobe.sign.model.widgets.WidgetInfo;
+import com.adobe.sign.utils.WidgetUtils;
 import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
-import com.adobe.sign.utils.WidgetUtils;
 import com.adobe.sign.utils.FileUtils;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
 
 /**
  * This sample client demonstrates how to download the form data of the specified widget.
@@ -31,31 +33,32 @@ public class RetrieveFormDataOfWidget {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(RetrieveFormDataOfWidget.class.getName());
     try {
       RetrieveFormDataOfWidget client = new RetrieveFormDataOfWidget();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.RETRIEVE_FORM_DATA_WIDGET);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.RETRIEVE_FORM_DATA_WIDGET, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException{
     //Get the id of the first library document of the user.
     String widgetId = WidgetUtils.getFirstWidgetId();
 
     if(widgetId == null) {
-      System.err.println(Errors.NO_WIDGET_FOUND);
+      ApiUtils.logError(Errors.NO_WIDGET_FOUND);
     }
     else {
       //Display name of the widget associated with the specified widget ID.
       WidgetInfo widgetInfo = WidgetUtils.getWidgetInfo(widgetId);
       String widgetName = widgetInfo.getName();
-      System.out.println("Widget name: " + widgetInfo.getName());
+      ApiUtils.getLogger().info("Widget name: " + widgetInfo.getName());
 
       //Make API call to get form data of this widget.
       byte formDataStream[] = WidgetUtils.getWidgetFormData(widgetInfo.getWidgetId());

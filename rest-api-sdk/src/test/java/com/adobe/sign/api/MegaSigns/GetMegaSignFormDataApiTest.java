@@ -18,12 +18,14 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.MegaSignsApi;
+import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.MegaSignUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -31,11 +33,14 @@ import org.junit.Test;
  */
 public class GetMegaSignFormDataApiTest {
 
-  private MegaSignsApi megaSignsApi = null;
-  private String megaSignId = null;
+  private static MegaSignsApi megaSignsApi = null;
+  private static String megaSignId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
       megaSignId = MegaSignUtils.getResourceId(TestData.MEGASIGN_NAME);
       megaSignsApi = MegaSignUtils.getMegaSignsApi();
   }
@@ -44,10 +49,8 @@ public class GetMegaSignFormDataApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      megaSignsApi.getMegaSignFormData(TestData.NULL_PARAM,
-                                       TestData.ACCEPT,
-                                       megaSignId,
-                                       TestData.X_API_HEADER);
+      megaSignsApi.getMegaSignFormData(ApiUtils.getNullAccessTokenHeaderParams(),
+                                       megaSignId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -55,10 +58,8 @@ public class GetMegaSignFormDataApiTest {
     }
 
     try {
-      megaSignsApi.getMegaSignFormData(TestData.EMPTY_PARAM,
-                                       TestData.ACCEPT,
-                                       megaSignId,
-                                       TestData.X_API_HEADER);
+      megaSignsApi.getMegaSignFormData(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                       megaSignId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -77,10 +78,8 @@ public class GetMegaSignFormDataApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      megaSignsApi.getMegaSignFormData(TestData.ACCESS_TOKEN,
-                                       TestData.ACCEPT,
-                                       megaSignId,
-                                       TestData.EMPTY_PARAM);
+      megaSignsApi.getMegaSignFormData(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                       megaSignId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -98,10 +97,8 @@ public class GetMegaSignFormDataApiTest {
   public void testInvalidMegaSignId() throws ApiException {
 
     try {
-      megaSignsApi.getMegaSignFormData(TestData.ACCESS_TOKEN,
-                                       TestData.ACCEPT,
-                                       TestData.EMPTY_PARAM,
-                                       TestData.X_API_HEADER);
+      megaSignsApi.getMegaSignFormData(ApiUtils.getValidHeaderParams(),
+                                       TestData.EMPTY_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -109,10 +106,8 @@ public class GetMegaSignFormDataApiTest {
     }
 
     try {
-      megaSignsApi.getMegaSignFormData(TestData.ACCESS_TOKEN,
-                                       TestData.ACCEPT,
-                                       TestData.NULL_PARAM,
-                                       TestData.X_API_HEADER);
+      megaSignsApi.getMegaSignFormData(ApiUtils.getValidHeaderParams(),
+                                       TestData.NULL_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -130,10 +125,8 @@ public class GetMegaSignFormDataApiTest {
   public void testGetFormData() throws ApiException {
 
     try {
-      byte[] megaSignFormData = megaSignsApi.getMegaSignFormData(TestData.ACCESS_TOKEN,
-                                                                 TestData.ACCEPT,
-                                                                 megaSignId,
-                                                                 TestData.X_API_HEADER);
+      byte[] megaSignFormData = megaSignsApi.getMegaSignFormData(ApiUtils.getValidHeaderParams(),
+                                                                 megaSignId);
       assertNotNull(megaSignFormData);
     }
     catch (ApiException e) {

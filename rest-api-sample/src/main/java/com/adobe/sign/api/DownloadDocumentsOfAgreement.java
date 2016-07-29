@@ -21,6 +21,8 @@ import com.adobe.sign.utils.AgreementUtils;
 import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
 import com.adobe.sign.utils.FileUtils;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
 
 /**
  * This sample client demonstrates how to to download documents of the specified agreement.
@@ -35,20 +37,21 @@ public class DownloadDocumentsOfAgreement {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(DownloadDocumentsOfAgreement.class.getName());
     try {
       DownloadDocumentsOfAgreement client = new DownloadDocumentsOfAgreement();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.DOWNLOAD_DOCUMENT);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.DOWNLOAD_DOCUMENT, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException{
     //Get agreement ID
     String agreementId = AgreementUtils.getAgreementId(Constants.AGREEMENT_NAME);
 

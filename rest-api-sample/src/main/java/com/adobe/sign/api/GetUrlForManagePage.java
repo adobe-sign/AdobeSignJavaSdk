@@ -18,6 +18,8 @@ import com.adobe.sign.utils.AgreementUtils;
 import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
 import com.adobe.sign.utils.ViewUtils;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
 
 /**
  * This sample client demonstrates how to generate URL for manage page.
@@ -33,20 +35,21 @@ public class GetUrlForManagePage {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(GetUrlForManagePage.class.getName());
     try {
       GetUrlForManagePage client = new GetUrlForManagePage();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.GET_URL_FOR_MANAGE_PAGE);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_URL_FOR_MANAGE_PAGE, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception {
+  private void run() throws ApiException {
     //Get agreement asset ID
     String agreementAssetId = AgreementUtils.getAgreementId(Constants.AGREEMENT_NAME);
 
@@ -54,6 +57,6 @@ public class GetUrlForManagePage {
     ViewUrl viewUrl = ViewUtils.getAgreementAssetListUrl(agreementAssetId);
 
     // Display URL for manage page.
-    System.out.println("URL for manage page = " + viewUrl.getViewURL());
+    ApiUtils.getLogger().info("URL for manage page = " + viewUrl.getViewURL());
   }
 }

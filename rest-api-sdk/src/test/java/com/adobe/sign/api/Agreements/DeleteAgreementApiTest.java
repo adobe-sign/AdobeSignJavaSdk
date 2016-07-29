@@ -13,30 +13,35 @@
 
 package com.adobe.sign.api.Agreements;
 
-import static com.adobe.sign.utils.AgreementsUtils.createAgreement;
+import static com.adobe.sign.utils.ApiUtils.getValidHeaderParams;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.AgreementsApi;
-import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.AgreementsUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * Junit test cases for Delete Agreement API.
  */
 public class DeleteAgreementApiTest {
-  private AgreementsApi agreementsApi = null;
-  private String agreementId = null;
+  private static AgreementsApi agreementsApi = null;
+  private static String agreementId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     agreementsApi = AgreementsUtils.getAgreementsApi();
-    agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
+    agreementId = AgreementsUtils.createAgreement(ApiUtils.getAgreementName());
   }
   /**
    * Test for deleting an agreement through the deleteAgreement endpoint. Negative scenarios covered:
@@ -49,9 +54,8 @@ public class DeleteAgreementApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.deleteAgreement(TestData.NULL_PARAM,
-                                    agreementId,
-                                    TestData.X_API_HEADER);
+      agreementsApi.deleteAgreement(ApiUtils.getNullAccessTokenHeaderParams(),
+                                    agreementId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -59,9 +63,8 @@ public class DeleteAgreementApiTest {
     }
 
     try {
-      agreementsApi.deleteAgreement(TestData.EMPTY_PARAM,
-                                    agreementId,
-                                    TestData.X_API_HEADER);
+      agreementsApi.deleteAgreement(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                    agreementId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -78,9 +81,8 @@ public class DeleteAgreementApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.deleteAgreement(TestData.ACCESS_TOKEN,
-                                    agreementId,
-                                    TestData.EMPTY_PARAM);
+      agreementsApi.deleteAgreement(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                    agreementId);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -97,9 +99,8 @@ public class DeleteAgreementApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.deleteAgreement(TestData.ACCESS_TOKEN,
-                                    TestData.EMPTY_PARAM,
-                                    TestData.X_API_HEADER);
+      agreementsApi.deleteAgreement(ApiUtils.getValidHeaderParams(),
+                                    TestData.EMPTY_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -107,9 +108,8 @@ public class DeleteAgreementApiTest {
     }
 
     try {
-      agreementsApi.deleteAgreement(TestData.ACCESS_TOKEN,
-                                    TestData.NULL_PARAM,
-                                    TestData.X_API_HEADER);
+      agreementsApi.deleteAgreement(ApiUtils.getValidHeaderParams(),
+                                    TestData.NULL_PARAM);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -126,11 +126,8 @@ public class DeleteAgreementApiTest {
   public void testDeleteAgreement() throws ApiException {
 
     try {
-      String agreementId = createAgreement(ApiUtils.getAgreementName());
-
-      agreementsApi.deleteAgreement(TestData.ACCESS_TOKEN,
-                                    agreementId,
-                                    TestData.X_API_HEADER);
+     agreementsApi.deleteAgreement(getValidHeaderParams(),
+                                    agreementId);
     }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));

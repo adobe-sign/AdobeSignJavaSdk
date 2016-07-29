@@ -21,12 +21,14 @@ import static org.junit.Assert.fail;
 import com.adobe.sign.api.WidgetsApi;
 import com.adobe.sign.model.widgets.WidgetPersonalizationInfo;
 import com.adobe.sign.model.widgets.WidgetPersonalizeResponse;
+import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WidgetUtils;
-import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -34,12 +36,15 @@ import org.junit.Test;
  */
 public class PutWidgetsPersonalizeApiTest {
 
-  private WidgetsApi widgetsApi = null;
-  private String widgetId = null;
+  private static WidgetsApi widgetsApi = null;
+  private static String widgetId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
-    widgetId = WidgetUtils.getResourceId(TestData.WIDGET_NAME);
+  @BeforeClass
+  public static void setup() throws ApiException {
+    widgetId = WidgetUtils.createWidget(ApiUtils.getWidgetName());
     widgetsApi = WidgetUtils.getWidgetsApi();
   }
 
@@ -57,10 +62,9 @@ public class PutWidgetsPersonalizeApiTest {
     widgetPersonalizationInfo.setEmail(TestData.POST_EMAIL);
 
     try {
-      widgetsApi.updateWidgetPersonalize(TestData.NULL_PARAM,
+      widgetsApi.updateWidgetPersonalize(ApiUtils.getNullAccessTokenHeaderParams(),
                                          widgetId,
-                                         widgetPersonalizationInfo,
-                                         TestData.X_API_HEADER);
+                                         widgetPersonalizationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -68,10 +72,9 @@ public class PutWidgetsPersonalizeApiTest {
     }
 
     try {
-      widgetsApi.updateWidgetPersonalize(TestData.EMPTY_PARAM,
+      widgetsApi.updateWidgetPersonalize(ApiUtils.getEmptyAccessTokenHeaderParams(),
                                          widgetId,
-                                         widgetPersonalizationInfo,
-                                         TestData.X_API_HEADER);
+                                         widgetPersonalizationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -90,10 +93,9 @@ public class PutWidgetsPersonalizeApiTest {
     WidgetPersonalizationInfo widgetPersonalizationInfo = new WidgetPersonalizationInfo();
     widgetPersonalizationInfo.setEmail(TestData.POST_EMAIL);
     try {
-      widgetsApi.updateWidgetPersonalize(TestData.ACCESS_TOKEN,
+      widgetsApi.updateWidgetPersonalize(ApiUtils.getEmptyXApiUserHeaderParams(),
                                          widgetId,
-                                         widgetPersonalizationInfo,
-                                         TestData.EMPTY_PARAM);
+                                         widgetPersonalizationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -112,10 +114,9 @@ public class PutWidgetsPersonalizeApiTest {
     WidgetPersonalizationInfo widgetPersonalizationInfo = new WidgetPersonalizationInfo();
     widgetPersonalizationInfo.setEmail(TestData.POST_EMAIL);
     try {
-      widgetsApi.updateWidgetPersonalize(TestData.ACCESS_TOKEN,
+      widgetsApi.updateWidgetPersonalize(ApiUtils.getValidHeaderParams(),
                                          TestData.EMPTY_PARAM,
-                                         widgetPersonalizationInfo,
-                                         TestData.X_API_HEADER);
+                                         widgetPersonalizationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -123,10 +124,9 @@ public class PutWidgetsPersonalizeApiTest {
     }
 
     try {
-      widgetsApi.updateWidgetPersonalize(TestData.ACCESS_TOKEN,
+      widgetsApi.updateWidgetPersonalize(ApiUtils.getValidHeaderParams(),
                                          TestData.NULL_PARAM,
-                                         widgetPersonalizationInfo,
-                                         TestData.X_API_HEADER);
+                                         widgetPersonalizationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -145,10 +145,9 @@ public class PutWidgetsPersonalizeApiTest {
     WidgetPersonalizationInfo widgetPersonalizationInfo = new WidgetPersonalizationInfo();
     widgetPersonalizationInfo.setEmail(TestData.NULL_PARAM);
     try {
-      widgetsApi.updateWidgetPersonalize(TestData.ACCESS_TOKEN,
+      widgetsApi.updateWidgetPersonalize(ApiUtils.getValidHeaderParams(),
                                          widgetId,
-                                         widgetPersonalizationInfo,
-                                         TestData.X_API_HEADER);
+                                         widgetPersonalizationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -157,10 +156,9 @@ public class PutWidgetsPersonalizeApiTest {
 
     widgetPersonalizationInfo.setEmail(TestData.INVALID_EMAIL);
     try {
-      widgetsApi.updateWidgetPersonalize(TestData.ACCESS_TOKEN,
+      widgetsApi.updateWidgetPersonalize(ApiUtils.getValidHeaderParams(),
                                          widgetId,
-                                         widgetPersonalizationInfo,
-                                         TestData.X_API_HEADER);
+                                         widgetPersonalizationInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -179,10 +177,9 @@ public class PutWidgetsPersonalizeApiTest {
     WidgetPersonalizationInfo widgetPersonalizationInfo = new WidgetPersonalizationInfo();
     widgetPersonalizationInfo.setEmail(TestData.POST_EMAIL);
     try {
-      WidgetPersonalizeResponse widgetPersonalizeResponse = widgetsApi.updateWidgetPersonalize(TestData.ACCESS_TOKEN,
+      WidgetPersonalizeResponse widgetPersonalizeResponse = widgetsApi.updateWidgetPersonalize(ApiUtils.getValidHeaderParams(),
                                                                                                widgetId,
-                                                                                               widgetPersonalizationInfo,
-                                                                                               TestData.X_API_HEADER);
+                                                                                               widgetPersonalizationInfo);
       assertNotNull(widgetPersonalizeResponse);
       assertNotNull(widgetPersonalizeResponse.getWidgetId());
       assertNotNull(widgetPersonalizeResponse.getJavascript());

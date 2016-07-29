@@ -14,6 +14,7 @@ package com.adobe.sign.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.AgreementsApi;
 import com.adobe.sign.model.agreements.AgreementCreationInfo;
@@ -31,13 +32,17 @@ import com.adobe.sign.model.agreements.ParticipantInfo;
 import com.adobe.sign.model.agreements.ParticipantSetInfo;
 import com.adobe.sign.model.agreements.RecipientInfo;
 import com.adobe.sign.model.agreements.RecipientSetInfo;
+import com.adobe.sign.model.agreements.SigningUrlSetInfo;
 import com.adobe.sign.model.agreements.UserAgreement;
 import com.adobe.sign.model.agreements.UserAgreements;
 import com.adobe.sign.model.transientDocuments.TransientDocumentResponse;
+import com.adobe.sign.model.agreements.SigningUrl;
+import com.adobe.sign.model.agreements.SigningUrlResponse;
 
 public class AgreementUtils {
 
   private final static AgreementsApi agreementsApi = new AgreementsApi();
+  private final static MultivaluedMap headers = ApiUtils.getHeaderParams();
 
   //Document identifier to identify whether document is library document or transient document
   public enum DocumentIdentifierType {
@@ -58,35 +63,34 @@ public class AgreementUtils {
   public static AgreementCreationResponse createAgreement(List<String> recipientSetEmailList,
                                                           String documentId,
                                                           DocumentIdentifierType documentIdentifierType,
-                                                          String agreementName) throws Exception{
+                                                          String agreementName) throws ApiException{
     try {
       //Get recipient set info
       List<RecipientSetInfo> recipientSetInfos = AgreementUtils.getRecipientSetInfo(recipientSetEmailList);
 
       //Get file info and create a list of file info
       FileInfo fileInfo = AgreementUtils.getFileInfo(documentId,
-                                                     documentIdentifierType);
+              documentIdentifierType);
       List<FileInfo> fileInfos = new ArrayList<FileInfo>();
       fileInfos.add(fileInfo);
 
       //Get document creation info using library document id
       DocumentCreationInfo documentCreationInfo = AgreementUtils.getDocumentCreationInfo(agreementName,
-                                                                                         fileInfos,
-                                                                                         recipientSetInfos);
+              fileInfos,
+              recipientSetInfos);
 
       //Get agreement creation info
       AgreementCreationInfo agreementCreationInfo = AgreementUtils.getAgreementCreationInfo(documentCreationInfo,
-                                                                                            null);
+              null);
 
       //Make API call to create agreement
-      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(Constants.ACCESS_TOKEN,
-                                                                                          agreementCreationInfo,
-                                                                                          Constants.X_API_USER);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(headers,
+              agreementCreationInfo);
       return agreementCreationResponse;
     }
-    catch (Exception e) {
-      System.err.println(Errors.CREATE_AGREEMENT);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CREATE_AGREEMENT, e);
+      return null;
     }
   }
 
@@ -123,7 +127,7 @@ public class AgreementUtils {
    * @return FileInfo object containing information about the file.
    */
   private static FileInfo getFileInfo(String documentId,
-                                     DocumentIdentifierType documentIdentifierType) {
+                                      DocumentIdentifierType documentIdentifierType) {
     //Create file info object using document id and name
     FileInfo fileInfo = new FileInfo();
     if(documentIdentifierType.equals(DocumentIdentifierType.LIBRARY_DOCUMENT_ID)) {
@@ -147,8 +151,8 @@ public class AgreementUtils {
    * @return DocumentCreationInfo object containing information required to create a document.
    */
   private static DocumentCreationInfo getDocumentCreationInfo(String agreementName,
-                                                             List<FileInfo> fileInfos,
-                                                             List<RecipientSetInfo> recipientSetInfos) {
+                                                              List<FileInfo> fileInfos,
+                                                              List<RecipientSetInfo> recipientSetInfos) {
 
 
     //Create document creation info from the file info object
@@ -168,7 +172,7 @@ public class AgreementUtils {
    * @return AgreementCreationInfo object containing information required to create an agreement.
    */
   private static AgreementCreationInfo getAgreementCreationInfo(DocumentCreationInfo documentCreationInfo,
-                                                               InteractiveOptions interactiveOptions) {
+                                                                InteractiveOptions interactiveOptions) {
     AgreementCreationInfo agreementCreationInfo = new AgreementCreationInfo();
     agreementCreationInfo.setDocumentCreationInfo(documentCreationInfo);
     agreementCreationInfo.setOptions(interactiveOptions);
@@ -181,19 +185,18 @@ public class AgreementUtils {
    * @return UserAgreements object containing all the agreements of a user.
    * @throws Exception
    */
-  public static UserAgreements getAllAgreements() throws Exception{
+  public static UserAgreements getAllAgreements() throws ApiException{
     try {
-      UserAgreements userAgreements = agreementsApi.getAgreements(Constants.ACCESS_TOKEN,
-                                                                  Constants.X_API_USER,
-                                                                  Constants.QUERY,
-                                                                  Constants.EXTERNAL_ID,
-                                                                  Constants.EXTERNAL_GROUP,
-                                                                  Constants.EXTERNAL_NAMESPACE);
+      UserAgreements userAgreements = agreementsApi.getAgreements(headers,
+              Constants.QUERY,
+              Constants.EXTERNAL_ID,
+              Constants.EXTERNAL_GROUP,
+              Constants.EXTERNAL_NAMESPACE);
       return userAgreements;
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_AGREEMENTS);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_AGREEMENTS, e);
+      return null;
     }
   }
 
@@ -206,7 +209,7 @@ public class AgreementUtils {
    */
   public static AlternateParticipantResponse createAlternateParticipant(String agreementId,
                                                                         String userEmail,
-                                                                        String userMessage) throws Exception{
+                                                                        String userMessage) throws ApiException{
     try {
       //Create alternate participant info
       AlternateParticipantInfo alternateParticipantInfo = new AlternateParticipantInfo();
@@ -225,16 +228,16 @@ public class AgreementUtils {
       //Get participant id of first participant in the set
       ParticipantInfo participantInfo = participantSetInfo.getParticipantSetMemberInfos().get(0);
       String participantId = participantInfo.getParticipantId();
-      AlternateParticipantResponse alternateParticipantResponse = agreementsApi.createAlternateParticipant(Constants.ACCESS_TOKEN,
-                                                                                                           agreementId,
-                                                                                                           participantSetId,
-                                                                                                           participantId,
-                                                                                                           alternateParticipantInfo,
-                                                                                                           Constants.X_API_USER);
+      AlternateParticipantResponse alternateParticipantResponse = agreementsApi.createAlternateParticipant(headers,
+              agreementId,
+              participantSetId,
+              participantId,
+              alternateParticipantInfo);
       return alternateParticipantResponse;
     }
-    catch (Exception e) {
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CREATE_ALTERNATE_PARTICIPANT_FOR_AGREEMENT, e);
+      return null;
     }
   }
 
@@ -244,16 +247,15 @@ public class AgreementUtils {
    * @param agreementId The agreement identifier.
    * @return AgreementInfo
    */
-  public static AgreementInfo getAgreementInfo (String agreementId) throws Exception {
+  public static AgreementInfo getAgreementInfo (String agreementId) throws ApiException {
     try {
-      AgreementInfo agreementInfo = agreementsApi.getAgreementInfo(Constants.ACCESS_TOKEN,
-                                                                   agreementId ,
-                                                                   Constants.X_API_USER);
+      AgreementInfo agreementInfo = agreementsApi.getAgreementInfo(headers,
+              agreementId );
       return agreementInfo;
     }
-    catch ( Exception e) {
-      System.err.println(Errors.GET_AGREEMENT_DETAILS);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_AGREEMENT_DETAILS, e);
+      return null;
     }
   }
 
@@ -263,7 +265,7 @@ public class AgreementUtils {
    * @param agreementId agreement identifier
    * @throws Exception
    */
-  public static void printNextParticipantSetInfo(String agreementId) throws Exception {
+  public static void printNextParticipantSetInfo(String agreementId) throws ApiException {
     //Make API call to get agreement information.
     AgreementInfo agreementInfo = getAgreementInfo(agreementId);
 
@@ -272,8 +274,8 @@ public class AgreementUtils {
 
     //Check nextParticipantSetInfoList is not empty
     if (nextParticipantSetInfoList == null || nextParticipantSetInfoList.isEmpty()) {
-      System.err.println(Errors.NO_PARTICIPANT_SET);
-      System.out.println();
+      ApiUtils.logError(Errors.NO_PARTICIPANT_SET);
+      ApiUtils.getLogger().info("");
       return;
     }
 
@@ -296,11 +298,11 @@ public class AgreementUtils {
     for(NextParticipantInfo nextParticipantInfo : nextParticipantSetMemberInfoList) {
 
       //Display details about next participant set
-      System.out.println("Information about next participant");
-      System.out.println("Name = " + nextParticipantInfo.getName());
-      System.out.println("Email = " + nextParticipantInfo.getEmail());
-      System.out.println("Waiting Since = " + nextParticipantInfo.getWaitingSince());
-      System.out.println();
+      ApiUtils.getLogger().info("Information about next participant");
+      ApiUtils.getLogger().info("Name = " + nextParticipantInfo.getName());
+      ApiUtils.getLogger().info("Email = " + nextParticipantInfo.getEmail());
+      ApiUtils.getLogger().info("Waiting Since = " + nextParticipantInfo.getWaitingSince());
+      ApiUtils.getLogger().info("");
     }
   }
 
@@ -311,17 +313,16 @@ public class AgreementUtils {
    * @return Audit Trail
    * @throws Exception
    */
-  public static byte[] getAuditTrail(String agreementId) throws Exception{
+  public static byte[] getAuditTrail(String agreementId) throws ApiException{
     try {
-      byte[] auditTrail = agreementsApi.getAuditTrail(Constants.ACCESS_TOKEN,
-                                                      agreementId,
-                                                      Constants.X_API_USER);
+      byte[] auditTrail = agreementsApi.getAuditTrail(headers,
+              agreementId);
 
       return auditTrail;
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_AUDIT_TRAIL);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_AUDIT_TRAIL, e);
+      return null;
     }
   }
 
@@ -332,21 +333,20 @@ public class AgreementUtils {
    * @return array of bytes of documents of the given agreement.
    * @throws Exception
    */
-  public static byte[] getAgreementCombinedDocument(String agreementId) throws Exception {
+  public static byte[] getAgreementCombinedDocument(String agreementId) throws ApiException {
     try {
-      byte[] responseBytes = agreementsApi.getCombinedDocument(Constants.ACCESS_TOKEN,
-                                                               agreementId,
-                                                               Constants.X_API_USER,
-                                                               null,
-                                                               null,
-                                                               true,
-                                                               false);
+      byte[] responseBytes = agreementsApi.getCombinedDocument(headers,
+              agreementId,
+              null,
+              null,
+              true,
+              false);
 
       return responseBytes;
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_COMBINED_DOCUMENT);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_COMBINED_DOCUMENT, e);
+      return null;
     }
   }
 
@@ -356,45 +356,43 @@ public class AgreementUtils {
    * @param agreementId The agreement identifier.
    * @return AgreementDocuments
    */
-  public static AgreementDocuments getAllDocuments (String agreementId) throws Exception {
+  public static AgreementDocuments getAllDocuments (String agreementId) throws ApiException {
     try {
       //Fetch list of documents associated with the specified agreement.
-      AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(Constants.ACCESS_TOKEN,
-                                                                            agreementId,
-                                                                            Constants.X_API_USER,
-                                                                            null,
-                                                                            null,
-                                                                            null);
+      AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(headers,
+              agreementId,
+              null,
+              null,
+              null);
       return agreementDocuments;
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_AGREEMENTS_DOCUMENTS);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_AGREEMENTS_DOCUMENTS, e);
+      return null;
     }
   }
 
-    /**
-     * Saves the contents of all the document associated with a specified agreement in files.<br>
-     * Note: The format of content can either be PDF or original, depending upon the format associated with ID.
-     *
-     * @param agreementId       The agreement ID.
-     * @param documentId        The document ID
-     * @return
-     * @throws Exception
-     */
+  /**
+   * Saves the contents of all the document associated with a specified agreement in files.<br>
+   * Note: The format of content can either be PDF or original, depending upon the format associated with ID.
+   *
+   * @param agreementId       The agreement ID.
+   * @param documentId        The document ID
+   * @return
+   * @throws Exception
+   */
   public static byte[] downloadDocuments(String agreementId,
-                                         String documentId) throws Exception {
+                                         String documentId) throws ApiException {
     try {
       //Download and save the documents.
-      byte docStream[] = agreementsApi.getDocument(Constants.ACCESS_TOKEN,
-                                                   agreementId,
-                                                   documentId,
-                                                   Constants.X_API_USER);
+      byte docStream[] = agreementsApi.getDocument(headers,
+              agreementId,
+              documentId);
       return docStream;
     }
-    catch (Exception e) {
-      System.err.println(Errors.SAVE_DOCUMENTS);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.SAVE_DOCUMENTS, e);
+      return null;
     }
   }
 
@@ -404,7 +402,7 @@ public class AgreementUtils {
    * @param agreementName name of the agreement.
    * @return String containing agreement id.
    */
-  public static String isExistingAgreement(String agreementName) throws Exception{
+  public static String isExistingAgreement(String agreementName) throws ApiException{
     try {
       //Make API call to get all the agreements of a user.
       UserAgreements userAgreements = getAllAgreements();
@@ -418,8 +416,8 @@ public class AgreementUtils {
       }
       return null;
     }
-    catch (Exception e) {
-      System.err.println(Errors.CHECK_AGREEMENT_EXIST);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CHECK_AGREEMENT_EXIST, e);
       return null;
     }
   }
@@ -430,7 +428,7 @@ public class AgreementUtils {
    * @param agreementName name of the agreement.
    * @return String containing agreement id.
    */
-  public static String getAgreementId(String agreementName) throws Exception{
+  public static String getAgreementId(String agreementName) throws ApiException{
     try {
       //Check if agreement exist and return agreement id.
       String agreementId = isExistingAgreement(agreementName);
@@ -439,7 +437,7 @@ public class AgreementUtils {
       }
       //Create transient document.
       TransientDocumentResponse transientDocumentResponse = TransientDocumentUtils.createTransientDocument(Constants.REQUEST_PATH,
-                                                                                                           Constants.INPUT_FILE_NAME);
+              Constants.INPUT_FILE_NAME);
 
       //Get the id of the transient document.
       String transientDocumentId = transientDocumentResponse.getTransientDocumentId();
@@ -450,13 +448,33 @@ public class AgreementUtils {
 
       //Create agreement using the transient document.
       AgreementCreationResponse agreementCreationResponse =  AgreementUtils.createAgreement(recipientSetEmailList,
-                                                                                            transientDocumentId,
-                                                                                            DocumentIdentifierType.TRANSIENT_DOCUMENT_ID,
-                                                                                            agreementName);
+              transientDocumentId,
+              DocumentIdentifierType.TRANSIENT_DOCUMENT_ID,
+              agreementName);
       return agreementCreationResponse.getAgreementId();
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_AGREEMENT_ID);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_AGREEMENT_ID, e);
+      return null;
+    }
+  }
+
+  /**
+   * Returns url of the agreement identified by agreement id.
+   *
+   * @param agreementId The agreement id.
+   * @return SigningUrlSetInfo containing list of signing urls.
+   */
+  public static List<SigningUrlSetInfo> getSigningUrl(String agreementId) throws ApiException{
+    try{
+      //Fetch the signing url for the specified agreement
+      SigningUrlResponse signingUrlResponse = agreementsApi.getSigningUrl(headers,
+              agreementId);
+      //Returning the Arraylist of the url's
+      return signingUrlResponse.getSigningUrlSetInfos();
+    }
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_SIGNING_URL, e);
       return null;
     }
   }

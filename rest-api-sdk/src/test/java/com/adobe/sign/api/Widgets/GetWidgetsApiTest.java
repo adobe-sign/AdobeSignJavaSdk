@@ -20,12 +20,13 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.WidgetsApi;
 import com.adobe.sign.model.widgets.UserWidgets;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.WidgetUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.WidgetUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -33,10 +34,13 @@ import org.junit.Test;
  */
 public class GetWidgetsApiTest {
 
-  private WidgetsApi widgetsApi = null;
+  private static WidgetsApi widgetsApi = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     widgetsApi = WidgetUtils.getWidgetsApi();
   }
 
@@ -50,8 +54,7 @@ public class GetWidgetsApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      widgetsApi.getWidgets(TestData.NULL_PARAM,
-                            TestData.X_API_HEADER);
+      widgetsApi.getWidgets(ApiUtils.getNullAccessTokenHeaderParams());
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -59,8 +62,7 @@ public class GetWidgetsApiTest {
     }
 
     try {
-      widgetsApi.getWidgets(TestData.EMPTY_PARAM,
-                            TestData.X_API_HEADER);
+      widgetsApi.getWidgets(ApiUtils.getEmptyAccessTokenHeaderParams());
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -77,8 +79,7 @@ public class GetWidgetsApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      widgetsApi.getWidgets(TestData.ACCESS_TOKEN,
-                            TestData.EMPTY_PARAM);
+      widgetsApi.getWidgets(ApiUtils.getEmptyXApiUserHeaderParams());
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -95,8 +96,7 @@ public class GetWidgetsApiTest {
   @Test
   public void testGetWidgets() throws ApiException {
     try {
-      UserWidgets userWidgets = widgetsApi.getWidgets(TestData.ACCESS_TOKEN,
-                                                      TestData.X_API_HEADER);
+      UserWidgets userWidgets = widgetsApi.getWidgets(ApiUtils.getValidHeaderParams());
       assertNotNull(userWidgets);
     }
     catch (ApiException e) {

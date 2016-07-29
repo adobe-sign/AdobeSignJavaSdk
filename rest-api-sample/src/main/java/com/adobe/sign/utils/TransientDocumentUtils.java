@@ -13,6 +13,7 @@
 package com.adobe.sign.utils;
 
 import java.io.File;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.TransientDocumentsApi;
 import com.adobe.sign.model.transientDocuments.TransientDocumentResponse;
@@ -20,6 +21,7 @@ import com.adobe.sign.model.transientDocuments.TransientDocumentResponse;
 public class TransientDocumentUtils {
 
   private final static TransientDocumentsApi transientDocumentsApi = new TransientDocumentsApi();
+  private final static MultivaluedMap headers = ApiUtils.getHeaderParams();
 
   /**
    * Uploads a document and obtains the document ID.
@@ -32,7 +34,7 @@ public class TransientDocumentUtils {
    * @return TransientDocumentResponse
    */
   public static TransientDocumentResponse createTransientDocument (String dirName,
-                                                                   String fileName) throws Exception {
+                                                                   String fileName) throws ApiException {
     try {
       //Get a reference to the file to be uploaded to Adobe Sign.
       String pathToFile = dirName + fileName;
@@ -41,16 +43,15 @@ public class TransientDocumentUtils {
       File file = new File(pathToFile);
 
       //Make API call to create transient document.
-      TransientDocumentResponse  transientDocumentResponse = transientDocumentsApi.createTransientDocument(Constants.ACCESS_TOKEN,
+      TransientDocumentResponse  transientDocumentResponse = transientDocumentsApi.createTransientDocument(headers,
                                                                                                            file.getAbsoluteFile(),
-                                                                                                           Constants.X_API_USER,
                                                                                                            fileName,
                                                                                                            Constants.MIME_TYPE_PDF);
       return transientDocumentResponse;
     }
-    catch (Exception e) {
-      System.err.println(Errors.CREATE_TRANSIENT_DOCUMENT);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CREATE_TRANSIENT_DOCUMENT, e);
+      return null;
     }
   }
 }

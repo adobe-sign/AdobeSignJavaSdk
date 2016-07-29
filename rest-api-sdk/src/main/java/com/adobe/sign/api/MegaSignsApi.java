@@ -17,6 +17,7 @@ import com.adobe.sign.utils.ApiClient;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Pair;
 import com.adobe.sign.utils.TypeRef;
+import com.adobe.sign.utils.validator.ApiValidatorHelper;
 import com.adobe.sign.utils.validator.MegaSignsApiValidator;
 
 import com.adobe.sign.model.megaSigns.MegaSigns;
@@ -27,30 +28,41 @@ import com.adobe.sign.model.megaSigns.MegaSignChildAgreements;
 import com.adobe.sign.model.megaSigns.MegaSignStatusUpdateInfo;
 import com.adobe.sign.model.megaSigns.MegaSignStatusUpdateResponse;
 
-import java.util.*;
+    import java.util.*;
+import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:24:59.623+05:30")
-public class MegaSignsApi {
-  private ApiClient apiClient;
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:06.747+05:30")
+    public class MegaSignsApi {
+    private ApiClient apiClient;
+    private final String CONTENT_TYPE = "Content-Type";
+    private final String ACCEPT = "Accept";
+    private final String ACCESS_TOKEN = "Access-Token";
+    private final String X_API_USER = "x-api-user";
 
-  public MegaSignsApi() {
+    public MegaSignsApi() {
     this.apiClient = Context.getDefaultApiClient();
-  }
+    }
 
-  
-  /**
-   * Get all the MegaSign parent agreements of a user.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @param query The query string used for the search. Multiple search terms can be provided, separated by spaces. Some of the search terms include document name, participant name or company, and form data
-   * @return MegaSigns
-   */
-  public MegaSigns getMegaSigns (String accessToken,
-                                                        String xApiUser,
-                                                        String query) throws ApiException {
+    
+    /**
+    * Get all the MegaSign parent agreements of a user.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param query The query string used for the search. Multiple search terms can be provided, separated by spaces. Some of the search terms include document name, participant name or company, and form data
+    * @return MegaSigns
+    */
+    public MegaSigns getMegaSigns (MultivaluedMap headers,
+                                        String query) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    MegaSignsApiValidator.getMegaSignsValidator(accessToken, xApiUser, query);
+    MegaSignsApiValidator.getMegaSignsValidator(query);
 
     //Create path and map variables
     String path = "/megaSigns".replaceAll("\\{format\\}","json");
@@ -59,45 +71,69 @@ public class MegaSignsApi {
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     queryParams.addAll(apiClient.parameterToPairs("", "query", query));
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<MegaSigns>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Send an agreement out for signature to multiple recipients. Each recipient will receive and sign their own copy of the agreement.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_send
-   * @param megaSignCreationRequest Information about the MegaSign that you want to send.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return MegaSignCreationResponse
-   */
-  public MegaSignCreationResponse createMegaSign (String accessToken,
-                                                        MegaSignCreationRequest megaSignCreationRequest,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Send an agreement out for signature to multiple recipients. Each recipient will receive and sign their own copy of the agreement.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_send 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param megaSignCreationRequest Information about the MegaSign that you want to send.
+    * @return MegaSignCreationResponse
+    */
+    public MegaSignCreationResponse createMegaSign (MultivaluedMap headers,
+                                        MegaSignCreationRequest megaSignCreationRequest) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    MegaSignsApiValidator.createMegaSignValidator(accessToken, megaSignCreationRequest, xApiUser);
+    MegaSignsApiValidator.createMegaSignValidator(megaSignCreationRequest);
 
     //Create path and map variables
     String path = "/megaSigns".replaceAll("\\{format\\}","json");
@@ -106,217 +142,329 @@ public class MegaSignsApi {
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<MegaSignCreationResponse>() {};
-    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Get detailed information of the specified MegaSign parent agreement.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param megaSignId The identifier of the MegaSign parent agreement, as returned by the megaSign creation API or retrieved from the API to fetch megaSign agreements
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return MegaSignInfo
-   */
-  public MegaSignInfo getMegaSignInfo (String accessToken,
-                                                        String megaSignId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Get detailed information of the specified MegaSign parent agreement.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param megaSignId The identifier of the MegaSign parent agreement, as provided by the APIs which retrieve megaSign agreements or creates megaSign agreements
+    * @return MegaSignInfo
+    */
+    public MegaSignInfo getMegaSignInfo (MultivaluedMap headers,
+                                        String megaSignId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    MegaSignsApiValidator.getMegaSignInfoValidator(accessToken, megaSignId, xApiUser);
+    MegaSignsApiValidator.getMegaSignInfoValidator(megaSignId);
 
     //Create path and map variables
     String path = "/megaSigns/{megaSignId}".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "megaSignId" + "\\}", apiClient.escapeString(megaSignId.toString()));
+        .replaceAll("\\{" + "megaSignId" + "\\}", apiClient.escapeString(megaSignId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<MegaSignInfo>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Get all the child agreements of the specified MegaSign parent agreement.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param megaSignId The identifier of the MegaSign parent agreement, as returned by the megaSign creation API or retrieved from the API to fetch megaSign agreements
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return MegaSignChildAgreements
-   */
-  public MegaSignChildAgreements getMegaSignChildAgreements (String accessToken,
-                                                        String megaSignId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Get all the child agreements of the specified MegaSign parent agreement.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param megaSignId The identifier of the MegaSign parent agreement, as provided by the APIs which retrieve megaSign agreements or creates megaSign agreements
+    * @return MegaSignChildAgreements
+    */
+    public MegaSignChildAgreements getMegaSignChildAgreements (MultivaluedMap headers,
+                                        String megaSignId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    MegaSignsApiValidator.getMegaSignChildAgreementsValidator(accessToken, megaSignId, xApiUser);
+    MegaSignsApiValidator.getMegaSignChildAgreementsValidator(megaSignId);
 
     //Create path and map variables
     String path = "/megaSigns/{megaSignId}/agreements".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "megaSignId" + "\\}", apiClient.escapeString(megaSignId.toString()));
+        .replaceAll("\\{" + "megaSignId" + "\\}", apiClient.escapeString(megaSignId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<MegaSignChildAgreements>() {};
-    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
     
-  }
-  
-  /**
-   * Retrieves data entered by recipients into interactive form fields at the time they signed the child agreements of the specified MegaSign agreement
-   * CSV file stream containing form data information
-   * @param accessToken An OAuth Access Token with scopes:agreement_read
-   * @param accept Specify media types which are acceptable for the response. Currently only text/csv is supported.
-   * @param megaSignId The identifier of the MegaSign parent agreement, as returned by the megaSign creation API or retrieved from the API to fetch megaSign agreements
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return byte[]
-   */
-  public byte[] getMegaSignFormData (String accessToken,
-                                                        String accept,
-                                                        String megaSignId,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Retrieves data entered by recipients into interactive form fields at the time they signed the child agreements of the specified MegaSign agreement
+    * CSV file stream containing form data information
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    accept(key) Specify media types which are acceptable for the response. Currently only text/csv is supported. 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param megaSignId The identifier of the MegaSign parent agreement, as provided by the APIs which retrieve megaSign agreements or creates megaSign agreements
+    * @return byte[]
+    */
+    public byte[] getMegaSignFormData (MultivaluedMap headers,
+                                        String megaSignId) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    MegaSignsApiValidator.getMegaSignFormDataValidator(accessToken, accept, megaSignId, xApiUser);
+    MegaSignsApiValidator.getMegaSignFormDataValidator(megaSignId);
 
     //Create path and map variables
     String path = "/megaSigns/{megaSignId}/formData".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "megaSignId" + "\\}", apiClient.escapeString(megaSignId.toString()));
+        .replaceAll("\\{" + "megaSignId" + "\\}", apiClient.escapeString(megaSignId.toString()));
 
     Object postBody = null;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (accept != null)
-    headerParams.put("accept", apiClient.parameterToString(accept));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("text/csv");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "text/csv"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
-    return apiClient.invokeBinaryAPI(path, "GET", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType);
+    return apiClient.invokeBinaryAPI(path, "GET", queryParams, 
+    postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, true);
     
-  }
-  
-  /**
-   * Cancel all the child agreements of the specified MegaSign agreement.
-   * 
-   * @param accessToken An OAuth Access Token with scopes:agreement_write
-   * @param megaSignId The identifier of the MegaSign parent agreement, as returned by the megaSign creation API or retrieved from the API to fetch megaSign agreements
-   * @param megaSignStatusUpdateInfo MegaSign status update information object.
-   * @param xApiUser The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token.
-   * @return MegaSignStatusUpdateResponse
-   */
-  public MegaSignStatusUpdateResponse updateMegaSignStatus (String accessToken,
-                                                        String megaSignId,
-                                                        MegaSignStatusUpdateInfo megaSignStatusUpdateInfo,
-                                                        String xApiUser) throws ApiException {
+    }
+    
+    /**
+    * Cancel all the child agreements of the specified MegaSign agreement.
+    * 
+    * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
+    <pre>
+    Access-Token(key) An OAuth Access Token with scopes: agreement_write 
+    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    
+    * @param megaSignId The identifier of the MegaSign parent agreement, as provided by the APIs which retrieve megaSign agreements or creates megaSign agreements
+    * @param megaSignStatusUpdateInfo MegaSign status update information object.
+    * @return MegaSignStatusUpdateResponse
+    */
+    public MegaSignStatusUpdateResponse updateMegaSignStatus (MultivaluedMap headers,
+                                        String megaSignId,
+                                        MegaSignStatusUpdateInfo megaSignStatusUpdateInfo) throws ApiException {
+
+    //Validate header parameters
+    ApiValidatorHelper.validateHeaderParams(headers);
+
     //Validate Request
-    MegaSignsApiValidator.updateMegaSignStatusValidator(accessToken, megaSignId, megaSignStatusUpdateInfo, xApiUser);
+    MegaSignsApiValidator.updateMegaSignStatusValidator(megaSignId,megaSignStatusUpdateInfo);
 
     //Create path and map variables
     String path = "/megaSigns/{megaSignId}/status".replaceAll("\\{format\\}","json")
-      .replaceAll("\\{" + "megaSignId" + "\\}", apiClient.escapeString(megaSignId.toString()));
+        .replaceAll("\\{" + "megaSignId" + "\\}", apiClient.escapeString(megaSignId.toString()));
 
     Object postBody = megaSignStatusUpdateInfo;
     byte[] postBinaryBody = null;
 
     Map<String, String> headerParams = new HashMap<String, String>();
-    if (accessToken != null)
-    headerParams.put("Access-Token", apiClient.parameterToString(accessToken));
-    if (xApiUser != null)
-    headerParams.put("x-api-user", apiClient.parameterToString(xApiUser));
+    List<String> acceptsList = new ArrayList<String>();
+    List<String> contentTypesList = new ArrayList<String>();
     
+    acceptsList.add("application/json");
+    
+    Set <String> keys = headers.keySet();
+
+    for(String key : keys) {
+    String value = apiClient.parameterToString(headers.get(key));
+      if(key.equalsIgnoreCase(CONTENT_TYPE)) {
+        contentTypesList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCEPT)) {
+        acceptsList.add(value);
+      }
+      else if(key.equalsIgnoreCase(ACCESS_TOKEN)) {
+        headerParams.put(ACCESS_TOKEN,value);
+      }
+      else if(key.equalsIgnoreCase(X_API_USER)) {
+        headerParams.put(X_API_USER,value);
+      }
+    }
+
     List<Pair> queryParams = new ArrayList<Pair>();
     
     Map<String, Object> formParams = new HashMap<String, Object>();
     
-    final String[] accepts = {
-      "application/json"
-    };
+    String[] accepts = new String[acceptsList.size()];
+    accepts = acceptsList.toArray(accepts);
+
+    String[] contentTypes = new String[contentTypesList.size()];
+    contentTypes = contentTypesList.toArray(contentTypes);
+
     final String acceptHeader = apiClient.selectHeaderAccept(accepts);
 
-    final String[] contentTypes = {
-      
-    };
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
     
     TypeRef returnType = new TypeRef<MegaSignStatusUpdateResponse>() {};
-    return apiClient.invokeAPI(path, "PUT", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType);
+    return apiClient.invokeAPI(path, "PUT", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, true);
+    
+    }
     
   }
-  
-}

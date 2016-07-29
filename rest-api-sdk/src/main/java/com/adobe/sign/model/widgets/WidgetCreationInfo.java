@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-05-23T20:24:57.177+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:04.202+05:30")
 public class WidgetCreationInfo   {
   
   private String callbackInfo = null;
@@ -118,9 +118,9 @@ public enum SignatureFlowEnum {
 
   
   /**
-   * The locale associated with this widget - specifies the language for the signing page and emails, for example en_US or fr_FR.  If none specified, defaults to the language configured for the widget creator
+   * The locale associated with this widget - specifies the language for the signing page and emails, for example en_US or fr_FR. If none specified, defaults to the language configured for the widget creator
    **/
-  @ApiModelProperty(value = "The locale associated with this widget - specifies the language for the signing page and emails, for example en_US or fr_FR.  If none specified, defaults to the language configured for the widget creator")
+  @ApiModelProperty(value = "The locale associated with this widget - specifies the language for the signing page and emails, for example en_US or fr_FR. If none specified, defaults to the language configured for the widget creator")
   @JsonProperty("locale")
   public String getLocale() {
     return locale;

@@ -17,8 +17,11 @@ import java.util.List;
 
 import com.adobe.sign.model.libraryDocuments.DocumentLibraryItem;
 import com.adobe.sign.model.libraryDocuments.DocumentLibraryItems;
-import com.adobe.sign.utils.Errors;
 import com.adobe.sign.utils.LibraryDocumentUtils;
+import com.adobe.sign.utils.Errors;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
+
 
 /**
  * This sample client demonstrates how to retrieve personal library documents of a user.
@@ -33,20 +36,21 @@ public class GetPersonalLibraryDocumentsOfUser {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(GetPersonalLibraryDocumentsOfUser.class.getName());
     try {
       GetPersonalLibraryDocumentsOfUser client = new GetPersonalLibraryDocumentsOfUser();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.GET_PERSONAL_LIBRARY_DOCUMENTS);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_PERSONAL_LIBRARY_DOCUMENTS, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException{
     //Get the list of library documents of the specified user.
     DocumentLibraryItems documentLibraryItems = LibraryDocumentUtils.getLibraryDocuments();
     List<DocumentLibraryItem> documentLibraryItemList = documentLibraryItems.getLibraryDocumentList();
@@ -58,8 +62,8 @@ public class GetPersonalLibraryDocumentsOfUser {
       if(documentLibraryItem.getScope().equals(DocumentLibraryItem.ScopeEnum.PERSONAL)) {
 
         //Display name and id of the document.
-        System.out.println("Name = " + documentLibraryItem.getName());
-        System.out.println("Document ID = " + documentLibraryItem.getLibraryDocumentId());
+        ApiUtils.getLogger().info("Name = " + documentLibraryItem.getName());
+        ApiUtils.getLogger().info("Document ID = " + documentLibraryItem.getLibraryDocumentId());
       }
     }
   }

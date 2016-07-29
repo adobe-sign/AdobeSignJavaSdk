@@ -17,7 +17,7 @@ import java.util.Properties;
 
 public class Constants {
 
-  private static final String CONFIG_PATH = "src/main/java/com/adobe/sign/resources/config.properties";
+  private static final String CONFIG_PATH = ApiUtils.getSampleAbsolutePath() + "src/main/java/com/adobe/sign/resources/config.properties";
   private static Properties properties= ApiUtils.getProperties(CONFIG_PATH);
   private static final String MINUS_ONE = "-1";
   private static final String ACCESS_TOKEN_KEY= "accessToken";
@@ -59,6 +59,18 @@ public class Constants {
   private static final String PAGE_SIZE_KEY = "pageSize";
   private static final String INPUT_FORM_FIELD_FILE_NAME_KEY = "inputFormFieldFileName";
 
+  private static final String REDIRECT_URI_KEY = "redirectUri";
+  private static final String STATE_KEY = "state";
+  private static final String CLIENT_ID_KEY = "clientId";
+  private static final String CLIENT_SECRET_KEY = "clientSecret";
+  private static final String ACCESS_TOKEN_GRANT_TYPE_KEY = "accessTokenGrantType";
+  private static final String REFRESH_TOKEN_GRANT_TYPE_KEY = "refreshTokenGrantType";
+  private static final String RESPONSE_TYPE_KEY = "responseType";
+  private static final String SERVER_PORT_KEY = "serverPort";
+  private static final String KEY_STORE_FILE_KEY = "keyStoreFile";
+  private static final String KEY_STORE_PASSWORD_KEY = "keyStorePassword";
+  private static final String AGREEMENT_COUNT_LIMIT_KEY = "agreementCountLimit";
+
   //Common Parameters
   public static final String ACCESS_TOKEN = properties.getProperty(ACCESS_TOKEN_KEY).equals("null") ? null : properties.getProperty(ACCESS_TOKEN_KEY);
   public static final String X_API_USER = properties.getProperty(X_API_USER_KEY).equals("null") ? null : properties.getProperty(X_API_USER_KEY);
@@ -77,8 +89,8 @@ public class Constants {
   public static final String EXTERNAL_NAMESPACE = properties.getProperty(EXTERNAL_NAMESPACE_KEY).equals("null") ? null : properties.getProperty(EXTERNAL_NAMESPACE_KEY);
   public static final String QUERY = properties.getProperty(QUERY_KEY).equals("null") ? null : properties.getProperty(QUERY_KEY);
   public static final String INPUT_FILE_NAME = properties.getProperty(INPUT_FILE_NAME_KEY).equals("null") ? null : properties.getProperty(INPUT_FILE_NAME_KEY);
-  public static final String REQUEST_PATH = properties.getProperty(REQUEST_PATH_KEY).equals("null") ? null : properties.getProperty(REQUEST_PATH_KEY) + FILE_SEP;
-  public static final String OUTPUT_PATH = properties.getProperty(OUTPUT_PATH_KEY).equals("null") ? null : properties.getProperty(OUTPUT_PATH_KEY) + FILE_SEP;
+  public static final String REQUEST_PATH = properties.getProperty(REQUEST_PATH_KEY).equals("null") ? null : ApiUtils.getSampleAbsolutePath() +  properties.getProperty(REQUEST_PATH_KEY) + FILE_SEP;
+  public static final String OUTPUT_PATH = ApiUtils.getSampleAbsolutePath() + (properties.getProperty(OUTPUT_PATH_KEY).equals("null") ? null : properties.getProperty(OUTPUT_PATH_KEY)) + FILE_SEP;
   public static final String AGREEMENT_DOCUMENT = properties.getProperty(AGREEMENT_DOCUMENT_KEY).equals("null") ? null : properties.getProperty(AGREEMENT_DOCUMENT_KEY) + FILE_SEP;
   public static final String ARCHIVE = properties.getProperty(ARCHIVE_KEY).equals("null") ? null : properties.getProperty(ARCHIVE_KEY) + FILE_SEP;
   public static final String AUDIT_TRAIL = properties.getProperty(AUDIT_TRAIL_KEY).equals("null") ? null : properties.getProperty(AUDIT_TRAIL_KEY) + FILE_SEP;
@@ -94,4 +106,26 @@ public class Constants {
   public static final int FILE_OFFSET = Integer.parseInt(properties.getProperty(FILE_OFFSET_KEY).equals("null") ? MINUS_ONE : properties.getProperty(FILE_OFFSET_KEY));
   public static final int PAGE_SIZE = Integer.parseInt(properties.getProperty(PAGE_SIZE_KEY).equals("null") ? MINUS_ONE : properties.getProperty(PAGE_SIZE_KEY));
   public static final String INPUT_FORM_FIELD_FILE_NAME = properties.getProperty(INPUT_FORM_FIELD_FILE_NAME_KEY).equals("null") ? null : properties.getProperty(INPUT_FORM_FIELD_FILE_NAME_KEY);
+
+  public static final int AGREEMENT_COUNT_LIMIT = Integer.parseInt(properties.getProperty(AGREEMENT_COUNT_LIMIT_KEY).equals("null") ? MINUS_ONE : properties.getProperty(AGREEMENT_COUNT_LIMIT_KEY));
+
+  //OAuth workflow parameters
+  public static final String REDIRECT_URI = properties.getProperty(REDIRECT_URI_KEY).equals("null") ? null : properties.getProperty(REDIRECT_URI_KEY);
+  public static final String STATE = properties.getProperty(STATE_KEY).equals("null") ? null : properties.getProperty(STATE_KEY);
+  public static final String CLIENT_ID = properties.getProperty(CLIENT_ID_KEY).equals("null") ? null : properties.getProperty(CLIENT_ID_KEY);
+  public static final String CLIENT_SECRET = properties.getProperty(CLIENT_SECRET_KEY).equals("null") ? null : properties.getProperty(CLIENT_SECRET_KEY);
+  public static final String ACCESS_TOKEN_GRANT_TYPE = properties.getProperty(ACCESS_TOKEN_GRANT_TYPE_KEY).equals("null") ? null : properties.getProperty(ACCESS_TOKEN_GRANT_TYPE_KEY);
+  public static final String REFRESH_TOKEN_GRANT_TYPE = properties.getProperty(REFRESH_TOKEN_GRANT_TYPE_KEY).equals("null") ? null : properties.getProperty(REFRESH_TOKEN_GRANT_TYPE_KEY);
+  public static final String RESPONSE_TYPE = properties.getProperty(RESPONSE_TYPE_KEY).equals("null") ? null : properties.getProperty(RESPONSE_TYPE_KEY);
+
+
+  public static final String LOG_CONFIG_PATH = ApiUtils.getSampleAbsolutePath() + "src/main/java/com/adobe/sign/resources/log4j.properties";
+  private static Properties logProperties=ApiUtils.getProperties(LOG_CONFIG_PATH);
+  public static final String LOG_KEY="log";
+  public static final String LOG = logProperties.getProperty(LOG_KEY).equals("null") ? null : logProperties.getProperty(LOG_KEY);
+  public static final String SERVER_PATH = ApiUtils.getSampleAbsolutePath() + "src/main/java/com/adobe/sign/api/OAuth/server/";
+  public static final int SERVER_PORT = Integer.parseInt(properties.getProperty(SERVER_PORT_KEY).equals("null") ? MINUS_ONE : properties.getProperty(SERVER_PORT_KEY));
+  public static final String KEY_STORE_FILE = properties.getProperty(KEY_STORE_FILE_KEY).equals("null") ? null : properties.getProperty(KEY_STORE_FILE_KEY);
+  public static final String KEY_STORE_PASSWORD = properties.getProperty(KEY_STORE_PASSWORD_KEY).equals("null") ? null : properties.getProperty(KEY_STORE_PASSWORD_KEY);
 }
+

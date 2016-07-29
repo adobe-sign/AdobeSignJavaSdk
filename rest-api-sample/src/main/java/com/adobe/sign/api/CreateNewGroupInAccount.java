@@ -13,9 +13,13 @@
 
 package com.adobe.sign.api;
 
+import com.adobe.sign.utils.AgreementUtils;
 import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
+import com.adobe.sign.utils.FileUtils;
+import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.GroupUtils;
+import com.adobe.sign.utils.ApiException;
 
 /**
  * This sample client demonstrates how to create a new group in an account.
@@ -30,24 +34,25 @@ public class CreateNewGroupInAccount {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(CreateNewGroupInAccount.class.getName());
     try {
       CreateNewGroupInAccount client = new CreateNewGroupInAccount();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.CREATE_NEW_GROUP_IN_ACCOUNT);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CREATE_NEW_GROUP_IN_ACCOUNT, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception{
+  private void run() throws ApiException{
     //Make API call to create a group
     String groupId = GroupUtils.createGroup(Constants.GROUP_NAME);
 
     //Display group id of the new group
-    System.out.println("Group created with Group ID = " + groupId);
+    ApiUtils.getLogger().info("Group created with Group ID = " + groupId);
   }
 }

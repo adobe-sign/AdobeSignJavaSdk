@@ -20,24 +20,27 @@ import static org.junit.Assert.fail;
 import com.adobe.sign.api.AgreementsApi;
 import com.adobe.sign.model.agreements.UserAgreements;
 import com.adobe.sign.utils.AgreementsUtils;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * Junit test cases for Get Agreements API.
  */
 public class GetAgreementsApiTest {
-  private AgreementsApi agreementsApi = null;
-  private String agreementId = null;
+  private static AgreementsApi agreementsApi = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     agreementsApi = AgreementsUtils.getAgreementsApi();
-    agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
   /**
    * Test for fetching all user agreements through the getAgreements endpoint. Negative scenarios covered:
@@ -50,8 +53,7 @@ public class GetAgreementsApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getAgreements(TestData.NULL_PARAM,
-                                  TestData.X_API_HEADER,
+      agreementsApi.getAgreements(ApiUtils.getNullAccessTokenHeaderParams(),
                                   TestData.AGREEMENT_QUERY,
                                   TestData.AGREEMENT_EXTERNAL_ID,
                                   TestData.AGREEMENT_EXTERNAL_GROUP,
@@ -62,8 +64,7 @@ public class GetAgreementsApiTest {
     }
 
     try {
-      agreementsApi.getAgreements(TestData.EMPTY_PARAM,
-                                  TestData.X_API_HEADER,
+      agreementsApi.getAgreements(ApiUtils.getEmptyAccessTokenHeaderParams(),
                                   TestData.AGREEMENT_QUERY,
                                   TestData.AGREEMENT_EXTERNAL_ID,
                                   TestData.AGREEMENT_EXTERNAL_GROUP,
@@ -85,8 +86,7 @@ public class GetAgreementsApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getAgreements(TestData.ACCESS_TOKEN,
-                                  TestData.EMPTY_PARAM,
+      agreementsApi.getAgreements(ApiUtils.getEmptyXApiUserHeaderParams(),
                                   TestData.AGREEMENT_QUERY,
                                   TestData.AGREEMENT_EXTERNAL_ID,
                                   TestData.AGREEMENT_EXTERNAL_GROUP,
@@ -107,8 +107,7 @@ public class GetAgreementsApiTest {
   public void testEmptyExternalId() throws ApiException {
 
     try {
-      agreementsApi.getAgreements(TestData.ACCESS_TOKEN,
-                                  TestData.X_API_HEADER,
+      agreementsApi.getAgreements(ApiUtils.getValidHeaderParams(),
                                   TestData.AGREEMENT_QUERY,
                                   TestData.EMPTY_PARAM,
                                   TestData.GROUP_NAME,
@@ -127,8 +126,7 @@ public class GetAgreementsApiTest {
   public void testAgreements() throws ApiException {
 
     try {
-      UserAgreements userAgreements = agreementsApi.getAgreements(TestData.ACCESS_TOKEN,
-                                                                  TestData.X_API_HEADER,
+      UserAgreements userAgreements = agreementsApi.getAgreements(ApiUtils.getValidHeaderParams(),
                                                                   TestData.AGREEMENT_QUERY,
                                                                   TestData.AGREEMENT_EXTERNAL_ID,
                                                                   TestData.AGREEMENT_EXTERNAL_GROUP,

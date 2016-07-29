@@ -20,22 +20,27 @@ import static org.junit.Assert.fail;
 import com.adobe.sign.api.AgreementsApi;
 import com.adobe.sign.model.agreements.AgreementDocuments;
 import com.adobe.sign.utils.AgreementsUtils;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
  * Junit test cases for Get Agreement Documents API.
  */
 public class GetAgreementDocumentsApiTest {
-  private AgreementsApi agreementsApi = null;
-  private String agreementId = null;
+  private static AgreementsApi agreementsApi = null;
+  private static String agreementId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
@@ -50,9 +55,8 @@ public class GetAgreementDocumentsApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getAllDocuments(TestData.NULL_PARAM,
+      agreementsApi.getAllDocuments(ApiUtils.getNullAccessTokenHeaderParams(),
                                     agreementId,
-                                    TestData.X_API_HEADER,
                                     TestData.VERSION_ID,
                                     TestData.PARTICIPANT_EMAIL,
                                     TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
@@ -63,9 +67,8 @@ public class GetAgreementDocumentsApiTest {
 
 
     try {
-      agreementsApi.getAllDocuments(TestData.EMPTY_PARAM,
+      agreementsApi.getAllDocuments(ApiUtils.getEmptyAccessTokenHeaderParams(),
                                     agreementId,
-                                    TestData.X_API_HEADER,
                                     TestData.VERSION_ID,
                                     TestData.PARTICIPANT_EMAIL,
                                     TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
@@ -85,9 +88,8 @@ public class GetAgreementDocumentsApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getAllDocuments(TestData.ACCESS_TOKEN,
+      agreementsApi.getAllDocuments(ApiUtils.getEmptyXApiUserHeaderParams(),
                                     agreementId,
-                                    TestData.EMPTY_PARAM,
                                     TestData.VERSION_ID,
                                     TestData.PARTICIPANT_EMAIL,
                                     TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
@@ -106,9 +108,8 @@ public class GetAgreementDocumentsApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getAllDocuments(TestData.ACCESS_TOKEN,
+      agreementsApi.getAllDocuments(ApiUtils.getValidHeaderParams(),
                                     TestData.EMPTY_PARAM,
-                                    TestData.X_API_HEADER,
                                     TestData.VERSION_ID,
                                     TestData.PARTICIPANT_EMAIL,
                                     TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
@@ -118,9 +119,8 @@ public class GetAgreementDocumentsApiTest {
     }
 
     try {
-      agreementsApi.getAllDocuments(TestData.ACCESS_TOKEN,
+      agreementsApi.getAllDocuments(ApiUtils.getValidHeaderParams(),
                                     TestData.NULL_PARAM,
-                                    TestData.X_API_HEADER,
                                     TestData.VERSION_ID,
                                     TestData.PARTICIPANT_EMAIL,
                                     TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
@@ -139,9 +139,8 @@ public class GetAgreementDocumentsApiTest {
   public void testInvalidVersionId() throws ApiException {
 
     try {
-      agreementsApi.getAllDocuments(TestData.ACCESS_TOKEN,
+      agreementsApi.getAllDocuments(ApiUtils.getValidHeaderParams(),
                                     agreementId,
-                                    TestData.X_API_HEADER,
                                     TestData.EMPTY_PARAM,
                                     TestData.PARTICIPANT_EMAIL,
                                     TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
@@ -161,9 +160,8 @@ public class GetAgreementDocumentsApiTest {
   public void testInvalidParticipantEmail() throws ApiException {
 
     try {
-      agreementsApi.getAllDocuments(TestData.ACCESS_TOKEN,
+      agreementsApi.getAllDocuments(ApiUtils.getValidHeaderParams(),
                                     agreementId,
-                                    TestData.X_API_HEADER,
                                     TestData.VERSION_ID,
                                     TestData.EMPTY_PARAM,
                                     TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
@@ -183,9 +181,8 @@ public class GetAgreementDocumentsApiTest {
   public void testGetAllDocuments() throws ApiException {
 
     try {
-      AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(TestData.ACCESS_TOKEN,
+      AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(ApiUtils.getValidHeaderParams(),
                                                                             agreementId,
-                                                                            TestData.X_API_HEADER,
                                                                             TestData.VERSION_ID,
                                                                             TestData.PARTICIPANT_EMAIL,
                                                                             TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);

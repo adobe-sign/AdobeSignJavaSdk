@@ -13,6 +13,7 @@
 package com.adobe.sign.utils;
 
 import java.util.List;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.LibraryDocumentsApi;
 import com.adobe.sign.model.libraryDocuments.DocumentLibraryItem;
@@ -22,21 +23,21 @@ import com.adobe.sign.model.libraryDocuments.DocumentLibraryItems;
 public class LibraryDocumentUtils {
 
   private final static LibraryDocumentsApi libraryDocumentsApi = new LibraryDocumentsApi();
+  private final static MultivaluedMap headers = ApiUtils.getHeaderParams();
 
   /**
    * Retrieves library documents for a user.
    *
    * @return DocumentLibraryItems
    */
-  public static DocumentLibraryItems getLibraryDocuments() throws Exception {
+  public static DocumentLibraryItems getLibraryDocuments() throws ApiException {
     try {
-      DocumentLibraryItems documentLibraryItems = libraryDocumentsApi.getLibraryDocuments(Constants.ACCESS_TOKEN,
-                                                                                          Constants.X_API_USER);
+      DocumentLibraryItems documentLibraryItems = libraryDocumentsApi.getLibraryDocuments(headers);
       return documentLibraryItems;
     }
-    catch ( Exception e) {
-      System.err.println(Errors.GET_LIBRARY_DOCUMENTS);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_LIBRARY_DOCUMENTS, e);
+      return null;
     }
   }
 
@@ -45,7 +46,7 @@ public class LibraryDocumentUtils {
    *
    * @return String containing id of first library document(shared or personal).
    */
-  public static String getFirstLibraryDocumentId() throws Exception{
+  public static String getFirstLibraryDocumentId() throws ApiException{
     try {
       DocumentLibraryItems documentLibraryItems = getLibraryDocuments();
       List<DocumentLibraryItem> documentLibraryItemList = documentLibraryItems.getLibraryDocumentList();
@@ -56,9 +57,9 @@ public class LibraryDocumentUtils {
       }
       return null;
     }
-    catch (Exception e) {
-      System.err.println(Errors.GET_FIRST_LIBRARY_DOCUMENT);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_FIRST_LIBRARY_DOCUMENT, e);
+      return null;
     }
   }
 }

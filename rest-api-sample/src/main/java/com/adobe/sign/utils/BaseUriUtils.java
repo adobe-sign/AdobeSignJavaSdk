@@ -24,14 +24,13 @@ public class BaseUriUtils {
    *
    * @throws Exception
    */
-  public static void setBaseUri() throws Exception {
+  public static void setBaseUri() throws ApiException {
     try {
-      BaseUriInfo baseUriInfo = baseUrisApi.getBaseUris(Constants.ACCESS_TOKEN);
+      BaseUriInfo baseUriInfo = baseUrisApi.getBaseUris(ApiUtils.getHeaderParams());
       Context.setBaseUri(baseUriInfo.getApiAccessPoint());
     }
-    catch (Exception e) {
-      System.err.println(Errors.SET_BASE_URI);
-      throw new Exception(e);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.SET_BASE_URI, e);
     }
   }
 }

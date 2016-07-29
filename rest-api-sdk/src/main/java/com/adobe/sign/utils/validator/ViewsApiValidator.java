@@ -18,61 +18,48 @@ import com.adobe.sign.model.views.TargetViewRequest;
 import com.adobe.sign.utils.ApiException;
 
 /**
- * Validator class for ViewsApi. The main purpose of this class is to check the validity of the parameters passed to 
+ * Validator class for ViewsApi. The main purpose of this class is to check the validity of the parameters passed to
  * the Views API and throw ApiException with required error messages if the validation fails.
  */
 public class ViewsApiValidator {
-  
+
   /**
    * Validator for getAgreementAssetListUrl API that returns the URL for manage page.
-   * 
-   * @param accessToken An OAuth Access Token.
-   * @param xApiUser The userId or email of API caller.
+   *
    * @param agreementAssetListRequest Information about the type of url to be generated for Manage Page body.
    * @throws ApiException
    */
-  public static void createAgreementAssetListUrlValidator (String accessToken, 
-                                                           String xApiUser, 
-                                                           AgreementAssetListRequest agreementAssetListRequest) throws ApiException {  
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
-    if(agreementAssetListRequest != null && agreementAssetListRequest.getAgreementAssetId() != null)
-      ApiValidatorHelper.validateId(agreementAssetListRequest.getAgreementAssetId(), 
-                                    SdkErrorCodes.INVALID_AGREEMENT_ASSET_ID); 
+  public static void createAgreementAssetListUrlValidator(AgreementAssetListRequest agreementAssetListRequest) throws ApiException {
+    if (agreementAssetListRequest != null && agreementAssetListRequest.getAgreementAssetId() != null)
+      ApiValidatorHelper.validateId(agreementAssetListRequest.getAgreementAssetId(),
+                                    SdkErrorCodes.INVALID_AGREEMENT_ASSET_ID);
   }
-  
+
   /**
    * Validator for getAgreementAssetUrl API that returns the URL which shows the view page of given agreement asset.
-   * 
-   * @param accessToken An OAuth Access Token.
+   *
    * @param agreementAssetRequest Information about the type of url to be generated for agreement asset page.
-   * @param xApiUser The userId or email of API caller.
    * @throws ApiException
    */
-  public static void createAgreementAssetUrlValidator (String accessToken, 
-                                                       AgreementAssetRequest agreementAssetRequest, 
-                                                       String xApiUser) throws ApiException {
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
+  public static void createAgreementAssetUrlValidator(AgreementAssetRequest agreementAssetRequest) throws ApiException {
+
     ApiValidatorHelper.validateParameter(agreementAssetRequest);
-    ApiValidatorHelper.validateId(agreementAssetRequest.getAgreementAssetId(), 
+    ApiValidatorHelper.validateId(agreementAssetRequest.getAgreementAssetId(),
                                   SdkErrorCodes.INVALID_AGREEMENT_ASSET_ID);
-    
+
   }
-  
+
   /**
    * Validator for getSettingsUrl API that returns the URL for settings page.
-   * 
-   * @param accessToken An OAuth Access Token.
+   *
    * @param targetViewRequest Information about the type of url to be generated for various Settings page.
-   * @param xApiUser The userId or email of API caller.
    * @throws ApiException
    */
-  public static void createSettingsUrlValidator (String accessToken, 
-                                                 TargetViewRequest targetViewRequest, 
-                                                 String xApiUser) throws ApiException {
-    ApiValidatorHelper.validateCommonParameters(accessToken, xApiUser);
+  public static void createSettingsUrlValidator(TargetViewRequest targetViewRequest) throws ApiException {
+
     ApiValidatorHelper.validateParameter(targetViewRequest);
-    ApiValidatorHelper.validateParameter(targetViewRequest.getTargetView(), 
-                                      SdkErrorCodes.INVALID_TARGET_VIEW);
+    ApiValidatorHelper.validateParameter(targetViewRequest.getTargetView(),
+                                         SdkErrorCodes.INVALID_TARGET_VIEW);
   }
 
 }

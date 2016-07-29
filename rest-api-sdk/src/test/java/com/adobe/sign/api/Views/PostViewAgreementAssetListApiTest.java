@@ -20,12 +20,13 @@ import static org.junit.Assert.fail;
 import com.adobe.sign.api.ViewsApi;
 import com.adobe.sign.model.views.AgreementAssetListRequest;
 import com.adobe.sign.model.views.ViewUrl;
-import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.ApiException;
-import com.adobe.sign.utils.TestData;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.ViewsUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -33,10 +34,14 @@ import org.junit.Test;
  */
 public class PostViewAgreementAssetListApiTest {
 
-  private ViewsApi viewsApi = null;
+  private static ViewsApi viewsApi = null;
   
-  @Before
-  public void setup() {
+  @Rule
+  public Retry retry = new Retry();
+  
+  @BeforeClass
+  public static void setup() {
+
     viewsApi = ViewsUtils.getViewsApi();
   }
 
@@ -52,8 +57,7 @@ public class PostViewAgreementAssetListApiTest {
     AgreementAssetListRequest agreementAssetListRequest = new AgreementAssetListRequest();
 
     try {
-      viewsApi.createAgreementAssetListUrl(TestData.NULL_PARAM,
-                                           TestData.X_API_HEADER,
+      viewsApi.createAgreementAssetListUrl(ApiUtils.getNullAccessTokenHeaderParams(),
                                            agreementAssetListRequest);
     }
     catch (ApiException e) {
@@ -62,8 +66,7 @@ public class PostViewAgreementAssetListApiTest {
     }
 
     try {
-      viewsApi.createAgreementAssetListUrl(TestData.EMPTY_PARAM,
-                                           TestData.X_API_HEADER,
+      viewsApi.createAgreementAssetListUrl(ApiUtils.getEmptyAccessTokenHeaderParams(),
                                            agreementAssetListRequest);
     }
     catch (ApiException e) {
@@ -83,8 +86,7 @@ public class PostViewAgreementAssetListApiTest {
     AgreementAssetListRequest agreementAssetListRequest = new AgreementAssetListRequest();
 
     try {
-      viewsApi.createAgreementAssetListUrl(TestData.ACCESS_TOKEN,
-                                           TestData.EMPTY_PARAM,
+      viewsApi.createAgreementAssetListUrl(ApiUtils.getEmptyXApiUserHeaderParams(),
                                            agreementAssetListRequest);
     }
     catch (ApiException e) {
@@ -104,8 +106,7 @@ public class PostViewAgreementAssetListApiTest {
     AgreementAssetListRequest agreementAssetListRequest = new AgreementAssetListRequest();
 
     try {
-      ViewUrl viewUrl = viewsApi.createAgreementAssetListUrl(TestData.ACCESS_TOKEN,
-                                                             TestData.X_API_HEADER,
+      ViewUrl viewUrl = viewsApi.createAgreementAssetListUrl(ApiUtils.getValidHeaderParams(),
                                                              agreementAssetListRequest);
       assertNotNull(viewUrl);
       assertNotNull(viewUrl.getViewURL());

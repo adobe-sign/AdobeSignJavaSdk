@@ -15,8 +15,10 @@ package com.adobe.sign.api;
 
 import com.adobe.sign.model.views.TargetViewRequest;
 import com.adobe.sign.model.views.ViewUrl;
-import com.adobe.sign.utils.Errors;
 import com.adobe.sign.utils.ViewUtils;
+import com.adobe.sign.utils.Errors;
+import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.ApiException;
 
 /**
  * This sample client demonstrates how to get URL for Settings page. The URL can be generated for two type of settings page.
@@ -34,25 +36,26 @@ public class GetUrlForSettingsPage {
   /**
    * Entry point for this sample client program.
    */
-  public static void main(String args[]) {
+  public static void main(String args[]) throws ApiException {
+    ApiUtils.configureLogProperty(GetUrlForSettingsPage.class.getName());
     try {
       GetUrlForSettingsPage client = new GetUrlForSettingsPage();
       client.run();
     }
-    catch (Exception e) {
-      throw new AssertionError(Errors.GET_URL_FOR_SETTINGS_PAGE);
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.GET_URL_FOR_SETTINGS_PAGE, e);
     }
   }
 
   /**
    * Main work function. See the class comment for details.
    */
-  private void run() throws Exception {
+  private void run() throws ApiException {
     // Make API call to get URL for settings page.
     ViewUrl viewUrl = ViewUtils.getSettingsUrl(TargetViewRequest.TargetViewEnum.USER_PROFILE);
 
     // Display URL for settings page.
-    System.out.println("URL for settings page = " + viewUrl.getViewURL());
+    ApiUtils.getLogger().info("URL for settings page = " + viewUrl.getViewURL());
   }
 }
 

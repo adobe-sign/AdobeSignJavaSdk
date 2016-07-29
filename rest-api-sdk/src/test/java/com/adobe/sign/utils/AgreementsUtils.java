@@ -13,6 +13,7 @@
 package com.adobe.sign.utils;
 
 import java.util.ArrayList;
+import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.AgreementsApi;
 import com.adobe.sign.model.agreements.AgreementCreationInfo;
@@ -35,6 +36,7 @@ public class AgreementsUtils extends ApiUtils {
   private static String agreementId = null;
   private static String documentId = null;
   private static String libraryDocumentId = null;
+  private static MultivaluedMap headers = ApiUtils.getValidHeaderParams();
 
   public static String getResourceId(String agreementName)throws ApiException  {
 
@@ -51,9 +53,8 @@ public class AgreementsUtils extends ApiUtils {
 
     String agreementId = null;
     AgreementCreationInfo agreementCreationInfo = getAgreementCreationInfo(name);
-    AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(TestData.ACCESS_TOKEN,
-                                                                                        agreementCreationInfo,
-                                                                                        TestData.X_API_HEADER);
+    AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(headers,
+                                                                                        agreementCreationInfo);
     agreementId = agreementCreationResponse.getAgreementId();
 
     return agreementId;
@@ -202,9 +203,8 @@ public class AgreementsUtils extends ApiUtils {
   }
   
   private static void setDocumentId() throws ApiException {
-    AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(TestData.ACCESS_TOKEN,
+    AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(headers,
                                                                           agreementId,
-                                                                          TestData.X_API_HEADER,
                                                                           TestData.VERSION_ID,
                                                                           TestData.PARTICIPANT_EMAIL,
                                                                           TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
@@ -213,10 +213,9 @@ public class AgreementsUtils extends ApiUtils {
     documentId = documents.get(0).getDocumentId();
   }
 
-  private static boolean isExistingAgreement(String agreementName) throws ApiException {
+  public static boolean isExistingAgreement(String agreementName) throws ApiException {
 
-    UserAgreements userAgreements = agreementsApi.getAgreements(TestData.ACCESS_TOKEN,
-                                                                TestData.X_API_HEADER,
+    UserAgreements userAgreements = agreementsApi.getAgreements(headers,
                                                                 TestData.AGREEMENT_QUERY,
                                                                 TestData.AGREEMENT_EXTERNAL_ID,
                                                                 TestData.AGREEMENT_EXTERNAL_GROUP,

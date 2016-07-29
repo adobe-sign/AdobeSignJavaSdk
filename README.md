@@ -25,23 +25,25 @@ Prerequisites
 ====================
 For the Java-based SDK, the client machine should have the following software installed:
 *   OS: Windows/Mac/Linux
-*   Java JDK: version 1.7 or above
-*   Gradle: 2.0 version or above 
+*   Java JDK: version 1.8 or above
+*   Gradle: 2.11 version or above 
 
 
 Third party dependencies
 ====================
 The SDK incorporates the following third party libraries:  
-*   io.swagger:swagger-annotations:1.5.0  
-*   com.sun.jersey:jersey-client:1.18  
-*   com.sun.jersey.contribs:jersey-multipart:1.18  
-*   com.fasterxml.jackson.core:jackson-core:2.4.2  
-*   com.fasterxml.jackson.core:jackson-annotations:2.4.2  
-*   com.fasterxml.jackson.core:jackson-databind:2.4.2.  
-*   com.fasterxml.jackson.datatype:jackson-datatype-joda:2.1.5  
-*   commons-validator:commons-validator:1.5.0
-*   joda-time:joda-time:2.3  
-*   junit:junit:4.8.1  
+* io.swagger:swagger-annotations:1.5.9
+* com.sun.jersey:jersey-client:1.19.1
+* com.sun.jersey.contribs:jersey-multipart:1.19.1
+* com.fasterxml.jackson.core:jackson-core:2.7.4
+* com.fasterxml.jackson.core:jackson-annotations:2.7.4
+* com.fasterxml.jackson.core:jackson-databind:2.7.4
+* com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.4
+* joda-time:joda-time:2.9.4
+* io.swagger:swagger-annotations:1.5.9
+* commons-validator:commons-validator:1.5.1
+* log4j:log4j:1.2.17
+* junit:junit:4.12
 
 Getting Started
 ====================
@@ -63,22 +65,26 @@ Downloading and Building the SDK
     `AdobeSignJavaSdk` will be referred as the root directory.  
      
 2.  To compile the SDK, run the following command : 
-    ```java
+    ```
         gradle classes
     ```
     This command will compile all the sdk source files.
     
 3. To compile test classes and run the tests,run the following command :  
-    ```java
+    ```
         gradle test
     ``` 
-    **Note :** Before executing the tests  edit `AdobeSignJavaSdk/rest-api-sdk/test/java/com/adobe/sign/resources/config.properties` accordingly with your information.  
+    **Note :** Before executing the tests  edit `AdobeSignJavaSdk/rest-api-sdk/src/test/java/com/adobe/sign/resources/config.properties` accordingly with your information.  
     
 4.  If you want to compile all the source classes and run the tests, a single command can be used :  
-    ```java
+    ```
         gradle build
     ```
 
+5.  If you want the JAR file of the SDK, you can find it at the location : 
+    ```
+        AdobeSignJavaSdk/build/libs/adobe-sign-java-sdk-{project-version}.jar
+    ```
 
 APIs
 ====================
@@ -99,7 +105,7 @@ This folder contains the helper utilities required for the execution of APIs.
 
 Samples
 ====================
-The samples are located at : `AdobeSignJavaSdk/rest-api-sample/sdk/src/main/java/com/adobe/sign/`.  
+The samples are located at : `AdobeSignJavaSdk/rest-api-sample/src/main/java/com/adobe/sign/`.  
 These contain java clients of Adobe Sign's APIs that 
 demonstrate how to use the API as well as some of its capabilities. 
 
@@ -110,6 +116,11 @@ Contains individual sample clients each demonstrating a specific capability. Eac
 client is named according to the capability it demonstrates. For example, the client 
 GetUsersInAccount.java shows how to retrieve a list of users from the account of 
 the user on whose behalf the API call is made.
+
+**com.adobe.sign.api.OAuth**  
+Contains sample clients demonstrating how to create a new group in an account by using the OAuth workflow.
+**Note :** It also contains a README file which describes how the user can use these samples. 
+
 
 **com.adobe.sign.utils**  
 Contains helper classes that encapsulate the API calls required by the sample 
@@ -130,20 +141,65 @@ You should edit the `config.properties` configuration file to configure:
 *   Parameters used by the samples  
 *   Output path of downloaded files
 
+There are 2 ways to run the samples :  
+###### 1) Through command line  
 To run all samples, use the following command : 
-    ```java
+    ```
         gradle --continue allSamples
-    ```  
-
-To run a specific sample, use the following command : 
-    ```java
+    ```.    
+To run a specific sample, use the following command :
+    ```
         gradle Sample_<SampleFileName>
     ```.  
-For example, to run  the sample `ArchievAllSignedAgreements.java`, use 
-    ```java
-        gradle Sample_ArchievAllSignedAgreements
-    ```.
+For example, to run  the sample `ArchiveAllSignedAgreements.java`, use  
+    ```
+        gradle Sample_ArchiveAllSignedAgreements
+    ```.  
     
+###### 2) From the IDE
+
+######  IntellijIdea
+ 
+ Import the project  
+ 
+1. Click File -> New -> Project from Existing Sources.
+2. In the dialog that opens, select the directory which contains the collection of sources you want to import. Click OK.  
+3. As a result, the Import Project wizard opens.  
+4. On the first page of the wizard, select Create project from external model, select Gradle and click Next.  
+5. Set gradle JVM to java version 1.8. 
+6. Specify the gradle home path and click finish.  
+7. In the Gradle Project Data To Import, select all the 3 modules :  
+    * adobe-sign-java-sdk  
+    * rest-api-sample  
+    * rest-api-sdk  
+ 
+######  Eclipse
+Install a gradle plugin for eclipse, if not already available.  
+Gradle (STS) Integration for eclipse is widely used plugin for eclipse.  
+
+Import the project  
+
+1. Click File -> Import -> gradle project.    
+2. In root folder, browse to the the AdobeSignJavaSdk.
+3. Click build Model. Select adobe-sign-java-sdk project.
+4. Click finish.  
+
+
+To run the sample, create a new gradle configuration.  
+###### For IntellijIdea  
+Edit the following parameters :  
+`Gradle Project` : Specify path to `build.gradle` file.  
+`Tasks` : Depending on whether you want to run a specific sample or all samples, use one of the following :  
+* For single sample : enter `Sample_<SampleFileName>`.
+* For all samples : enter allSamples.
+
+###### For Eclipse  
+Edit the following parameters :  
+`Project` : adobe-sign-java-sdk  
+`Gradle Tasks` : follow the same steps as mentioned in `Tasks` parameter for IntellijIdea.
+
+Note : You can also right click on the sample, and select `Run` to run it.
+
 Tests
 ====================
 
@@ -165,7 +221,7 @@ Contains helper classes that encapsulate the functionality required by the test 
 ### Executing the tests
 
 The tests can be executed by using this command from the base directory:  
-```java
+```
     gradle test
 ```
 At the end of the execution, an HTML report containing a comprehensive summary of the result is generated.  

@@ -19,12 +19,14 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.LibraryDocumentsApi;
 import com.adobe.sign.model.libraryDocuments.Documents;
-import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
+import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
-import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 /**
@@ -32,11 +34,14 @@ import org.junit.Test;
  */
 public class GetDocumentsApiTest {
   
-  private LibraryDocumentsApi libraryDocumentsApi = null;
-  private String libraryDocumentId = null;
+  private static LibraryDocumentsApi libraryDocumentsApi = null;
+  private static String libraryDocumentId = null;
+  
+  @Rule
+  public Retry retry = new Retry();
 
-  @Before
-  public void setup() throws ApiException {
+  @BeforeClass
+  public static void setup() throws ApiException {
     libraryDocumentsApi = LibraryDocumentsUtils.getLibraryDocumentsApi();
     libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);
   }
@@ -51,9 +56,8 @@ public class GetDocumentsApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      libraryDocumentsApi.getDocuments(TestData.NULL_PARAM,
-                                       libraryDocumentId,
-                                       TestData.X_API_HEADER);
+      libraryDocumentsApi.getDocuments(ApiUtils.getNullAccessTokenHeaderParams(),
+                                       libraryDocumentId);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -61,9 +65,8 @@ public class GetDocumentsApiTest {
     }
 
     try {
-      libraryDocumentsApi.getDocuments(TestData.EMPTY_PARAM,
-                                       libraryDocumentId,
-                                       TestData.X_API_HEADER);
+      libraryDocumentsApi.getDocuments(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                       libraryDocumentId);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -80,9 +83,8 @@ public class GetDocumentsApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      libraryDocumentsApi.getDocuments(TestData.ACCESS_TOKEN,
-                                       libraryDocumentId,
-                                       TestData.EMPTY_PARAM);
+      libraryDocumentsApi.getDocuments(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                       libraryDocumentId);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -99,9 +101,8 @@ public class GetDocumentsApiTest {
   @Test
   public void testInvalidLibraryDocumentId() throws ApiException {
     try {
-      libraryDocumentsApi.getDocuments(TestData.ACCESS_TOKEN,
-                                       TestData.EMPTY_PARAM,
-                                       TestData.X_API_HEADER);
+      libraryDocumentsApi.getDocuments(ApiUtils.getValidHeaderParams(),
+                                       TestData.EMPTY_PARAM);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -109,9 +110,8 @@ public class GetDocumentsApiTest {
     }
 
     try {
-      libraryDocumentsApi.getDocuments(TestData.ACCESS_TOKEN,
-                                       TestData.NULL_PARAM,
-                                       TestData.X_API_HEADER);
+      libraryDocumentsApi.getDocuments(ApiUtils.getValidHeaderParams(),
+                                       TestData.NULL_PARAM);
     } 
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -128,9 +128,8 @@ public class GetDocumentsApiTest {
   @Test
   public void testDocuments() throws ApiException {
     try {
-      Documents documents  = libraryDocumentsApi.getDocuments(TestData.ACCESS_TOKEN,
-                                                              libraryDocumentId,
-                                                              TestData.X_API_HEADER);
+      Documents documents  = libraryDocumentsApi.getDocuments(ApiUtils.getValidHeaderParams(),
+                                                              libraryDocumentId);
       assertNotNull(documents);
     } 
     catch (ApiException e) {
