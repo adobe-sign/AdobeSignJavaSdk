@@ -6,8 +6,8 @@ v1.0.0 (May 31, 2016)
 
 v1.1.0 (July 29, 2016)
 ----------------------
-   * Added OAuth 2.0 support.
-   * Added Custom Headers Support.
-   * Added Sample for Outh APIs and Get Signing Url.
+   * Support for OAuth 2.0
+   * Support for custom headers
+   * Samples for OAuth and hosted signing
    * Third party libraries version update
-   * Bugs Fixes
+   * Bug fixes
