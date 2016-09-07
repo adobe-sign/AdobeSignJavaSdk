@@ -39,7 +39,7 @@ public class ArchiveAllSignedAgreements {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(ArchiveAllSignedAgreements.class.getName());
+    ApiUtils.configureProperty(ArchiveAllSignedAgreements.class.getName());
     try {
       ArchiveAllSignedAgreements client = new ArchiveAllSignedAgreements();
       client.run();

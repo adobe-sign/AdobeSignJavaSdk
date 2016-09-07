@@ -15,8 +15,8 @@ package com.adobe.sign.model.widgets;
 
 import com.adobe.sign.utils.StringUtil;
 import com.adobe.sign.model.widgets.WidgetHistoryEvent;
-import com.adobe.sign.model.widgets.WidgetParticipantSetInfo;
 import java.util.*;
+import com.adobe.sign.model.widgets.WidgetParticipantSetInfo;
 
 
 
@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:04.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
 public class WidgetInfo   {
   
   private List<WidgetHistoryEvent> events = new ArrayList<WidgetHistoryEvent>();

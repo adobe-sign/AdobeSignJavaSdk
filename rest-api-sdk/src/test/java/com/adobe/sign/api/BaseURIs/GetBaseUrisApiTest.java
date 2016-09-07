@@ -22,7 +22,9 @@ import com.adobe.sign.model.baseUris.BaseUriInfo;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.BaseUrisUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -34,12 +36,14 @@ import org.junit.Test;
 public class GetBaseUrisApiTest {
 
   private static BaseUrisApi baseurisApi = null;
+
   
   @Rule
   public Retry retry = new Retry();
   
   @BeforeClass
   public static void setup() {
+    ApiUtils.configureProperty();
     baseurisApi = BaseUrisUtils.getBaseUrisApi();
     
   }

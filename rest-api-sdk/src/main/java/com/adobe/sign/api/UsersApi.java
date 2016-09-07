@@ -25,13 +25,13 @@ import com.adobe.sign.model.users.UserCreationResponse;
 import com.adobe.sign.model.users.UserCreationInfo;
 import com.adobe.sign.model.users.UserDetailsInfo;
 import com.adobe.sign.model.users.UserModificationInfo;
-import com.adobe.sign.model.users.UserStatusUpdateInfo;
 import com.adobe.sign.model.users.UserStatusUpdateResponse;
+import com.adobe.sign.model.users.UserStatusUpdateInfo;
 
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:01.470+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.999+05:30")
     public class UsersApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -192,7 +192,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: user_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param userId The user identifier, as provided by the APIs to retrieve users or to create a user. To get the details for the token owner, UserId can be replaced by \&quot;me\&quot; without quotes.
+    * @param userId The user identifier, as returned by the user creation API or retrieved from the API to fetch users. To get the details for the token owner, UserId can be replaced by \&quot;me\&quot; without quotes.
     * @return UserDetailsInfo
     */
     public UserDetailsInfo getUserDetail (MultivaluedMap headers,
@@ -262,7 +262,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: user_write 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param userId The user identifier, as provided by the APIs to retrieve users or to create a user
+    * @param userId The user identifier, as provided by the APIs to retrieve or create users
     * @param userModificationInfo 
     * @return UserDetailsInfo
     */
@@ -334,7 +334,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: user_write 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param userId The user identifier, as provided by the APIs to retrieve users or to create a user
+    * @param userId The user identifier, as provided by the APIs to retrieve or create users
     * @param userStatusUpdateInfo User status update information object.
     * @return UserStatusUpdateResponse
     */

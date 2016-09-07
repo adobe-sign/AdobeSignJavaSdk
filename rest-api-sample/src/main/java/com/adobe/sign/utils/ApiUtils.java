@@ -12,11 +12,6 @@
 */
 package com.adobe.sign.utils;
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-import org.apache.log4j.lf5.util.StreamUtils;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,13 +21,16 @@ import java.util.Properties;
 import javax.ws.rs.core.MultivaluedMap;
 
 import com.sun.jersey.core.util.MultivaluedMapImpl;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 public class ApiUtils {
   private static Logger log = null;
   private final static String ACCESS_TOKEN_KEY= "Access-Token";
   private final static String X_API_USER_KEY = "x-api-user";
   private static final String BUILD_SEPERATOR = "build";
-
+  private static final String ENV_HOST_NAME = Constants.ENV_HOST_NAME;
   public static Properties getProperties(String configPath) {
     Properties prop = new Properties();
     try {
@@ -101,11 +99,9 @@ public class ApiUtils {
 
     return headers;
   }
-  public static void configureLogProperty(String className){
-    log = LogManager.getLogger(className);
-    Properties properties=getProperties(Constants.LOG_CONFIG_PATH);
-    properties.setProperty(Constants.LOG_KEY,getSampleAbsolutePath()+Constants.LOG);
-    PropertyConfigurator.configure(properties);
+  public static void configureProperty(String className){
+    configureLogProperty(className);
+    configureEnvHostName();
   }
   public static void logException(String error,Exception e) throws ApiException {
     log.error(error, e);
@@ -115,5 +111,22 @@ public class ApiUtils {
   public static void logError(String error) {
     log.error(error);
     System.err.println(error);
+  }
+
+  public static void configureLogProperty(String className) {
+    log = LogManager.getLogger(className);
+    Properties properties=getProperties(Constants.LOG_CONFIG_PATH);
+    properties.setProperty(Constants.LOG_KEY,getSampleAbsolutePath()+Constants.LOG);
+    PropertyConfigurator.configure(properties);
+  }
+
+  public static void configureEnvHostName() {
+    if(ENV_HOST_NAME != null && ENV_HOST_NAME.length()>0){
+      Context.setEnvHostName(ENV_HOST_NAME);
+    }
+  }
+
+  public static String getUserEmail(String emailPrefix, String emailDomain) {
+    return emailPrefix + String.valueOf(System.currentTimeMillis()) + emailDomain;
   }
 }

@@ -15,6 +15,7 @@ public class TestSetup {
      * Main work function.
      */
     private void run() throws ApiException {
+        ApiUtils.configureProperty();
         if(!AgreementsUtils.isExistingAgreement(TestData.AGREEMENT_NAME))
             AgreementsUtils.createAgreement(TestData.AGREEMENT_NAME);
         

@@ -26,15 +26,15 @@ import com.adobe.sign.model.widgets.WidgetCreationRequest;
 import com.adobe.sign.model.widgets.WidgetInfo;
 import com.adobe.sign.model.widgets.WidgetAgreements;
 import com.adobe.sign.model.widgets.WidgetDocuments;
-import com.adobe.sign.model.widgets.WidgetPersonalizationInfo;
 import com.adobe.sign.model.widgets.WidgetPersonalizeResponse;
+import com.adobe.sign.model.widgets.WidgetPersonalizationInfo;
 import com.adobe.sign.model.widgets.WidgetStatusUpdateResponse;
 import com.adobe.sign.model.widgets.WidgetStatusUpdateInfo;
 
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:04.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
     public class WidgetsApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -191,7 +191,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: widget_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param widgetId The widget identifier, as provided by the APIs to retrieve widgets or create widgets.
+    * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @return WidgetInfo
     */
     public WidgetInfo getWidgetInfo (MultivaluedMap headers,
@@ -261,7 +261,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: widget_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param widgetId The widget identifier, as provided by the APIs to retrieve widgets or create widgets.
+    * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @return WidgetAgreements
     */
     public WidgetAgreements getWidgetAgreements (MultivaluedMap headers,
@@ -331,7 +331,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: widget_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param widgetId The widget identifier, as provided by the APIs to retrieve widgets or create widgets.
+    * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @return byte[]
     */
     public byte[] getWidgetAuditTrail (MultivaluedMap headers,
@@ -401,8 +401,8 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: widget_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param widgetId The widget identifier, as provided by the APIs to retrieve widgets or create widgets.
-    * @param versionId The version identifier of widget as provided by the API which retrieves a widget. If not provided then latest version will be used.
+    * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
+    * @param versionId The version identifier of widget as provided by the API which retrieves information of a specific widget. If not provided then latest version will be used.
     * @param participantEmail The email address of the participant to be used to retrieve documents.
     * @param auditReport When set to YES, attach an audit report to the signed Widget PDF. Default value is false
     * @return byte[]
@@ -483,8 +483,8 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: widget_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param widgetId The widget identifier, as provided by the APIs to retrieve widgets or create widgets.
-    * @param versionId The version identifier of widget as provided by the API which retrieves a widget. If not provided then latest version will be used.
+    * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
+    * @param versionId The version identifier of widget as provided by the API which retrieves information of a specific widget. If not provided then latest version will be used.
     * @param participantEmail The email address of the participant to be used to retrieve documents.
     * @return WidgetDocuments
     */
@@ -561,8 +561,8 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: widget_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param widgetId The widget identifier, as provided by the APIs to retrieve widgets or create widgets.
-    * @param documentId The document identifier, as provided by the API which retrieves the documents of a specified widgetwidgets/{widgetId}/documents
+    * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
+    * @param documentId The document identifier, as retrieved from the API which fetches the documents of a specified widget
     * @return byte[]
     */
     public byte[] getWidgetDocumentInfo (MultivaluedMap headers,
@@ -634,7 +634,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: widget_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param widgetId The widget identifier, as provided by the APIs to retrieve widgets or create widgets.
+    * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @return byte[]
     */
     public byte[] getWidgetFormData (MultivaluedMap headers,
@@ -704,7 +704,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: widget_write 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param widgetId The widget identifier, as provided by the APIs to retrieve widgets or create widgets.
+    * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @param widgetPersonalizationInfo Widget Personalize update information object
     * @return WidgetPersonalizeResponse
     */
@@ -776,7 +776,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: widget_write 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param widgetId The widget identifier, as provided by the APIs to retrieve widgets or create widgets.
+    * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @param widgetStatusUpdateInfo Widget status update information object.
     * @return WidgetStatusUpdateResponse
     */

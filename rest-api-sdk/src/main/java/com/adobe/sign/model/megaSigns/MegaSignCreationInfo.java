@@ -15,13 +15,13 @@ package com.adobe.sign.model.megaSigns;
 
 import com.adobe.sign.utils.StringUtil;
 import com.adobe.sign.model.megaSigns.VaultingInfo;
-import com.adobe.sign.model.megaSigns.RecipientSetInfo;
 import com.adobe.sign.model.megaSigns.FileInfo;
-import com.adobe.sign.model.megaSigns.ExternalId;
-import com.adobe.sign.model.megaSigns.SecurityOption;
 import com.adobe.sign.model.megaSigns.MergefieldInfo;
-import java.util.*;
 import com.adobe.sign.model.megaSigns.PostSignOptions;
+import com.adobe.sign.model.megaSigns.ExternalId;
+import com.adobe.sign.model.megaSigns.RecipientSetInfo;
+import com.adobe.sign.model.megaSigns.SecurityOption;
+import java.util.*;
 
 
 
@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:06.747+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
 public class MegaSignCreationInfo   {
   
   private String callbackInfo = null;
@@ -178,9 +178,9 @@ public enum SignatureTypeEnum {
 
   
   /**
-   * Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are curently supported
+   * Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are currently supported
    **/
-  @ApiModelProperty(value = "Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are curently supported")
+  @ApiModelProperty(value = "Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are currently supported")
   @JsonProperty("mergeFieldInfo")
   public List<MergefieldInfo> getMergeFieldInfo() {
     return mergeFieldInfo;
@@ -191,9 +191,9 @@ public enum SignatureTypeEnum {
 
   
   /**
-   * The merge file ID as returned from the API to create transient documents. The merge file contains the details of all the Mega Sign recipients.
+   * The merge file ID as returned from the transient document creation API. The merge file contains the details of all the Mega Sign recipients.
    **/
-  @ApiModelProperty(value = "The merge file ID as returned from the API to create transient documents. The merge file contains the details of all the Mega Sign recipients.")
+  @ApiModelProperty(value = "The merge file ID as returned from the transient document creation API. The merge file contains the details of all the Mega Sign recipients.")
   @JsonProperty("mergeFileTransientId")
   public String getMergeFileTransientId() {
     return mergeFileTransientId;

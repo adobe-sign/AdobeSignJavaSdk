@@ -45,7 +45,7 @@ public class SendMegaSignUsingTransientDocument {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(SendMegaSignUsingTransientDocument.class.getName());
+    ApiUtils.configureProperty(SendMegaSignUsingTransientDocument.class.getName());
     try {
       SendMegaSignUsingTransientDocument client = new SendMegaSignUsingTransientDocument();
       client.run();

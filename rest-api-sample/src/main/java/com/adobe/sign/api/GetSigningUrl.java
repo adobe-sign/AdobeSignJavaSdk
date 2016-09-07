@@ -36,7 +36,7 @@ public class GetSigningUrl {
    * Entry point for this sample client program.
    */
   public static void main(String[] args) throws ApiException {
-    ApiUtils.configureLogProperty(GetSigningUrl.class.getName());
+    ApiUtils.configureProperty(GetSigningUrl.class.getName());
     try {
       GetSigningUrl client = new GetSigningUrl();
       client.run();

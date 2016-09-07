@@ -38,7 +38,7 @@ public class DownloadDocumentsOfAgreement {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(DownloadDocumentsOfAgreement.class.getName());
+    ApiUtils.configureProperty(DownloadDocumentsOfAgreement.class.getName());
     try {
       DownloadDocumentsOfAgreement client = new DownloadDocumentsOfAgreement();
       client.run();

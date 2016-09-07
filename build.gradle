@@ -1,5 +1,5 @@
 group = 'com.adobe.sign'
-version = '1.1.0'
+version = '1.1.1'
 
 
 buildscript {
@@ -109,7 +109,8 @@ project(':rest-api-sample') {
                   "SendAgreementUsingTransientDocument",
                   "SendMegaSignUsingLibraryDocument",
                   "SendMegaSignUsingTransientDocument",
-                  "SendReminderOnPendingAgreements"].toArray()
+                  "SendReminderOnPendingAgreements",
+				  "SendToGroup"].toArray()
         def fileName = ""
         def pathPrefix = "com.adobe.sign.api."
         def filePath = ""

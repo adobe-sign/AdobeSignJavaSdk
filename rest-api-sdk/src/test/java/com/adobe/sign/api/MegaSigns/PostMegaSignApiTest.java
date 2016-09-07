@@ -26,6 +26,7 @@ import com.adobe.sign.model.megaSigns.PostSignOptions;
 import com.adobe.sign.model.megaSigns.URLFileInfo;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.MegaSignUtils;
 import com.adobe.sign.utils.Retry;
@@ -44,12 +45,14 @@ public class PostMegaSignApiTest {
   private static MegaSignsApi megaSignsApi = null;
   private static String libraryDocumentId = null;
   private static String transientDocumentId = null;
+
   
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     megaSignsApi = MegaSignUtils.getMegaSignsApi();
 
     libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);

@@ -27,7 +27,7 @@ import com.adobe.sign.model.search.AgreementAssetEventGetResponse;
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:07.906+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:55.943+05:30")
     public class SearchApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -42,7 +42,7 @@ import javax.ws.rs.core.MultivaluedMap;
     
     /**
     * Create a search object for agreement asset event . It will return the result for the first page and search Id to fetch results for further pages.
-    * The agreement asset refers to any asset through which an agreement can be created for instance library document,widget and agreement itself. To search for Agreement Asset Events, first make a POST request to POST /search/agreementAssetEvents with relevant search parameters. Response will be the first page of results along with a search Id param and next page cursor. These can be used to fetch further page results if they are available using the API which retrieves a list of AgreementAssetEvents using a searchId
+    * The agreement asset refers to any asset through which an agreement can be created for instance library document,widget and agreement itself. To search for Agreement Asset Events, first make a POST request to the API to create search results with relevant search parameters. Response will be the first page of results along with a search Id param and next page cursor. These can be used to fetch further page results if they are available using the API to retrieve search results
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
     Access-Token(key) An OAuth Access Token with scopes: agreement_read widget_read library_read 
@@ -111,13 +111,13 @@ import javax.ws.rs.core.MultivaluedMap;
     
     /**
     * Return the result for the page which is described inside the Page Cursor Info.
-    * The agreement asset refers to any asset through which an agreement can be created for instance library document,widget and agreement itself. Provide the searchId obtained from POST /search/agreementAssetEvents request and the next page cursor id from the original call to the API which creates a search object for an agreementAssetEvent or a previous call to the API which retrieves a list of agreementAssetEvents for a searchId.
+    * The agreement asset refers to any asset through which an agreement can be created for instance library document,widget and agreement itself. Provide the searchId obtained from the API to create search results request and the next page cursor id from the original call to the API to create search results or a previous call to the API to retrieve search results.
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
     Access-Token(key) An OAuth Access Token with scopes: agreement_read widget_read library_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param searchId The search object identifier, as provided by the API which creates a search object for an agreement asset event .
+    * @param searchId The search object identifier, as returned by the agreementAssetEvent creation API .
     * @param pageCursor Page cursor of the page whose result will be fetched
     * @param pageSize Count of agreement asset events which will be returned in the response. If the pageSize is left blank, then the pageSize which is mentioned while making POST request to /search/agreementAssetEvents will be used. Maximum page size is 500.
     * @return AgreementAssetEventGetResponse

@@ -15,14 +15,14 @@ package com.adobe.sign.model.agreements;
 
 import com.adobe.sign.utils.StringUtil;
 import com.adobe.sign.model.agreements.VaultingInfo;
-import com.adobe.sign.model.agreements.RecipientSetInfo;
 import com.adobe.sign.model.agreements.RequestFormField;
 import com.adobe.sign.model.agreements.FileInfo;
-import com.adobe.sign.model.agreements.ExternalId;
-import com.adobe.sign.model.agreements.SecurityOption;
 import com.adobe.sign.model.agreements.MergefieldInfo;
-import java.util.*;
 import com.adobe.sign.model.agreements.PostSignOptions;
+import com.adobe.sign.model.agreements.ExternalId;
+import com.adobe.sign.model.agreements.RecipientSetInfo;
+import com.adobe.sign.model.agreements.SecurityOption;
+import java.util.*;
 
 
 
@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:02.594+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
 public class DocumentCreationInfo   {
   
   private String callbackInfo = null;
@@ -214,9 +214,9 @@ public enum SignatureTypeEnum {
 
   
   /**
-   * Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are curently supported
+   * Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are currently supported
    **/
-  @ApiModelProperty(value = "Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are curently supported")
+  @ApiModelProperty(value = "Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are currently supported")
   @JsonProperty("mergeFieldInfo")
   public List<MergefieldInfo> getMergeFieldInfo() {
     return mergeFieldInfo;
@@ -266,9 +266,9 @@ public enum SignatureTypeEnum {
 
   
   /**
-   * A list of one or more recipient sets. A recipient set may have one or more recipients. If any member of the recipient set signs, the agreement is considered signed by the recipient set. For regular (non-MegaSign) documents, there is no limit on the number of electronic signatures in a single document. Written signatures are limited to four per document. This limit includes the sender if the signature of the sender is also required
+   * A list of one or more recipient sets. A recipient set may have one or more recipients. If any member of the recipient set signs, the agreement is considered signed by the recipient set. For regular (non-MegaSign) documents, there is no limit on the number of electronic signatures in a single document. Written signatures are limited to four per document. This limit includes the sender if the signature of the sender is also required. Note: If signatureFlow is set to SENDER_SIGNS_ONLY, this parameter is optional
    **/
-  @ApiModelProperty(required = true, value = "A list of one or more recipient sets. A recipient set may have one or more recipients. If any member of the recipient set signs, the agreement is considered signed by the recipient set. For regular (non-MegaSign) documents, there is no limit on the number of electronic signatures in a single document. Written signatures are limited to four per document. This limit includes the sender if the signature of the sender is also required")
+  @ApiModelProperty(required = true, value = "A list of one or more recipient sets. A recipient set may have one or more recipients. If any member of the recipient set signs, the agreement is considered signed by the recipient set. For regular (non-MegaSign) documents, there is no limit on the number of electronic signatures in a single document. Written signatures are limited to four per document. This limit includes the sender if the signature of the sender is also required. Note: If signatureFlow is set to SENDER_SIGNS_ONLY, this parameter is optional")
   @JsonProperty("recipientSetInfos")
   public List<RecipientSetInfo> getRecipientSetInfos() {
     return recipientSetInfos;

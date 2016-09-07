@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:09.776+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
 public class CCsListInfoDescription   {
   
   private String defaultValue = null;
@@ -35,9 +35,9 @@ public class CCsListInfoDescription   {
 
   
   /**
-   * A defualt email that will be used if no input is provided for this list element
+   * A default email that will be used if no input is provided for this list element
    **/
-  @ApiModelProperty(required = true, value = "A defualt email that will be used if no input is provided for this list element")
+  @ApiModelProperty(required = true, value = "A default email that will be used if no input is provided for this list element")
   @JsonProperty("defaultValue")
   public String getDefaultValue() {
     return defaultValue;

@@ -14,8 +14,8 @@
 package com.adobe.sign.model.libraryDocuments;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.libraryDocuments.OriginalDocument;
 import java.util.*;
+import com.adobe.sign.model.libraryDocuments.OriginalDocument;
 
 
 
@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:05.613+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:51.876+05:30")
 public class Documents   {
   
   private List<OriginalDocument> documents = new ArrayList<OriginalDocument>();

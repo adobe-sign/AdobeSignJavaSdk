@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(description = "")
-public class RefreshedAccessTokenResponse {
+public class AccessTokenRefreshResponse {
 
   private String accessToken = null;
   private int expiresIn = -1;
@@ -64,7 +64,7 @@ public class RefreshedAccessTokenResponse {
   @Override
   public String toString()  {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RefreshedAccessTokenInfo {\n");
+    sb.append("class AccessTokenRefreshResponse {\n");
 
     sb.append("    accessToken: ").append(StringUtil.toIndentedString(accessToken)).append("\n");
     sb.append("    expiresIn: ").append(StringUtil.toIndentedString(expiresIn)).append("\n");

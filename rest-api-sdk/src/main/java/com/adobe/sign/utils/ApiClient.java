@@ -33,7 +33,7 @@ public class ApiClient {
   private Map<String, Client> hostMap = new HashMap<String, Client>();
   private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
   private boolean debugging = false;
-  private String basePath = "https://secure.na1.echosign.com";
+  private String envHostName = "https://secure.na1.echosign.com";
   private String subPath = "/api/rest/v5";
   private boolean queryBaseUrl = true;
   private JSON json = new JSON();
@@ -60,20 +60,30 @@ public class ApiClient {
     if (queryBaseUrl)
       return null;
 
-    return basePath;
+    return envHostName;
   }
 
   public void setBaseUri(String baseUri) {
-    this.basePath = baseUri;
+    this.envHostName = baseUri;
     queryBaseUrl = false;
   }
 
-
-  public String getBasePath() {
-    return basePath;
+  /**
+   * Gets the enviroment
+   */
+  public String getEnvHostName() {
+    return envHostName;
   }
 
-
+  /**
+   * Set the environment
+   */
+  public void setEnvHostName(String hostName) {
+    if(hostName != null && hostName.length()>0) {
+      this.envHostName = hostName;
+      queryBaseUrl = true;
+    }
+  }
   /**
    * Gets the status code of the previous request
    */
@@ -490,9 +500,9 @@ public class ApiClient {
 
   private String getBaseUrl(String accessToken) throws ApiException {
 
+    String baseUrl = envHostName + subPath;
     String path = "/base_uris".replaceAll("\\{format\\}",
                                           "json");
-
     Map<String, String> headerParams = new HashMap<String, String>();
     if (accessToken != null)
       headerParams.put("Access-Token",
@@ -515,7 +525,7 @@ public class ApiClient {
     TypeRef returnType = new TypeRef<BaseUriInfo>() {
     };
 
-    ClientResponse response = getAPIResponse(basePath,
+    ClientResponse response = getAPIResponse(baseUrl,
                                              path,
                                              "GET",
                                              queryParams,
@@ -531,7 +541,7 @@ public class ApiClient {
                                             returnType);
       return baseUriInfo.getApiAccessPoint();
     }
-    return basePath;
+    return envHostName;
   }
 
 
@@ -561,7 +571,7 @@ public class ApiClient {
                          TypeRef returnType,
                          boolean addSubPath) throws ApiException {
 
-    String baseUrl = basePath;
+    String baseUrl = envHostName;
     if (queryBaseUrl) {
       baseUrl = getBaseUrl(headerParams.get("Access-Token"));
     }
@@ -664,7 +674,7 @@ public class ApiClient {
                                 String contentType,
                                 boolean addSubPath) throws ApiException {
 
-    String baseUrl = basePath;
+    String baseUrl = envHostName;
     if (queryBaseUrl) {
       baseUrl = getBaseUrl(headerParams.get("Access-Token"));
     }

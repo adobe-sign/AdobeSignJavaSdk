@@ -24,10 +24,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:02.594+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
 public class SigningUrlSetInfo   {
   
   private List<SigningUrl> signingUrls = new ArrayList<SigningUrl>();
+  private String signingUrlSetName = null;
 
   
   /**
@@ -43,6 +44,19 @@ public class SigningUrlSetInfo   {
   }
 
   
+  /**
+   * The name of the current signer set. Returned only, if the API caller is the sender of agreement
+   **/
+  @ApiModelProperty(value = "The name of the current signer set. Returned only, if the API caller is the sender of agreement")
+  @JsonProperty("signingUrlSetName")
+  public String getSigningUrlSetName() {
+    return signingUrlSetName;
+  }
+  public void setSigningUrlSetName(String signingUrlSetName) {
+    this.signingUrlSetName = signingUrlSetName;
+  }
+
+  
 
   @Override
   public String toString()  {
@@ -50,6 +64,7 @@ public class SigningUrlSetInfo   {
     sb.append("class SigningUrlSetInfo {\n");
     
     sb.append("    signingUrls: ").append(StringUtil.toIndentedString(signingUrls)).append("\n");
+    sb.append("    signingUrlSetName: ").append(StringUtil.toIndentedString(signingUrlSetName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

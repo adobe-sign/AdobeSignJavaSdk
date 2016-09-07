@@ -23,6 +23,7 @@ import com.adobe.sign.model.reminders.ReminderCreationResult;
 import com.adobe.sign.utils.AgreementsUtils;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.ReminderUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
@@ -34,13 +35,15 @@ import org.junit.Test;
 public class PostRemindersApiTest {
   private static RemindersApi remindersApi = null;
   private static String agreementId = null;
-  
+
+
   @Rule
   public Retry retry = new Retry();
   
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
     remindersApi = ReminderUtils.getRemindersApi();
   }

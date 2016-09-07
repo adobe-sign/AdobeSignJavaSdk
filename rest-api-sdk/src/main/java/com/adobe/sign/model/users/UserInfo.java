@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:01.470+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.999+05:30")
 public class UserInfo   {
   
   private String company = null;
@@ -33,9 +33,9 @@ public class UserInfo   {
 
   
   /**
-   * The name of the company of the user
+   * The name of company of the user
    **/
-  @ApiModelProperty(value = "The name of the company of the user")
+  @ApiModelProperty(value = "The name of company of the user")
   @JsonProperty("company")
   public String getCompany() {
     return company;
@@ -85,9 +85,9 @@ public class UserInfo   {
 
   
   /**
-   * A unique identifier of the user resource for REST APIs. This identfier can not be used in SOAP APIs
+   * A unique identifier of the user resource for REST APIs. This identifier can not be used in SOAP APIs
    **/
-  @ApiModelProperty(required = true, value = "A unique identifier of the user resource for REST APIs. This identfier can not be used in SOAP APIs")
+  @ApiModelProperty(required = true, value = "A unique identifier of the user resource for REST APIs. This identifier can not be used in SOAP APIs")
   @JsonProperty("userId")
   public String getUserId() {
     return userId;

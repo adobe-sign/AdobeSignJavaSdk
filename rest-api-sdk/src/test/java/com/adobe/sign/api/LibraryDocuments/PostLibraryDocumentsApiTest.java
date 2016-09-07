@@ -27,6 +27,7 @@ import com.adobe.sign.model.libraryDocuments.LibraryDocumentCreationResponse;
 import com.adobe.sign.model.libraryDocuments.URLFileInfo;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
@@ -44,12 +45,14 @@ public class PostLibraryDocumentsApiTest {
   private static LibraryDocumentsApi libraryDocumentsApi = null;
   private static String libraryDocumentId = null;
   private static String transientDocumentId = null;
-  
+
+
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     libraryDocumentsApi = LibraryDocumentsUtils.getLibraryDocumentsApi();
 
     libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);
@@ -118,7 +121,7 @@ public class PostLibraryDocumentsApiTest {
   public void testInvalidAgreementCreationInfo() throws ApiException {
     FileInfo fileInfo = new FileInfo();
     
-    LibraryCreationInfo libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(fileInfo, 
+    LibraryCreationInfo libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(fileInfo,
                                                                                            ApiUtils.getLibraryDocumentName());
     
     // FileInfo with all 4 parameters null.
@@ -135,7 +138,7 @@ public class PostLibraryDocumentsApiTest {
     url.setUrl(TestData.INVALID_URL);
     fileInfo.setDocumentURL(url);
     
-    libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(fileInfo, 
+    libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(fileInfo,
                                                                        ApiUtils.getLibraryDocumentName());
     
     // Invalid url specified in FileInfo's getDocumentUrl parameter.
@@ -152,7 +155,7 @@ public class PostLibraryDocumentsApiTest {
     fileInfo.setTransientDocumentId(transientDocumentId);
     fileInfo.setDocumentURL(null);
     
-    libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(fileInfo, 
+    libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(fileInfo,
                                                                        ApiUtils.getLibraryDocumentName());
     
     // FileInfo with more than 1 parameter non-empty.
@@ -178,8 +181,8 @@ public class PostLibraryDocumentsApiTest {
                  SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
     
-    libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(null, 
-                                                 LibraryDocumentCreationInfo.LibrarySharingModeEnum.USER, 
+    libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(null,
+                                                 LibraryDocumentCreationInfo.LibrarySharingModeEnum.USER,
                                                  ApiUtils.getLibraryDocumentName());
     
     // SharingType null in libraryDocumentCreationInfo
@@ -192,7 +195,7 @@ public class PostLibraryDocumentsApiTest {
                  SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
     
-    libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(Arrays.asList(LibraryDocumentCreationInfo.LibraryTemplateTypesEnum.DOCUMENT), 
+    libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(Arrays.asList(LibraryDocumentCreationInfo.LibraryTemplateTypesEnum.DOCUMENT),
                                                                                      null,
                                                                                      ApiUtils.getLibraryDocumentName());
     

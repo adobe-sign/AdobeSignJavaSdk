@@ -180,7 +180,7 @@ x-api-user(key) The userId or email of API caller using the account or group tok
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: user_read 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">userId</td><td>The user identifier, as provided by the APIs to retrieve users or to create a user. To get the details for the token owner, UserId can be replaced by &amp;quot;me&amp;quot; without quotes. </td></tr>
+    <tr><td class="paramname">userId</td><td>The user identifier, as returned by the user creation API or retrieved from the API to fetch users. To get the details for the token owner, UserId can be replaced by &amp;quot;me&amp;quot; without quotes. </td></tr>
   </table>
   </dd>
 </dl>
@@ -260,7 +260,7 @@ x-api-user(key) The userId or email of API caller using the account or group tok
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: user_write 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">userId</td><td>The user identifier, as provided by the APIs to retrieve users or to create a user </td></tr>
+    <tr><td class="paramname">userId</td><td>The user identifier, as provided by the APIs to retrieve or create users </td></tr>
     <tr><td class="paramname">userModificationInfo</td><td></td></tr>
   </table>
   </dd>
@@ -304,7 +304,7 @@ x-api-user(key) The userId or email of API caller using the account or group tok
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: user_write 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">userId</td><td>The user identifier, as provided by the APIs to retrieve users or to create a user </td></tr>
+    <tr><td class="paramname">userId</td><td>The user identifier, as provided by the APIs to retrieve or create users </td></tr>
     <tr><td class="paramname">userStatusUpdateInfo</td><td>User status update information object. </td></tr>
   </table>
   </dd>

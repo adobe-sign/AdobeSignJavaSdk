@@ -21,6 +21,7 @@ import com.adobe.sign.api.MegaSignsApi;
 import com.adobe.sign.model.megaSigns.MegaSigns;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.MegaSignUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
@@ -28,18 +29,21 @@ import com.adobe.sign.utils.validator.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
+
 /**
  * Junit test cases for Get MegaSigns APIs.
  */
 public class GetMegasignsApiTest {
 
   private static MegaSignsApi megaSignsApi = null;
+
   
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     megaSignsApi = MegaSignUtils.getMegaSignsApi();
   }
 

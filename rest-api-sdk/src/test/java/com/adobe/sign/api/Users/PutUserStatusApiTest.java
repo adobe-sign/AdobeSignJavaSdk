@@ -19,7 +19,9 @@ import com.adobe.sign.api.UsersApi;
 import com.adobe.sign.model.users.UserStatusUpdateInfo;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.UserUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
 import org.junit.BeforeClass;
@@ -33,7 +35,9 @@ public class PutUserStatusApiTest{
 
 	private static UsersApi usersApi = null;
 	private static String userId = null;
-	
+	private static String envHostName = TestData.ENV_HOST_NAME;
+
+
 	@Rule
   public Retry retry = new Retry();
 
@@ -44,6 +48,7 @@ public class PutUserStatusApiTest{
 	 */
 	@BeforeClass
 	public static void setup() throws ApiException {
+		ApiUtils.configureProperty();
 		userId = UserUtils.createUser(ApiUtils.getUserEmail());
 		usersApi = UserUtils.getUsersApi();
 	}

@@ -25,6 +25,7 @@ import com.adobe.sign.model.widgets.WidgetStatusUpdateInfo;
 import com.adobe.sign.model.widgets.WidgetStatusUpdateResponse;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WidgetUtils;
@@ -39,12 +40,14 @@ import org.junit.Test;
 public class PutWidgetStatusApiTest {
   private static WidgetsApi widgetsApi = null;
   private static String widgetId = null;
+
   
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     widgetId = WidgetUtils.createWidget(ApiUtils.getWidgetName());
     widgetsApi = WidgetUtils.getWidgetsApi();
   }

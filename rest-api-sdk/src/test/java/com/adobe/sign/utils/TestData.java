@@ -91,7 +91,7 @@ public class TestData {
   private static final String REFRESH_TOKEN_GRANT_TYPE_KEY = "refreshTokenGrantType";
   private static final String RESPONSE_TYPE_KEY = "responseType";
   private static final String RETRY_COUNT_KEY = "retryCount";
-
+  private static final String ENV_HOST_NAME_KEY = "envHostName";
 
   // Common Parameters
   public static final String ACCESS_TOKEN = properties.getProperty(ACCESS_TOKEN_KEY).equals("null") ? null : properties.getProperty(ACCESS_TOKEN_KEY);
@@ -101,7 +101,7 @@ public class TestData {
 
   public static final String X_API_HEADER = properties.getProperty(X_API_HEADER_KEY).equals("null") ? null : properties.getProperty(X_API_HEADER_KEY);
   public static final String X_USER_EMAIL = properties.getProperty(X_USER_EMAIL_KEY).equals("null") ? null : properties.getProperty(X_USER_EMAIL_KEY);
-  
+  public static final String ENV_HOST_NAME = properties.getProperty(ENV_HOST_NAME_KEY).equals("null") ? null : properties.getProperty(ENV_HOST_NAME_KEY);
   // Test Parameters
   public static final String RETRY_COUNT = properties.getProperty(RETRY_COUNT_KEY).equals("null") ? null : properties.getProperty(RETRY_COUNT_KEY);
   

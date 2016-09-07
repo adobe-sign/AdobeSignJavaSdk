@@ -26,11 +26,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.adobe.sign.api.OAuthApi;
-import com.adobe.sign.model.oAuth.AccessTokenInfo;
+import com.adobe.sign.model.oAuth.AccessTokenRequest;
 import com.adobe.sign.model.oAuth.AccessTokenResponse;
-import com.adobe.sign.model.oAuth.AuthorizationInfo;
-import com.adobe.sign.model.oAuth.RefreshedAccessTokenInfo;
-import com.adobe.sign.model.oAuth.RefreshedAccessTokenResponse;
+import com.adobe.sign.model.oAuth.AuthorizationRequest;
+import com.adobe.sign.model.oAuth.AccessTokenRefreshRequest;
+import com.adobe.sign.model.oAuth.AccessTokenRefreshResponse;
 import com.adobe.sign.model.oAuth.Scope;
 import com.adobe.sign.model.oAuth.Token;
 import com.adobe.sign.utils.ApiException;
@@ -235,7 +235,7 @@ public class OAuthHandler {
       if(key.equalsIgnoreCase(CLIENT_SECRET_KEY))
         clientSecret = parameters.get(key).toString();
     }
-    AuthorizationInfo authorizationInfo = new AuthorizationInfo(clientId,
+    AuthorizationRequest authorizationInfo = new AuthorizationRequest(clientId,
                                                                 redirectUri,
                                                                 scopes,
                                                                 state,
@@ -254,7 +254,7 @@ public class OAuthHandler {
     OAuthApi oAuthApi = new OAuthApi();
     String groupId = null;
     //Fetch the access token.
-    AccessTokenInfo accessTokenInfo = new AccessTokenInfo(clientId,
+    AccessTokenRequest accessTokenInfo = new AccessTokenRequest(clientId,
                                                           clientSecret,
                                                           redirectUri,
                                                           code,
@@ -264,13 +264,13 @@ public class OAuthHandler {
     AccessTokenResponse accessTokenResponse = oAuthApi.getAccessToken(accessTokenInfo);
 
     //Refresh the accessToken
-    RefreshedAccessTokenInfo refreshedAccessTokenInfo = new RefreshedAccessTokenInfo(clientId,
+    AccessTokenRefreshRequest refreshedAccessTokenInfo = new AccessTokenRefreshRequest(clientId,
                                                                                      clientSecret,
                                                                                      accessTokenResponse.getRefreshToken(),
                                                                                      Constants.REFRESH_TOKEN_GRANT_TYPE);
 
     //Refreshed Access Token should be stored in the encrypted format
-    RefreshedAccessTokenResponse refreshedAccessTokenResponse = oAuthApi.refreshAccessToken(refreshedAccessTokenInfo);
+    AccessTokenRefreshResponse refreshedAccessTokenResponse = oAuthApi.refreshAccessToken(refreshedAccessTokenInfo);
 
     //Make API call to create a group with access token from the server.
     groupId = GroupUtils.createGroupWithOAuthWorkflow(Constants.GROUP_NAME,

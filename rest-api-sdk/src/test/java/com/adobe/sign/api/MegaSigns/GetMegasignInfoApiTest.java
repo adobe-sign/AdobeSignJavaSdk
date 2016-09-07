@@ -21,6 +21,7 @@ import com.adobe.sign.api.MegaSignsApi;
 import com.adobe.sign.model.megaSigns.MegaSignInfo;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.MegaSignUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
@@ -36,12 +37,14 @@ public class GetMegasignInfoApiTest {
 
   private static MegaSignsApi megaSignsApi = null;
   private static String megaSignId = null;
+
   
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     megaSignId = MegaSignUtils.getResourceId(TestData.MEGASIGN_NAME);
     megaSignsApi = MegaSignUtils.getMegaSignsApi();
   }

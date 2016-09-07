@@ -22,6 +22,7 @@ import com.adobe.sign.model.users.UserCreationInfo;
 import com.adobe.sign.model.users.UserCreationResponse;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.UserUtils;
@@ -40,6 +41,7 @@ public class PostUsersApiTest {
   @Rule
   public Retry retry = new Retry();
 
+
   /**
    * Setting up the UsersApi BeforeClass the tests are run.
    *
@@ -47,6 +49,7 @@ public class PostUsersApiTest {
    */
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     usersApi = UserUtils.getUsersApi();
   }
 

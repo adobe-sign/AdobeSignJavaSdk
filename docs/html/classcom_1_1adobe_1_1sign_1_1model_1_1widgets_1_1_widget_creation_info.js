@@ -1,6 +1,7 @@
 var classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info =
 [
     [ "SignatureFlowEnum", "enumcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info_1_1_signature_flow_enum.html", "enumcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info_1_1_signature_flow_enum" ],
+    [ "getAuthoringRequested", "classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info.html#aa2fea39b3f2db2f822c2e5563ab2e563", null ],
     [ "getCallbackInfo", "classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info.html#a163261a34a96904bea154828489cbfe7", null ],
     [ "getCounterSignerSetInfos", "classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info.html#a4e3c4c8a1d1f28849e8ddad525de8545", null ],
     [ "getFileInfos", "classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info.html#a382503e4ea722ab1942f49b5614ffe4e", null ],
@@ -14,6 +15,7 @@ var classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info =
     [ "getWidgetAuthFailureInfo", "classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info.html#afe8a015dbd7dfb2e0b3a7ba2fc964d63", null ],
     [ "getWidgetCompletionInfo", "classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info.html#a9a2685aa103e822bfa8e275c6fc6d053", null ],
     [ "getWidgetSignerSecurityOptions", "classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info.html#aba60c0857d03bbf4a5f8a4c670d87230", null ],
+    [ "setAuthoringRequested", "classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info.html#aa3f9187dc982a90cbbe3f488ed61e731", null ],
     [ "setCallbackInfo", "classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info.html#a39c6b31357f1ae6ea5e7d804bdb5911d", null ],
     [ "setCounterSignerSetInfos", "classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info.html#a63c28ee1dc24058b13f56a0cf5cd8bb7", null ],
     [ "setFileInfos", "classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info.html#ad5269099a1ccf9445ddfc0a442667bad", null ],

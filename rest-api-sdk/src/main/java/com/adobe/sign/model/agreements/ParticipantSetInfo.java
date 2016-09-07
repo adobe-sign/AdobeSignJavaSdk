@@ -24,11 +24,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:02.594+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
 public class ParticipantSetInfo   {
   
   private String participantSetId = null;
   private List<ParticipantInfo> participantSetMemberInfos = new ArrayList<ParticipantInfo>();
+  private String participantSetName = null;
   private String privateMessage = null;
 
 public enum RolesEnum {
@@ -143,6 +144,19 @@ public enum StatusEnum {
 
   
   /**
+   * The name of the participant set. Returned only, if the API caller is the sender of agreement
+   **/
+  @ApiModelProperty(value = "The name of the participant set. Returned only, if the API caller is the sender of agreement")
+  @JsonProperty("participantSetName")
+  public String getParticipantSetName() {
+    return participantSetName;
+  }
+  public void setParticipantSetName(String participantSetName) {
+    this.participantSetName = participantSetName;
+  }
+
+  
+  /**
    * Private message for the participants in the set
    **/
   @ApiModelProperty(value = "Private message for the participants in the set")
@@ -195,9 +209,9 @@ public enum StatusEnum {
 
   
   /**
-   * The participant set status with respect to the widget
+   * The status of the participant set with respect to the widget
    **/
-  @ApiModelProperty(required = true, value = "The participant set status with respect to the widget")
+  @ApiModelProperty(required = true, value = "The status of the participant set with respect to the widget")
   @JsonProperty("status")
   public StatusEnum getStatus() {
     return status;
@@ -215,6 +229,7 @@ public enum StatusEnum {
     
     sb.append("    participantSetId: ").append(StringUtil.toIndentedString(participantSetId)).append("\n");
     sb.append("    participantSetMemberInfos: ").append(StringUtil.toIndentedString(participantSetMemberInfos)).append("\n");
+    sb.append("    participantSetName: ").append(StringUtil.toIndentedString(participantSetName)).append("\n");
     sb.append("    privateMessage: ").append(StringUtil.toIndentedString(privateMessage)).append("\n");
     sb.append("    roles: ").append(StringUtil.toIndentedString(roles)).append("\n");
     sb.append("    securityOptions: ").append(StringUtil.toIndentedString(securityOptions)).append("\n");

@@ -44,7 +44,7 @@ public class SendMegaSignUsingLibraryDocument {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(SendMegaSignUsingLibraryDocument.class.getName());
+    ApiUtils.configureProperty(SendMegaSignUsingLibraryDocument.class.getName());
     try {
       SendMegaSignUsingLibraryDocument client = new SendMegaSignUsingLibraryDocument();
       client.run();

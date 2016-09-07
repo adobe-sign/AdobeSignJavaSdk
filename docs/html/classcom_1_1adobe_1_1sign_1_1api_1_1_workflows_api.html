@@ -146,7 +146,7 @@ Public Member Functions</h2></td></tr>
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: workflow_read - To read the workflow resource which will be used for agreement creation agreement_send - If authoringRequested parameter is set to false agreement_write - If authoringRequested parameter is set to true user_login - Required additionally if the autoLoginUser parameter is set to true 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">workflowId</td><td>The workflow identifier, as provided by API to retrieve workflows. </td></tr>
+    <tr><td class="paramname">workflowId</td><td>The workflow identifier, as retrieved from the API to fetch workflows. </td></tr>
     <tr><td class="paramname">customWorkflowAgreementCreationRequest</td><td>Information about the agreement that you want to send and authoring options that you want to apply at the time of sending. NOTE: optional specified with the input parameters is a general guideline on normal request sent to this endpoint. You need to check the actual workflow definition to determine whether a parameter is required or optional. </td></tr>
   </table>
   </dd>
@@ -184,7 +184,7 @@ x-api-user(key) The userId or email of API caller using the account or group tok
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: workflow_read 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">workflowId</td><td>The workflow identifier, as provided by the API to retrieve workflows. </td></tr>
+    <tr><td class="paramname">workflowId</td><td>The workflow identifier, as retrieved from the API to fetch workflows. </td></tr>
   </table>
   </dd>
 </dl>

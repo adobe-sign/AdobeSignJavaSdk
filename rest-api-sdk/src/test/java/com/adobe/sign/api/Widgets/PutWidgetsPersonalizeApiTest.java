@@ -23,6 +23,7 @@ import com.adobe.sign.model.widgets.WidgetPersonalizationInfo;
 import com.adobe.sign.model.widgets.WidgetPersonalizeResponse;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WidgetUtils;
@@ -38,12 +39,14 @@ public class PutWidgetsPersonalizeApiTest {
 
   private static WidgetsApi widgetsApi = null;
   private static String widgetId = null;
+
   
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     widgetId = WidgetUtils.createWidget(ApiUtils.getWidgetName());
     widgetsApi = WidgetUtils.getWidgetsApi();
   }

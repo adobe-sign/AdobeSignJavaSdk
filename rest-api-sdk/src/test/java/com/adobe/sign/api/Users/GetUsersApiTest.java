@@ -21,6 +21,7 @@ import com.adobe.sign.api.UsersApi;
 import com.adobe.sign.model.users.UsersInfo;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.UserUtils;
@@ -38,7 +39,8 @@ public class GetUsersApiTest {
   
   @Rule
   public Retry retry = new Retry();
-  
+	private static String envHostName = TestData.ENV_HOST_NAME;
+
 	/**
 	 * Setting up the UsersApi BeforeClass the tests are run.
 	 * 
@@ -46,6 +48,7 @@ public class GetUsersApiTest {
 	 */
 	@BeforeClass
 	public static void setup() throws ApiException {
+		ApiUtils.configureProperty();
 		usersApi = UserUtils.getUsersApi();
 	}
 	

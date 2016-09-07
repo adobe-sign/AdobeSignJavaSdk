@@ -17,17 +17,32 @@ import com.adobe.sign.utils.StringUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
-public class RefreshedAccessTokenInfo {
+public class AccessTokenRequest {
 
   private String clientId = null;
   private String clientSecret = null;
-  private String refreshToken = null;
+  private String redirectUri = null;
+  private String code = null;
   private String grantType = null;
 
-  public RefreshedAccessTokenInfo(String clientId, String clientSecret, String refreshToken, String grantType) {
+  public AccessTokenRequest(String clientId, String clientSecret, String redirectUri, String code, String grantType) {
     this.clientId = clientId;
     this.clientSecret = clientSecret;
-    this.refreshToken = refreshToken;
+    this.redirectUri = redirectUri;
+    this.code = code;
+    this.grantType = grantType;
+  }
+
+  /**
+   * Value must always be "authorization_code".
+   *
+   */
+  @ApiModelProperty(required = true, value = "Value must always be \"authorization_code\".")
+  @JsonProperty("grant_type")
+  public String getGrantType() {
+    return grantType;
+  }
+  public void setGrantType(String grantType) {
     this.grantType = grantType;
   }
 
@@ -57,44 +72,49 @@ public class RefreshedAccessTokenInfo {
   }
 
   /**
-   * Token which is used to refresh existing access token.
+   * The url where the end user will be redirected after successful completion of authorization.
+   * This value must belong to the set of values specified on the OAuth Configuration page.
    *
    */
-  @ApiModelProperty(required = true, value = "Token which is used to refresh existing access token.\n")
-  @JsonProperty("refresh_token")
-  public String getRefreshToken() {
-    return refreshToken;
+  @ApiModelProperty(required = true, value = "The url where the end user will be redirected after successful completion of authorization." + "\n" +
+                                              "This value must belong to the set of values specified on the OAuth Configuration page.")
+  @JsonProperty("redirect_uri")
+  public String getRedirectUri() {
+    return redirectUri;
   }
-  public void setRefreshToken(String refreshToken) {
-    this.refreshToken = refreshToken;
+  public void setRedirectUri(String redirectUri) {
+    this.redirectUri = redirectUri;
   }
 
   /**
-   * Value must always be "refresh_token".
+   * The authorization code retrieved by successful authorization workflow.
+   * This credential represents the resource owner's authorization.
    *
    */
-  @ApiModelProperty(required = true, value = "Value must always be \"refresh_token.\"")
-  @JsonProperty("grant_type")
-  public String getGrantType() {
-    return grantType;
+  @ApiModelProperty(required = true, value = "The authorization code retrieved by successful authorization workflow." + "\n" +
+                                              "This credential represents the resource owner's authorization.")
+  @JsonProperty("code")
+  public String getCode() {
+    return code;
   }
-
-  public void setGrantType(String grantType) {
-    this.grantType = grantType;
+  public void setCode(String code) {
+    this.code = code;
   }
 
   @Override
   public String toString()  {
     StringBuilder sb = new StringBuilder();
-    sb.append("class RefreshedAccessTokenInfo {\n");
+    sb.append("class AccessTokenRequest {\n");
 
     sb.append("    clientId: ").append(StringUtil.toIndentedString(clientId)).append("\n");
     sb.append("    clientSecret: ").append(StringUtil.toIndentedString(clientSecret)).append("\n");
-    sb.append("    refreshToken: ").append(StringUtil.toIndentedString(refreshToken)).append("\n");
+    sb.append("    redirectUri: ").append(StringUtil.toIndentedString(redirectUri)).append("\n");
+    sb.append("    code: ").append(StringUtil.toIndentedString(code)).append("\n");
     sb.append("    grantType: ").append(StringUtil.toIndentedString(grantType)).append("\n");
 
     sb.append("}");
 
     return sb.toString();
   }
+
 }

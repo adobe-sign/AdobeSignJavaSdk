@@ -24,6 +24,7 @@ import com.adobe.sign.model.search.AgreementAssetEventPostResponse;
 import com.adobe.sign.model.search.AgreementAssetEventRequest;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.SearchUtils;
 import com.adobe.sign.utils.TestData;
@@ -38,12 +39,14 @@ import org.junit.Test;
 public class PostSearchApiTest {
   
   private static SearchApi searchApi = null;
-  
+
+
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() {
+    ApiUtils.configureProperty();
     searchApi = SearchUtils.getSearchApi();
   }
 

@@ -21,6 +21,7 @@ import com.adobe.sign.api.SearchApi;
 import com.adobe.sign.model.search.AgreementAssetEventGetResponse;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.SearchUtils;
 import com.adobe.sign.utils.TestData;
@@ -39,13 +40,16 @@ public class GetSearchApiTest {
   private static String searchId = null;
   
   private static String pageCursor = null;
-  
+
+
+
   @Rule
   public Retry retry = new Retry();
   
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     searchApi = SearchUtils.getSearchApi();
     searchId = SearchUtils.getResourceId();
     pageCursor = SearchUtils.getPageCursor();

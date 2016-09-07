@@ -39,7 +39,7 @@ public class GetStatusOfAgreements {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(GetStatusOfAgreements.class.getName());
+    ApiUtils.configureProperty(GetStatusOfAgreements.class.getName());
     try {
       GetStatusOfAgreements client = new GetStatusOfAgreements();
       client.run();

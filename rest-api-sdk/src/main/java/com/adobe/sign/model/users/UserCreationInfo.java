@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:01.470+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.999+05:30")
 public class UserCreationInfo   {
   
   private String company = null;
@@ -140,9 +140,9 @@ public enum RolesEnum {
 
   
   /**
-   * Whether or not the user has opted in to recieve marketing information from Adobe Sign and its partners. Default value is UNKNOWN
+   * Whether or not the user has opted in to receive marketing information from Adobe Sign and its partners. Default value is UNKNOWN
    **/
-  @ApiModelProperty(value = "Whether or not the user has opted in to recieve marketing information from Adobe Sign and its partners. Default value is UNKNOWN")
+  @ApiModelProperty(value = "Whether or not the user has opted in to receive marketing information from Adobe Sign and its partners. Default value is UNKNOWN")
   @JsonProperty("optIn")
   public OptInEnum getOptIn() {
     return optIn;

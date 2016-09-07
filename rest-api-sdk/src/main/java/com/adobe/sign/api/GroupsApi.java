@@ -21,17 +21,17 @@ import com.adobe.sign.utils.validator.ApiValidatorHelper;
 import com.adobe.sign.utils.validator.GroupsApiValidator;
 
 import com.adobe.sign.model.groups.GroupsInfo;
-import com.adobe.sign.model.groups.GroupCreationInfo;
 import com.adobe.sign.model.groups.GroupCreationResponse;
+import com.adobe.sign.model.groups.GroupCreationInfo;
 import com.adobe.sign.model.groups.GroupDetailsInfo;
-import com.adobe.sign.model.groups.GroupModificationInfo;
 import com.adobe.sign.model.groups.GroupModificationResponse;
+import com.adobe.sign.model.groups.GroupModificationInfo;
 import com.adobe.sign.model.groups.UsersInfo;
 
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:00.387+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.002+05:30")
     public class GroupsApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -188,7 +188,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: user_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param groupId The group identifier, as provided by the APIs which retrieves groups or creates groups
+    * @param groupId The group identifier, as returned by the group creation API or retrieved from the API to fetch groups
     * @return GroupDetailsInfo
     */
     public GroupDetailsInfo getGroupDetails (MultivaluedMap headers,
@@ -258,7 +258,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: user_write 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param groupId The group identifier, as provided by the APIs which retrieves groups or creates groups
+    * @param groupId The group identifier, as returned by the group creation API or retrieved from the API to fetch groups
     * @param groupModificationInfo 
     * @return GroupModificationResponse
     */
@@ -330,7 +330,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: user_write 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param groupId The group identifier, as provided by the APIs which retrieves groups or creates groups
+    * @param groupId The group identifier, as returned by the group creation API or retrieved from the API to fetch groups
     * @return void
     */
     public void deleteGroup (MultivaluedMap headers,
@@ -399,7 +399,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: user_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param groupId The group identifier, as provided by the APIs which retrieves groups or creates groups
+    * @param groupId The group identifier, as returned by the group creation API or retrieved from the API to fetch groups
     * @return UsersInfo
     */
     public UsersInfo getUsersInGroup (MultivaluedMap headers,

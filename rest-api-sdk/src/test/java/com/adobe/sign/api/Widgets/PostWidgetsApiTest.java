@@ -25,6 +25,7 @@ import com.adobe.sign.model.widgets.WidgetFileInfo;
 import com.adobe.sign.model.widgets.WidgetURLFileInfo;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
@@ -42,12 +43,14 @@ public class PostWidgetsApiTest {
   private static WidgetsApi widgetsApi = null;
   private static String libraryDocumentId = null;
   private static String transientDocumentId = null;
+
   
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     widgetsApi = WidgetUtils.getWidgetsApi();
 
     libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);

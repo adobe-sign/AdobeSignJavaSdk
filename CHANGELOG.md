@@ -11,3 +11,8 @@ v1.1.0 (July 29, 2016)
    * Samples for OAuth and hosted signing
    * Third party libraries version update
    * Bug fixes
+
+v1.1.1 (September 7, 2016)
+--------------------------
+   * API updates
+   * Sample for sending agreement to a named recipient set

@@ -36,7 +36,7 @@ public class GetUrlForManagePage {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(GetUrlForManagePage.class.getName());
+    ApiUtils.configureProperty(GetUrlForManagePage.class.getName());
     try {
       GetUrlForManagePage client = new GetUrlForManagePage();
       client.run();

@@ -34,7 +34,7 @@ public class DownloadAuditTrail {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(DownloadAuditTrail.class.getName());
+    ApiUtils.configureProperty(DownloadAuditTrail.class.getName());
     try {
       DownloadAuditTrail client = new DownloadAuditTrail();
       client.run();

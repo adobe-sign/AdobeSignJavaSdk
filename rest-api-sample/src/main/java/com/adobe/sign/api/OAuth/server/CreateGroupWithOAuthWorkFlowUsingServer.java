@@ -31,7 +31,7 @@ public class CreateGroupWithOAuthWorkFlowUsingServer {
   public static int port = Constants.SERVER_PORT;
 
   public static void main(String[] args) throws ApiException{
-    ApiUtils.configureLogProperty(CreateGroupWithOAuthWorkFlowUsingServer.class.getName());
+    ApiUtils.configureProperty(CreateGroupWithOAuthWorkFlowUsingServer.class.getName());
     LocalHttpsServer localHttpsServer = new LocalHttpsServer();
 
     //Start the server

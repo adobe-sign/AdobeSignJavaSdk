@@ -10,40 +10,28 @@
 *  governing permissions and limitations under the License.
 *
 */
-
 package com.adobe.sign.model.oAuth;
+
+import java.util.ArrayList;
 
 import com.adobe.sign.utils.StringUtil;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
 
-public class AccessTokenInfo {
+public class AuthorizationRequest {
 
   private String clientId = null;
-  private String clientSecret = null;
   private String redirectUri = null;
-  private String code = null;
-  private String grantType = null;
+  private ArrayList<Scope> scopes = new ArrayList<Scope>();;
+  private String state = null;
+  private String responseType = null;
 
-  public AccessTokenInfo(String clientId, String clientSecret, String redirectUri, String code, String grantType) {
+  public AuthorizationRequest(String clientId, String redirectUri, ArrayList<Scope> scopes, String state, String responseType) {
     this.clientId = clientId;
-    this.clientSecret = clientSecret;
     this.redirectUri = redirectUri;
-    this.code = code;
-    this.grantType = grantType;
-  }
-
-  /**
-   * Value must always be "authorization_code".
-   *
-   */
-  @ApiModelProperty(required = true, value = "Value must always be \"authorization_code\".")
-  @JsonProperty("grant_type")
-  public String getGrantType() {
-    return grantType;
-  }
-  public void setGrantType(String grantType) {
-    this.grantType = grantType;
+    this.scopes = scopes;
+    this.state = state;
+    this.responseType = responseType;
   }
 
   /**
@@ -59,25 +47,12 @@ public class AccessTokenInfo {
   }
 
   /**
-   * Authenticates the application configured on the OAuth Configuration page.
-   *
-   */
-  @ApiModelProperty(required = true, value = "Authenticates the application configured on the OAuth Configuration page.")
-  @JsonProperty("client_secret")
-  public String getClientSecret() {
-    return clientSecret;
-  }
-  public void setClientSecret(String clientSecret) {
-    this.clientSecret = clientSecret;
-  }
-
-  /**
    * The url where the end user will be redirected after successful completion of authorization.
    * This value must belong to the set of values specified on the OAuth Configuration page.
    *
    */
   @ApiModelProperty(required = true, value = "The url where the end user will be redirected after successful completion of authorization." + "\n" +
-                                              "This value must belong to the set of values specified on the OAuth Configuration page.")
+    "This value must belong to the set of values specified on the OAuth Configuration page.")
   @JsonProperty("redirect_uri")
   public String getRedirectUri() {
     return redirectUri;
@@ -87,34 +62,57 @@ public class AccessTokenInfo {
   }
 
   /**
-   * The authorization code retrieved by successful authorization workflow.
-   * This credential represents the resource owner's authorization.
+   * Value used by the client to maintain state between the request and callback.
    *
    */
-  @ApiModelProperty(required = true, value = "The authorization code retrieved by successful authorization workflow." + "\n" +
-                                              "This credential represents the resource owner's authorization.")
-  @JsonProperty("code")
-  public String getCode() {
-    return code;
+  @ApiModelProperty(required = false, value = "Value used by the client to maintain state between the request and callback.")
+  @JsonProperty("state")
+  public String getState() {
+    return state;
   }
-  public void setCode(String code) {
-    this.code = code;
+  public void setState(String state) {
+    this.state = state;
+  }
+
+  /**
+   * List of permissions required by the application on behalf of the user to access the resources.
+   *
+   */
+  @ApiModelProperty(required = true, value = "List of permissions required by the application on behalf of the user to access the resources.\n")
+  @JsonProperty("scope")
+  public ArrayList<Scope> getScopes() {
+    return scopes;
+  }
+  public void setScopes(ArrayList<Scope> scopes) {
+    this.scopes = scopes;
+  }
+
+  /**
+   * Value must always be "code".
+   */
+  @ApiModelProperty(required = true, value = "Value must always be \"code\".")
+  @JsonProperty("response_type")
+  public String getResponseType() {
+    return responseType;
+  }
+  public void setResponseType(String responseType) {
+    this.responseType = responseType;
   }
 
   @Override
   public String toString()  {
     StringBuilder sb = new StringBuilder();
-    sb.append("class AccessTokenInfo {\n");
+    sb.append("class AuthorizationRequest {\n");
 
     sb.append("    clientId: ").append(StringUtil.toIndentedString(clientId)).append("\n");
-    sb.append("    clientSecret: ").append(StringUtil.toIndentedString(clientSecret)).append("\n");
     sb.append("    redirectUri: ").append(StringUtil.toIndentedString(redirectUri)).append("\n");
-    sb.append("    code: ").append(StringUtil.toIndentedString(code)).append("\n");
-    sb.append("    grantType: ").append(StringUtil.toIndentedString(grantType)).append("\n");
+    sb.append("    scopes: ").append(StringUtil.toIndentedString(scopes)).append("\n");
+    sb.append("    state: ").append(StringUtil.toIndentedString(state)).append("\n");
+    sb.append("    response_type: ").append(StringUtil.toIndentedString(responseType)).append("\n");
 
     sb.append("}");
 
+
     return sb.toString();
   }
-
 }

@@ -17,11 +17,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.adobe.sign.model.oAuth.AccessTokenInfo;
+import com.adobe.sign.model.oAuth.AccessTokenRefreshRequest;
+import com.adobe.sign.model.oAuth.AccessTokenRefreshResponse;
+import com.adobe.sign.model.oAuth.AccessTokenRequest;
 import com.adobe.sign.model.oAuth.AccessTokenResponse;
-import com.adobe.sign.model.oAuth.AuthorizationInfo;
-import com.adobe.sign.model.oAuth.RefreshedAccessTokenInfo;
-import com.adobe.sign.model.oAuth.RefreshedAccessTokenResponse;
+import com.adobe.sign.model.oAuth.AuthorizationRequest;
 import com.adobe.sign.model.oAuth.Token;
 import com.adobe.sign.utils.ApiClient;
 import com.adobe.sign.utils.ApiException;
@@ -41,32 +41,32 @@ public class OAuthApi {
   /**
    * Retrieves the authorization url that will be used to get the authorization code.
    *
-   * @param authorizationInfo
+   * @param authorizationRequest
    * @return String - The authorization url where the user will be directed to authorize the application.
    * @throws ApiException
    */
-  public String getAuthorizationUrl(AuthorizationInfo authorizationInfo) throws ApiException {
-    String baseUri = apiClient.getBasePath();
+  public String getAuthorizationUrl(AuthorizationRequest authorizationRequest) throws ApiException {
+    String baseUri = apiClient.getEnvHostName();
     String subPath = "/public/oauth";
 
     //Validate Request
-    OAuthApiValidator.getAuthorizationUrlValidator(authorizationInfo);
+    OAuthApiValidator.getAuthorizationUrlValidator(authorizationRequest);
 
     String baseUrl = baseUri + subPath;
-    return OAuthUtils.appendTo(baseUrl, authorizationInfo.getClientId(), authorizationInfo.getRedirectUri(), OAuthUtils.spaceDelimitedSet(authorizationInfo.getScopes()), authorizationInfo.getState(), authorizationInfo.getResponseType());
+    return OAuthUtils.appendTo(baseUrl, authorizationRequest.getClientId(), authorizationRequest.getRedirectUri(), OAuthUtils.spaceDelimitedSet(authorizationRequest.getScopes()), authorizationRequest.getState(), authorizationRequest.getResponseType());
   }
 
   /**
    * Retrieves the access token with the required scopes using the authorization code granted during the authorization.
    *
-   * @param accessTokenInfo
+   * @param accessTokenRequest
    * @return AccessTokenResponse
    * @throws ApiException
    */
-  public AccessTokenResponse getAccessToken(AccessTokenInfo accessTokenInfo) throws ApiException {
+  public AccessTokenResponse getAccessToken(AccessTokenRequest accessTokenRequest) throws ApiException {
 
     //Validate Request
-    OAuthApiValidator.getAccessTokenValidator(accessTokenInfo);
+    OAuthApiValidator.getAccessTokenValidator(accessTokenRequest);
 
     //Create path and map variables
     String path = "/oauth/token";
@@ -85,11 +85,11 @@ public class OAuthApi {
     List<Pair> queryParams = new ArrayList<Pair>();
 
     Map<String, Object> formParams = new HashMap<String, Object>();
-    formParams.put("code", accessTokenInfo.getCode());
-    formParams.put("client_id", accessTokenInfo.getClientId());
-    formParams.put("client_secret", accessTokenInfo.getClientSecret());
-    formParams.put("redirect_uri", accessTokenInfo.getRedirectUri());
-    formParams.put("grant_type", accessTokenInfo.getGrantType());
+    formParams.put("code", accessTokenRequest.getCode());
+    formParams.put("client_id", accessTokenRequest.getClientId());
+    formParams.put("client_secret", accessTokenRequest.getClientSecret());
+    formParams.put("redirect_uri", accessTokenRequest.getRedirectUri());
+    formParams.put("grant_type", accessTokenRequest.getGrantType());
 
 
     String[] accepts = new String[acceptsList.size()];
@@ -109,14 +109,14 @@ public class OAuthApi {
   /**
    * Refreshes the access token.
    *
-   * @param refreshedAccessTokenInfo
+   * @param accessTokenRefreshRequest
    * @return RefreshedAccessTokenResponse
    * @throws ApiException
    */
-  public RefreshedAccessTokenResponse refreshAccessToken(RefreshedAccessTokenInfo refreshedAccessTokenInfo) throws ApiException {
+  public AccessTokenRefreshResponse refreshAccessToken(AccessTokenRefreshRequest accessTokenRefreshRequest) throws ApiException {
 
     //Validate Request
-    OAuthApiValidator.refreshAccessTokenValidator(refreshedAccessTokenInfo);
+    OAuthApiValidator.refreshAccessTokenValidator(accessTokenRefreshRequest);
     //Create path and map variables
     String path = "/oauth/refresh";
 
@@ -134,10 +134,10 @@ public class OAuthApi {
     List<Pair> queryParams = new ArrayList<Pair>();
 
     Map<String, Object> formParams = new HashMap<String, Object>();
-    formParams.put("refresh_token", refreshedAccessTokenInfo.getRefreshToken());
-    formParams.put("client_id", refreshedAccessTokenInfo.getClientId());
-    formParams.put("client_secret",refreshedAccessTokenInfo.getClientSecret());
-    formParams.put("grant_type", refreshedAccessTokenInfo.getGrantType());
+    formParams.put("refresh_token", accessTokenRefreshRequest.getRefreshToken());
+    formParams.put("client_id", accessTokenRefreshRequest.getClientId());
+    formParams.put("client_secret",accessTokenRefreshRequest.getClientSecret());
+    formParams.put("grant_type", accessTokenRefreshRequest.getGrantType());
 
     String[] accepts = new String[acceptsList.size()];
     accepts = acceptsList.toArray(accepts);
@@ -149,7 +149,7 @@ public class OAuthApi {
 
     final String contentType = apiClient.selectHeaderContentType(contentTypes);
 
-    TypeRef returnType = new TypeRef<RefreshedAccessTokenResponse>() {};
+    TypeRef returnType = new TypeRef<AccessTokenRefreshResponse>() {};
     return apiClient.invokeAPI(path, "POST", queryParams, postBody, postBinaryBody, headerParams, formParams, acceptHeader, contentType, returnType, false);
   }
 

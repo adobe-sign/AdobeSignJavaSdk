@@ -14,8 +14,8 @@
 package com.adobe.sign.model.widgets;
 
 import com.adobe.sign.utils.StringUtil;
-import java.util.*;
 import com.adobe.sign.model.widgets.WidgetParticipantInfo;
+import java.util.*;
 
 
 
@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:04.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
 public class WidgetParticipantSetInfo   {
   
   private List<WidgetParticipantInfo> participantSetMemberInfos = new ArrayList<WidgetParticipantInfo>();
@@ -154,9 +154,9 @@ public enum StatusEnum {
 
   
   /**
-   * The participant set status with respect to the widget
+   * The status of the participant set with respect to the widget
    **/
-  @ApiModelProperty(required = true, value = "The participant set status with respect to the widget")
+  @ApiModelProperty(required = true, value = "The status of the participant set with respect to the widget")
   @JsonProperty("status")
   public StatusEnum getStatus() {
     return status;

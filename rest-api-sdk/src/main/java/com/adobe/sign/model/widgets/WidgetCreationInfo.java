@@ -14,14 +14,14 @@
 package com.adobe.sign.model.widgets;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.widgets.WidgetCompletionInfo;
-import com.adobe.sign.model.widgets.CounterSignerSetInfo;
-import com.adobe.sign.model.widgets.WidgetSignerSecurityOption;
-import com.adobe.sign.model.widgets.WidgetSecurityOption;
 import com.adobe.sign.model.widgets.WidgetMergefieldInfo;
 import com.adobe.sign.model.widgets.WidgetFileInfo;
 import com.adobe.sign.model.widgets.WidgetVaultingInfo;
+import com.adobe.sign.model.widgets.WidgetCompletionInfo;
+import com.adobe.sign.model.widgets.WidgetSecurityOption;
+import com.adobe.sign.model.widgets.WidgetSignerSecurityOption;
 import java.util.*;
+import com.adobe.sign.model.widgets.CounterSignerSetInfo;
 
 
 
@@ -30,9 +30,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:04.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
 public class WidgetCreationInfo   {
   
+  private Boolean authoringRequested = null;
   private String callbackInfo = null;
   private List<CounterSignerSetInfo> counterSignerSetInfos = new ArrayList<CounterSignerSetInfo>();
   private List<WidgetFileInfo> fileInfos = new ArrayList<WidgetFileInfo>();
@@ -63,6 +64,19 @@ public enum SignatureFlowEnum {
   private WidgetCompletionInfo widgetAuthFailureInfo = null;
   private WidgetCompletionInfo widgetCompletionInfo = null;
   private WidgetSignerSecurityOption widgetSignerSecurityOptions = null;
+
+  
+  /**
+   * Indicates that authoring is requested prior to sending the document
+   **/
+  @ApiModelProperty(value = "Indicates that authoring is requested prior to sending the document")
+  @JsonProperty("authoringRequested")
+  public Boolean getAuthoringRequested() {
+    return authoringRequested;
+  }
+  public void setAuthoringRequested(Boolean authoringRequested) {
+    this.authoringRequested = authoringRequested;
+  }
 
   
   /**
@@ -131,9 +145,9 @@ public enum SignatureFlowEnum {
 
   
   /**
-   * Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are curently supported
+   * Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are currently supported
    **/
-  @ApiModelProperty(value = "Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are curently supported")
+  @ApiModelProperty(value = "Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are currently supported")
   @JsonProperty("mergeFieldInfo")
   public List<WidgetMergefieldInfo> getMergeFieldInfo() {
     return mergeFieldInfo;
@@ -240,6 +254,7 @@ public enum SignatureFlowEnum {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetCreationInfo {\n");
     
+    sb.append("    authoringRequested: ").append(StringUtil.toIndentedString(authoringRequested)).append("\n");
     sb.append("    callbackInfo: ").append(StringUtil.toIndentedString(callbackInfo)).append("\n");
     sb.append("    counterSignerSetInfos: ").append(StringUtil.toIndentedString(counterSignerSetInfos)).append("\n");
     sb.append("    fileInfos: ").append(StringUtil.toIndentedString(fileInfos)).append("\n");

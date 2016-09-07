@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * A JSON object describing the personalize widget
  **/
 @ApiModel(description = "A JSON object describing the personalize widget")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:04.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
 public class WidgetPersonalizeResponse   {
   
   private String javascript = null;

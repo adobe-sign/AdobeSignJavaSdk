@@ -37,7 +37,7 @@ public class GetUrlForSettingsPage {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(GetUrlForSettingsPage.class.getName());
+    ApiUtils.configureProperty(GetUrlForSettingsPage.class.getName());
     try {
       GetUrlForSettingsPage client = new GetUrlForSettingsPage();
       client.run();

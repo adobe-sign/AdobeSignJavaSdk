@@ -14,9 +14,9 @@
 package com.adobe.sign.model.agreements;
 
 import com.adobe.sign.utils.StringUtil;
+import com.adobe.sign.model.agreements.FormFieldCondition;
 import com.adobe.sign.model.agreements.FormFieldLocation;
 import java.util.*;
-import com.adobe.sign.model.agreements.FormFieldCondition;
 
 
 
@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:02.594+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
 public class RequestFormField   {
   
 
@@ -416,9 +416,9 @@ public enum ShowOrHideEnum {
 
   
   /**
-   * Format of value of the field to be displayed based on the displayFormatType property.
+   * Format of the value of the field to be displayed based on the displayFormatType property.
    **/
-  @ApiModelProperty(value = "Format of value of the field to be displayed based on the displayFormatType property.")
+  @ApiModelProperty(value = "Format of the value of the field to be displayed based on the displayFormatType property.")
   @JsonProperty("displayFormat")
   public String getDisplayFormat() {
     return displayFormat;
@@ -754,9 +754,9 @@ public enum ShowOrHideEnum {
 
   
   /**
-   * Formula used to calculate form value of the field
+   * Formula used to calculate the value of the form field
    **/
-  @ApiModelProperty(value = "Formula used to calculate form value of the field")
+  @ApiModelProperty(value = "Formula used to calculate the value of the form field")
   @JsonProperty("specialFormula")
   public String getSpecialFormula() {
     return specialFormula;
