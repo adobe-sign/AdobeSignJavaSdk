@@ -22,13 +22,13 @@ import com.adobe.sign.utils.validator.WorkflowsApiValidator;
 
 import com.adobe.sign.model.workflows.UserWorkflows;
 import com.adobe.sign.model.workflows.WorkflowDescription;
-import com.adobe.sign.model.workflows.CustomWorkflowAgreementCreationRequest;
 import com.adobe.sign.model.workflows.AgreementCreationResponse;
+import com.adobe.sign.model.workflows.CustomWorkflowAgreementCreationRequest;
 
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:09.776+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
     public class WorkflowsApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -124,7 +124,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: workflow_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param workflowId The workflow identifier, as provided by the API to retrieve workflows.
+    * @param workflowId The workflow identifier, as retrieved from the API to fetch workflows.
     * @return WorkflowDescription
     */
     public WorkflowDescription getWorkflowInfo (MultivaluedMap headers,
@@ -194,7 +194,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: workflow_read - To read the workflow resource which will be used for agreement creation agreement_send - If authoringRequested parameter is set to false agreement_write - If authoringRequested parameter is set to true user_login - Required additionally if the autoLoginUser parameter is set to true 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param workflowId The workflow identifier, as provided by API to retrieve workflows.
+    * @param workflowId The workflow identifier, as retrieved from the API to fetch workflows.
     * @param customWorkflowAgreementCreationRequest Information about the agreement that you want to send and authoring options that you want to apply at the time of sending. NOTE: optional specified with the input parameters is a general guideline on normal request sent to this endpoint. You need to check the actual workflow definition to determine whether a parameter is required or optional.
     * @return AgreementCreationResponse
     */

@@ -21,8 +21,8 @@ import com.adobe.sign.utils.validator.ApiValidatorHelper;
 import com.adobe.sign.utils.validator.MegaSignsApiValidator;
 
 import com.adobe.sign.model.megaSigns.MegaSigns;
-import com.adobe.sign.model.megaSigns.MegaSignCreationRequest;
 import com.adobe.sign.model.megaSigns.MegaSignCreationResponse;
+import com.adobe.sign.model.megaSigns.MegaSignCreationRequest;
 import com.adobe.sign.model.megaSigns.MegaSignInfo;
 import com.adobe.sign.model.megaSigns.MegaSignChildAgreements;
 import com.adobe.sign.model.megaSigns.MegaSignStatusUpdateInfo;
@@ -31,7 +31,7 @@ import com.adobe.sign.model.megaSigns.MegaSignStatusUpdateResponse;
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:06.747+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
     public class MegaSignsApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -192,7 +192,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: agreement_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param megaSignId The identifier of the MegaSign parent agreement, as provided by the APIs which retrieve megaSign agreements or creates megaSign agreements
+    * @param megaSignId The identifier of the MegaSign parent agreement, as returned by the megaSign creation API or retrieved from the API to fetch megaSign agreements
     * @return MegaSignInfo
     */
     public MegaSignInfo getMegaSignInfo (MultivaluedMap headers,
@@ -262,7 +262,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: agreement_read 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param megaSignId The identifier of the MegaSign parent agreement, as provided by the APIs which retrieve megaSign agreements or creates megaSign agreements
+    * @param megaSignId The identifier of the MegaSign parent agreement, as returned by the megaSign creation API or retrieved from the API to fetch megaSign agreements
     * @return MegaSignChildAgreements
     */
     public MegaSignChildAgreements getMegaSignChildAgreements (MultivaluedMap headers,
@@ -333,7 +333,7 @@ import javax.ws.rs.core.MultivaluedMap;
     accept(key) Specify media types which are acceptable for the response. Currently only text/csv is supported. 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param megaSignId The identifier of the MegaSign parent agreement, as provided by the APIs which retrieve megaSign agreements or creates megaSign agreements
+    * @param megaSignId The identifier of the MegaSign parent agreement, as returned by the megaSign creation API or retrieved from the API to fetch megaSign agreements
     * @return byte[]
     */
     public byte[] getMegaSignFormData (MultivaluedMap headers,
@@ -403,7 +403,7 @@ import javax.ws.rs.core.MultivaluedMap;
     Access-Token(key) An OAuth Access Token with scopes: agreement_write 
     x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param megaSignId The identifier of the MegaSign parent agreement, as provided by the APIs which retrieve megaSign agreements or creates megaSign agreements
+    * @param megaSignId The identifier of the MegaSign parent agreement, as returned by the megaSign creation API or retrieved from the API to fetch megaSign agreements
     * @param megaSignStatusUpdateInfo MegaSign status update information object.
     * @return MegaSignStatusUpdateResponse
     */

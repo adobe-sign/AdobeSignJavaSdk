@@ -22,6 +22,7 @@ import com.adobe.sign.model.views.AgreementAssetRequest;
 import com.adobe.sign.model.views.ViewUrl;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
@@ -38,12 +39,14 @@ public class PostViewAgreementAssetsApiTest {
   
   private static ViewsApi viewsApi = null;
   private static String libraryDocumentId = null;
+
   
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     viewsApi = ViewsUtils.getViewsApi();
     libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);
   }

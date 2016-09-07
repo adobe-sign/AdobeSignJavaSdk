@@ -70,13 +70,18 @@ public class Constants {
   private static final String KEY_STORE_FILE_KEY = "keyStoreFile";
   private static final String KEY_STORE_PASSWORD_KEY = "keyStorePassword";
   private static final String AGREEMENT_COUNT_LIMIT_KEY = "agreementCountLimit";
+  private static final String ENV_HOST_NAME_KEY = "envHostName";
+  private static final String USER_EMAIL_PREFIX_KEY = "userEmailPrefix";
+  private static final String USER_EMAIL_DOMAIN_KEY = "userEmailDomain";
+  private static final String RECIPIENT_SET_NAME_KEY = "recipientSetName";
+
+
 
   //Common Parameters
   public static final String ACCESS_TOKEN = properties.getProperty(ACCESS_TOKEN_KEY).equals("null") ? null : properties.getProperty(ACCESS_TOKEN_KEY);
   public static final String X_API_USER = properties.getProperty(X_API_USER_KEY).equals("null") ? null : properties.getProperty(X_API_USER_KEY);
   public static final String USER_FIRST_NAME = properties.getProperty(USER_FIRST_NAME_KEY).equals("null") ? null : properties.getProperty(USER_FIRST_NAME_KEY);
   public static final String USER_LAST_NAME = properties.getProperty(USER_LAST_NAME_KEY).equals("null") ? null : properties.getProperty(USER_LAST_NAME_KEY);
-  public static final String USER_EMAIL = properties.getProperty(USER_EMAIL_KEY).equals("null") ? null : properties.getProperty(USER_EMAIL_KEY);
   public static final String X_USER_EMAIL = properties.getProperty(X_USER_EMAIL_KEY).equals("null") ? null : properties.getProperty(X_USER_EMAIL_KEY);
   public static final String ALTERNATE_PARTICIPANT_EMAIL = properties.getProperty(ALTERNATE_PARTICIPANT_EMAIL_KEY).equals("null") ? null : properties.getProperty(ALTERNATE_PARTICIPANT_EMAIL_KEY);
   public static final String GROUP_NAME = ApiUtils.getGroupName(properties.getProperty(GROUP_NAME_KEY).equals("null") ? null : properties.getProperty(GROUP_NAME_KEY));
@@ -108,6 +113,11 @@ public class Constants {
   public static final String INPUT_FORM_FIELD_FILE_NAME = properties.getProperty(INPUT_FORM_FIELD_FILE_NAME_KEY).equals("null") ? null : properties.getProperty(INPUT_FORM_FIELD_FILE_NAME_KEY);
 
   public static final int AGREEMENT_COUNT_LIMIT = Integer.parseInt(properties.getProperty(AGREEMENT_COUNT_LIMIT_KEY).equals("null") ? MINUS_ONE : properties.getProperty(AGREEMENT_COUNT_LIMIT_KEY));
+  public static final String ENV_HOST_NAME = properties.getProperty(ENV_HOST_NAME_KEY).equals("null") ? null : properties.getProperty(ENV_HOST_NAME_KEY);
+
+  private static final String USER_EMAIL_PREFIX = properties.getProperty(USER_EMAIL_PREFIX_KEY).equals("null") ? null : properties.getProperty(USER_EMAIL_PREFIX_KEY);
+  private static final String USER_EMAIL_DOMAIN = properties.getProperty(USER_EMAIL_DOMAIN_KEY).equals("null") ? null : properties.getProperty(USER_EMAIL_DOMAIN_KEY);
+  public static final String USER_EMAIL = ApiUtils.getUserEmail(USER_EMAIL_PREFIX,USER_EMAIL_DOMAIN);
 
   //OAuth workflow parameters
   public static final String REDIRECT_URI = properties.getProperty(REDIRECT_URI_KEY).equals("null") ? null : properties.getProperty(REDIRECT_URI_KEY);
@@ -127,5 +137,7 @@ public class Constants {
   public static final int SERVER_PORT = Integer.parseInt(properties.getProperty(SERVER_PORT_KEY).equals("null") ? MINUS_ONE : properties.getProperty(SERVER_PORT_KEY));
   public static final String KEY_STORE_FILE = properties.getProperty(KEY_STORE_FILE_KEY).equals("null") ? null : properties.getProperty(KEY_STORE_FILE_KEY);
   public static final String KEY_STORE_PASSWORD = properties.getProperty(KEY_STORE_PASSWORD_KEY).equals("null") ? null : properties.getProperty(KEY_STORE_PASSWORD_KEY);
-}
+  public static final String RECIPIENT_SET_NAME = properties.getProperty(RECIPIENT_SET_NAME_KEY).equals("null") ? null : properties.getProperty(RECIPIENT_SET_NAME_KEY);
 
+
+}

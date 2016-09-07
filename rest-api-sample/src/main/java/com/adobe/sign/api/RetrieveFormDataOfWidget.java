@@ -34,7 +34,7 @@ public class RetrieveFormDataOfWidget {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(RetrieveFormDataOfWidget.class.getName());
+    ApiUtils.configureProperty(RetrieveFormDataOfWidget.class.getName());
     try {
       RetrieveFormDataOfWidget client = new RetrieveFormDataOfWidget();
       client.run();

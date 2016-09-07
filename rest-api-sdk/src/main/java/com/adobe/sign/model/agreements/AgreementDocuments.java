@@ -14,9 +14,9 @@
 package com.adobe.sign.model.agreements;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.agreements.Document;
 import com.adobe.sign.model.agreements.SupportingDocument;
 import java.util.*;
+import com.adobe.sign.model.agreements.Document;
 
 
 
@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:02.594+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
 public class AgreementDocuments   {
   
   private List<Document> documents = new ArrayList<Document>();

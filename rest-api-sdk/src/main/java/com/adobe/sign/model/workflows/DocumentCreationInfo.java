@@ -14,16 +14,16 @@
 package com.adobe.sign.model.workflows;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.workflows.VaultingInfo;
-import com.adobe.sign.model.workflows.CcsInfo;
 import com.adobe.sign.model.workflows.CustomWorkflowFileInfo;
-import com.adobe.sign.model.workflows.WorkflowBasedFormField;
+import com.adobe.sign.model.workflows.VaultingInfo;
 import com.adobe.sign.model.workflows.FileInfo;
-import com.adobe.sign.model.workflows.SecurityOption;
 import com.adobe.sign.model.workflows.MergefieldInfo;
-import java.util.*;
-import com.adobe.sign.model.workflows.RecipientsInfo;
 import com.adobe.sign.model.workflows.PostSignOptions;
+import com.adobe.sign.model.workflows.RecipientsInfo;
+import com.adobe.sign.model.workflows.SecurityOption;
+import com.adobe.sign.model.workflows.CcsInfo;
+import com.adobe.sign.model.workflows.WorkflowBasedFormField;
+import java.util.*;
 
 
 
@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:09.776+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
 public class DocumentCreationInfo   {
   
   private String callbackInfo = null;
@@ -161,9 +161,9 @@ public enum ReminderFrequencyEnum {
 
   
   /**
-   * Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are curently supported
+   * Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are currently supported
    **/
-  @ApiModelProperty(value = "Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are curently supported")
+  @ApiModelProperty(value = "Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are currently supported")
   @JsonProperty("mergeFieldInfo")
   public List<MergefieldInfo> getMergeFieldInfo() {
     return mergeFieldInfo;

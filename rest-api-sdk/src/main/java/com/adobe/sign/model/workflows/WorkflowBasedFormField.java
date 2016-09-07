@@ -14,9 +14,9 @@
 package com.adobe.sign.model.workflows;
 
 import com.adobe.sign.utils.StringUtil;
+import com.adobe.sign.model.workflows.FormFieldCondition;
 import com.adobe.sign.model.workflows.FormFieldLocation;
 import java.util.*;
-import com.adobe.sign.model.workflows.FormFieldCondition;
 
 
 
@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:09.776+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
 public class WorkflowBasedFormField   {
   
 
@@ -755,9 +755,9 @@ public enum ShowOrHideEnum {
 
   
   /**
-   * Error message to be shown to the signer if filled value does not match the validations of the form field
+   * Error message to be shown to the signer if filled value doesn't match the validations of the form field
    **/
-  @ApiModelProperty(value = "Error message to be shown to the signer if filled value does not match the validations of the form field")
+  @ApiModelProperty(value = "Error message to be shown to the signer if filled value doesn't match the validations of the form field")
   @JsonProperty("specialErrMsg")
   public String getSpecialErrMsg() {
     return specialErrMsg;

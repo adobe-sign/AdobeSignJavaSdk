@@ -17,7 +17,10 @@ import static org.junit.Assert.assertTrue;
 
 import com.adobe.sign.api.OAuthApi;
 import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.OAuthUtil;
+import com.adobe.sign.utils.TestData;
+import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -25,12 +28,15 @@ import org.junit.Test;
 /**
  * Junit test cases for Get revokeToken API.
  */
-public class revokeTokenTest {
+public class RevokeTokenTest {
 
   private static OAuthApi oAuthApi = null;
 
+
+
   @BeforeClass
   public static void setup() {
+    ApiUtils.configureProperty();
     oAuthApi = OAuthUtil.getoAuthApi();
   }
 

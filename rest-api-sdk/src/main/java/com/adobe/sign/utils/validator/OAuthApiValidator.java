@@ -14,9 +14,9 @@ package com.adobe.sign.utils.validator;
 
 import java.util.ArrayList;
 
-import com.adobe.sign.model.oAuth.AccessTokenInfo;
-import com.adobe.sign.model.oAuth.AuthorizationInfo;
-import com.adobe.sign.model.oAuth.RefreshedAccessTokenInfo;
+import com.adobe.sign.model.oAuth.AccessTokenRefreshRequest;
+import com.adobe.sign.model.oAuth.AccessTokenRequest;
+import com.adobe.sign.model.oAuth.AuthorizationRequest;
 import com.adobe.sign.model.oAuth.Token;
 import com.adobe.sign.utils.ApiException;
 
@@ -29,54 +29,54 @@ public class OAuthApiValidator {
   /**
    * Validator for getAuthorizationUrl API that forms the url for authorization workflow.
    *
-   * @param authorizationInfo
+   * @param authorizationRequest
    * @throws ApiException
    */
-  public static void getAuthorizationUrlValidator(AuthorizationInfo authorizationInfo) throws ApiException {
-    ApiValidatorHelper.validateParameter(authorizationInfo);
+  public static void getAuthorizationUrlValidator(AuthorizationRequest authorizationRequest) throws ApiException {
+    ApiValidatorHelper.validateParameter(authorizationRequest);
 
     ArrayList<String> parameterList = new ArrayList();
-    parameterList.add(authorizationInfo.getClientId());
-    parameterList.add(authorizationInfo.getRedirectUri());
+    parameterList.add(authorizationRequest.getClientId());
+    parameterList.add(authorizationRequest.getRedirectUri());
 
     ApiValidatorHelper.validateRequiredParameters(parameterList);
-    ApiValidatorHelper.validateParameter(authorizationInfo.getScopes());
-    validateRedirectUri(authorizationInfo.getRedirectUri());
+    ApiValidatorHelper.validateParameter(authorizationRequest.getScopes());
+    validateRedirectUri(authorizationRequest.getRedirectUri());
   }
 
   /**
    * Validator for getAccessToken API that retrieves accessToken for the user.
    *
-   * @param accessTokenInfo
+   * @param accessTokenRequest
    * @throws ApiException
    */
-  public static void getAccessTokenValidator(AccessTokenInfo accessTokenInfo) throws ApiException {
-    ApiValidatorHelper.validateParameter(accessTokenInfo);
+  public static void getAccessTokenValidator(AccessTokenRequest accessTokenRequest) throws ApiException {
+    ApiValidatorHelper.validateParameter(accessTokenRequest);
 
     ArrayList<String> parameterList = new ArrayList();
-    parameterList.add(accessTokenInfo.getClientId());
-    parameterList.add(accessTokenInfo.getClientSecret());
-    parameterList.add(accessTokenInfo.getCode());
-    parameterList.add(accessTokenInfo.getGrantType());
+    parameterList.add(accessTokenRequest.getClientId());
+    parameterList.add(accessTokenRequest.getClientSecret());
+    parameterList.add(accessTokenRequest.getCode());
+    parameterList.add(accessTokenRequest.getGrantType());
 
     ApiValidatorHelper.validateRequiredParameters(parameterList);
-    validateRedirectUri(accessTokenInfo.getRedirectUri());
+    validateRedirectUri(accessTokenRequest.getRedirectUri());
   }
 
   /**
    * Validator for refreshAccessToken API that refreshes the accessToken of the user.
    *
-   * @param refreshedAccessTokenInfo
+   * @param accessTokenRefreshRequest
    * @throws ApiException
    */
-  public static void refreshAccessTokenValidator(RefreshedAccessTokenInfo refreshedAccessTokenInfo) throws ApiException {
-    ApiValidatorHelper.validateParameter(refreshedAccessTokenInfo);
+  public static void refreshAccessTokenValidator(AccessTokenRefreshRequest accessTokenRefreshRequest) throws ApiException {
+    ApiValidatorHelper.validateParameter(accessTokenRefreshRequest);
 
     ArrayList<String> parameterList = new ArrayList();
-    parameterList.add(refreshedAccessTokenInfo.getClientId());
-    parameterList.add(refreshedAccessTokenInfo.getClientSecret());
-    parameterList.add(refreshedAccessTokenInfo.getRefreshToken());
-    parameterList.add(refreshedAccessTokenInfo.getGrantType());
+    parameterList.add(accessTokenRefreshRequest.getClientId());
+    parameterList.add(accessTokenRefreshRequest.getClientSecret());
+    parameterList.add(accessTokenRefreshRequest.getRefreshToken());
+    parameterList.add(accessTokenRefreshRequest.getGrantType());
 
     ApiValidatorHelper.validateRequiredParameters(parameterList);
   }

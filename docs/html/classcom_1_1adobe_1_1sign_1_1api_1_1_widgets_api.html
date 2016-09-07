@@ -193,7 +193,7 @@ x-api-user(key) The userId or email of API caller using the account or group tok
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: widget_read 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">widgetId</td><td>The widget identifier, as provided by the APIs to retrieve widgets or create widgets. </td></tr>
+    <tr><td class="paramname">widgetId</td><td>The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets. </td></tr>
   </table>
   </dd>
 </dl>
@@ -229,7 +229,7 @@ x-api-user(key) The userId or email of API caller using the account or group tok
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: widget_read 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">widgetId</td><td>The widget identifier, as provided by the APIs to retrieve widgets or create widgets. </td></tr>
+    <tr><td class="paramname">widgetId</td><td>The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets. </td></tr>
   </table>
   </dd>
 </dl>
@@ -283,8 +283,8 @@ x-api-user(key) The userId or email of API caller using the account or group tok
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: widget_read 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">widgetId</td><td>The widget identifier, as provided by the APIs to retrieve widgets or create widgets. </td></tr>
-    <tr><td class="paramname">versionId</td><td>The version identifier of widget as provided by the API which retrieves a widget. If not provided then latest version will be used. </td></tr>
+    <tr><td class="paramname">widgetId</td><td>The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets. </td></tr>
+    <tr><td class="paramname">versionId</td><td>The version identifier of widget as provided by the API which retrieves information of a specific widget. If not provided then latest version will be used. </td></tr>
     <tr><td class="paramname">participantEmail</td><td>The email address of the participant to be used to retrieve documents. </td></tr>
     <tr><td class="paramname">auditReport</td><td>When set to YES, attach an audit report to the signed Widget PDF. Default value is false </td></tr>
   </table>
@@ -328,8 +328,8 @@ x-api-user(key) The userId or email of API caller using the account or group tok
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: widget_read 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">widgetId</td><td>The widget identifier, as provided by the APIs to retrieve widgets or create widgets. </td></tr>
-    <tr><td class="paramname">documentId</td><td>The document identifier, as provided by the API which retrieves the documents of a specified widgetwidgets/{widgetId}/documents </td></tr>
+    <tr><td class="paramname">widgetId</td><td>The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets. </td></tr>
+    <tr><td class="paramname">documentId</td><td>The document identifier, as retrieved from the API which fetches the documents of a specified widget </td></tr>
   </table>
   </dd>
 </dl>
@@ -378,8 +378,8 @@ x-api-user(key) The userId or email of API caller using the account or group tok
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: widget_read 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">widgetId</td><td>The widget identifier, as provided by the APIs to retrieve widgets or create widgets. </td></tr>
-    <tr><td class="paramname">versionId</td><td>The version identifier of widget as provided by the API which retrieves a widget. If not provided then latest version will be used. </td></tr>
+    <tr><td class="paramname">widgetId</td><td>The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets. </td></tr>
+    <tr><td class="paramname">versionId</td><td>The version identifier of widget as provided by the API which retrieves information of a specific widget. If not provided then latest version will be used. </td></tr>
     <tr><td class="paramname">participantEmail</td><td>The email address of the participant to be used to retrieve documents. </td></tr>
   </table>
   </dd>
@@ -416,7 +416,7 @@ x-api-user(key) The userId or email of API caller using the account or group tok
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: widget_read 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">widgetId</td><td>The widget identifier, as provided by the APIs to retrieve widgets or create widgets. </td></tr>
+    <tr><td class="paramname">widgetId</td><td>The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets. </td></tr>
   </table>
   </dd>
 </dl>
@@ -453,7 +453,7 @@ x-api-user(key) The userId or email of API caller using the account or group tok
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: widget_read 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">widgetId</td><td>The widget identifier, as provided by the APIs to retrieve widgets or create widgets. </td></tr>
+    <tr><td class="paramname">widgetId</td><td>The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets. </td></tr>
   </table>
   </dd>
 </dl>
@@ -522,7 +522,7 @@ x-api-user(key) The userId or email of API caller using the account or group tok
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: widget_write 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">widgetId</td><td>The widget identifier, as provided by the APIs to retrieve widgets or create widgets. </td></tr>
+    <tr><td class="paramname">widgetId</td><td>The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets. </td></tr>
     <tr><td class="paramname">widgetPersonalizationInfo</td><td>Widget Personalize update information object </td></tr>
   </table>
   </dd>
@@ -566,7 +566,7 @@ x-api-user(key) The userId or email of API caller using the account or group tok
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
 Access-Token(key) An OAuth Access Token with scopes: widget_write 
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">widgetId</td><td>The widget identifier, as provided by the APIs to retrieve widgets or create widgets. </td></tr>
+    <tr><td class="paramname">widgetId</td><td>The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets. </td></tr>
     <tr><td class="paramname">widgetStatusUpdateInfo</td><td>Widget status update information object. </td></tr>
   </table>
   </dd>

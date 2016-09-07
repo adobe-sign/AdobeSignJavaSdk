@@ -46,7 +46,7 @@ public class SendAgreementUsingTransientDocument {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(SendAgreementUsingTransientDocument.class.getName());
+    ApiUtils.configureProperty(SendAgreementUsingTransientDocument.class.getName());
     try {
       SendAgreementUsingTransientDocument client = new SendAgreementUsingTransientDocument();
       client.run();

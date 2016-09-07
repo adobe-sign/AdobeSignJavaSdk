@@ -89,4 +89,6 @@ public class Errors {
   public final static String START_HTTPS_SERVER = "Failure in starting the HTTPS server";
   public final static String OAUTH_HANDLER = "Failure in authorizing for Oauth code";
   public final static String REDIRECT_HANDLER = "Failure in redirecting to redirect URI";
+  public final static String SEND_TO_GROUP = "Failure in sending agreement to the specified group";
 }
+

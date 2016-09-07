@@ -13,7 +13,7 @@
 
 package com.adobe.sign.utils;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:12.693+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:04:00.834+05:30")
 public class Context {
   private static ApiClient defaultApiClient = new ApiClient();
 
@@ -39,6 +39,22 @@ public class Context {
   public static String getBaseUri()
   {
     return defaultApiClient.getBaseUri();  
+  }
+
+  /**
+   * Set the host environment.
+   */
+  public static void setEnvHostName(String hostName)
+  {
+    defaultApiClient.setEnvHostName(hostName);
+  }
+
+  /**
+   * Get the host environment.
+   */
+  public static String getEnvHostName()
+  {
+    return defaultApiClient.getEnvHostName();
   }
 
 }

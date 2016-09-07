@@ -44,7 +44,7 @@ public class SendAgreementUsingLibraryDocument {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(SendAgreementUsingLibraryDocument.class.getName());
+    ApiUtils.configureProperty(SendAgreementUsingLibraryDocument.class.getName());
     try {
       SendAgreementUsingLibraryDocument client = new SendAgreementUsingLibraryDocument();
       client.run();

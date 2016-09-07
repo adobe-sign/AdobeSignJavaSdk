@@ -36,7 +36,7 @@ public class GetUsersInAccount {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(GetUsersInAccount.class.getName());
+    ApiUtils.configureProperty(GetUsersInAccount.class.getName());
     try {
       GetUsersInAccount client = new GetUsersInAccount();
       client.run();

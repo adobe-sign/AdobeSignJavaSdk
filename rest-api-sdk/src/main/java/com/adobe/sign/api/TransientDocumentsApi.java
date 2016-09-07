@@ -26,7 +26,7 @@ import java.io.File;
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:11.858+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:04:00.006+05:30")
     public class TransientDocumentsApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -40,7 +40,7 @@ import javax.ws.rs.core.MultivaluedMap;
 
     
     /**
-    * Uploads a document and obtains the ID of the document .
+    * Uploads a document and obtains the ID of the document.
     * The document uploaded through this call is referred to as transient since it is available only for 7 days after the upload. The returned transient document ID can be used to refer to the document in api calls like POST /agreements where uploaded file needs to be referred. The transient document request is a multipart request consisting of three parts - filename, mime type and the file stream. You can only upload one file at a time in this request.
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>

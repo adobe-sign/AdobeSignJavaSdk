@@ -14,8 +14,8 @@
 package com.adobe.sign.model.megaSigns;
 
 import com.adobe.sign.utils.StringUtil;
-import java.util.Date;
 import com.adobe.sign.model.megaSigns.DeviceLocation;
+import java.util.Date;
 
 
 
@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:06.747+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
 public class DocumentHistoryEvent   {
   
   private String actingUserEmail = null;

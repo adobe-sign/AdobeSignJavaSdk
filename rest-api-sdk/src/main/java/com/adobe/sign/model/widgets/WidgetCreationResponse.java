@@ -25,10 +25,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * A JSON object describing the widget
  **/
 @ApiModel(description = "A JSON object describing the widget")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:04.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
 public class WidgetCreationResponse   {
   
   private String javascript = null;
+  private String nextPageEmbeddedCode = null;
+  private String nextPageUrl = null;
   private String url = null;
   private String widgetId = null;
 
@@ -43,6 +45,32 @@ public class WidgetCreationResponse   {
   }
   public void setJavascript(String javascript) {
     this.javascript = javascript;
+  }
+
+  
+  /**
+   * Javascript snippet suitable for an embedded page of the redirected URL that can be used by widget creators
+   **/
+  @ApiModelProperty(required = true, value = "Javascript snippet suitable for an embedded page of the redirected URL that can be used by widget creators")
+  @JsonProperty("nextPageEmbeddedCode")
+  public String getNextPageEmbeddedCode() {
+    return nextPageEmbeddedCode;
+  }
+  public void setNextPageEmbeddedCode(String nextPageEmbeddedCode) {
+    this.nextPageEmbeddedCode = nextPageEmbeddedCode;
+  }
+
+  
+  /**
+   * Redirect URL once the widget is created
+   **/
+  @ApiModelProperty(required = true, value = "Redirect URL once the widget is created")
+  @JsonProperty("nextPageUrl")
+  public String getNextPageUrl() {
+    return nextPageUrl;
+  }
+  public void setNextPageUrl(String nextPageUrl) {
+    this.nextPageUrl = nextPageUrl;
   }
 
   
@@ -79,6 +107,8 @@ public class WidgetCreationResponse   {
     sb.append("class WidgetCreationResponse {\n");
     
     sb.append("    javascript: ").append(StringUtil.toIndentedString(javascript)).append("\n");
+    sb.append("    nextPageEmbeddedCode: ").append(StringUtil.toIndentedString(nextPageEmbeddedCode)).append("\n");
+    sb.append("    nextPageUrl: ").append(StringUtil.toIndentedString(nextPageUrl)).append("\n");
     sb.append("    url: ").append(StringUtil.toIndentedString(url)).append("\n");
     sb.append("    widgetId: ").append(StringUtil.toIndentedString(widgetId)).append("\n");
     sb.append("}");

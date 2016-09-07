@@ -37,7 +37,7 @@ public class GetNextParticipantInfoOfAllWaitingAgreements {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(GetNextParticipantInfoOfAllWaitingAgreements.class.getName());
+    ApiUtils.configureProperty(GetNextParticipantInfoOfAllWaitingAgreements.class.getName());
     try {
       GetNextParticipantInfoOfAllWaitingAgreements client = new GetNextParticipantInfoOfAllWaitingAgreements();
       client.run();

@@ -33,7 +33,7 @@ public class CreateNewUserInAccount {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(CreateNewUserInAccount.class.getName());
+    ApiUtils.configureProperty(CreateNewUserInAccount.class.getName());
     try {
       CreateNewUserInAccount client = new CreateNewUserInAccount();
       client.run();

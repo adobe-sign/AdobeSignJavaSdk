@@ -18,8 +18,10 @@ import static org.junit.Assert.fail;
 import com.adobe.sign.api.GroupsApi;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.GroupUtils;
 import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,13 +33,15 @@ public class DeleteGroupApiTest {
   
   private static String groupId = null;
   private static GroupsApi groupsApi = null;
+
   
   @Rule
   public Retry retry = new Retry();
 
 	@BeforeClass
 	public static void setup() throws ApiException {
-		groupId = GroupUtils.createGroup(ApiUtils.getGroupName());
+    ApiUtils.configureProperty();
+    groupId = GroupUtils.createGroup(ApiUtils.getGroupName());
 		groupsApi = GroupUtils.getGroupsApi();
 	}
 

@@ -21,6 +21,7 @@ import com.adobe.sign.api.WorkflowsApi;
 import com.adobe.sign.model.workflows.WorkflowDescription;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WorkFlowUtils;
@@ -35,12 +36,14 @@ import org.junit.Test;
 public class GetWorkflowInfoApiTest {
   private static WorkflowsApi workflowsApi = null;
   private static String workflowId = null;
+
   
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     workflowId = WorkFlowUtils.getResourceId();
     workflowsApi = WorkFlowUtils.getWorkflowsApi();
   }

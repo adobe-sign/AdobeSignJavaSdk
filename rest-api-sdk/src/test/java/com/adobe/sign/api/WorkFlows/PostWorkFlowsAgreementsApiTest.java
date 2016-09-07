@@ -24,6 +24,7 @@ import com.adobe.sign.model.workflows.CustomWorkflowFileInfo;
 import com.adobe.sign.model.workflows.PostSignOptions;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
@@ -43,12 +44,14 @@ public class PostWorkFlowsAgreementsApiTest {
   private static String workflowId = null;
   private static String libraryDocumentId = null;
   private static String transientDocumentId = null;
+
   
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     workflowId = WorkFlowUtils.getResourceId();
     workflowsApi = WorkFlowUtils.getWorkflowsApi();
 

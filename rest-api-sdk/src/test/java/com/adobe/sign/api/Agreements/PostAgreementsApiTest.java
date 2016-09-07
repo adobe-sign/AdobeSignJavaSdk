@@ -27,6 +27,7 @@ import com.adobe.sign.model.agreements.URLFileInfo;
 import com.adobe.sign.utils.AgreementsUtils;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
@@ -43,12 +44,14 @@ public class PostAgreementsApiTest {
   private static AgreementsApi agreementsApi = null;
   private static String libraryDocumentId = null;
   private static String transientDocumentId = null;
-  
+
+
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     agreementsApi = AgreementsUtils.getAgreementsApi();
 
     libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);

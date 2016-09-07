@@ -35,7 +35,7 @@ public class GetSearchAgreementAssetEventsForUser {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(GetSearchAgreementAssetEventsForUser.class.getName());
+    ApiUtils.configureProperty(GetSearchAgreementAssetEventsForUser.class.getName());
     try {
       GetSearchAgreementAssetEventsForUser client = new GetSearchAgreementAssetEventsForUser();
       client.run();

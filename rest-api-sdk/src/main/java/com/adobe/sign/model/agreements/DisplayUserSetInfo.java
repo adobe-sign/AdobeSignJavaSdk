@@ -24,10 +24,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:02.594+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
 public class DisplayUserSetInfo   {
   
   private List<DisplayUserInfo> displayUserSetMemberInfos = new ArrayList<DisplayUserInfo>();
+  private String displayUserSetName = null;
 
   
   /**
@@ -43,6 +44,19 @@ public class DisplayUserSetInfo   {
   }
 
   
+  /**
+   * The name of the display user set. Returned only, if the API caller is the sender of agreement.
+   **/
+  @ApiModelProperty(value = "The name of the display user set. Returned only, if the API caller is the sender of agreement.")
+  @JsonProperty("displayUserSetName")
+  public String getDisplayUserSetName() {
+    return displayUserSetName;
+  }
+  public void setDisplayUserSetName(String displayUserSetName) {
+    this.displayUserSetName = displayUserSetName;
+  }
+
+  
 
   @Override
   public String toString()  {
@@ -50,6 +64,7 @@ public class DisplayUserSetInfo   {
     sb.append("class DisplayUserSetInfo {\n");
     
     sb.append("    displayUserSetMemberInfos: ").append(StringUtil.toIndentedString(displayUserSetMemberInfos)).append("\n");
+    sb.append("    displayUserSetName: ").append(StringUtil.toIndentedString(displayUserSetName)).append("\n");
     sb.append("}");
     return sb.toString();
   }

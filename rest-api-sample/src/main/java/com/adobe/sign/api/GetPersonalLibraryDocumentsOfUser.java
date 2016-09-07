@@ -37,7 +37,7 @@ public class GetPersonalLibraryDocumentsOfUser {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(GetPersonalLibraryDocumentsOfUser.class.getName());
+    ApiUtils.configureProperty(GetPersonalLibraryDocumentsOfUser.class.getName());
     try {
       GetPersonalLibraryDocumentsOfUser client = new GetPersonalLibraryDocumentsOfUser();
       client.run();

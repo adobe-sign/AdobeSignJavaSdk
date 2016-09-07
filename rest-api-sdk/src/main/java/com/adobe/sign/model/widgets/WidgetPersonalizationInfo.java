@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:04.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
 public class WidgetPersonalizationInfo   {
   
   private Boolean allowManualVerification = null;
@@ -47,9 +47,9 @@ public class WidgetPersonalizationInfo   {
 
   
   /**
-   * Comment describing how the API caller established the signer's identity - will appear in the audit trail.
+   * Comment describing how the API caller established the identity of the signer - will appear in the audit trail.
    **/
-  @ApiModelProperty(value = "Comment describing how the API caller established the signer's identity - will appear in the audit trail.")
+  @ApiModelProperty(value = "Comment describing how the API caller established the identity of the signer - will appear in the audit trail.")
   @JsonProperty("comment")
   public String getComment() {
     return comment;

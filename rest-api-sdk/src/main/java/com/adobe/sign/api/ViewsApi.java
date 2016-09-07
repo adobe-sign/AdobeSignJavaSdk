@@ -20,15 +20,15 @@ import com.adobe.sign.utils.TypeRef;
 import com.adobe.sign.utils.validator.ApiValidatorHelper;
 import com.adobe.sign.utils.validator.ViewsApiValidator;
 
-import com.adobe.sign.model.views.AgreementAssetListRequest;
 import com.adobe.sign.model.views.ViewUrl;
+import com.adobe.sign.model.views.AgreementAssetListRequest;
 import com.adobe.sign.model.views.AgreementAssetRequest;
 import com.adobe.sign.model.views.TargetViewRequest;
 
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:08.837+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.045+05:30")
     public class ViewsApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";

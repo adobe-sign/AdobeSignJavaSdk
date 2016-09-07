@@ -41,7 +41,7 @@ public class SendReminderOnPendingAgreements {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(SendReminderOnPendingAgreements.class.getName());
+    ApiUtils.configureProperty(SendReminderOnPendingAgreements.class.getName());
     try {
       SendReminderOnPendingAgreements client = new SendReminderOnPendingAgreements();
       client.run();

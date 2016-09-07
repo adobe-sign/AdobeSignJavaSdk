@@ -25,11 +25,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:02.594+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
 public class RecipientSetInfo   {
   
   private String privateMessage = null;
   private List<RecipientInfo> recipientSetMemberInfos = new ArrayList<RecipientInfo>();
+  private String recipientSetName = null;
 
 public enum RecipientSetRoleEnum {
   SIGNER("SIGNER"),
@@ -81,6 +82,19 @@ public enum RecipientSetRoleEnum {
 
   
   /**
+   * Specify the name of Recipient set. Maximum no of characters in recipient set name is restricted to 255.
+   **/
+  @ApiModelProperty(value = "Specify the name of Recipient set. Maximum no of characters in recipient set name is restricted to 255.")
+  @JsonProperty("recipientSetName")
+  public String getRecipientSetName() {
+    return recipientSetName;
+  }
+  public void setRecipientSetName(String recipientSetName) {
+    this.recipientSetName = recipientSetName;
+  }
+
+  
+  /**
    * Specify the role of recipient set
    **/
   @ApiModelProperty(required = true, value = "Specify the role of recipient set")
@@ -127,6 +141,7 @@ public enum RecipientSetRoleEnum {
     
     sb.append("    privateMessage: ").append(StringUtil.toIndentedString(privateMessage)).append("\n");
     sb.append("    recipientSetMemberInfos: ").append(StringUtil.toIndentedString(recipientSetMemberInfos)).append("\n");
+    sb.append("    recipientSetName: ").append(StringUtil.toIndentedString(recipientSetName)).append("\n");
     sb.append("    recipientSetRole: ").append(StringUtil.toIndentedString(recipientSetRole)).append("\n");
     sb.append("    securityOptions: ").append(StringUtil.toIndentedString(securityOptions)).append("\n");
     sb.append("    signingOrder: ").append(StringUtil.toIndentedString(signingOrder)).append("\n");

@@ -21,6 +21,7 @@ import com.adobe.sign.api.TransientDocumentsApi;
 import com.adobe.sign.model.transientDocuments.TransientDocumentResponse;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.TransientDocumentsUtils;
@@ -35,14 +36,16 @@ import org.junit.Test;
 public class PostTransientDocumentsApiTest {
   
   private static TransientDocumentsApi transientDocumentsApi = null;
-  
+
+
+
   @Rule
   public Retry retry = new Retry();
   
   
   @BeforeClass
   public static void setup() {
-
+    ApiUtils.configureProperty();
     transientDocumentsApi = TransientDocumentsUtils.getTransientDocumentsApi();
   }
   

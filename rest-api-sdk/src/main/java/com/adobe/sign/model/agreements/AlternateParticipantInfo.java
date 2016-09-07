@@ -22,11 +22,26 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:02.594+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
 public class AlternateParticipantInfo   {
   
+  private String countryCode = null;
   private String email = null;
+  private String phone = null;
   private String privateMessage = null;
+
+  
+  /**
+   * The country code for the alternate participant
+   **/
+  @ApiModelProperty(value = "The country code for the alternate participant")
+  @JsonProperty("countryCode")
+  public String getCountryCode() {
+    return countryCode;
+  }
+  public void setCountryCode(String countryCode) {
+    this.countryCode = countryCode;
+  }
 
   
   /**
@@ -39,6 +54,19 @@ public class AlternateParticipantInfo   {
   }
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  
+  /**
+   * The phone number for the alternate participant
+   **/
+  @ApiModelProperty(value = "The phone number for the alternate participant")
+  @JsonProperty("phone")
+  public String getPhone() {
+    return phone;
+  }
+  public void setPhone(String phone) {
+    this.phone = phone;
   }
 
   
@@ -61,7 +89,9 @@ public class AlternateParticipantInfo   {
     StringBuilder sb = new StringBuilder();
     sb.append("class AlternateParticipantInfo {\n");
     
+    sb.append("    countryCode: ").append(StringUtil.toIndentedString(countryCode)).append("\n");
     sb.append("    email: ").append(StringUtil.toIndentedString(email)).append("\n");
+    sb.append("    phone: ").append(StringUtil.toIndentedString(phone)).append("\n");
     sb.append("    privateMessage: ").append(StringUtil.toIndentedString(privateMessage)).append("\n");
     sb.append("}");
     return sb.toString();

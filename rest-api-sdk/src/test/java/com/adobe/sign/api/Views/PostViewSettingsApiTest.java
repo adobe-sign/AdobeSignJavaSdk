@@ -23,7 +23,9 @@ import com.adobe.sign.model.views.TargetViewRequest.TargetViewEnum;
 import com.adobe.sign.model.views.ViewUrl;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ViewsUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
 import org.junit.BeforeClass;
@@ -36,13 +38,14 @@ import org.junit.Test;
 public class PostViewSettingsApiTest {
 
   private static ViewsApi viewsApi = null;
+
   
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() {
-
+    ApiUtils.configureProperty();
     viewsApi = ViewsUtils.getViewsApi();
   }
 

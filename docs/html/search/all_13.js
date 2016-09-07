@@ -1,8 +1,8 @@
 var searchData=
 [
   ['webidentityprotectionenum',['WebIdentityProtectionEnum',['../enumcom_1_1adobe_1_1sign_1_1model_1_1agreements_1_1_security_option_1_1_web_identity_protection_enum.html',1,'com::adobe::sign::model::agreements::SecurityOption']]],
-  ['webidentityprotectionenum',['WebIdentityProtectionEnum',['../enumcom_1_1adobe_1_1sign_1_1model_1_1mega_signs_1_1_security_option_1_1_web_identity_protection_enum.html',1,'com::adobe::sign::model::megaSigns::SecurityOption']]],
   ['webidentityprotectionenum',['WebIdentityProtectionEnum',['../enumcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_security_option_1_1_web_identity_protection_enum.html',1,'com::adobe::sign::model::widgets::WidgetSecurityOption']]],
+  ['webidentityprotectionenum',['WebIdentityProtectionEnum',['../enumcom_1_1adobe_1_1sign_1_1model_1_1mega_signs_1_1_security_option_1_1_web_identity_protection_enum.html',1,'com::adobe::sign::model::megaSigns::SecurityOption']]],
   ['widgetagreements',['WidgetAgreements',['../classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_agreements.html',1,'com::adobe::sign::model::widgets']]],
   ['widgetcompletioninfo',['WidgetCompletionInfo',['../classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_completion_info.html',1,'com::adobe::sign::model::widgets']]],
   ['widgetcreationinfo',['WidgetCreationInfo',['../classcom_1_1adobe_1_1sign_1_1model_1_1widgets_1_1_widget_creation_info.html',1,'com::adobe::sign::model::widgets']]],

@@ -22,7 +22,9 @@ import com.adobe.sign.api.WidgetsApi;
 import com.adobe.sign.model.widgets.UserWidgets;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WidgetUtils;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
 import org.junit.BeforeClass;
@@ -35,12 +37,14 @@ import org.junit.Test;
 public class GetWidgetsApiTest {
 
   private static WidgetsApi widgetsApi = null;
+
   
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     widgetsApi = WidgetUtils.getWidgetsApi();
   }
 

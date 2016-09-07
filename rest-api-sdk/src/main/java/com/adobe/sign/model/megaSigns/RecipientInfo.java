@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:06.747+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
 public class RecipientInfo   {
   
   private String email = null;
@@ -32,7 +32,7 @@ public class RecipientInfo   {
   /**
    * Email of the recipient. This is required if fax is not provided. Both fax and email can not be provided
    **/
-  @ApiModelProperty(required = true, value = "Email of the recipient. This is required if fax is not provided. Both fax and email can not be provided")
+  @ApiModelProperty(value = "Email of the recipient. This is required if fax is not provided. Both fax and email can not be provided")
   @JsonProperty("email")
   public String getEmail() {
     return email;
@@ -45,7 +45,7 @@ public class RecipientInfo   {
   /**
    * Fax of the recipient. This is required if email is not provided. Both fax and email can not be provided. In case of recipient set having more than one member, fax is not allowed
    **/
-  @ApiModelProperty(required = true, value = "Fax of the recipient. This is required if email is not provided. Both fax and email can not be provided. In case of recipient set having more than one member, fax is not allowed")
+  @ApiModelProperty(value = "Fax of the recipient. This is required if email is not provided. Both fax and email can not be provided. In case of recipient set having more than one member, fax is not allowed")
   @JsonProperty("fax")
   public String getFax() {
     return fax;

@@ -15,8 +15,8 @@ package com.adobe.sign.model.libraryDocuments;
 
 import com.adobe.sign.utils.StringUtil;
 import com.adobe.sign.model.libraryDocuments.LibDocParticipantInfo;
-import com.adobe.sign.model.libraryDocuments.LibDocumentHistoryEvent;
 import java.util.*;
+import com.adobe.sign.model.libraryDocuments.LibDocumentHistoryEvent;
 
 
 
@@ -25,13 +25,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:05.613+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:51.876+05:30")
 public class LibraryDocumentInfo   {
   
   private List<LibDocumentHistoryEvent> events = new ArrayList<LibDocumentHistoryEvent>();
   private String libraryDocumentId = null;
   private String locale = null;
   private String message = null;
+  private String latestVersionId = null;
   private String name = null;
   private List<LibDocParticipantInfo> participants = new ArrayList<LibDocParticipantInfo>();
 
@@ -140,6 +141,19 @@ public enum StatusEnum {
 
   
   /**
+   * A version ID which uniquely identifies the current version of the agreement
+   **/
+  @ApiModelProperty(required = true, value = "A version ID which uniquely identifies the current version of the agreement")
+  @JsonProperty("latestVersionId")
+  public String getLatestVersionId() {
+    return latestVersionId;
+  }
+  public void setLatestVersionId(String latestVersionId) {
+    this.latestVersionId = latestVersionId;
+  }
+
+  
+  /**
    * The name of the document, specified by the sender
    **/
   @ApiModelProperty(required = true, value = "The name of the document, specified by the sender")
@@ -201,6 +215,7 @@ public enum StatusEnum {
     sb.append("    libraryDocumentId: ").append(StringUtil.toIndentedString(libraryDocumentId)).append("\n");
     sb.append("    locale: ").append(StringUtil.toIndentedString(locale)).append("\n");
     sb.append("    message: ").append(StringUtil.toIndentedString(message)).append("\n");
+    sb.append("    latestVersionId: ").append(StringUtil.toIndentedString(latestVersionId)).append("\n");
     sb.append("    name: ").append(StringUtil.toIndentedString(name)).append("\n");
     sb.append("    participants: ").append(StringUtil.toIndentedString(participants)).append("\n");
     sb.append("    securityOptions: ").append(StringUtil.toIndentedString(securityOptions)).append("\n");

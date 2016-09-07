@@ -21,8 +21,10 @@ import com.adobe.sign.api.GroupsApi;
 import com.adobe.sign.model.groups.GroupsInfo;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.GroupUtils;
 import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -34,13 +36,14 @@ import org.junit.Test;
 public class GetGroupsApiTest {
   
   private static GroupsApi groupsApi = null;
+
   
   @Rule
   public Retry retry = new Retry();
   
   @BeforeClass
   public static void setup() {
-
+    ApiUtils.configureProperty();
     groupsApi = GroupUtils.getGroupsApi();
   }
   

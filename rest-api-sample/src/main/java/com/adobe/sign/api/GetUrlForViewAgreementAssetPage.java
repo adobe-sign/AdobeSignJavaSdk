@@ -36,7 +36,7 @@ public class GetUrlForViewAgreementAssetPage {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(GetUrlForViewAgreementAssetPage.class.getName());
+    ApiUtils.configureProperty(GetUrlForViewAgreementAssetPage.class.getName());
     try {
       GetUrlForViewAgreementAssetPage client = new GetUrlForViewAgreementAssetPage();
       client.run();

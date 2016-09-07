@@ -17,11 +17,11 @@ package com.adobe.sign.api.OAuth.desktopApp;
 import java.util.ArrayList;
 
 import com.adobe.sign.api.OAuthApi;
-import com.adobe.sign.model.oAuth.AccessTokenInfo;
+import com.adobe.sign.model.oAuth.AccessTokenRequest;
 import com.adobe.sign.model.oAuth.AccessTokenResponse;
-import com.adobe.sign.model.oAuth.AuthorizationInfo;
-import com.adobe.sign.model.oAuth.RefreshedAccessTokenInfo;
-import com.adobe.sign.model.oAuth.RefreshedAccessTokenResponse;
+import com.adobe.sign.model.oAuth.AuthorizationRequest;
+import com.adobe.sign.model.oAuth.AccessTokenRefreshRequest;
+import com.adobe.sign.model.oAuth.AccessTokenRefreshResponse;
 import com.adobe.sign.model.oAuth.Scope;
 import com.adobe.sign.model.oAuth.Token;
 import com.adobe.sign.utils.ApiException;
@@ -45,7 +45,7 @@ public class CreateGroupWithOAuthWorkFlowUsingDesktopApp {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(CreateGroupWithOAuthWorkFlowUsingDesktopApp.class.getName());
+    ApiUtils.configureProperty(CreateGroupWithOAuthWorkFlowUsingDesktopApp.class.getName());
     try {
       CreateGroupWithOAuthWorkFlowUsingDesktopApp client = new CreateGroupWithOAuthWorkFlowUsingDesktopApp();
       client.run();
@@ -70,7 +70,7 @@ public class CreateGroupWithOAuthWorkFlowUsingDesktopApp {
     scopes.add(new Scope(SCOPE_TARGET, SCOPE_MODIFIER));
 
     //Fetch the authorization url.
-    AuthorizationInfo authorizationInfo = new AuthorizationInfo(Constants.CLIENT_ID,
+    AuthorizationRequest authorizationInfo = new AuthorizationRequest(Constants.CLIENT_ID,
                                                                 Constants.REDIRECT_URI,
                                                                 scopes,
                                                                 Constants.STATE,
@@ -96,7 +96,7 @@ public class CreateGroupWithOAuthWorkFlowUsingDesktopApp {
     Context.setBaseUri(apiAccessPoint);
 
     //Fetch the access token.
-    AccessTokenInfo accessTokenInfo = new AccessTokenInfo(Constants.CLIENT_ID,
+    AccessTokenRequest accessTokenInfo = new AccessTokenRequest(Constants.CLIENT_ID,
                                                           Constants.CLIENT_SECRET,
                                                           Constants.REDIRECT_URI,
                                                           code,
@@ -105,11 +105,11 @@ public class CreateGroupWithOAuthWorkFlowUsingDesktopApp {
     ApiUtils.getLogger().info(accessTokenResponse.toString());
 
     //Refresh the accessToken
-    RefreshedAccessTokenInfo refreshedAccessTokenInfo = new RefreshedAccessTokenInfo(Constants.CLIENT_ID ,
+    AccessTokenRefreshRequest refreshedAccessTokenInfo = new AccessTokenRefreshRequest(Constants.CLIENT_ID ,
                                                                                      Constants.CLIENT_SECRET,
                                                                                      accessTokenResponse.getRefreshToken(),
                                                                                      Constants.REFRESH_TOKEN_GRANT_TYPE);
-    RefreshedAccessTokenResponse refreshedAccessTokenResponse = oAuthApi.refreshAccessToken(refreshedAccessTokenInfo);
+    AccessTokenRefreshResponse refreshedAccessTokenResponse = oAuthApi.refreshAccessToken(refreshedAccessTokenInfo);
     ApiUtils.getLogger().info(refreshedAccessTokenResponse.toString());
 
     //Make API call to create a group with refreshed token. You can also use the accessToken before it's expiry time.

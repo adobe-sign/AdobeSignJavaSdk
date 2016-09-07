@@ -23,6 +23,7 @@ import com.adobe.sign.model.users.UserModificationInfo;
 import com.adobe.sign.model.users.UserModificationInfo.RolesEnum;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.UserUtils;
@@ -38,8 +39,9 @@ public class PutUsersApiTest {
 
 	private static UsersApi usersApi = null;
 	private static String userId = null;
-	
-	@Rule
+
+
+  @Rule
   public Retry retry = new Retry();
 
 	/**
@@ -49,7 +51,8 @@ public class PutUsersApiTest {
 	 */
 	@BeforeClass
 	public static void setup() throws ApiException {
-		userId = UserUtils.createUser(ApiUtils.getUserEmail());
+    ApiUtils.configureProperty();
+    userId = UserUtils.createUser(ApiUtils.getUserEmail());
 		usersApi = UserUtils.getUsersApi();
 	}
 

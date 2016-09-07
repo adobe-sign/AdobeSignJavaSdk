@@ -26,7 +26,7 @@ import com.adobe.sign.model.reminders.ReminderCreationInfo;
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:10.996+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:59.159+05:30")
     public class RemindersApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";

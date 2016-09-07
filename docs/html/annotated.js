@@ -122,11 +122,11 @@ var annotated =
               [ "VaultingInfo", "classcom_1_1adobe_1_1sign_1_1model_1_1mega_signs_1_1_vaulting_info.html", "classcom_1_1adobe_1_1sign_1_1model_1_1mega_signs_1_1_vaulting_info" ]
             ] ],
             [ "oAuth", null, [
-              [ "AccessTokenInfo", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_access_token_info.html", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_access_token_info" ],
+              [ "AccessTokenRefreshRequest", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_access_token_refresh_request.html", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_access_token_refresh_request" ],
+              [ "AccessTokenRefreshResponse", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_access_token_refresh_response.html", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_access_token_refresh_response" ],
+              [ "AccessTokenRequest", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_access_token_request.html", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_access_token_request" ],
               [ "AccessTokenResponse", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_access_token_response.html", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_access_token_response" ],
-              [ "AuthorizationInfo", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_authorization_info.html", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_authorization_info" ],
-              [ "RefreshedAccessTokenInfo", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_refreshed_access_token_info.html", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_refreshed_access_token_info" ],
-              [ "RefreshedAccessTokenResponse", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_refreshed_access_token_response.html", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_refreshed_access_token_response" ],
+              [ "AuthorizationRequest", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_authorization_request.html", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_authorization_request" ],
               [ "Scope", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_scope.html", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_scope" ],
               [ "Token", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_token.html", "classcom_1_1adobe_1_1sign_1_1model_1_1o_auth_1_1_token" ]
             ] ],

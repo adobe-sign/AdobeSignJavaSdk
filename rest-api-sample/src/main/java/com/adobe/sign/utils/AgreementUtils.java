@@ -14,6 +14,7 @@ package com.adobe.sign.utils;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ws.rs.core.MultivaluedMap;
 
 import com.adobe.sign.api.AgreementsApi;
@@ -32,12 +33,11 @@ import com.adobe.sign.model.agreements.ParticipantInfo;
 import com.adobe.sign.model.agreements.ParticipantSetInfo;
 import com.adobe.sign.model.agreements.RecipientInfo;
 import com.adobe.sign.model.agreements.RecipientSetInfo;
+import com.adobe.sign.model.agreements.SigningUrlResponse;
 import com.adobe.sign.model.agreements.SigningUrlSetInfo;
 import com.adobe.sign.model.agreements.UserAgreement;
 import com.adobe.sign.model.agreements.UserAgreements;
 import com.adobe.sign.model.transientDocuments.TransientDocumentResponse;
-import com.adobe.sign.model.agreements.SigningUrl;
-import com.adobe.sign.model.agreements.SigningUrlResponse;
 
 public class AgreementUtils {
 
@@ -65,28 +65,7 @@ public class AgreementUtils {
                                                           DocumentIdentifierType documentIdentifierType,
                                                           String agreementName) throws ApiException{
     try {
-      //Get recipient set info
-      List<RecipientSetInfo> recipientSetInfos = AgreementUtils.getRecipientSetInfo(recipientSetEmailList);
-
-      //Get file info and create a list of file info
-      FileInfo fileInfo = AgreementUtils.getFileInfo(documentId,
-              documentIdentifierType);
-      List<FileInfo> fileInfos = new ArrayList<FileInfo>();
-      fileInfos.add(fileInfo);
-
-      //Get document creation info using library document id
-      DocumentCreationInfo documentCreationInfo = AgreementUtils.getDocumentCreationInfo(agreementName,
-              fileInfos,
-              recipientSetInfos);
-
-      //Get agreement creation info
-      AgreementCreationInfo agreementCreationInfo = AgreementUtils.getAgreementCreationInfo(documentCreationInfo,
-              null);
-
-      //Make API call to create agreement
-      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(headers,
-              agreementCreationInfo);
-      return agreementCreationResponse;
+     return createAgreementWithRecipientSetName(recipientSetEmailList, null, documentId, documentIdentifierType, agreementName);
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.CREATE_AGREEMENT, e);
@@ -101,6 +80,17 @@ public class AgreementUtils {
    * @return RecipientSetInfo object containing information of the recipients.
    */
   private static List<RecipientSetInfo> getRecipientSetInfo(List<String> userEmails) {
+    return getRecipientSetInfoWithRecipientSetName(userEmails, null);
+  }
+  
+  /**
+   * Returns list containing information about the recipients.
+   *
+   * @param userEmails List containing email ids about the recipients.
+   * @param recipientSetName The name of the recipient set.
+   * @return RecipientSetInfo object containing information of the recipients.
+   */
+  private static List<RecipientSetInfo> getRecipientSetInfoWithRecipientSetName(List<String> userEmails, String recipientSetName) {
 
     //Create an array of recipients from list of email ids.
     List<RecipientInfo> recipientSetMemberInfos = new ArrayList<RecipientInfo>();
@@ -114,6 +104,10 @@ public class AgreementUtils {
     RecipientSetInfo recipientSetInfo  = new RecipientSetInfo();
     recipientSetInfo.setRecipientSetMemberInfos(recipientSetMemberInfos);
     recipientSetInfo.setRecipientSetRole(RecipientSetInfo.RecipientSetRoleEnum.SIGNER);
+    
+    if(recipientSetName != null)
+      recipientSetInfo.setRecipientSetName(recipientSetName);
+    
     List<RecipientSetInfo> recipientSetInfos =  new ArrayList<RecipientSetInfo>();
     recipientSetInfos.add(recipientSetInfo);
     return recipientSetInfos;
@@ -475,6 +469,41 @@ public class AgreementUtils {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.GET_SIGNING_URL, e);
+      return null;
+    }
+  }
+
+  public static AgreementCreationResponse createAgreementWithRecipientSetName(List<String> recipientSetEmailList, 
+                                                                              String recipientSetName,
+                                                                              String documentId,
+                                                                              DocumentIdentifierType documentIdentifierType,
+                                                                              String agreementName) throws ApiException {
+    try {
+      //Get recipient set info
+      List<RecipientSetInfo> recipientSetInfos = AgreementUtils.getRecipientSetInfoWithRecipientSetName(recipientSetEmailList, recipientSetName);
+
+      //Get file info and create a list of file info
+      FileInfo fileInfo = AgreementUtils.getFileInfo(documentId,
+                                                     documentIdentifierType);
+      List<FileInfo> fileInfos = new ArrayList<FileInfo>();
+      fileInfos.add(fileInfo);
+
+      //Get document creation info using library document id
+      DocumentCreationInfo documentCreationInfo = AgreementUtils.getDocumentCreationInfo(agreementName,
+                                                                                         fileInfos,
+                                                                                         recipientSetInfos);
+
+      //Get agreement creation info
+      AgreementCreationInfo agreementCreationInfo = AgreementUtils.getAgreementCreationInfo(documentCreationInfo,
+                                                                                            null);
+
+      //Make API call to create agreement
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(headers,
+                                                                                          agreementCreationInfo);
+      return agreementCreationResponse;
+    }
+    catch (ApiException e) {
+      ApiUtils.logException(Errors.CREATE_AGREEMENT, e);
       return null;
     }
   }

@@ -40,7 +40,7 @@ public class CreateNewWidgetWithCounterSigners {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(CreateNewWidgetWithCounterSigners.class.getName());
+    ApiUtils.configureProperty(CreateNewWidgetWithCounterSigners.class.getName());
     try {
       CreateNewWidgetWithCounterSigners client = new CreateNewWidgetWithCounterSigners();
       client.run();

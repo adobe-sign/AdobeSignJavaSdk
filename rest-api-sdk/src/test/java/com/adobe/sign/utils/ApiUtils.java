@@ -37,6 +37,7 @@ public class ApiUtils {
   private static final String BUILD_SEPERATOR = "build";
   private final static String ACCESS_TOKEN_KEY= "Access-Token";
   private final static String X_API_USER_KEY = "x-api-user";
+  private static String ENV_HOST_NAME = TestData.ENV_HOST_NAME;
 
   public static Properties getProperties(String configPath) {
     Properties prop = new Properties();
@@ -68,20 +69,20 @@ public class ApiUtils {
     String errMessage = "";
 
     if(httpStatusCode != 0)
-      errMessage.concat(HTTP_STATUS_CODE + Integer.toString(httpStatusCode));
+      errMessage = errMessage.concat(HTTP_STATUS_CODE + Integer.toString(httpStatusCode));
 
     if(!StringUtil.isEmpty(apiCode)){
       if(!StringUtil.isEmpty(errMessage))
-        errMessage.concat(SEPARATOR);
+        errMessage = errMessage.concat(SEPARATOR);
 
-      errMessage.concat(CODE + apiCode);
+      errMessage = errMessage.concat(CODE + apiCode);
     }
 
     if(!StringUtil.isEmpty(message)){
       if(!StringUtil.isEmpty(errMessage))
-        errMessage.concat(SEPARATOR);
+        errMessage = errMessage.concat(SEPARATOR);
 
-      errMessage.concat(MESSAGE + message);
+      errMessage = errMessage.concat(MESSAGE + message);
     }
 
     return errMessage;
@@ -156,6 +157,14 @@ public class ApiUtils {
     headers.put(ACCESS_TOKEN_KEY, TestData.ACCESS_TOKEN);
     headers.put(X_API_USER_KEY, TestData.EMPTY_PARAM);
     return headers;
+  }
+  public static void configureProperty(){
+    configureEnvHostName();
+  }
+  public static void configureEnvHostName() {
+    if(ENV_HOST_NAME != null && ENV_HOST_NAME.length()>0){
+      Context.setEnvHostName(ENV_HOST_NAME);
+    }
   }
 }
 

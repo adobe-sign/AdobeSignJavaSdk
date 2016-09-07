@@ -21,6 +21,7 @@ import com.adobe.sign.api.UsersApi;
 import com.adobe.sign.model.users.UserDetailsInfo;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.UserUtils;
@@ -36,8 +37,10 @@ public class GetUserInfoApiTest {
 
 	private static UsersApi usersApi = null;
 	private static String userId = null;
-	
-	@Rule
+
+
+
+  @Rule
   public Retry retry = new Retry();
 	
 
@@ -48,7 +51,8 @@ public class GetUserInfoApiTest {
 	 */
 	@BeforeClass
 	public static void setup() throws ApiException {
-		userId = UserUtils.getResourceId(TestData.USER_EMAIL);
+    ApiUtils.configureProperty();
+    userId = UserUtils.getResourceId(TestData.USER_EMAIL);
 		usersApi = UserUtils.getUsersApi();
 	}
 

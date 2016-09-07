@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:07.906+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:55.943+05:30")
 public class AgreementAssetEventPostResponse   {
   
   private String currentPageCursor = null;
@@ -73,9 +73,9 @@ public class AgreementAssetEventPostResponse   {
 
   
   /**
-   * The search Id corresponding to current search object. This searchId can be used in combination with pageCursors in the API which retrieves a list of AgreementAssetEvents using a searchId to fetch the result for further pages
+   * The search Id corresponding to current search object. This searchId can be used in combination with pageCursors in the API to retrieve search results to fetch the result for further pages
    **/
-  @ApiModelProperty(required = true, value = "The search Id corresponding to current search object. This searchId can be used in combination with pageCursors in the API which retrieves a list of AgreementAssetEvents using a searchId to fetch the result for further pages")
+  @ApiModelProperty(required = true, value = "The search Id corresponding to current search object. This searchId can be used in combination with pageCursors in the API to retrieve search results to fetch the result for further pages")
   @JsonProperty("searchId")
   public String getSearchId() {
     return searchId;

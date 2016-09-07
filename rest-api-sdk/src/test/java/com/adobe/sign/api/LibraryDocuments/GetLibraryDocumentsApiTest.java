@@ -21,8 +21,10 @@ import com.adobe.sign.api.LibraryDocumentsApi;
 import com.adobe.sign.model.libraryDocuments.DocumentLibraryItems;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
+import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.validator.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
@@ -34,12 +36,14 @@ import org.junit.Test;
 public class GetLibraryDocumentsApiTest {
   
   private static LibraryDocumentsApi libraryDocumentsApi = null;
-  
+
+
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     libraryDocumentsApi = LibraryDocumentsUtils.getLibraryDocumentsApi();
   }
   

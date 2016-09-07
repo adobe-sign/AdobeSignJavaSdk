@@ -36,7 +36,7 @@ public class CreateAlternateParticipant {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(CreateAlternateParticipant.class.getName());
+    ApiUtils.configureProperty(CreateAlternateParticipant.class.getName());
     try {
       CreateAlternateParticipant client = new CreateAlternateParticipant();
       client.run();

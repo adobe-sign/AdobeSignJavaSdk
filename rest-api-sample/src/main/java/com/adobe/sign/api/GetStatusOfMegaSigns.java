@@ -38,7 +38,7 @@ public class GetStatusOfMegaSigns {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(GetStatusOfMegaSigns.class.getName());
+    ApiUtils.configureProperty(GetStatusOfMegaSigns.class.getName());
     try {
       GetStatusOfMegaSigns client = new GetStatusOfMegaSigns();
       client.run();

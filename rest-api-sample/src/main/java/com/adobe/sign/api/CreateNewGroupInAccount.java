@@ -35,7 +35,7 @@ public class CreateNewGroupInAccount {
    * Entry point for this sample client program.
    */
   public static void main(String args[]) throws ApiException {
-    ApiUtils.configureLogProperty(CreateNewGroupInAccount.class.getName());
+    ApiUtils.configureProperty(CreateNewGroupInAccount.class.getName());
     try {
       CreateNewGroupInAccount client = new CreateNewGroupInAccount();
       client.run();

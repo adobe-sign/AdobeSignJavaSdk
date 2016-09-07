@@ -21,6 +21,7 @@ import static org.junit.Assert.fail;
 import com.adobe.sign.api.WidgetsApi;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
+import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WidgetUtils;
@@ -37,12 +38,14 @@ public class GetWidgetDocumentInfoApiTest {
   private static WidgetsApi widgetsApi = null;
   private static String widgetId = null;
   private static String documentId = null;
+
   
   @Rule
   public Retry retry = new Retry();
 
   @BeforeClass
   public static void setup() throws ApiException {
+    ApiUtils.configureProperty();
     widgetId = WidgetUtils.getResourceId(TestData.WIDGET_NAME);
     widgetsApi = WidgetUtils.getWidgetsApi();
     documentId = WidgetUtils.getDocumentId();

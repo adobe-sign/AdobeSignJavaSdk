@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:01.470+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.999+05:30")
 public class UserModificationInfo   {
   
   private String company = null;
@@ -113,9 +113,9 @@ public enum RolesEnum {
 
   
   /**
-   * The new group in which the user should be added. It can be obtained through GET /users call. The server will reset to default if the value is not provided
+   * The new group in which the user should be added. It can be obtained through a call to the API which retrieves the list of users. The server will reset to default if the value is not provided
    **/
-  @ApiModelProperty(required = true, value = "The new group in which the user should be added. It can be obtained through GET /users call. The server will reset to default if the value is not provided")
+  @ApiModelProperty(required = true, value = "The new group in which the user should be added. It can be obtained through a call to the API which retrieves the list of users. The server will reset to default if the value is not provided")
   @JsonProperty("groupId")
   public String getGroupId() {
     return groupId;
@@ -139,9 +139,9 @@ public enum RolesEnum {
 
   
   /**
-   * Whether or not the user has opted in to recieve the marketing information from Adobe Sign and its partners. The server will reset to null if the value is not provided.
+   * Whether or not the user has opted in to receive the marketing information from Adobe Sign and its partners. The server will reset to null if the value is not provided.
    **/
-  @ApiModelProperty(value = "Whether or not the user has opted in to recieve the marketing information from Adobe Sign and its partners. The server will reset to null if the value is not provided.")
+  @ApiModelProperty(value = "Whether or not the user has opted in to receive the marketing information from Adobe Sign and its partners. The server will reset to null if the value is not provided.")
   @JsonProperty("optIn")
   public OptInEnum getOptIn() {
     return optIn;

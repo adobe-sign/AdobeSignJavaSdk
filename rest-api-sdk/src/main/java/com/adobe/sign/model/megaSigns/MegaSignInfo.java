@@ -14,9 +14,9 @@
 package com.adobe.sign.model.megaSigns;
 
 import com.adobe.sign.utils.StringUtil;
-import java.util.Date;
 import java.util.*;
 import com.adobe.sign.model.megaSigns.DocumentHistoryEvent;
+import java.util.Date;
 
 
 
@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:06.747+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
 public class MegaSignInfo   {
   
   private List<DocumentHistoryEvent> events = new ArrayList<DocumentHistoryEvent>();
@@ -33,6 +33,7 @@ public class MegaSignInfo   {
   private String locale = null;
   private String megaSignId = null;
   private String message = null;
+  private String latestVersionId = null;
   private String name = null;
 
 public enum SecurityOptionsEnum {
@@ -150,6 +151,19 @@ public enum StatusEnum {
 
   
   /**
+   * A version ID which uniquely identifies the current version of the agreement
+   **/
+  @ApiModelProperty(required = true, value = "A version ID which uniquely identifies the current version of the agreement")
+  @JsonProperty("latestVersionId")
+  public String getLatestVersionId() {
+    return latestVersionId;
+  }
+  public void setLatestVersionId(String latestVersionId) {
+    this.latestVersionId = latestVersionId;
+  }
+
+  
+  /**
    * The name of the document, specified by the sender
    **/
   @ApiModelProperty(required = true, value = "The name of the document, specified by the sender")
@@ -199,6 +213,7 @@ public enum StatusEnum {
     sb.append("    locale: ").append(StringUtil.toIndentedString(locale)).append("\n");
     sb.append("    megaSignId: ").append(StringUtil.toIndentedString(megaSignId)).append("\n");
     sb.append("    message: ").append(StringUtil.toIndentedString(message)).append("\n");
+    sb.append("    latestVersionId: ").append(StringUtil.toIndentedString(latestVersionId)).append("\n");
     sb.append("    name: ").append(StringUtil.toIndentedString(name)).append("\n");
     sb.append("    securityOptions: ").append(StringUtil.toIndentedString(securityOptions)).append("\n");
     sb.append("    status: ").append(StringUtil.toIndentedString(status)).append("\n");

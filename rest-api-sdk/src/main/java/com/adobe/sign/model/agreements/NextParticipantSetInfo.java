@@ -24,10 +24,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-07-28T18:56:02.594+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
 public class NextParticipantSetInfo   {
   
   private List<NextParticipantInfo> nextParticipantSetMemberInfos = new ArrayList<NextParticipantInfo>();
+  private String nextParticipantSetName = null;
 
   
   /**
@@ -43,6 +44,19 @@ public class NextParticipantSetInfo   {
   }
 
   
+  /**
+   * The name of the next participant set. Returned only, if the API caller is the sender of agreement.
+   **/
+  @ApiModelProperty(value = "The name of the next participant set. Returned only, if the API caller is the sender of agreement.")
+  @JsonProperty("nextParticipantSetName")
+  public String getNextParticipantSetName() {
+    return nextParticipantSetName;
+  }
+  public void setNextParticipantSetName(String nextParticipantSetName) {
+    this.nextParticipantSetName = nextParticipantSetName;
+  }
+
+  
 
   @Override
   public String toString()  {
@@ -50,6 +64,7 @@ public class NextParticipantSetInfo   {
     sb.append("class NextParticipantSetInfo {\n");
     
     sb.append("    nextParticipantSetMemberInfos: ").append(StringUtil.toIndentedString(nextParticipantSetMemberInfos)).append("\n");
+    sb.append("    nextParticipantSetName: ").append(StringUtil.toIndentedString(nextParticipantSetName)).append("\n");
     sb.append("}");
     return sb.toString();
   }
