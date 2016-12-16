@@ -14,8 +14,8 @@
 package com.adobe.sign.model.widgets;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.widgets.WidgetEventDeviceLocation;
 import java.util.Date;
+import com.adobe.sign.model.widgets.WidgetEventDeviceLocation;
 
 
 
@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class WidgetHistoryEvent   {
   
   private String actingUserEmail = null;
@@ -97,9 +97,16 @@ public enum TypeEnum {
    **/
   @ApiModelProperty(required = true, value = "Email address of the user that initiated the event")
   @JsonProperty("actingUserEmail")
+  /**
+   * @return String
+   **/
   public String getActingUserEmail() {
     return actingUserEmail;
   }
+  /**
+   * Email address of the user that initiated the event
+   * @param actingUserEmail
+   **/
   public void setActingUserEmail(String actingUserEmail) {
     this.actingUserEmail = actingUserEmail;
   }
@@ -110,9 +117,16 @@ public enum TypeEnum {
    **/
   @ApiModelProperty(required = true, value = "The IP address of the user that initiated the event")
   @JsonProperty("actingUserIpAddress")
+  /**
+   * @return String
+   **/
   public String getActingUserIpAddress() {
     return actingUserIpAddress;
   }
+  /**
+   * The IP address of the user that initiated the event
+   * @param actingUserIpAddress
+   **/
   public void setActingUserIpAddress(String actingUserIpAddress) {
     this.actingUserIpAddress = actingUserIpAddress;
   }
@@ -123,9 +137,16 @@ public enum TypeEnum {
    **/
   @ApiModelProperty(value = "The event comment. For RECALLED or REJECTED, the reason given by the user that initiates the event. For DELEGATE or SHARE, the message from the acting user to the participant")
   @JsonProperty("comment")
+  /**
+   * @return String
+   **/
   public String getComment() {
     return comment;
   }
+  /**
+   * The event comment. For RECALLED or REJECTED, the reason given by the user that initiates the event. For DELEGATE or SHARE, the message from the acting user to the participant
+   * @param comment
+   **/
   public void setComment(String comment) {
     this.comment = comment;
   }
@@ -136,9 +157,16 @@ public enum TypeEnum {
    **/
   @ApiModelProperty(required = true, value = "The date of the audit event")
   @JsonProperty("date")
+  /**
+   * @return Date
+   **/
   public Date getDate() {
     return date;
   }
+  /**
+   * The date of the audit event
+   * @param date
+   **/
   public void setDate(Date date) {
     this.date = date;
   }
@@ -149,9 +177,16 @@ public enum TypeEnum {
    **/
   @ApiModelProperty(required = true, value = "A description of the audit event")
   @JsonProperty("description")
+  /**
+   * @return String
+   **/
   public String getDescription() {
     return description;
   }
+  /**
+   * A description of the audit event
+   * @param description
+   **/
   public void setDescription(String description) {
     this.description = description;
   }
@@ -162,9 +197,16 @@ public enum TypeEnum {
    **/
   @ApiModelProperty(value = "Location of the device that created the event (This value may be null due to limited privileges)")
   @JsonProperty("deviceLocation")
+  /**
+   * @return WidgetEventDeviceLocation
+   **/
   public WidgetEventDeviceLocation getDeviceLocation() {
     return deviceLocation;
   }
+  /**
+   * Location of the device that created the event (This value may be null due to limited privileges)
+   * @param deviceLocation
+   **/
   public void setDeviceLocation(WidgetEventDeviceLocation deviceLocation) {
     this.deviceLocation = deviceLocation;
   }
@@ -175,9 +217,16 @@ public enum TypeEnum {
    **/
   @ApiModelProperty(required = true, value = "Email address of the user that initiated the event")
   @JsonProperty("participantEmail")
+  /**
+   * @return String
+   **/
   public String getParticipantEmail() {
     return participantEmail;
   }
+  /**
+   * Email address of the user that initiated the event
+   * @param participantEmail
+   **/
   public void setParticipantEmail(String participantEmail) {
     this.participantEmail = participantEmail;
   }
@@ -188,9 +237,16 @@ public enum TypeEnum {
    **/
   @ApiModelProperty(value = "A unique identifier linking offline events to synchronization events (specified for offline signing events and synchronization events, else null)")
   @JsonProperty("synchronizationId")
+  /**
+   * @return String
+   **/
   public String getSynchronizationId() {
     return synchronizationId;
   }
+  /**
+   * A unique identifier linking offline events to synchronization events (specified for offline signing events and synchronization events, else null)
+   * @param synchronizationId
+   **/
   public void setSynchronizationId(String synchronizationId) {
     this.synchronizationId = synchronizationId;
   }
@@ -201,9 +257,16 @@ public enum TypeEnum {
    **/
   @ApiModelProperty(required = true, value = "Type of the widget event")
   @JsonProperty("type")
+  /**
+   * @return TypeEnum
+   **/
   public TypeEnum getType() {
     return type;
   }
+  /**
+   * Type of the widget event
+   * @param type
+   **/
   public void setType(TypeEnum type) {
     this.type = type;
   }
@@ -214,9 +277,16 @@ public enum TypeEnum {
    **/
   @ApiModelProperty(value = "The identifier assigned by the vault provider for the vault event (if vaulted, otherwise null)")
   @JsonProperty("vaultEventId")
+  /**
+   * @return String
+   **/
   public String getVaultEventId() {
     return vaultEventId;
   }
+  /**
+   * The identifier assigned by the vault provider for the vault event (if vaulted, otherwise null)
+   * @param vaultEventId
+   **/
   public void setVaultEventId(String vaultEventId) {
     this.vaultEventId = vaultEventId;
   }
@@ -227,9 +297,16 @@ public enum TypeEnum {
    **/
   @ApiModelProperty(required = true, value = "An ID which uniquely identifies the version of the widget associated with this audit event")
   @JsonProperty("versionId")
+  /**
+   * @return String
+   **/
   public String getVersionId() {
     return versionId;
   }
+  /**
+   * An ID which uniquely identifies the version of the widget associated with this audit event
+   * @param versionId
+   **/
   public void setVersionId(String versionId) {
     this.versionId = versionId;
   }
@@ -237,6 +314,10 @@ public enum TypeEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetHistoryEvent {\n");

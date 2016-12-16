@@ -21,6 +21,7 @@ import com.adobe.sign.utils.ApiException;
  */
 public class RemindersApiValidator {
 
+  private static final String REMINDER_CREATION_INFO = "reminderCreationInfo";
   /**
    * Validator for createReminder API that sends a reminder for an agreement.
    *
@@ -28,7 +29,7 @@ public class RemindersApiValidator {
    * @throws ApiException
    */
   public static void createReminderValidator(ReminderCreationInfo reminderCreationInfo) throws ApiException {
-    ApiValidatorHelper.validateParameter(reminderCreationInfo);
+    ApiValidatorHelper.validateParameter(reminderCreationInfo, REMINDER_CREATION_INFO);
 
     ApiValidatorHelper.validateParameter(reminderCreationInfo.getAgreementId(),
                                          SdkErrorCodes.MUST_PROVIDE_AGREEMENT_ID);

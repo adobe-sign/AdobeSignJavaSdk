@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:51.876+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.195+05:30")
 public class DocumentLibraryItems   {
   
-  private List<DocumentLibraryItem> libraryDocumentList = new ArrayList<DocumentLibraryItem>();
+  private List<DocumentLibraryItem> libraryDocumentList = null;
 
   
   /**
@@ -35,9 +35,16 @@ public class DocumentLibraryItems   {
    **/
   @ApiModelProperty(required = true, value = "An array of document library items")
   @JsonProperty("libraryDocumentList")
+  /**
+   * @return List&lt;DocumentLibraryItem&gt;
+   **/
   public List<DocumentLibraryItem> getLibraryDocumentList() {
     return libraryDocumentList;
   }
+  /**
+   * An array of document library items
+   * @param libraryDocumentList
+   **/
   public void setLibraryDocumentList(List<DocumentLibraryItem> libraryDocumentList) {
     this.libraryDocumentList = libraryDocumentList;
   }
@@ -45,6 +52,10 @@ public class DocumentLibraryItems   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class DocumentLibraryItems {\n");

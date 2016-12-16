@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class DocumentImageUrl   {
   
-  private List<ImageUrl> imageUrls = new ArrayList<ImageUrl>();
+  private List<ImageUrl> imageUrls = null;
 
   
   /**
@@ -35,9 +35,16 @@ public class DocumentImageUrl   {
    **/
   @ApiModelProperty(required = true, value = "A list of objects representing all image URLs.(one per imagesize).")
   @JsonProperty("imageUrls")
+  /**
+   * @return List&lt;ImageUrl&gt;
+   **/
   public List<ImageUrl> getImageUrls() {
     return imageUrls;
   }
+  /**
+   * A list of objects representing all image URLs.(one per imagesize).
+   * @param imageUrls
+   **/
   public void setImageUrls(List<ImageUrl> imageUrls) {
     this.imageUrls = imageUrls;
   }
@@ -45,6 +52,10 @@ public class DocumentImageUrl   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class DocumentImageUrl {\n");

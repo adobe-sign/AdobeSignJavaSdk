@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:51.876+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.195+05:30")
 public class Documents   {
   
-  private List<OriginalDocument> documents = new ArrayList<OriginalDocument>();
+  private List<OriginalDocument> documents = null;
 
   
   /**
@@ -35,9 +35,16 @@ public class Documents   {
    **/
   @ApiModelProperty(required = true, value = "A list of objects representing the documents")
   @JsonProperty("documents")
+  /**
+   * @return List&lt;OriginalDocument&gt;
+   **/
   public List<OriginalDocument> getDocuments() {
     return documents;
   }
+  /**
+   * A list of objects representing the documents
+   * @param documents
+   **/
   public void setDocuments(List<OriginalDocument> documents) {
     this.documents = documents;
   }
@@ -45,6 +52,10 @@ public class Documents   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class Documents {\n");

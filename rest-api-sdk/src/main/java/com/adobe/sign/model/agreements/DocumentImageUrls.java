@@ -14,8 +14,8 @@
 package com.adobe.sign.model.agreements;
 
 import com.adobe.sign.utils.StringUtil;
-import java.util.*;
 import com.adobe.sign.model.agreements.DocumentImageUrl;
+import java.util.*;
 
 
 
@@ -24,11 +24,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class DocumentImageUrls   {
   
-  private List<DocumentImageUrl> documentsImageUrls = new ArrayList<DocumentImageUrl>();
-  private List<DocumentImageUrl> supportingDocumentsImageUrls = new ArrayList<DocumentImageUrl>();
+  private List<DocumentImageUrl> documentsImageUrls = null;
+  private List<DocumentImageUrl> supportingDocumentsImageUrls = null;
 
   
   /**
@@ -36,9 +36,16 @@ public class DocumentImageUrls   {
    **/
   @ApiModelProperty(required = true, value = "A list of documents image URLs.")
   @JsonProperty("documentsImageUrls")
+  /**
+   * @return List&lt;DocumentImageUrl&gt;
+   **/
   public List<DocumentImageUrl> getDocumentsImageUrls() {
     return documentsImageUrls;
   }
+  /**
+   * A list of documents image URLs.
+   * @param documentsImageUrls
+   **/
   public void setDocumentsImageUrls(List<DocumentImageUrl> documentsImageUrls) {
     this.documentsImageUrls = documentsImageUrls;
   }
@@ -49,9 +56,16 @@ public class DocumentImageUrls   {
    **/
   @ApiModelProperty(value = "A list of supporting document image URLs.")
   @JsonProperty("supportingDocumentsImageUrls")
+  /**
+   * @return List&lt;DocumentImageUrl&gt;
+   **/
   public List<DocumentImageUrl> getSupportingDocumentsImageUrls() {
     return supportingDocumentsImageUrls;
   }
+  /**
+   * A list of supporting document image URLs.
+   * @param supportingDocumentsImageUrls
+   **/
   public void setSupportingDocumentsImageUrls(List<DocumentImageUrl> supportingDocumentsImageUrls) {
     this.supportingDocumentsImageUrls = supportingDocumentsImageUrls;
   }
@@ -59,6 +73,10 @@ public class DocumentImageUrls   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class DocumentImageUrls {\n");

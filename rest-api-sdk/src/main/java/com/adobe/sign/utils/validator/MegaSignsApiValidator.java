@@ -29,6 +29,13 @@ import com.adobe.sign.utils.ApiException;
  */
 public class MegaSignsApiValidator {
 
+  private static final String MEGA_SIGN_CREATION_REQUEST = "megaSignCreationRequest";
+  private static final String MEGA_SIGN_CREATION_INFO = "megasignCreationInfo";
+  private static final String NAME = "name";
+  private static final String SIGNATURE_TYPE = "signatureType";
+  private static final String MEGA_SIGN_STATUS_UPDATE_INFO = "megaSignStatusUpdateInfo";
+  private static final String RECIPIENT_SET_MEMBER_INFOS = "recipientSetMemberInfos";
+
   /**
    * Validator for getMegaSigns API that retrieves all the megaSign parent agreements of the user.
    *
@@ -49,15 +56,15 @@ public class MegaSignsApiValidator {
   public static void createMegaSignValidator(MegaSignCreationRequest megaSignCreationRequest) throws ApiException {
 
 
-    ApiValidatorHelper.validateParameter(megaSignCreationRequest);
+    ApiValidatorHelper.validateParameter(megaSignCreationRequest, MEGA_SIGN_CREATION_REQUEST);
 
     MegaSignCreationInfo megasignCreationInfo = megaSignCreationRequest.getMegaSignCreationInfo();
-    ApiValidatorHelper.validateParameter(megasignCreationInfo);
+    ApiValidatorHelper.validateParameter(megasignCreationInfo, MEGA_SIGN_CREATION_INFO);
 
     List<FileInfo> fileInfos = megasignCreationInfo.getFileInfos();
     validateFileInfo(fileInfos);
 
-    ApiValidatorHelper.validateParameter(megasignCreationInfo.getName());
+    ApiValidatorHelper.validateParameter(megasignCreationInfo.getName(), NAME);
 
     validatePostSignOptions(megasignCreationInfo.getPostSignOptions());
 
@@ -65,7 +72,7 @@ public class MegaSignsApiValidator {
     if (recipientSetInfos != null)
       validateRecipientSetInfos(recipientSetInfos);
 
-    ApiValidatorHelper.validateParameter(megasignCreationInfo.getSignatureType());
+    ApiValidatorHelper.validateParameter(megasignCreationInfo.getSignatureType(), SIGNATURE_TYPE);
   }
 
   /**
@@ -113,7 +120,7 @@ public class MegaSignsApiValidator {
                                                    MegaSignStatusUpdateInfo megaSignStatusUpdateInfo) throws ApiException {
     ApiValidatorHelper.validateId(megaSignId,
                                   SdkErrorCodes.INVALID_MEGASIGN_ID);
-    ApiValidatorHelper.validateParameter(megaSignStatusUpdateInfo);
+    ApiValidatorHelper.validateParameter(megaSignStatusUpdateInfo, MEGA_SIGN_STATUS_UPDATE_INFO);
     String updateValue = megaSignStatusUpdateInfo.getValue() == null ? "" : megaSignStatusUpdateInfo.getValue().toString();
     ApiValidatorHelper.validateParameter(updateValue,
                                          SdkErrorCodes.INVALID_MEGASIGN_STATUS);
@@ -147,7 +154,7 @@ public class MegaSignsApiValidator {
 
     for (RecipientSetInfo recipientSetInfo : recipientSetInfos) {
 
-      ApiValidatorHelper.validateParameter(recipientSetInfo.getRecipientSetMemberInfos());
+      ApiValidatorHelper.validateParameter(recipientSetInfo.getRecipientSetMemberInfos(), RECIPIENT_SET_MEMBER_INFOS);
       List<RecipientInfo> recipientInfos = recipientSetInfo.getRecipientSetMemberInfos();
       int numberOfRecipients = recipientInfos.size();
 

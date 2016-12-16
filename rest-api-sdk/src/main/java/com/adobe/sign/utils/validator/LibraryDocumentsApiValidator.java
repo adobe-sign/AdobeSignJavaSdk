@@ -25,6 +25,10 @@ import com.adobe.sign.utils.ApiException;
  */
 public class LibraryDocumentsApiValidator {
 
+  private static final String LIBRARY_CREATION_INFO = "libraryCreationInfo";
+  private static final String LIBRARY_SHARING_MODE = "librarySharingMode";
+  private static final String LIBRARY_TEMPLATE_TYPES = "libraryTemplateTypes";
+  private static final String NAME = "name";
   /**
    * Validator for libraryDocuments API that retrieves library documents of the user.
    *
@@ -40,16 +44,16 @@ public class LibraryDocumentsApiValidator {
    * @throws ApiException
    */
   public static void createLibraryDocumentValidator(LibraryCreationInfo libraryCreationInfo) throws ApiException {
-    ApiValidatorHelper.validateParameter(libraryCreationInfo);
+    ApiValidatorHelper.validateParameter(libraryCreationInfo, LIBRARY_CREATION_INFO);
 
     LibraryDocumentCreationInfo libraryDocumentCreationInfo = libraryCreationInfo.getLibraryDocumentCreationInfo();
 
     validateFileInfo(libraryDocumentCreationInfo.getFileInfos());
 
-    ApiValidatorHelper.validateParameter(libraryDocumentCreationInfo.getLibrarySharingMode());
-    ApiValidatorHelper.validateParameter(libraryDocumentCreationInfo.getLibraryTemplateTypes());
+    ApiValidatorHelper.validateParameter(libraryDocumentCreationInfo.getLibrarySharingMode(), LIBRARY_SHARING_MODE);
+    ApiValidatorHelper.validateParameter(libraryDocumentCreationInfo.getLibraryTemplateTypes(), LIBRARY_TEMPLATE_TYPES);
 
-    ApiValidatorHelper.validateParameter(libraryDocumentCreationInfo.getName());
+    ApiValidatorHelper.validateParameter(libraryDocumentCreationInfo.getName(), NAME);
 
   }
 

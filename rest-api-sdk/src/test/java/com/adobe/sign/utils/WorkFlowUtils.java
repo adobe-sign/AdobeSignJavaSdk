@@ -24,7 +24,7 @@ import com.adobe.sign.model.workflows.PostSignOptions;
 import com.adobe.sign.model.workflows.RecipientInfo;
 import com.adobe.sign.model.workflows.RecipientsInfo;
 
-public class WorkFlowUtils extends ApiUtils{
+public class WorkFlowUtils {
   private static WorkflowsApi workflowsApi = new WorkflowsApi();
 
   public static String getResourceId() throws ApiException {

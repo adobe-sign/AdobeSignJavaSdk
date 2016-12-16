@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class WorkflowLibraryDocument   {
   
   private String label = null;
@@ -34,9 +34,16 @@ public class WorkflowLibraryDocument   {
    **/
   @ApiModelProperty(required = true, value = "A display text for this form for workflow users")
   @JsonProperty("label")
+  /**
+   * @return String
+   **/
   public String getLabel() {
     return label;
   }
+  /**
+   * A display text for this form for workflow users
+   * @param label
+   **/
   public void setLabel(String label) {
     this.label = label;
   }
@@ -47,9 +54,16 @@ public class WorkflowLibraryDocument   {
    **/
   @ApiModelProperty(required = true, value = "An id of the workflow library document that can be provided as an input file in the custom workflow agreement creation request")
   @JsonProperty("workflowLibDoc")
+  /**
+   * @return String
+   **/
   public String getWorkflowLibDoc() {
     return workflowLibDoc;
   }
+  /**
+   * An id of the workflow library document that can be provided as an input file in the custom workflow agreement creation request
+   * @param workflowLibDoc
+   **/
   public void setWorkflowLibDoc(String workflowLibDoc) {
     this.workflowLibDoc = workflowLibDoc;
   }
@@ -57,6 +71,10 @@ public class WorkflowLibraryDocument   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WorkflowLibraryDocument {\n");

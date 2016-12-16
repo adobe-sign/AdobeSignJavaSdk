@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * A JSON object describing the library template
  **/
 @ApiModel(description = "A JSON object describing the library template")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:51.876+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.195+05:30")
 public class LibraryDocumentCreationResponse   {
   
   private String embeddedCode = null;
@@ -40,9 +40,16 @@ public class LibraryDocumentCreationResponse   {
    **/
   @ApiModelProperty(required = true, value = "Javascript snippet suitable for an embedded page taking a user to a URL")
   @JsonProperty("embeddedCode")
+  /**
+   * @return String
+   **/
   public String getEmbeddedCode() {
     return embeddedCode;
   }
+  /**
+   * Javascript snippet suitable for an embedded page taking a user to a URL
+   * @param embeddedCode
+   **/
   public void setEmbeddedCode(String embeddedCode) {
     this.embeddedCode = embeddedCode;
   }
@@ -53,9 +60,16 @@ public class LibraryDocumentCreationResponse   {
    **/
   @ApiModelProperty(required = true, value = "Expiration date for autologin. This is based on the user setting, API_AUTO_LOGIN_LIFETIME")
   @JsonProperty("expiration")
+  /**
+   * @return Date
+   **/
   public Date getExpiration() {
     return expiration;
   }
+  /**
+   * Expiration date for autologin. This is based on the user setting, API_AUTO_LOGIN_LIFETIME
+   * @param expiration
+   **/
   public void setExpiration(Date expiration) {
     this.expiration = expiration;
   }
@@ -66,9 +80,16 @@ public class LibraryDocumentCreationResponse   {
    **/
   @ApiModelProperty(required = true, value = "The unique identifier that can be used to refer to the library template")
   @JsonProperty("libraryDocumentId")
+  /**
+   * @return String
+   **/
   public String getLibraryDocumentId() {
     return libraryDocumentId;
   }
+  /**
+   * The unique identifier that can be used to refer to the library template
+   * @param libraryDocumentId
+   **/
   public void setLibraryDocumentId(String libraryDocumentId) {
     this.libraryDocumentId = libraryDocumentId;
   }
@@ -79,9 +100,16 @@ public class LibraryDocumentCreationResponse   {
    **/
   @ApiModelProperty(required = true, value = "Standalone URL to direct end users to")
   @JsonProperty("url")
+  /**
+   * @return String
+   **/
   public String getUrl() {
     return url;
   }
+  /**
+   * Standalone URL to direct end users to
+   * @param url
+   **/
   public void setUrl(String url) {
     this.url = url;
   }
@@ -89,6 +117,10 @@ public class LibraryDocumentCreationResponse   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class LibraryDocumentCreationResponse {\n");

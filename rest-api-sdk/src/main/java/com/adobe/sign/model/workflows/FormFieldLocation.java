@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class FormFieldLocation   {
   
   private Double height = null;
@@ -37,9 +37,16 @@ public class FormFieldLocation   {
    **/
   @ApiModelProperty(required = true, value = "Height of the form field in pixels")
   @JsonProperty("height")
+  /**
+   * @return Double
+   **/
   public Double getHeight() {
     return height;
   }
+  /**
+   * Height of the form field in pixels
+   * @param height
+   **/
   public void setHeight(Double height) {
     this.height = height;
   }
@@ -50,9 +57,16 @@ public class FormFieldLocation   {
    **/
   @ApiModelProperty(required = true, value = "No. of pixels from left of the page for form field placement")
   @JsonProperty("left")
+  /**
+   * @return Double
+   **/
   public Double getLeft() {
     return left;
   }
+  /**
+   * No. of pixels from left of the page for form field placement
+   * @param left
+   **/
   public void setLeft(Double left) {
     this.left = left;
   }
@@ -63,9 +77,16 @@ public class FormFieldLocation   {
    **/
   @ApiModelProperty(required = true, value = "Number of the page where form field has to be placed, starting from 1.")
   @JsonProperty("pageNumber")
+  /**
+   * @return Integer
+   **/
   public Integer getPageNumber() {
     return pageNumber;
   }
+  /**
+   * Number of the page where form field has to be placed, starting from 1.
+   * @param pageNumber
+   **/
   public void setPageNumber(Integer pageNumber) {
     this.pageNumber = pageNumber;
   }
@@ -76,9 +97,16 @@ public class FormFieldLocation   {
    **/
   @ApiModelProperty(required = true, value = "No. of pixels from bottom of the page for form field placement")
   @JsonProperty("top")
+  /**
+   * @return Double
+   **/
   public Double getTop() {
     return top;
   }
+  /**
+   * No. of pixels from bottom of the page for form field placement
+   * @param top
+   **/
   public void setTop(Double top) {
     this.top = top;
   }
@@ -89,9 +117,16 @@ public class FormFieldLocation   {
    **/
   @ApiModelProperty(required = true, value = "Width of the form field in pixels")
   @JsonProperty("width")
+  /**
+   * @return Double
+   **/
   public Double getWidth() {
     return width;
   }
+  /**
+   * Width of the form field in pixels
+   * @param width
+   **/
   public void setWidth(Double width) {
     this.width = width;
   }
@@ -99,6 +134,10 @@ public class FormFieldLocation   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class FormFieldLocation {\n");

@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class UserWorkflows   {
   
-  private List<UserWorkflow> userWorkflowList = new ArrayList<UserWorkflow>();
+  private List<UserWorkflow> userWorkflowList = null;
 
   
   /**
@@ -35,9 +35,16 @@ public class UserWorkflows   {
    **/
   @ApiModelProperty(required = true, value = "An array of workflows")
   @JsonProperty("userWorkflowList")
+  /**
+   * @return List&lt;UserWorkflow&gt;
+   **/
   public List<UserWorkflow> getUserWorkflowList() {
     return userWorkflowList;
   }
+  /**
+   * An array of workflows
+   * @param userWorkflowList
+   **/
   public void setUserWorkflowList(List<UserWorkflow> userWorkflowList) {
     this.userWorkflowList = userWorkflowList;
   }
@@ -45,6 +52,10 @@ public class UserWorkflows   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserWorkflows {\n");

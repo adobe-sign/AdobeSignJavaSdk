@@ -41,6 +41,7 @@ public class RetrieveFormDataOfWidget {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.RETRIEVE_FORM_DATA_WIDGET, e);
+      throw e;
     }
   }
 

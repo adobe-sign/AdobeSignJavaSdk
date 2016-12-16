@@ -28,16 +28,16 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.SearchUtils;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Post Search API.
+ * Junit test cases for Create Search endpoint.
  */
-public class PostSearchApiTest {
-  
+public class CreateSearchApiTest {
+
   private static SearchApi searchApi = null;
 
 
@@ -59,11 +59,12 @@ public class PostSearchApiTest {
    */
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
-    AgreementAssetEventRequest agreementAssetEventRequest = SearchUtils.getAgreementAssetEventRequest(TestData.STATIC_START_DATE,
-                                                                                                      TestData.STATIC_END_DATE);
+    AgreementAssetEventRequest agreementAssetEventRequest = SearchUtils.getAgreementAssetEventRequest(ApiUtils.getDate(TestData.DAYS_BETWEEN_START_DATE_AND_CURRENT_DATE),
+                                                                                                      ApiUtils.getDate(TestData.DAYS_BETWEEN_END_DATE_AND_CURRENT_DATE));
     try {
-      searchApi.createAssetEvent(ApiUtils.getNullAccessTokenHeaderParams(),
-                                 agreementAssetEventRequest);
+      AgreementAssetEventPostResponse agreementAssetEventPostResponse = searchApi.createAssetEvent(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                                                   agreementAssetEventRequest);
+      assertNotNull(agreementAssetEventPostResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -71,8 +72,9 @@ public class PostSearchApiTest {
     }
 
     try {
-      searchApi.createAssetEvent(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                 agreementAssetEventRequest);
+      AgreementAssetEventPostResponse agreementAssetEventPostResponse = searchApi.createAssetEvent(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                                                   agreementAssetEventRequest);
+      assertNotNull(agreementAssetEventPostResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -88,11 +90,12 @@ public class PostSearchApiTest {
    */
   @Test
   public void testInvalidXApiUser() throws ApiException {
-    AgreementAssetEventRequest agreementAssetEventRequest = SearchUtils.getAgreementAssetEventRequest(TestData.STATIC_START_DATE,
-                                                                                                      TestData.STATIC_END_DATE);
+    AgreementAssetEventRequest agreementAssetEventRequest = SearchUtils.getAgreementAssetEventRequest(ApiUtils.getDate(TestData.DAYS_BETWEEN_START_DATE_AND_CURRENT_DATE),
+                                                                                                      ApiUtils.getDate(TestData.DAYS_BETWEEN_END_DATE_AND_CURRENT_DATE));
     try {
-      searchApi.createAssetEvent(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                 agreementAssetEventRequest);
+      AgreementAssetEventPostResponse agreementAssetEventPostResponse = searchApi.createAssetEvent(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                                                   agreementAssetEventRequest);
+      assertNotNull(agreementAssetEventPostResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -110,8 +113,9 @@ public class PostSearchApiTest {
   @Test
   public void testInvalidAgreementAssetEventRequest() throws ApiException {
     try {
-      searchApi.createAssetEvent(ApiUtils.getValidHeaderParams(),
-                                 null);
+      AgreementAssetEventPostResponse agreementAssetEventPostResponse = searchApi.createAssetEvent(ApiUtils.getValidHeaderParams(),
+                                                                                                   null);
+      assertNotNull(agreementAssetEventPostResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -119,35 +123,38 @@ public class PostSearchApiTest {
     }
 
     AgreementAssetEventRequest agreementAssetEventRequest = SearchUtils.getAgreementAssetEventRequest(null,
-                                                                                                      TestData.STATIC_END_DATE);
+                                                                                                      ApiUtils.getDate(TestData.DAYS_BETWEEN_END_DATE_AND_CURRENT_DATE));
     try {
-      searchApi.createAssetEvent(ApiUtils.getValidHeaderParams(),
-                                 agreementAssetEventRequest);
+      AgreementAssetEventPostResponse agreementAssetEventPostResponse = searchApi.createAssetEvent(ApiUtils.getValidHeaderParams(),
+                                                                                                   agreementAssetEventRequest);
+      assertNotNull(agreementAssetEventPostResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_DATE.getApiCode().equals(e.getApiCode()));
     }
 
-    agreementAssetEventRequest = SearchUtils.getAgreementAssetEventRequest(TestData.STATIC_START_DATE,
+    agreementAssetEventRequest = SearchUtils.getAgreementAssetEventRequest(ApiUtils.getDate(TestData.DAYS_BETWEEN_START_DATE_AND_CURRENT_DATE),
                                                                            null);
     try {
-      searchApi.createAssetEvent(ApiUtils.getValidHeaderParams(),
-                                 agreementAssetEventRequest);
+      AgreementAssetEventPostResponse agreementAssetEventPostResponse = searchApi.createAssetEvent(ApiUtils.getValidHeaderParams(),
+                                                                                                   agreementAssetEventRequest);
+      assertNotNull(agreementAssetEventPostResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_DATE.getApiCode().equals(e.getApiCode()));
     }
 
-    Date startDate = TestData.STATIC_END_DATE;
-    Date endDate = TestData.STATIC_START_DATE;
+    Date startDate = ApiUtils.getDate(TestData.DAYS_BETWEEN_END_DATE_AND_CURRENT_DATE);
+    Date endDate = ApiUtils.getDate(TestData.DAYS_BETWEEN_START_DATE_AND_CURRENT_DATE);
 
     agreementAssetEventRequest = SearchUtils.getAgreementAssetEventRequest(startDate,
                                                                            endDate);
     try {
-      searchApi.createAssetEvent(ApiUtils.getValidHeaderParams(),
-                                 agreementAssetEventRequest);
+      AgreementAssetEventPostResponse agreementAssetEventPostResponse = searchApi.createAssetEvent(ApiUtils.getValidHeaderParams(),
+                                                                                                   agreementAssetEventRequest);
+      assertNotNull(agreementAssetEventPostResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -163,13 +170,13 @@ public class PostSearchApiTest {
    */
   @Test
   public void testCreateAssetEvent() throws ApiException {
-    AgreementAssetEventRequest agreementAssetEventRequest = SearchUtils.getAgreementAssetEventRequest(TestData.STATIC_START_DATE,
-                                                                                                      TestData.STATIC_END_DATE);
+    AgreementAssetEventRequest agreementAssetEventRequest = SearchUtils.getAgreementAssetEventRequest(ApiUtils.getDate(TestData.DAYS_BETWEEN_START_DATE_AND_CURRENT_DATE),
+                                                                                                      ApiUtils.getDate(TestData.DAYS_BETWEEN_END_DATE_AND_CURRENT_DATE));
     try {
-      AgreementAssetEventPostResponse response = searchApi.createAssetEvent(ApiUtils.getValidHeaderParams(),
-                                                                            agreementAssetEventRequest);
-      assertNotNull(response);
-      assertNotNull(response.getSearchId());
+      AgreementAssetEventPostResponse agreementAssetEventPostResponse = searchApi.createAssetEvent(ApiUtils.getValidHeaderParams(),
+                                                                                                   agreementAssetEventRequest);
+      assertNotNull(agreementAssetEventPostResponse);
+      assertNotNull(agreementAssetEventPostResponse.getSearchId());
     }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));

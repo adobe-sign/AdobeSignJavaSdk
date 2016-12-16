@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class AlternateParticipantInfo   {
   
   private String countryCode = null;
@@ -36,9 +36,16 @@ public class AlternateParticipantInfo   {
    **/
   @ApiModelProperty(value = "The country code for the alternate participant")
   @JsonProperty("countryCode")
+  /**
+   * @return String
+   **/
   public String getCountryCode() {
     return countryCode;
   }
+  /**
+   * The country code for the alternate participant
+   * @param countryCode
+   **/
   public void setCountryCode(String countryCode) {
     this.countryCode = countryCode;
   }
@@ -49,9 +56,16 @@ public class AlternateParticipantInfo   {
    **/
   @ApiModelProperty(required = true, value = "The email of the alternate participant. This is required if fax is not provided. Both fax and email can not be provided")
   @JsonProperty("email")
+  /**
+   * @return String
+   **/
   public String getEmail() {
     return email;
   }
+  /**
+   * The email of the alternate participant. This is required if fax is not provided. Both fax and email can not be provided
+   * @param email
+   **/
   public void setEmail(String email) {
     this.email = email;
   }
@@ -62,9 +76,16 @@ public class AlternateParticipantInfo   {
    **/
   @ApiModelProperty(value = "The phone number for the alternate participant")
   @JsonProperty("phone")
+  /**
+   * @return String
+   **/
   public String getPhone() {
     return phone;
   }
+  /**
+   * The phone number for the alternate participant
+   * @param phone
+   **/
   public void setPhone(String phone) {
     this.phone = phone;
   }
@@ -75,9 +96,16 @@ public class AlternateParticipantInfo   {
    **/
   @ApiModelProperty(required = true, value = "The private message for the alternate participant")
   @JsonProperty("privateMessage")
+  /**
+   * @return String
+   **/
   public String getPrivateMessage() {
     return privateMessage;
   }
+  /**
+   * The private message for the alternate participant
+   * @param privateMessage
+   **/
   public void setPrivateMessage(String privateMessage) {
     this.privateMessage = privateMessage;
   }
@@ -85,6 +113,10 @@ public class AlternateParticipantInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class AlternateParticipantInfo {\n");

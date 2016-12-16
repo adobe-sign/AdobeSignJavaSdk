@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class DisplayUserSetInfo   {
   
-  private List<DisplayUserInfo> displayUserSetMemberInfos = new ArrayList<DisplayUserInfo>();
+  private List<DisplayUserInfo> displayUserSetMemberInfos = null;
   private String displayUserSetName = null;
 
   
@@ -36,9 +36,16 @@ public class DisplayUserSetInfo   {
    **/
   @ApiModelProperty(required = true, value = "Displays the info about user set")
   @JsonProperty("displayUserSetMemberInfos")
+  /**
+   * @return List&lt;DisplayUserInfo&gt;
+   **/
   public List<DisplayUserInfo> getDisplayUserSetMemberInfos() {
     return displayUserSetMemberInfos;
   }
+  /**
+   * Displays the info about user set
+   * @param displayUserSetMemberInfos
+   **/
   public void setDisplayUserSetMemberInfos(List<DisplayUserInfo> displayUserSetMemberInfos) {
     this.displayUserSetMemberInfos = displayUserSetMemberInfos;
   }
@@ -49,9 +56,16 @@ public class DisplayUserSetInfo   {
    **/
   @ApiModelProperty(value = "The name of the display user set. Returned only, if the API caller is the sender of agreement.")
   @JsonProperty("displayUserSetName")
+  /**
+   * @return String
+   **/
   public String getDisplayUserSetName() {
     return displayUserSetName;
   }
+  /**
+   * The name of the display user set. Returned only, if the API caller is the sender of agreement.
+   * @param displayUserSetName
+   **/
   public void setDisplayUserSetName(String displayUserSetName) {
     this.displayUserSetName = displayUserSetName;
   }
@@ -59,6 +73,10 @@ public class DisplayUserSetInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class DisplayUserSetInfo {\n");

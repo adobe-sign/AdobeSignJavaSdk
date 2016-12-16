@@ -26,19 +26,19 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Put Agreement Status API.
+ * Junit test cases for Update Agreement Status endpoint.
  */
-public class PutAgreementStatusApiTest {
+public class UpdateAgreementStatusApiTest {
   private static AgreementsApi agreementsApi = null;
   private static String agreementId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -48,6 +48,7 @@ public class PutAgreementStatusApiTest {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.createAgreement(ApiUtils.getAgreementName());
   }
+
   /**
    * Test for modifying an agreement's status through the updateStatus endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -61,9 +62,10 @@ public class PutAgreementStatusApiTest {
     updateInfo.setValue(AgreementStatusUpdateInfo.ValueEnum.CANCEL);
 
     try {
-      agreementsApi.updateStatus(ApiUtils.getNullAccessTokenHeaderParams(),
-                                 agreementId,
-                                 updateInfo);
+      AgreementStatusUpdateResponse agreementStatusUpdateResponse = agreementsApi.updateStatus(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                                               agreementId,
+                                                                                               updateInfo);
+      assertNotNull(agreementStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -71,9 +73,10 @@ public class PutAgreementStatusApiTest {
     }
 
     try {
-      agreementsApi.updateStatus(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                 agreementId,
-                                 updateInfo);
+      AgreementStatusUpdateResponse agreementStatusUpdateResponse = agreementsApi.updateStatus(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                                               agreementId,
+                                                                                               updateInfo);
+      assertNotNull(agreementStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -81,6 +84,7 @@ public class PutAgreementStatusApiTest {
     }
 
   }
+
   /**
    * Test for modifying an agreement's status through the updateStatus endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -93,15 +97,17 @@ public class PutAgreementStatusApiTest {
     updateInfo.setValue(AgreementStatusUpdateInfo.ValueEnum.CANCEL);
 
     try {
-      agreementsApi.updateStatus(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                 agreementId,
-                                 updateInfo);
+      AgreementStatusUpdateResponse agreementStatusUpdateResponse = agreementsApi.updateStatus(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                                               agreementId,
+                                                                                               updateInfo);
+      assertNotNull(agreementStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for modifying an agreement's status through the updateStatus endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: null and empty agreementId.
@@ -114,9 +120,10 @@ public class PutAgreementStatusApiTest {
     updateInfo.setValue(AgreementStatusUpdateInfo.ValueEnum.CANCEL);
 
     try {
-      agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
-                                 TestData.EMPTY_PARAM,
-                                 updateInfo);
+      AgreementStatusUpdateResponse agreementStatusUpdateResponse = agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
+                                                                                               TestData.EMPTY_PARAM,
+                                                                                               updateInfo);
+      assertNotNull(agreementStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -124,15 +131,17 @@ public class PutAgreementStatusApiTest {
     }
 
     try {
-      agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
-                                 TestData.NULL_PARAM,
-                                 updateInfo);
+      AgreementStatusUpdateResponse agreementStatusUpdateResponse = agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
+                                                                                               TestData.NULL_PARAM,
+                                                                                               updateInfo);
+      assertNotNull(agreementStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for modifying an agreement's status through the updateStatus endpoint. Negative scenarios covered:
    * MUST_PROVIDE_VALID_AGREEMENT_STATUS: invalid updateInfo status.
@@ -144,9 +153,10 @@ public class PutAgreementStatusApiTest {
   public void testInvalidAgreementStatus() throws ApiException {
 
     try {
-      agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
-                                 agreementId,
-                                 null);
+      AgreementStatusUpdateResponse agreementStatusUpdateResponse = agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
+                                                                                               agreementId,
+                                                                                               null);
+      assertNotNull(agreementStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -157,9 +167,10 @@ public class PutAgreementStatusApiTest {
     updateInfo.setValue(null);
 
     try {
-      agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
-                                 agreementId,
-                                 updateInfo);
+      AgreementStatusUpdateResponse agreementStatusUpdateResponse = agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
+                                                                                               agreementId,
+                                                                                               updateInfo);
+      assertNotNull(agreementStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -175,10 +186,10 @@ public class PutAgreementStatusApiTest {
     updateInfo.setValue(AgreementStatusUpdateInfo.ValueEnum.CANCEL);
 
     try {
-      AgreementStatusUpdateResponse response = agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
-                                                                          agreementId,
-                                                                          updateInfo);
-      assertNotNull(response);
+      AgreementStatusUpdateResponse agreementStatusUpdateResponse = agreementsApi.updateStatus(ApiUtils.getValidHeaderParams(),
+                                                                                               agreementId,
+                                                                                               updateInfo);
+      assertNotNull(agreementStatusUpdateResponse);
     }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));

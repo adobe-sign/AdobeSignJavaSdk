@@ -13,6 +13,7 @@
 
 package com.adobe.sign.utils;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -114,7 +115,7 @@ public class ApiUtils {
 
   public static Date getDate(int offset){
     Calendar cal = Calendar.getInstance();
-    cal.add(Calendar.DATE, offset);
+    cal.add(Calendar.DATE, -offset);
     return cal.getTime();
   }
 
@@ -166,6 +167,11 @@ public class ApiUtils {
       Context.setEnvHostName(ENV_HOST_NAME);
     }
   }
+  public static File getFile(String filePath) {
+    File file = new File(filePath);
+    return file;
+  }
+
 }
 
 

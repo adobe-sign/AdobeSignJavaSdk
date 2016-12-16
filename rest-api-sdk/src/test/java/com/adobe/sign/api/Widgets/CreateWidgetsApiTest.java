@@ -31,20 +31,20 @@ import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.TransientDocumentsUtils;
 import com.adobe.sign.utils.WidgetUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Post Widgets API.
+ * Junit test cases for Create Widgets endpoint.
  */
-public class PostWidgetsApiTest {
+public class CreateWidgetsApiTest {
   private static WidgetsApi widgetsApi = null;
   private static String libraryDocumentId = null;
   private static String transientDocumentId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -69,8 +69,9 @@ public class PostWidgetsApiTest {
     WidgetCreationRequest widgetCreationRequest = new WidgetCreationRequest();
 
     try {
-      widgetsApi.createWidget(ApiUtils.getNullAccessTokenHeaderParams(),
-                              widgetCreationRequest);
+      WidgetCreationResponse widgetCreationResponse = widgetsApi.createWidget(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                              widgetCreationRequest);
+      assertNotNull(widgetCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -78,8 +79,9 @@ public class PostWidgetsApiTest {
     }
 
     try {
-      widgetsApi.createWidget(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                              widgetCreationRequest);
+      WidgetCreationResponse widgetCreationResponse = widgetsApi.createWidget(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                              widgetCreationRequest);
+      assertNotNull(widgetCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -98,8 +100,9 @@ public class PostWidgetsApiTest {
   @Test
   public void testInvalidWidgetCreationInfo() throws ApiException {
     try {
-      widgetsApi.createWidget(ApiUtils.getValidHeaderParams(),
-                              null);
+      WidgetCreationResponse widgetCreationResponse = widgetsApi.createWidget(ApiUtils.getValidHeaderParams(),
+                                                                              null);
+      assertNotNull(widgetCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -109,8 +112,9 @@ public class PostWidgetsApiTest {
     WidgetCreationRequest widgetCreationRequest = WidgetUtils.getWidgetCreationRequest(TestData.NULL_PARAM);
 
     try {
-      widgetsApi.createWidget(ApiUtils.getValidHeaderParams(),
-                              widgetCreationRequest);
+      WidgetCreationResponse widgetCreationResponse = widgetsApi.createWidget(ApiUtils.getValidHeaderParams(),
+                                                                              widgetCreationRequest);
+      assertNotNull(widgetCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -122,8 +126,9 @@ public class PostWidgetsApiTest {
                                                                  fileInfo);
 
     try {
-      widgetsApi.createWidget(ApiUtils.getValidHeaderParams(),
-                              widgetCreationRequest);
+      WidgetCreationResponse widgetCreationResponse = widgetsApi.createWidget(ApiUtils.getValidHeaderParams(),
+                                                                              widgetCreationRequest);
+      assertNotNull(widgetCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -138,8 +143,9 @@ public class PostWidgetsApiTest {
                                                                  fileInfo);
 
     try {
-      widgetsApi.createWidget(ApiUtils.getValidHeaderParams(),
-                              widgetCreationRequest);
+      WidgetCreationResponse widgetCreationResponse = widgetsApi.createWidget(ApiUtils.getValidHeaderParams(),
+                                                                              widgetCreationRequest);
+      assertNotNull(widgetCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -154,8 +160,9 @@ public class PostWidgetsApiTest {
                                                                  fileInfo);
 
     try {
-      widgetsApi.createWidget(ApiUtils.getValidHeaderParams(),
-                              widgetCreationRequest);
+      WidgetCreationResponse widgetCreationResponse = widgetsApi.createWidget(ApiUtils.getValidHeaderParams(),
+                                                                              widgetCreationRequest);
+      assertNotNull(widgetCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -174,8 +181,9 @@ public class PostWidgetsApiTest {
     WidgetCreationRequest widgetCreationRequest = new WidgetCreationRequest();
 
     try {
-      widgetsApi.createWidget(ApiUtils.getEmptyXApiUserHeaderParams(),
-                              widgetCreationRequest);
+      WidgetCreationResponse widgetCreationResponse = widgetsApi.createWidget(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                              widgetCreationRequest);
+      assertNotNull(widgetCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),

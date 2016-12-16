@@ -14,8 +14,8 @@
 package com.adobe.sign.model.libraryDocuments;
 
 import com.adobe.sign.utils.StringUtil;
-import java.util.*;
 import java.util.Date;
+import java.util.*;
 
 
 
@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:51.876+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.195+05:30")
 public class DocumentLibraryItem   {
   
   private String libraryDocumentId = null;
@@ -45,7 +45,7 @@ public enum LibraryTemplateTypesEnum {
   }
 }
 
-  private List<LibraryTemplateTypesEnum> libraryTemplateTypes = new ArrayList<LibraryTemplateTypesEnum>();
+  private List<LibraryTemplateTypesEnum> libraryTemplateTypes = null;
   private Date modifiedDate = null;
   private String name = null;
 
@@ -74,9 +74,16 @@ public enum ScopeEnum {
    **/
   @ApiModelProperty(required = true, value = "The unique identifier of the library document used when sending the document to be signed")
   @JsonProperty("libraryDocumentId")
+  /**
+   * @return String
+   **/
   public String getLibraryDocumentId() {
     return libraryDocumentId;
   }
+  /**
+   * The unique identifier of the library document used when sending the document to be signed
+   * @param libraryDocumentId
+   **/
   public void setLibraryDocumentId(String libraryDocumentId) {
     this.libraryDocumentId = libraryDocumentId;
   }
@@ -87,9 +94,16 @@ public enum ScopeEnum {
    **/
   @ApiModelProperty(required = true, value = "A list of one or more library template types")
   @JsonProperty("libraryTemplateTypes")
+  /**
+   * @return List&lt;LibraryTemplateTypesEnum&gt;
+   **/
   public List<LibraryTemplateTypesEnum> getLibraryTemplateTypes() {
     return libraryTemplateTypes;
   }
+  /**
+   * A list of one or more library template types
+   * @param libraryTemplateTypes
+   **/
   public void setLibraryTemplateTypes(List<LibraryTemplateTypesEnum> libraryTemplateTypes) {
     this.libraryTemplateTypes = libraryTemplateTypes;
   }
@@ -100,9 +114,16 @@ public enum ScopeEnum {
    **/
   @ApiModelProperty(required = true, value = "The day on which the library document was last modified")
   @JsonProperty("modifiedDate")
+  /**
+   * @return Date
+   **/
   public Date getModifiedDate() {
     return modifiedDate;
   }
+  /**
+   * The day on which the library document was last modified
+   * @param modifiedDate
+   **/
   public void setModifiedDate(Date modifiedDate) {
     this.modifiedDate = modifiedDate;
   }
@@ -113,9 +134,16 @@ public enum ScopeEnum {
    **/
   @ApiModelProperty(required = true, value = "The name of the library document")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * The name of the library document
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -126,9 +154,16 @@ public enum ScopeEnum {
    **/
   @ApiModelProperty(required = true, value = "The scope of visibility of the library document")
   @JsonProperty("scope")
+  /**
+   * @return ScopeEnum
+   **/
   public ScopeEnum getScope() {
     return scope;
   }
+  /**
+   * The scope of visibility of the library document
+   * @param scope
+   **/
   public void setScope(ScopeEnum scope) {
     this.scope = scope;
   }
@@ -136,6 +171,10 @@ public enum ScopeEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class DocumentLibraryItem {\n");

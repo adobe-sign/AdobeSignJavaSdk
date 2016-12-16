@@ -14,8 +14,8 @@
 package com.adobe.sign.model.widgets;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.widgets.WidgetHistoryEvent;
 import java.util.*;
+import com.adobe.sign.model.widgets.WidgetHistoryEvent;
 import com.adobe.sign.model.widgets.WidgetParticipantSetInfo;
 
 
@@ -25,16 +25,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class WidgetInfo   {
   
-  private List<WidgetHistoryEvent> events = new ArrayList<WidgetHistoryEvent>();
+  private List<WidgetHistoryEvent> events = null;
   private String javascript = null;
   private String latestVersionId = null;
   private String locale = null;
   private String message = null;
   private String name = null;
-  private List<WidgetParticipantSetInfo> participantSetInfos = new ArrayList<WidgetParticipantSetInfo>();
+  private List<WidgetParticipantSetInfo> participantSetInfos = null;
 
 public enum SecurityOptionsEnum {
   OPEN_PROTECTED("OPEN_PROTECTED"),
@@ -52,7 +52,7 @@ public enum SecurityOptionsEnum {
   }
 }
 
-  private List<SecurityOptionsEnum> securityOptions = new ArrayList<SecurityOptionsEnum>();
+  private List<SecurityOptionsEnum> securityOptions = null;
 
 public enum StatusEnum {
   ENABLED("ENABLED"),
@@ -82,9 +82,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "An ordered list of the events in the audit trail of this widget")
   @JsonProperty("events")
+  /**
+   * @return List&lt;WidgetHistoryEvent&gt;
+   **/
   public List<WidgetHistoryEvent> getEvents() {
     return events;
   }
+  /**
+   * An ordered list of the events in the audit trail of this widget
+   * @param events
+   **/
   public void setEvents(List<WidgetHistoryEvent> events) {
     this.events = events;
   }
@@ -95,9 +102,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The embedded javascript code of the widget")
   @JsonProperty("javascript")
+  /**
+   * @return String
+   **/
   public String getJavascript() {
     return javascript;
   }
+  /**
+   * The embedded javascript code of the widget
+   * @param javascript
+   **/
   public void setJavascript(String javascript) {
     this.javascript = javascript;
   }
@@ -108,9 +122,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "An ID which uniquely identifies the current version of the widget")
   @JsonProperty("latestVersionId")
+  /**
+   * @return String
+   **/
   public String getLatestVersionId() {
     return latestVersionId;
   }
+  /**
+   * An ID which uniquely identifies the current version of the widget
+   * @param latestVersionId
+   **/
   public void setLatestVersionId(String latestVersionId) {
     this.latestVersionId = latestVersionId;
   }
@@ -121,9 +142,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The locale associated with this widget - for example, en_US or fr_FR")
   @JsonProperty("locale")
+  /**
+   * @return String
+   **/
   public String getLocale() {
     return locale;
   }
+  /**
+   * The locale associated with this widget - for example, en_US or fr_FR
+   * @param locale
+   **/
   public void setLocale(String locale) {
     this.locale = locale;
   }
@@ -134,9 +162,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "The message associated with the widget that the sender has provided")
   @JsonProperty("message")
+  /**
+   * @return String
+   **/
   public String getMessage() {
     return message;
   }
+  /**
+   * The message associated with the widget that the sender has provided
+   * @param message
+   **/
   public void setMessage(String message) {
     this.message = message;
   }
@@ -147,9 +182,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The widget name specified by the sender")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * The widget name specified by the sender
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -160,9 +202,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about the participant sets of the widget.")
   @JsonProperty("participantSetInfos")
+  /**
+   * @return List&lt;WidgetParticipantSetInfo&gt;
+   **/
   public List<WidgetParticipantSetInfo> getParticipantSetInfos() {
     return participantSetInfos;
   }
+  /**
+   * Information about the participant sets of the widget.
+   * @param participantSetInfos
+   **/
   public void setParticipantSetInfos(List<WidgetParticipantSetInfo> participantSetInfos) {
     this.participantSetInfos = participantSetInfos;
   }
@@ -173,9 +222,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Security information about the widget that specifies whether or not a password is required to view and sign the widget")
   @JsonProperty("securityOptions")
+  /**
+   * @return List&lt;SecurityOptionsEnum&gt;
+   **/
   public List<SecurityOptionsEnum> getSecurityOptions() {
     return securityOptions;
   }
+  /**
+   * Security information about the widget that specifies whether or not a password is required to view and sign the widget
+   * @param securityOptions
+   **/
   public void setSecurityOptions(List<SecurityOptionsEnum> securityOptions) {
     this.securityOptions = securityOptions;
   }
@@ -186,9 +242,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The current status of the widget")
   @JsonProperty("status")
+  /**
+   * @return StatusEnum
+   **/
   public StatusEnum getStatus() {
     return status;
   }
+  /**
+   * The current status of the widget
+   * @param status
+   **/
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -199,9 +262,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The hosted url of the widget")
   @JsonProperty("url")
+  /**
+   * @return String
+   **/
   public String getUrl() {
     return url;
   }
+  /**
+   * The hosted url of the widget
+   * @param url
+   **/
   public void setUrl(String url) {
     this.url = url;
   }
@@ -212,9 +282,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "A resource identifier that can be used to uniquely identify the widget in other apis")
   @JsonProperty("widgetId")
+  /**
+   * @return String
+   **/
   public String getWidgetId() {
     return widgetId;
   }
+  /**
+   * A resource identifier that can be used to uniquely identify the widget in other apis
+   * @param widgetId
+   **/
   public void setWidgetId(String widgetId) {
     this.widgetId = widgetId;
   }
@@ -222,6 +299,10 @@ public enum StatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetInfo {\n");

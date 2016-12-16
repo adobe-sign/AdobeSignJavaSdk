@@ -25,19 +25,19 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Agreement Combined Document Url API.
+ * Junit test cases for Get Agreement Combined Document Url endpoint.
  */
 public class GetAgreementCombinedDocUrlApiTest {
   private static AgreementsApi agreementsApi = null;
   private static String agreementId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -47,6 +47,7 @@ public class GetAgreementCombinedDocUrlApiTest {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
+
   /**
    * Test for fetching url of all documents combined through the getCombinedDocumentUrl endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -58,12 +59,13 @@ public class GetAgreementCombinedDocUrlApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentUrl(ApiUtils.getNullAccessTokenHeaderParams(),
-                                           agreementId,
-                                           TestData.VERSION_ID,
-                                           TestData.PARTICIPANT_EMAIL,
-                                           TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                           TestData.AUDIT_REPORT);
+      DocumentUrl documentUrl = agreementsApi.getCombinedDocumentUrl(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                     agreementId,
+                                                                     TestData.VERSION_ID,
+                                                                     TestData.PARTICIPANT_EMAIL,
+                                                                     TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                     TestData.AUDIT_REPORT);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -71,12 +73,13 @@ public class GetAgreementCombinedDocUrlApiTest {
     }
 
     try {
-      agreementsApi.getCombinedDocumentUrl(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                           agreementId,
-                                           TestData.VERSION_ID,
-                                           TestData.PARTICIPANT_EMAIL,
-                                           TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                           TestData.AUDIT_REPORT);
+      DocumentUrl documentUrl = agreementsApi.getCombinedDocumentUrl(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                     agreementId,
+                                                                     TestData.VERSION_ID,
+                                                                     TestData.PARTICIPANT_EMAIL,
+                                                                     TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                     TestData.AUDIT_REPORT);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -84,6 +87,7 @@ public class GetAgreementCombinedDocUrlApiTest {
     }
 
   }
+
   /**
    * Test for fetching url of all documents combined through the getCombinedDocumentUrl endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -94,18 +98,20 @@ public class GetAgreementCombinedDocUrlApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentUrl(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                           agreementId,
-                                           TestData.VERSION_ID,
-                                           TestData.PARTICIPANT_EMAIL,
-                                           TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                           TestData.AUDIT_REPORT);
+      DocumentUrl documentUrl = agreementsApi.getCombinedDocumentUrl(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                     agreementId,
+                                                                     TestData.VERSION_ID,
+                                                                     TestData.PARTICIPANT_EMAIL,
+                                                                     TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                     TestData.AUDIT_REPORT);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching url of all documents combined through the getCombinedDocumentUrl endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: empty and null agreementId.
@@ -116,12 +122,13 @@ public class GetAgreementCombinedDocUrlApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentUrl(ApiUtils.getValidHeaderParams(),
-                                           TestData.EMPTY_PARAM,
-                                           TestData.VERSION_ID,
-                                           TestData.PARTICIPANT_EMAIL,
-                                           TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                           TestData.AUDIT_REPORT);
+      DocumentUrl documentUrl = agreementsApi.getCombinedDocumentUrl(ApiUtils.getValidHeaderParams(),
+                                                                     TestData.EMPTY_PARAM,
+                                                                     TestData.VERSION_ID,
+                                                                     TestData.PARTICIPANT_EMAIL,
+                                                                     TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                     TestData.AUDIT_REPORT);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -129,18 +136,20 @@ public class GetAgreementCombinedDocUrlApiTest {
     }
 
     try {
-      agreementsApi.getCombinedDocumentUrl(ApiUtils.getValidHeaderParams(),
-                                           TestData.NULL_PARAM,
-                                           TestData.VERSION_ID,
-                                           TestData.PARTICIPANT_EMAIL,
-                                           TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                           TestData.AUDIT_REPORT);
+      DocumentUrl documentUrl = agreementsApi.getCombinedDocumentUrl(ApiUtils.getValidHeaderParams(),
+                                                                     TestData.NULL_PARAM,
+                                                                     TestData.VERSION_ID,
+                                                                     TestData.PARTICIPANT_EMAIL,
+                                                                     TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                     TestData.AUDIT_REPORT);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching url of all documents combined through the getCombinedDocumentUrl endpoint. Negative scenarios covered:
    * INVALID_VERSION_ID: empty versionId.
@@ -151,18 +160,20 @@ public class GetAgreementCombinedDocUrlApiTest {
   public void testInvalidVersionId() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentUrl(ApiUtils.getValidHeaderParams(),
-                                           agreementId,
-                                           TestData.EMPTY_PARAM,
-                                           TestData.PARTICIPANT_EMAIL,
-                                           TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                           TestData.AUDIT_REPORT);
+      DocumentUrl documentUrl = agreementsApi.getCombinedDocumentUrl(ApiUtils.getValidHeaderParams(),
+                                                                     agreementId,
+                                                                     TestData.EMPTY_PARAM,
+                                                                     TestData.PARTICIPANT_EMAIL,
+                                                                     TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                     TestData.AUDIT_REPORT);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_VERSION_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching url of all documents combined through the getCombinedDocumentUrl endpoint. Negative scenarios covered:
    * INVALID_PARTICIPANT: empty participantId.
@@ -173,12 +184,13 @@ public class GetAgreementCombinedDocUrlApiTest {
   public void testInvalidParticipantEmail() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentUrl(ApiUtils.getValidHeaderParams(),
-                                           agreementId,
-                                           TestData.NULL_PARAM,
-                                           TestData.VERSION_ID,
-                                           TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                           TestData.AUDIT_REPORT);
+      DocumentUrl documentUrl = agreementsApi.getCombinedDocumentUrl(ApiUtils.getValidHeaderParams(),
+                                                                     agreementId,
+                                                                     TestData.NULL_PARAM,
+                                                                     TestData.VERSION_ID,
+                                                                     TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                     TestData.AUDIT_REPORT);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -196,12 +208,12 @@ public class GetAgreementCombinedDocUrlApiTest {
   public void testGetCombinedDocumentUrl() throws ApiException {
 
     try {
-      DocumentUrl documentUrl =  agreementsApi.getCombinedDocumentUrl(ApiUtils.getValidHeaderParams(),
-                                                                      agreementId,
-                                                                      TestData.VERSION_ID,
-                                                                      TestData.PARTICIPANT_EMAIL,
-                                                                      TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                                                      TestData.AUDIT_REPORT);
+      DocumentUrl documentUrl = agreementsApi.getCombinedDocumentUrl(ApiUtils.getValidHeaderParams(),
+                                                                     agreementId,
+                                                                     TestData.VERSION_ID,
+                                                                     TestData.PARTICIPANT_EMAIL,
+                                                                     TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                     TestData.AUDIT_REPORT);
       assertNotNull(documentUrl);
     }
     catch (ApiException e) {
@@ -209,8 +221,6 @@ public class GetAgreementCombinedDocUrlApiTest {
     }
 
   }
-
-
 
 
 }

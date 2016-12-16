@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.002+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:32.597+05:30")
 public class GroupsInfo   {
   
-  private List<GroupInfo> groupInfoList = new ArrayList<GroupInfo>();
+  private List<GroupInfo> groupInfoList = null;
 
   
   /**
@@ -35,9 +35,16 @@ public class GroupsInfo   {
    **/
   @ApiModelProperty(required = true, value = "The list of groups in the account.")
   @JsonProperty("groupInfoList")
+  /**
+   * @return List&lt;GroupInfo&gt;
+   **/
   public List<GroupInfo> getGroupInfoList() {
     return groupInfoList;
   }
+  /**
+   * The list of groups in the account.
+   * @param groupInfoList
+   **/
   public void setGroupInfoList(List<GroupInfo> groupInfoList) {
     this.groupInfoList = groupInfoList;
   }
@@ -45,6 +52,10 @@ public class GroupsInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class GroupsInfo {\n");

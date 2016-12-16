@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.002+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:32.597+05:30")
 public class UserInfo   {
   
   private String company = null;
@@ -37,9 +37,16 @@ public class UserInfo   {
    **/
   @ApiModelProperty(value = "The name of company of the user")
   @JsonProperty("company")
+  /**
+   * @return String
+   **/
   public String getCompany() {
     return company;
   }
+  /**
+   * The name of company of the user
+   * @param company
+   **/
   public void setCompany(String company) {
     this.company = company;
   }
@@ -50,9 +57,16 @@ public class UserInfo   {
    **/
   @ApiModelProperty(required = true, value = "The email address of the user")
   @JsonProperty("email")
+  /**
+   * @return String
+   **/
   public String getEmail() {
     return email;
   }
+  /**
+   * The email address of the user
+   * @param email
+   **/
   public void setEmail(String email) {
     this.email = email;
   }
@@ -63,9 +77,16 @@ public class UserInfo   {
    **/
   @ApiModelProperty(required = true, value = "The full name of the user, if available; or their email address")
   @JsonProperty("fullNameOrEmail")
+  /**
+   * @return String
+   **/
   public String getFullNameOrEmail() {
     return fullNameOrEmail;
   }
+  /**
+   * The full name of the user, if available; or their email address
+   * @param fullNameOrEmail
+   **/
   public void setFullNameOrEmail(String fullNameOrEmail) {
     this.fullNameOrEmail = fullNameOrEmail;
   }
@@ -76,9 +97,16 @@ public class UserInfo   {
    **/
   @ApiModelProperty(required = true, value = "The identifier that can be used in group management methods")
   @JsonProperty("groupId")
+  /**
+   * @return String
+   **/
   public String getGroupId() {
     return groupId;
   }
+  /**
+   * The identifier that can be used in group management methods
+   * @param groupId
+   **/
   public void setGroupId(String groupId) {
     this.groupId = groupId;
   }
@@ -89,9 +117,16 @@ public class UserInfo   {
    **/
   @ApiModelProperty(required = true, value = "A unique identifier of the user resource for REST APIs. This identifier can not be used in SOAP APIs")
   @JsonProperty("userId")
+  /**
+   * @return String
+   **/
   public String getUserId() {
     return userId;
   }
+  /**
+   * A unique identifier of the user resource for REST APIs. This identifier can not be used in SOAP APIs
+   * @param userId
+   **/
   public void setUserId(String userId) {
     this.userId = userId;
   }
@@ -99,6 +134,10 @@ public class UserInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserInfo {\n");

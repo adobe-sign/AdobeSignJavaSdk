@@ -19,7 +19,7 @@ import com.adobe.sign.api.SearchApi;
 import com.adobe.sign.model.search.AgreementAssetEventPostResponse;
 import com.adobe.sign.model.search.AgreementAssetEventRequest;
 
-public class SearchUtils extends ApiUtils {
+public class SearchUtils {
 
   private static SearchApi searchApi = new SearchApi();
   private static MultivaluedMap headers = ApiUtils.getValidHeaderParams();
@@ -30,8 +30,8 @@ public class SearchUtils extends ApiUtils {
 
   public static String getResourceId() throws ApiException {
     
-    createSearch(TestData.STATIC_START_DATE,
-                 TestData.STATIC_END_DATE);
+    createSearch(ApiUtils.getDate(TestData.DAYS_BETWEEN_START_DATE_AND_CURRENT_DATE),
+                 ApiUtils.getDate(TestData.DAYS_BETWEEN_END_DATE_AND_CURRENT_DATE));
     return searchId ;
   }
 

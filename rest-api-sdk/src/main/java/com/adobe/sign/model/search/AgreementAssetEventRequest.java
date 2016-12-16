@@ -14,8 +14,8 @@
 package com.adobe.sign.model.search;
 
 import com.adobe.sign.utils.StringUtil;
-import java.util.*;
 import java.util.Date;
+import java.util.*;
 
 
 
@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:55.943+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:33.916+05:30")
 public class AgreementAssetEventRequest   {
   
   private Date endDate = null;
@@ -80,7 +80,7 @@ public enum FilterEventsEnum {
   }
 }
 
-  private List<FilterEventsEnum> filterEvents = new ArrayList<FilterEventsEnum>();
+  private List<FilterEventsEnum> filterEvents = null;
   private Boolean onlyShowLatestEvent = null;
   private Integer pageSize = null;
   private Date startDate = null;
@@ -91,9 +91,16 @@ public enum FilterEventsEnum {
    **/
   @ApiModelProperty(required = true, value = "The end of the date range for which events will be returned. Date should be mentioned in YYYY-MM-DDTHH:MM:SS format")
   @JsonProperty("endDate")
+  /**
+   * @return Date
+   **/
   public Date getEndDate() {
     return endDate;
   }
+  /**
+   * The end of the date range for which events will be returned. Date should be mentioned in YYYY-MM-DDTHH:MM:SS format
+   * @param endDate
+   **/
   public void setEndDate(Date endDate) {
     this.endDate = endDate;
   }
@@ -104,9 +111,16 @@ public enum FilterEventsEnum {
    **/
   @ApiModelProperty(value = "If filterEvents are specified, only those event types will be returned. If filterEvents are not specified, all event types will be returned.The Agreement Event type should be given in form of array like [\"ESIGNED\",\"SIGNED\"]")
   @JsonProperty("filterEvents")
+  /**
+   * @return List&lt;FilterEventsEnum&gt;
+   **/
   public List<FilterEventsEnum> getFilterEvents() {
     return filterEvents;
   }
+  /**
+   * If filterEvents are specified, only those event types will be returned. If filterEvents are not specified, all event types will be returned.The Agreement Event type should be given in form of array like [\"ESIGNED\",\"SIGNED\"]
+   * @param filterEvents
+   **/
   public void setFilterEvents(List<FilterEventsEnum> filterEvents) {
     this.filterEvents = filterEvents;
   }
@@ -117,9 +131,16 @@ public enum FilterEventsEnum {
    **/
   @ApiModelProperty(value = "If true, only the latest event for any given agreement asset within the specified date range will be returned. If false, all events will be returned")
   @JsonProperty("onlyShowLatestEvent")
+  /**
+   * @return Boolean
+   **/
   public Boolean getOnlyShowLatestEvent() {
     return onlyShowLatestEvent;
   }
+  /**
+   * If true, only the latest event for any given agreement asset within the specified date range will be returned. If false, all events will be returned
+   * @param onlyShowLatestEvent
+   **/
   public void setOnlyShowLatestEvent(Boolean onlyShowLatestEvent) {
     this.onlyShowLatestEvent = onlyShowLatestEvent;
   }
@@ -130,9 +151,16 @@ public enum FilterEventsEnum {
    **/
   @ApiModelProperty(value = "Count of agreement asset events which will be returned in the response. Default page size for the response is 100. Maximum value of page size is 500")
   @JsonProperty("pageSize")
+  /**
+   * @return Integer
+   **/
   public Integer getPageSize() {
     return pageSize;
   }
+  /**
+   * Count of agreement asset events which will be returned in the response. Default page size for the response is 100. Maximum value of page size is 500
+   * @param pageSize
+   **/
   public void setPageSize(Integer pageSize) {
     this.pageSize = pageSize;
   }
@@ -143,9 +171,16 @@ public enum FilterEventsEnum {
    **/
   @ApiModelProperty(required = true, value = "The beginning of the date range for which events will be returned. Date should be mentioned in YYYY-MM-DDTHH:MM:SS format")
   @JsonProperty("startDate")
+  /**
+   * @return Date
+   **/
   public Date getStartDate() {
     return startDate;
   }
+  /**
+   * The beginning of the date range for which events will be returned. Date should be mentioned in YYYY-MM-DDTHH:MM:SS format
+   * @param startDate
+   **/
   public void setStartDate(Date startDate) {
     this.startDate = startDate;
   }
@@ -153,6 +188,10 @@ public enum FilterEventsEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class AgreementAssetEventRequest {\n");

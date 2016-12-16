@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class ImageUrl   {
   
   private Boolean imagesAvailable = null;
@@ -52,7 +52,7 @@ public enum ImageSizeEnum {
 }
 
   private ImageSizeEnum imageSize = null;
-  private List<String> urls = new ArrayList<String>();
+  private List<String> urls = null;
 
   
   /**
@@ -60,9 +60,16 @@ public enum ImageSizeEnum {
    **/
   @ApiModelProperty(value = "true if images for the associated image size is available, else false.")
   @JsonProperty("imagesAvailable")
+  /**
+   * @return Boolean
+   **/
   public Boolean getImagesAvailable() {
     return imagesAvailable;
   }
+  /**
+   * true if images for the associated image size is available, else false.
+   * @param imagesAvailable
+   **/
   public void setImagesAvailable(Boolean imagesAvailable) {
     this.imagesAvailable = imagesAvailable;
   }
@@ -73,9 +80,16 @@ public enum ImageSizeEnum {
    **/
   @ApiModelProperty(value = "ImageSize corresponding to the imageUrl returned")
   @JsonProperty("imageSize")
+  /**
+   * @return ImageSizeEnum
+   **/
   public ImageSizeEnum getImageSize() {
     return imageSize;
   }
+  /**
+   * ImageSize corresponding to the imageUrl returned
+   * @param imageSize
+   **/
   public void setImageSize(ImageSizeEnum imageSize) {
     this.imageSize = imageSize;
   }
@@ -86,9 +100,16 @@ public enum ImageSizeEnum {
    **/
   @ApiModelProperty(required = true, value = "An ordered list of image urls (one per page).")
   @JsonProperty("urls")
+  /**
+   * @return List&lt;String&gt;
+   **/
   public List<String> getUrls() {
     return urls;
   }
+  /**
+   * An ordered list of image urls (one per page).
+   * @param urls
+   **/
   public void setUrls(List<String> urls) {
     this.urls = urls;
   }
@@ -96,6 +117,10 @@ public enum ImageSizeEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class ImageUrl {\n");

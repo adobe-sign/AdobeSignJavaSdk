@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.898+05:30")
 public class MegaSignCreationRequest   {
   
   private MegaSignCreationInfo megaSignCreationInfo = null;
@@ -34,9 +34,16 @@ public class MegaSignCreationRequest   {
    **/
   @ApiModelProperty(required = true, value = "Information about the MegaSign you want to send")
   @JsonProperty("megaSignCreationInfo")
+  /**
+   * @return MegaSignCreationInfo
+   **/
   public MegaSignCreationInfo getMegaSignCreationInfo() {
     return megaSignCreationInfo;
   }
+  /**
+   * Information about the MegaSign you want to send
+   * @param megaSignCreationInfo
+   **/
   public void setMegaSignCreationInfo(MegaSignCreationInfo megaSignCreationInfo) {
     this.megaSignCreationInfo = megaSignCreationInfo;
   }
@@ -44,6 +51,10 @@ public class MegaSignCreationRequest   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class MegaSignCreationRequest {\n");

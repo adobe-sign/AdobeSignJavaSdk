@@ -29,7 +29,7 @@ import com.adobe.sign.model.libraryDocuments.Documents;
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:51.876+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.195+05:30")
     public class LibraryDocumentsApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -47,8 +47,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: library_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: library_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @return DocumentLibraryItems
     */
@@ -114,8 +114,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: library_write user_login - Required additionally if the autoLoginUser parameter is set to true 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: library_write user_login - Required additionally if the autoLoginUser parameter is set to true 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param libraryCreationInfo Information about the library document that you want to create and authoring options that you want to apply at the time of creation.
     * @return LibraryDocumentCreationResponse
@@ -183,8 +183,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: library_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: library_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param libraryDocumentId The document identifier, as retrieved from the API to fetch library documents.
     * @return LibraryDocumentInfo
@@ -253,8 +253,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * This API will delete the library document. However, the agreements created using this library document will not be impacted.
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: library_retention 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: library_retention 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param libraryDocumentId The document identifier, as retrieved from the API to fetch library documents.
     * @return void
@@ -322,8 +322,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * File Stream of PDF file
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: library_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: library_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param libraryDocumentId The document identifier, as retrieved from the API to fetch library documents.
     * @return byte[]
@@ -392,8 +392,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * File Stream of PDF file
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: library_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: library_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param libraryDocumentId The document identifier, as retrieved from the API to fetch library documents.
     * @param auditReport When set to YES attach an audit report to the library document PDF. Default value will be false.
@@ -466,8 +466,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: library_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: library_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param libraryDocumentId The document identifier, as retrieved from the API to fetch library documents.
     * @return Documents
@@ -536,8 +536,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * Raw stream of the file
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: library_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: library_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param libraryDocumentId The document identifier, as retrieved from the API to fetch library documents.
     * @param documentId The document identifier, as retrieved from the API which fetches the documents of a specified library document

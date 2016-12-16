@@ -14,16 +14,16 @@
 package com.adobe.sign.model.workflows;
 
 import com.adobe.sign.utils.StringUtil;
+import com.adobe.sign.model.workflows.CCsListInfoDescription;
+import java.util.Date;
+import com.adobe.sign.model.workflows.ExpirationFieldInfoDescription;
+import com.adobe.sign.model.workflows.FileInfosDescription;
+import java.util.*;
 import com.adobe.sign.model.workflows.LocaleFieldInfoDescription;
 import com.adobe.sign.model.workflows.MergeFieldInfoDescription;
-import com.adobe.sign.model.workflows.RecipientsListInfoDescription;
-import com.adobe.sign.model.workflows.ExpirationFieldInfoDescription;
-import com.adobe.sign.model.workflows.CCsListInfoDescription;
-import java.util.*;
-import com.adobe.sign.model.workflows.WorkflowDefaultParams;
 import com.adobe.sign.model.workflows.PasswordFieldInfoDescription;
-import java.util.Date;
-import com.adobe.sign.model.workflows.FileInfosDescription;
+import com.adobe.sign.model.workflows.RecipientsListInfoDescription;
+import com.adobe.sign.model.workflows.WorkflowDefaultParams;
 
 
 
@@ -32,24 +32,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class WorkflowDescription   {
   
   private WorkflowDefaultParams agreementNameInfo = null;
   private WorkflowDefaultParams authoringInfo = null;
-  private List<CCsListInfoDescription> ccsListInfo = new ArrayList<CCsListInfoDescription>();
+  private List<CCsListInfoDescription> ccsListInfo = null;
   private Date created = null;
   private String description = null;
   private String displayName = null;
   private ExpirationFieldInfoDescription expirationInfo = null;
-  private List<FileInfosDescription> fileInfos = new ArrayList<FileInfosDescription>();
+  private List<FileInfosDescription> fileInfos = null;
   private LocaleFieldInfoDescription localeInfo = null;
-  private List<MergeFieldInfoDescription> mergeFieldsInfo = new ArrayList<MergeFieldInfoDescription>();
+  private List<MergeFieldInfoDescription> mergeFieldsInfo = null;
   private WorkflowDefaultParams messageInfo = null;
   private Date modified = null;
   private String name = null;
   private PasswordFieldInfoDescription passwordInfo = null;
-  private List<RecipientsListInfoDescription> recipientsListInfo = new ArrayList<RecipientsListInfoDescription>();
+  private List<RecipientsListInfoDescription> recipientsListInfo = null;
 
 public enum ScopeEnum {
   ACCOUNT("ACCOUNT"),
@@ -95,9 +95,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about name field in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow")
   @JsonProperty("agreementNameInfo")
+  /**
+   * @return WorkflowDefaultParams
+   **/
   public WorkflowDefaultParams getAgreementNameInfo() {
     return agreementNameInfo;
   }
+  /**
+   * Information about name field in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow
+   * @param agreementNameInfo
+   **/
   public void setAgreementNameInfo(WorkflowDefaultParams agreementNameInfo) {
     this.agreementNameInfo = agreementNameInfo;
   }
@@ -108,9 +115,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about authoringRequested field in SendDocumentInteractiveOptions input field in the agreement creation request when using the API to create an agreement in a workflow")
   @JsonProperty("authoringInfo")
+  /**
+   * @return WorkflowDefaultParams
+   **/
   public WorkflowDefaultParams getAuthoringInfo() {
     return authoringInfo;
   }
+  /**
+   * Information about authoringRequested field in SendDocumentInteractiveOptions input field in the agreement creation request when using the API to create an agreement in a workflow
+   * @param authoringInfo
+   **/
   public void setAuthoringInfo(WorkflowDefaultParams authoringInfo) {
     this.authoringInfo = authoringInfo;
   }
@@ -121,9 +135,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about CCList input field in the agreement creation request when using the API to create an agreement in a workflow")
   @JsonProperty("ccsListInfo")
+  /**
+   * @return List&lt;CCsListInfoDescription&gt;
+   **/
   public List<CCsListInfoDescription> getCcsListInfo() {
     return ccsListInfo;
   }
+  /**
+   * Information about CCList input field in the agreement creation request when using the API to create an agreement in a workflow
+   * @param ccsListInfo
+   **/
   public void setCcsListInfo(List<CCsListInfoDescription> ccsListInfo) {
     this.ccsListInfo = ccsListInfo;
   }
@@ -134,9 +155,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The day on which the workflow was created")
   @JsonProperty("created")
+  /**
+   * @return Date
+   **/
   public Date getCreated() {
     return created;
   }
+  /**
+   * The day on which the workflow was created
+   * @param created
+   **/
   public void setCreated(Date created) {
     this.created = created;
   }
@@ -147,9 +175,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Description provided for this workflow at the time of its creation")
   @JsonProperty("description")
+  /**
+   * @return String
+   **/
   public String getDescription() {
     return description;
   }
+  /**
+   * Description provided for this workflow at the time of its creation
+   * @param description
+   **/
   public void setDescription(String description) {
     this.description = description;
   }
@@ -160,9 +195,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The display name of the workflow.")
   @JsonProperty("displayName")
+  /**
+   * @return String
+   **/
   public String getDisplayName() {
     return displayName;
   }
+  /**
+   * The display name of the workflow.
+   * @param displayName
+   **/
   public void setDisplayName(String displayName) {
     this.displayName = displayName;
   }
@@ -173,9 +215,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about daysUntilSigningDeadline field in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow")
   @JsonProperty("expirationInfo")
+  /**
+   * @return ExpirationFieldInfoDescription
+   **/
   public ExpirationFieldInfoDescription getExpirationInfo() {
     return expirationInfo;
   }
+  /**
+   * Information about daysUntilSigningDeadline field in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow
+   * @param expirationInfo
+   **/
   public void setExpirationInfo(ExpirationFieldInfoDescription expirationInfo) {
     this.expirationInfo = expirationInfo;
   }
@@ -186,9 +235,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about FileInfo input field in the agreement creation request when using the API to create an agreement in a workflow")
   @JsonProperty("fileInfos")
+  /**
+   * @return List&lt;FileInfosDescription&gt;
+   **/
   public List<FileInfosDescription> getFileInfos() {
     return fileInfos;
   }
+  /**
+   * Information about FileInfo input field in the agreement creation request when using the API to create an agreement in a workflow
+   * @param fileInfos
+   **/
   public void setFileInfos(List<FileInfosDescription> fileInfos) {
     this.fileInfos = fileInfos;
   }
@@ -199,9 +255,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about locale field in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow")
   @JsonProperty("localeInfo")
+  /**
+   * @return LocaleFieldInfoDescription
+   **/
   public LocaleFieldInfoDescription getLocaleInfo() {
     return localeInfo;
   }
+  /**
+   * Information about locale field in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow
+   * @param localeInfo
+   **/
   public void setLocaleInfo(LocaleFieldInfoDescription localeInfo) {
     this.localeInfo = localeInfo;
   }
@@ -212,9 +275,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about customFieldInfos in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow")
   @JsonProperty("mergeFieldsInfo")
+  /**
+   * @return List&lt;MergeFieldInfoDescription&gt;
+   **/
   public List<MergeFieldInfoDescription> getMergeFieldsInfo() {
     return mergeFieldsInfo;
   }
+  /**
+   * Information about customFieldInfos in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow
+   * @param mergeFieldsInfo
+   **/
   public void setMergeFieldsInfo(List<MergeFieldInfoDescription> mergeFieldsInfo) {
     this.mergeFieldsInfo = mergeFieldsInfo;
   }
@@ -225,9 +295,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about message field in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow")
   @JsonProperty("messageInfo")
+  /**
+   * @return WorkflowDefaultParams
+   **/
   public WorkflowDefaultParams getMessageInfo() {
     return messageInfo;
   }
+  /**
+   * Information about message field in DocumentCreationInfo input field in the agreement creation request when using the API to create an agreement in a workflow
+   * @param messageInfo
+   **/
   public void setMessageInfo(WorkflowDefaultParams messageInfo) {
     this.messageInfo = messageInfo;
   }
@@ -238,9 +315,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The day on which the workflow was last modified")
   @JsonProperty("modified")
+  /**
+   * @return Date
+   **/
   public Date getModified() {
     return modified;
   }
+  /**
+   * The day on which the workflow was last modified
+   * @param modified
+   **/
   public void setModified(Date modified) {
     this.modified = modified;
   }
@@ -251,9 +335,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The name of the workflow.")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * The name of the workflow.
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -264,9 +355,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about openPassword field in SecurityOptions input field in the agreement creation request when using the API to create an agreement in a workflow")
   @JsonProperty("passwordInfo")
+  /**
+   * @return PasswordFieldInfoDescription
+   **/
   public PasswordFieldInfoDescription getPasswordInfo() {
     return passwordInfo;
   }
+  /**
+   * Information about openPassword field in SecurityOptions input field in the agreement creation request when using the API to create an agreement in a workflow
+   * @param passwordInfo
+   **/
   public void setPasswordInfo(PasswordFieldInfoDescription passwordInfo) {
     this.passwordInfo = passwordInfo;
   }
@@ -277,9 +375,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about RecepientsInfo input field in the agreement creation request when using the API to create an agreement in a workflow")
   @JsonProperty("recipientsListInfo")
+  /**
+   * @return List&lt;RecipientsListInfoDescription&gt;
+   **/
   public List<RecipientsListInfoDescription> getRecipientsListInfo() {
     return recipientsListInfo;
   }
+  /**
+   * Information about RecepientsInfo input field in the agreement creation request when using the API to create an agreement in a workflow
+   * @param recipientsListInfo
+   **/
   public void setRecipientsListInfo(List<RecipientsListInfoDescription> recipientsListInfo) {
     this.recipientsListInfo = recipientsListInfo;
   }
@@ -290,9 +395,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The workflow scope (ACCOUNT or GROUP or OTHER)")
   @JsonProperty("scope")
+  /**
+   * @return ScopeEnum
+   **/
   public ScopeEnum getScope() {
     return scope;
   }
+  /**
+   * The workflow scope (ACCOUNT or GROUP or OTHER)
+   * @param scope
+   **/
   public void setScope(ScopeEnum scope) {
     this.scope = scope;
   }
@@ -303,9 +415,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "Identifier of scope. Currently it is applicable for scope GROUP only and the value will be groupId.")
   @JsonProperty("scopeId")
+  /**
+   * @return String
+   **/
   public String getScopeId() {
     return scopeId;
   }
+  /**
+   * Identifier of scope. Currently it is applicable for scope GROUP only and the value will be groupId.
+   * @param scopeId
+   **/
   public void setScopeId(String scopeId) {
     this.scopeId = scopeId;
   }
@@ -316,9 +435,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The workflow status (ACTIVE or DRAFT or OTHER)")
   @JsonProperty("status")
+  /**
+   * @return StatusEnum
+   **/
   public StatusEnum getStatus() {
     return status;
   }
+  /**
+   * The workflow status (ACTIVE or DRAFT or OTHER)
+   * @param status
+   **/
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -326,6 +452,10 @@ public enum StatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WorkflowDescription {\n");

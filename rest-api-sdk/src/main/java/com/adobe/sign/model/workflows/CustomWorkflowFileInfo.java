@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class CustomWorkflowFileInfo   {
   
   private String name = null;
@@ -35,9 +35,16 @@ public class CustomWorkflowFileInfo   {
    **/
   @ApiModelProperty(required = true, value = "Name of file info element")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * Name of file info element
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -48,9 +55,16 @@ public class CustomWorkflowFileInfo   {
    **/
   @ApiModelProperty(required = true, value = "Transient document identifier obtained from the transient document creation API")
   @JsonProperty("transientDocumentId")
+  /**
+   * @return String
+   **/
   public String getTransientDocumentId() {
     return transientDocumentId;
   }
+  /**
+   * Transient document identifier obtained from the transient document creation API
+   * @param transientDocumentId
+   **/
   public void setTransientDocumentId(String transientDocumentId) {
     this.transientDocumentId = transientDocumentId;
   }
@@ -61,9 +75,16 @@ public class CustomWorkflowFileInfo   {
    **/
   @ApiModelProperty(required = true, value = "An id of the workflow library document that can be provided as an input file in the custom workflow agreement creation request")
   @JsonProperty("workflowLibraryDocumentId")
+  /**
+   * @return String
+   **/
   public String getWorkflowLibraryDocumentId() {
     return workflowLibraryDocumentId;
   }
+  /**
+   * An id of the workflow library document that can be provided as an input file in the custom workflow agreement creation request
+   * @param workflowLibraryDocumentId
+   **/
   public void setWorkflowLibraryDocumentId(String workflowLibraryDocumentId) {
     this.workflowLibraryDocumentId = workflowLibraryDocumentId;
   }
@@ -71,6 +92,10 @@ public class CustomWorkflowFileInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class CustomWorkflowFileInfo {\n");

@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class WorkflowBasedFormField   {
   
 
@@ -90,7 +90,7 @@ public enum BorderStyleEnum {
   private BorderStyleEnum borderStyle = null;
   private Float borderWidth = null;
   private String calculatedExpression = null;
-  private List<FormFieldCondition> conditions = new ArrayList<FormFieldCondition>();
+  private List<FormFieldCondition> conditions = null;
 
 public enum ContentTypeEnum {
   DATA("DATA"),
@@ -194,7 +194,7 @@ public enum FormatEnum {
   private FormatEnum format = null;
   private String formatData = null;
   private Boolean hidden = null;
-  private List<String> hiddenOptions = new ArrayList<String>();
+  private List<String> hiddenOptions = null;
 
 public enum InputTypeEnum {
   TEXT_FIELD("TEXT_FIELD"),
@@ -225,7 +225,7 @@ public enum InputTypeEnum {
 }
 
   private InputTypeEnum inputType = null;
-  private List<FormFieldLocation> locations = new ArrayList<FormFieldLocation>();
+  private List<FormFieldLocation> locations = null;
   private Boolean masked = null;
   private String maskingText = null;
   private Integer maxLength = null;
@@ -283,7 +283,7 @@ public enum ShowOrHideEnum {
   private String specialErrMsg = null;
   private String specialFormula = null;
   private String tooltip = null;
-  private List<String> visibleOptions = new ArrayList<String>();
+  private List<String> visibleOptions = null;
 
   
   /**
@@ -291,9 +291,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Alignment of the text.")
   @JsonProperty("alignment")
+  /**
+   * @return AlignmentEnum
+   **/
   public AlignmentEnum getAlignment() {
     return alignment;
   }
+  /**
+   * Alignment of the text.
+   * @param alignment
+   **/
   public void setAlignment(AlignmentEnum alignment) {
     this.alignment = alignment;
   }
@@ -304,9 +311,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "It indicates if any one of the conditions or all of them have to be true.")
   @JsonProperty("anyOrAll")
+  /**
+   * @return AnyOrAllEnum
+   **/
   public AnyOrAllEnum getAnyOrAll() {
     return anyOrAll;
   }
+  /**
+   * It indicates if any one of the conditions or all of them have to be true.
+   * @param anyOrAll
+   **/
   public void setAnyOrAll(AnyOrAllEnum anyOrAll) {
     this.anyOrAll = anyOrAll;
   }
@@ -317,9 +331,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Background color of the form field in RGB or HEX format")
   @JsonProperty("backgroundColor")
+  /**
+   * @return String
+   **/
   public String getBackgroundColor() {
     return backgroundColor;
   }
+  /**
+   * Background color of the form field in RGB or HEX format
+   * @param backgroundColor
+   **/
   public void setBackgroundColor(String backgroundColor) {
     this.backgroundColor = backgroundColor;
   }
@@ -330,9 +351,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Color of the border of the field in RGB or HEX format")
   @JsonProperty("borderColor")
+  /**
+   * @return String
+   **/
   public String getBorderColor() {
     return borderColor;
   }
+  /**
+   * Color of the border of the field in RGB or HEX format
+   * @param borderColor
+   **/
   public void setBorderColor(String borderColor) {
     this.borderColor = borderColor;
   }
@@ -343,9 +371,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Style of the border of the field.")
   @JsonProperty("borderStyle")
+  /**
+   * @return BorderStyleEnum
+   **/
   public BorderStyleEnum getBorderStyle() {
     return borderStyle;
   }
+  /**
+   * Style of the border of the field.
+   * @param borderStyle
+   **/
   public void setBorderStyle(BorderStyleEnum borderStyle) {
     this.borderStyle = borderStyle;
   }
@@ -356,9 +391,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Width of the border of the field in pixels")
   @JsonProperty("borderWidth")
+  /**
+   * @return Float
+   **/
   public Float getBorderWidth() {
     return borderWidth;
   }
+  /**
+   * Width of the border of the field in pixels
+   * @param borderWidth
+   **/
   public void setBorderWidth(Float borderWidth) {
     this.borderWidth = borderWidth;
   }
@@ -369,9 +411,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Expression to calculate value of the form field")
   @JsonProperty("calculatedExpression")
+  /**
+   * @return String
+   **/
   public String getCalculatedExpression() {
     return calculatedExpression;
   }
+  /**
+   * Expression to calculate value of the form field
+   * @param calculatedExpression
+   **/
   public void setCalculatedExpression(String calculatedExpression) {
     this.calculatedExpression = calculatedExpression;
   }
@@ -382,9 +431,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Conditions to be evaluated which decides the visibility of the form field in association with showOrHide property")
   @JsonProperty("conditions")
+  /**
+   * @return List&lt;FormFieldCondition&gt;
+   **/
   public List<FormFieldCondition> getConditions() {
     return conditions;
   }
+  /**
+   * Conditions to be evaluated which decides the visibility of the form field in association with showOrHide property
+   * @param conditions
+   **/
   public void setConditions(List<FormFieldCondition> conditions) {
     this.conditions = conditions;
   }
@@ -395,9 +451,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Content Type of the form field.")
   @JsonProperty("contentType")
+  /**
+   * @return ContentTypeEnum
+   **/
   public ContentTypeEnum getContentType() {
     return contentType;
   }
+  /**
+   * Content Type of the form field.
+   * @param contentType
+   **/
   public void setContentType(ContentTypeEnum contentType) {
     this.contentType = contentType;
   }
@@ -408,9 +471,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Default value of the form field")
   @JsonProperty("defaultValue")
+  /**
+   * @return String
+   **/
   public String getDefaultValue() {
     return defaultValue;
   }
+  /**
+   * Default value of the form field
+   * @param defaultValue
+   **/
   public void setDefaultValue(String defaultValue) {
     this.defaultValue = defaultValue;
   }
@@ -421,9 +491,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Format of the value of the field to be displayed based on the displayFormatType property.")
   @JsonProperty("displayFormat")
+  /**
+   * @return String
+   **/
   public String getDisplayFormat() {
     return displayFormat;
   }
+  /**
+   * Format of the value of the field to be displayed based on the displayFormatType property.
+   * @param displayFormat
+   **/
   public void setDisplayFormat(String displayFormat) {
     this.displayFormat = displayFormat;
   }
@@ -434,9 +511,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Format type of the text field.")
   @JsonProperty("displayFormatType")
+  /**
+   * @return DisplayFormatTypeEnum
+   **/
   public DisplayFormatTypeEnum getDisplayFormatType() {
     return displayFormatType;
   }
+  /**
+   * Format type of the text field.
+   * @param displayFormatType
+   **/
   public void setDisplayFormatType(DisplayFormatTypeEnum displayFormatType) {
     this.displayFormatType = displayFormatType;
   }
@@ -447,9 +531,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Display label attached to the field")
   @JsonProperty("displayLabel")
+  /**
+   * @return String
+   **/
   public String getDisplayLabel() {
     return displayLabel;
   }
+  /**
+   * Display label attached to the field
+   * @param displayLabel
+   **/
   public void setDisplayLabel(String displayLabel) {
     this.displayLabel = displayLabel;
   }
@@ -460,9 +551,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Font color of the form field in RGB or HEX format")
   @JsonProperty("fontColor")
+  /**
+   * @return String
+   **/
   public String getFontColor() {
     return fontColor;
   }
+  /**
+   * Font color of the form field in RGB or HEX format
+   * @param fontColor
+   **/
   public void setFontColor(String fontColor) {
     this.fontColor = fontColor;
   }
@@ -473,9 +571,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Font name of the form field")
   @JsonProperty("fontName")
+  /**
+   * @return String
+   **/
   public String getFontName() {
     return fontName;
   }
+  /**
+   * Font name of the form field
+   * @param fontName
+   **/
   public void setFontName(String fontName) {
     this.fontName = fontName;
   }
@@ -486,9 +591,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Font size of the form field in points")
   @JsonProperty("fontSize")
+  /**
+   * @return Float
+   **/
   public Float getFontSize() {
     return fontSize;
   }
+  /**
+   * Font size of the form field in points
+   * @param fontSize
+   **/
   public void setFontSize(Float fontSize) {
     this.fontSize = fontSize;
   }
@@ -499,9 +611,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Format of the form field")
   @JsonProperty("format")
+  /**
+   * @return FormatEnum
+   **/
   public FormatEnum getFormat() {
     return format;
   }
+  /**
+   * Format of the form field
+   * @param format
+   **/
   public void setFormat(FormatEnum format) {
     this.format = format;
   }
@@ -512,9 +631,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "The format of data in text field")
   @JsonProperty("formatData")
+  /**
+   * @return String
+   **/
   public String getFormatData() {
     return formatData;
   }
+  /**
+   * The format of data in text field
+   * @param formatData
+   **/
   public void setFormatData(String formatData) {
     this.formatData = formatData;
   }
@@ -525,9 +651,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "true if the field is hidden, else false")
   @JsonProperty("hidden")
+  /**
+   * @return Boolean
+   **/
   public Boolean getHidden() {
     return hidden;
   }
+  /**
+   * true if the field is hidden, else false
+   * @param hidden
+   **/
   public void setHidden(Boolean hidden) {
     this.hidden = hidden;
   }
@@ -538,9 +671,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Text values which are hidden in a drop down form field")
   @JsonProperty("hiddenOptions")
+  /**
+   * @return List&lt;String&gt;
+   **/
   public List<String> getHiddenOptions() {
     return hiddenOptions;
   }
+  /**
+   * Text values which are hidden in a drop down form field
+   * @param hiddenOptions
+   **/
   public void setHiddenOptions(List<String> hiddenOptions) {
     this.hiddenOptions = hiddenOptions;
   }
@@ -551,9 +691,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Input type of the form field")
   @JsonProperty("inputType")
+  /**
+   * @return InputTypeEnum
+   **/
   public InputTypeEnum getInputType() {
     return inputType;
   }
+  /**
+   * Input type of the form field
+   * @param inputType
+   **/
   public void setInputType(InputTypeEnum inputType) {
     this.inputType = inputType;
   }
@@ -564,9 +711,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(required = true, value = "All locations in a document where the form field is placed")
   @JsonProperty("locations")
+  /**
+   * @return List&lt;FormFieldLocation&gt;
+   **/
   public List<FormFieldLocation> getLocations() {
     return locations;
   }
+  /**
+   * All locations in a document where the form field is placed
+   * @param locations
+   **/
   public void setLocations(List<FormFieldLocation> locations) {
     this.locations = locations;
   }
@@ -577,9 +731,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "true if the input entered by the signer has to be masked (like password), else false")
   @JsonProperty("masked")
+  /**
+   * @return Boolean
+   **/
   public Boolean getMasked() {
     return masked;
   }
+  /**
+   * true if the input entered by the signer has to be masked (like password), else false
+   * @param masked
+   **/
   public void setMasked(Boolean masked) {
     this.masked = masked;
   }
@@ -590,9 +751,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Text to mask the masked form field")
   @JsonProperty("maskingText")
+  /**
+   * @return String
+   **/
   public String getMaskingText() {
     return maskingText;
   }
+  /**
+   * Text to mask the masked form field
+   * @param maskingText
+   **/
   public void setMaskingText(String maskingText) {
     this.maskingText = maskingText;
   }
@@ -603,9 +771,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Maximum length of the input text field in terms of no. of characters")
   @JsonProperty("maxLength")
+  /**
+   * @return Integer
+   **/
   public Integer getMaxLength() {
     return maxLength;
   }
+  /**
+   * Maximum length of the input text field in terms of no. of characters
+   * @param maxLength
+   **/
   public void setMaxLength(Integer maxLength) {
     this.maxLength = maxLength;
   }
@@ -616,9 +791,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Upper bound of the number that can be entered by the signer")
   @JsonProperty("maxNumberValue")
+  /**
+   * @return Double
+   **/
   public Double getMaxNumberValue() {
     return maxNumberValue;
   }
+  /**
+   * Upper bound of the number that can be entered by the signer
+   * @param maxNumberValue
+   **/
   public void setMaxNumberValue(Double maxNumberValue) {
     this.maxNumberValue = maxNumberValue;
   }
@@ -629,9 +811,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Minimum length of the input text field in terms of no. of characters")
   @JsonProperty("minLength")
+  /**
+   * @return Integer
+   **/
   public Integer getMinLength() {
     return minLength;
   }
+  /**
+   * Minimum length of the input text field in terms of no. of characters
+   * @param minLength
+   **/
   public void setMinLength(Integer minLength) {
     this.minLength = minLength;
   }
@@ -642,9 +831,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Lower bound of the number that can be entered by the signer")
   @JsonProperty("minNumberValue")
+  /**
+   * @return Double
+   **/
   public Double getMinNumberValue() {
     return minNumberValue;
   }
+  /**
+   * Lower bound of the number that can be entered by the signer
+   * @param minNumberValue
+   **/
   public void setMinNumberValue(Double minNumberValue) {
     this.minNumberValue = minNumberValue;
   }
@@ -655,9 +851,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(required = true, value = "The name of the form field")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * The name of the form field
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -668,9 +871,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "The type of radio button (if field is radio button, identified by inputType).")
   @JsonProperty("radioCheckType")
+  /**
+   * @return RadioCheckTypeEnum
+   **/
   public RadioCheckTypeEnum getRadioCheckType() {
     return radioCheckType;
   }
+  /**
+   * The type of radio button (if field is radio button, identified by inputType).
+   * @param radioCheckType
+   **/
   public void setRadioCheckType(RadioCheckTypeEnum radioCheckType) {
     this.radioCheckType = radioCheckType;
   }
@@ -681,9 +891,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "true if it is a read-only field, else false")
   @JsonProperty("readOnly")
+  /**
+   * @return Boolean
+   **/
   public Boolean getReadOnly() {
     return readOnly;
   }
+  /**
+   * true if it is a read-only field, else false
+   * @param readOnly
+   **/
   public void setReadOnly(Boolean readOnly) {
     this.readOnly = readOnly;
   }
@@ -694,9 +911,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Index of recipient, starting from 1, in recipients list passed in the request")
   @JsonProperty("recipientIndex")
+  /**
+   * @return Integer
+   **/
   public Integer getRecipientIndex() {
     return recipientIndex;
   }
+  /**
+   * Index of recipient, starting from 1, in recipients list passed in the request
+   * @param recipientIndex
+   **/
   public void setRecipientIndex(Integer recipientIndex) {
     this.recipientIndex = recipientIndex;
   }
@@ -707,9 +931,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(required = true, value = "Name of the recipient list as returned in workflow description")
   @JsonProperty("recipientListName")
+  /**
+   * @return String
+   **/
   public String getRecipientListName() {
     return recipientListName;
   }
+  /**
+   * Name of the recipient list as returned in workflow description
+   * @param recipientListName
+   **/
   public void setRecipientListName(String recipientListName) {
     this.recipientListName = recipientListName;
   }
@@ -720,9 +951,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Regular expression validation of the form field")
   @JsonProperty("regularExpression")
+  /**
+   * @return String
+   **/
   public String getRegularExpression() {
     return regularExpression;
   }
+  /**
+   * Regular expression validation of the form field
+   * @param regularExpression
+   **/
   public void setRegularExpression(String regularExpression) {
     this.regularExpression = regularExpression;
   }
@@ -733,9 +971,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "true if it is a mandatory field to be filled by the signer, else false")
   @JsonProperty("required")
+  /**
+   * @return Boolean
+   **/
   public Boolean getRequired() {
     return required;
   }
+  /**
+   * true if it is a mandatory field to be filled by the signer, else false
+   * @param required
+   **/
   public void setRequired(Boolean required) {
     this.required = required;
   }
@@ -746,9 +991,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Action to show/hide the form field is to be taken on the basis of evaluation of conditions.")
   @JsonProperty("showOrHide")
+  /**
+   * @return ShowOrHideEnum
+   **/
   public ShowOrHideEnum getShowOrHide() {
     return showOrHide;
   }
+  /**
+   * Action to show/hide the form field is to be taken on the basis of evaluation of conditions.
+   * @param showOrHide
+   **/
   public void setShowOrHide(ShowOrHideEnum showOrHide) {
     this.showOrHide = showOrHide;
   }
@@ -759,9 +1011,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Error message to be shown to the signer if filled value doesn't match the validations of the form field")
   @JsonProperty("specialErrMsg")
+  /**
+   * @return String
+   **/
   public String getSpecialErrMsg() {
     return specialErrMsg;
   }
+  /**
+   * Error message to be shown to the signer if filled value doesn't match the validations of the form field
+   * @param specialErrMsg
+   **/
   public void setSpecialErrMsg(String specialErrMsg) {
     this.specialErrMsg = specialErrMsg;
   }
@@ -772,9 +1031,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Formula used to calculate the value of the form field")
   @JsonProperty("specialFormula")
+  /**
+   * @return String
+   **/
   public String getSpecialFormula() {
     return specialFormula;
   }
+  /**
+   * Formula used to calculate the value of the form field
+   * @param specialFormula
+   **/
   public void setSpecialFormula(String specialFormula) {
     this.specialFormula = specialFormula;
   }
@@ -785,9 +1051,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Text that appears while hovering over the field")
   @JsonProperty("tooltip")
+  /**
+   * @return String
+   **/
   public String getTooltip() {
     return tooltip;
   }
+  /**
+   * Text that appears while hovering over the field
+   * @param tooltip
+   **/
   public void setTooltip(String tooltip) {
     this.tooltip = tooltip;
   }
@@ -798,9 +1071,16 @@ public enum ShowOrHideEnum {
    **/
   @ApiModelProperty(value = "Text values which are visible in a drop down form field")
   @JsonProperty("visibleOptions")
+  /**
+   * @return List&lt;String&gt;
+   **/
   public List<String> getVisibleOptions() {
     return visibleOptions;
   }
+  /**
+   * Text values which are visible in a drop down form field
+   * @param visibleOptions
+   **/
   public void setVisibleOptions(List<String> visibleOptions) {
     this.visibleOptions = visibleOptions;
   }
@@ -808,6 +1088,10 @@ public enum ShowOrHideEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WorkflowBasedFormField {\n");

@@ -25,19 +25,19 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.MegaSignUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get MegaSigns APIs.
+ * Junit test cases for Get MegaSigns endpoint.
  */
 public class GetMegasignsApiTest {
 
   private static MegaSignsApi megaSignsApi = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -57,16 +57,18 @@ public class GetMegasignsApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      megaSignsApi.getMegaSigns(ApiUtils.getNullAccessTokenHeaderParams(),
-                                TestData.MEGASIGN_QUERY);
+      MegaSigns megaSigns = megaSignsApi.getMegaSigns(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                      TestData.MEGASIGN_QUERY);
+      assertNotNull(megaSigns);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      megaSignsApi.getMegaSigns(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                TestData.MEGASIGN_QUERY);
+      MegaSigns megaSigns = megaSignsApi.getMegaSigns(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                      TestData.MEGASIGN_QUERY);
+      assertNotNull(megaSigns);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
@@ -82,8 +84,9 @@ public class GetMegasignsApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      megaSignsApi.getMegaSigns(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                TestData.MEGASIGN_QUERY);
+      MegaSigns megaSigns = megaSignsApi.getMegaSigns(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                      TestData.MEGASIGN_QUERY);
+      assertNotNull(megaSigns);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));

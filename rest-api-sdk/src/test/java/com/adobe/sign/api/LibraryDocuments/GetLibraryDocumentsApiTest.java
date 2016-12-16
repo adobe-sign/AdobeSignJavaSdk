@@ -25,16 +25,16 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Library Documents API.
+ * Junit test cases for Get Library Documents endpoint.
  */
 public class GetLibraryDocumentsApiTest {
-  
+
   private static LibraryDocumentsApi libraryDocumentsApi = null;
 
 
@@ -46,7 +46,7 @@ public class GetLibraryDocumentsApiTest {
     ApiUtils.configureProperty();
     libraryDocumentsApi = LibraryDocumentsUtils.getLibraryDocumentsApi();
   }
-  
+
   /**
    * Test for fetching all library documents through the getLibraryDocuments endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -57,7 +57,8 @@ public class GetLibraryDocumentsApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      libraryDocumentsApi.getLibraryDocuments(ApiUtils.getNullAccessTokenHeaderParams());
+      DocumentLibraryItems documentLibraryItems = libraryDocumentsApi.getLibraryDocuments(ApiUtils.getNullAccessTokenHeaderParams());
+      assertNotNull(documentLibraryItems);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -65,8 +66,9 @@ public class GetLibraryDocumentsApiTest {
     }
 
     try {
-      libraryDocumentsApi.getLibraryDocuments(ApiUtils.getEmptyAccessTokenHeaderParams());
-    } 
+      DocumentLibraryItems documentLibraryItems = libraryDocumentsApi.getLibraryDocuments(ApiUtils.getEmptyAccessTokenHeaderParams());
+      assertNotNull(documentLibraryItems);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
@@ -82,8 +84,9 @@ public class GetLibraryDocumentsApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      libraryDocumentsApi.getLibraryDocuments(ApiUtils.getEmptyXApiUserHeaderParams());
-    } 
+      DocumentLibraryItems documentLibraryItems = libraryDocumentsApi.getLibraryDocuments(ApiUtils.getEmptyXApiUserHeaderParams());
+      assertNotNull(documentLibraryItems);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
@@ -101,7 +104,7 @@ public class GetLibraryDocumentsApiTest {
     try {
       DocumentLibraryItems documentLibraryItems = libraryDocumentsApi.getLibraryDocuments(ApiUtils.getValidHeaderParams());
       assertNotNull(documentLibraryItems);
-    } 
+    }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));
     }

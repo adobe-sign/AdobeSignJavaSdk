@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:51.876+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.195+05:30")
 public class LibDocParticipantInfo   {
   
-  private List<LibDocParticipantInfo> alternateParticipants = new ArrayList<LibDocParticipantInfo>();
+  private List<LibDocParticipantInfo> alternateParticipants = null;
   private String company = null;
   private String email = null;
   private String name = null;
@@ -55,7 +55,7 @@ public enum RolesEnum {
   }
 }
 
-  private List<RolesEnum> roles = new ArrayList<RolesEnum>();
+  private List<RolesEnum> roles = null;
 
 public enum SecurityOptionsEnum {
   PASSWORD("PASSWORD"),
@@ -76,7 +76,7 @@ public enum SecurityOptionsEnum {
   }
 }
 
-  private List<SecurityOptionsEnum> securityOptions = new ArrayList<SecurityOptionsEnum>();
+  private List<SecurityOptionsEnum> securityOptions = null;
 
 public enum StatusEnum {
   WAITING_FOR_MY_SIGNATURE("WAITING_FOR_MY_SIGNATURE"),
@@ -122,9 +122,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "All the child participants of the current participant. The possible values for the status of these participants are, SHARE and DELEGATE")
   @JsonProperty("alternateParticipants")
+  /**
+   * @return List&lt;LibDocParticipantInfo&gt;
+   **/
   public List<LibDocParticipantInfo> getAlternateParticipants() {
     return alternateParticipants;
   }
+  /**
+   * All the child participants of the current participant. The possible values for the status of these participants are, SHARE and DELEGATE
+   * @param alternateParticipants
+   **/
   public void setAlternateParticipants(List<LibDocParticipantInfo> alternateParticipants) {
     this.alternateParticipants = alternateParticipants;
   }
@@ -135,9 +142,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "The company of the participant, if available")
   @JsonProperty("company")
+  /**
+   * @return String
+   **/
   public String getCompany() {
     return company;
   }
+  /**
+   * The company of the participant, if available
+   * @param company
+   **/
   public void setCompany(String company) {
     this.company = company;
   }
@@ -148,9 +162,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The email address of the participant")
   @JsonProperty("email")
+  /**
+   * @return String
+   **/
   public String getEmail() {
     return email;
   }
+  /**
+   * The email address of the participant
+   * @param email
+   **/
   public void setEmail(String email) {
     this.email = email;
   }
@@ -161,9 +182,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "The name of the participant, if available")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * The name of the participant, if available
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -174,9 +202,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The current roles of the participant. A participant can have one or more roles")
   @JsonProperty("roles")
+  /**
+   * @return List&lt;RolesEnum&gt;
+   **/
   public List<RolesEnum> getRoles() {
     return roles;
   }
+  /**
+   * The current roles of the participant. A participant can have one or more roles
+   * @param roles
+   **/
   public void setRoles(List<RolesEnum> roles) {
     this.roles = roles;
   }
@@ -187,9 +222,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "Security options that apply to the participant")
   @JsonProperty("securityOptions")
+  /**
+   * @return List&lt;SecurityOptionsEnum&gt;
+   **/
   public List<SecurityOptionsEnum> getSecurityOptions() {
     return securityOptions;
   }
+  /**
+   * Security options that apply to the participant
+   * @param securityOptions
+   **/
   public void setSecurityOptions(List<SecurityOptionsEnum> securityOptions) {
     this.securityOptions = securityOptions;
   }
@@ -200,9 +242,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The status of the participant with respect to the document")
   @JsonProperty("status")
+  /**
+   * @return StatusEnum
+   **/
   public StatusEnum getStatus() {
     return status;
   }
+  /**
+   * The status of the participant with respect to the document
+   * @param status
+   **/
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -213,9 +262,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "The title of the participant, if available")
   @JsonProperty("title")
+  /**
+   * @return String
+   **/
   public String getTitle() {
     return title;
   }
+  /**
+   * The title of the participant, if available
+   * @param title
+   **/
   public void setTitle(String title) {
     this.title = title;
   }
@@ -223,6 +279,10 @@ public enum StatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class LibDocParticipantInfo {\n");

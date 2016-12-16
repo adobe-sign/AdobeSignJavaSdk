@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.898+05:30")
 public class DeviceLocation   {
   
   private Float latitude = null;
@@ -34,9 +34,16 @@ public class DeviceLocation   {
    **/
   @ApiModelProperty(required = true, value = "Latitude coordinate")
   @JsonProperty("latitude")
+  /**
+   * @return Float
+   **/
   public Float getLatitude() {
     return latitude;
   }
+  /**
+   * Latitude coordinate
+   * @param latitude
+   **/
   public void setLatitude(Float latitude) {
     this.latitude = latitude;
   }
@@ -47,9 +54,16 @@ public class DeviceLocation   {
    **/
   @ApiModelProperty(required = true, value = "Longitude coordinate")
   @JsonProperty("longitude")
+  /**
+   * @return Float
+   **/
   public Float getLongitude() {
     return longitude;
   }
+  /**
+   * Longitude coordinate
+   * @param longitude
+   **/
   public void setLongitude(Float longitude) {
     this.longitude = longitude;
   }
@@ -57,6 +71,10 @@ public class DeviceLocation   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class DeviceLocation {\n");

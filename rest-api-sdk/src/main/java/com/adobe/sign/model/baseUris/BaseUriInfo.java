@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:04:00.834+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:37.040+05:30")
 public class BaseUriInfo   {
   
   private String apiAccessPoint = null;
@@ -34,9 +34,16 @@ public class BaseUriInfo   {
    **/
   @ApiModelProperty(required = true, value = "The access point from where other APIs need to be accessed. In case other APIs are accessed from a different end point, it will be considered an invalid request.")
   @JsonProperty("api_access_point")
+  /**
+   * @return String
+   **/
   public String getApiAccessPoint() {
     return apiAccessPoint;
   }
+  /**
+   * The access point from where other APIs need to be accessed. In case other APIs are accessed from a different end point, it will be considered an invalid request.
+   * @param apiAccessPoint
+   **/
   public void setApiAccessPoint(String apiAccessPoint) {
     this.apiAccessPoint = apiAccessPoint;
   }
@@ -47,9 +54,16 @@ public class BaseUriInfo   {
    **/
   @ApiModelProperty(required = true, value = "The access point from where Adobe Sign website can be be accessed.")
   @JsonProperty("web_access_point")
+  /**
+   * @return String
+   **/
   public String getWebAccessPoint() {
     return webAccessPoint;
   }
+  /**
+   * The access point from where Adobe Sign website can be be accessed.
+   * @param webAccessPoint
+   **/
   public void setWebAccessPoint(String webAccessPoint) {
     this.webAccessPoint = webAccessPoint;
   }
@@ -57,6 +71,10 @@ public class BaseUriInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class BaseUriInfo {\n");

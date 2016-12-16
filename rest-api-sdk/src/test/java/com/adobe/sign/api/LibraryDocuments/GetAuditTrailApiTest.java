@@ -14,7 +14,7 @@
 package com.adobe.sign.api.LibraryDocuments;
 
 /**
- * Junit test cases for Get Audit Trail API.
+ * Junit test cases for Get Audit Trail endpoint.
  */
 
 import static org.junit.Assert.assertNotNull;
@@ -28,13 +28,13 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 public class GetAuditTrailApiTest {
-  
+
   private static LibraryDocumentsApi libraryDocumentsApi = null;
   private static String libraryDocumentId = null;
 
@@ -48,7 +48,7 @@ public class GetAuditTrailApiTest {
     libraryDocumentsApi = LibraryDocumentsUtils.getLibraryDocumentsApi();
     libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);
   }
-  
+
   /**
    * Test for retrieving the audit trail of a library document through the getLibraryDocumentAuditTrail endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -59,18 +59,20 @@ public class GetAuditTrailApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      libraryDocumentsApi.getLibraryDocumentAuditTrail(ApiUtils.getNullAccessTokenHeaderParams(),
-                                                       libraryDocumentId);
-    } 
+      byte[] auditTrail = libraryDocumentsApi.getLibraryDocumentAuditTrail(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                           libraryDocumentId);
+      assertNotNull(auditTrail);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      libraryDocumentsApi.getLibraryDocumentAuditTrail(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                                       libraryDocumentId);
-    } 
+      byte[] auditTrail = libraryDocumentsApi.getLibraryDocumentAuditTrail(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                           libraryDocumentId);
+      assertNotNull(auditTrail);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
@@ -86,9 +88,10 @@ public class GetAuditTrailApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      libraryDocumentsApi.getLibraryDocumentAuditTrail(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                                       libraryDocumentId);
-    } 
+      byte[] auditTrail = libraryDocumentsApi.getLibraryDocumentAuditTrail(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                           libraryDocumentId);
+      assertNotNull(auditTrail);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
@@ -104,18 +107,20 @@ public class GetAuditTrailApiTest {
   @Test
   public void testInvalidLibraryDocumentId() throws ApiException {
     try {
-      libraryDocumentsApi.getLibraryDocumentAuditTrail(ApiUtils.getValidHeaderParams(),
-                                                       TestData.EMPTY_PARAM);
-    } 
+      byte[] auditTrail = libraryDocumentsApi.getLibraryDocumentAuditTrail(ApiUtils.getValidHeaderParams(),
+                                                                           TestData.EMPTY_PARAM);
+      assertNotNull(auditTrail);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_LIBRARYDOCUMENT_ID.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      libraryDocumentsApi.getLibraryDocumentAuditTrail(ApiUtils.getValidHeaderParams(),
-                                                       TestData.NULL_PARAM);
-    } 
+      byte[] auditTrail = libraryDocumentsApi.getLibraryDocumentAuditTrail(ApiUtils.getValidHeaderParams(),
+                                                                           TestData.NULL_PARAM);
+      assertNotNull(auditTrail);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_LIBRARYDOCUMENT_ID.getApiCode().equals(e.getApiCode()));
@@ -134,7 +139,7 @@ public class GetAuditTrailApiTest {
       byte[] auditTrail = libraryDocumentsApi.getLibraryDocumentAuditTrail(ApiUtils.getValidHeaderParams(),
                                                                            libraryDocumentId);
       assertNotNull(auditTrail);
-    } 
+    }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));
     }

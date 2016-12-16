@@ -25,13 +25,13 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Agreement Documents API.
+ * Junit test cases for Get Agreement Documents endpoint.
  */
 public class GetAgreementDocumentsApiTest {
   private static AgreementsApi agreementsApi = null;
@@ -47,6 +47,7 @@ public class GetAgreementDocumentsApiTest {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
+
   /**
    * Test for fetching all documents through the getAllDocuments endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -58,11 +59,12 @@ public class GetAgreementDocumentsApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getAllDocuments(ApiUtils.getNullAccessTokenHeaderParams(),
-                                    agreementId,
-                                    TestData.VERSION_ID,
-                                    TestData.PARTICIPANT_EMAIL,
-                                    TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                            agreementId,
+                                                                            TestData.VERSION_ID,
+                                                                            TestData.PARTICIPANT_EMAIL,
+                                                                            TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      assertNotNull(agreementDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
@@ -70,17 +72,19 @@ public class GetAgreementDocumentsApiTest {
 
 
     try {
-      agreementsApi.getAllDocuments(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                    agreementId,
-                                    TestData.VERSION_ID,
-                                    TestData.PARTICIPANT_EMAIL,
-                                    TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                            agreementId,
+                                                                            TestData.VERSION_ID,
+                                                                            TestData.PARTICIPANT_EMAIL,
+                                                                            TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      assertNotNull(agreementDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
     }
 
   }
+
   /**
    * Test for fetching all documents through the getAllDocuments endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -91,16 +95,18 @@ public class GetAgreementDocumentsApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getAllDocuments(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                    agreementId,
-                                    TestData.VERSION_ID,
-                                    TestData.PARTICIPANT_EMAIL,
-                                    TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                            agreementId,
+                                                                            TestData.VERSION_ID,
+                                                                            TestData.PARTICIPANT_EMAIL,
+                                                                            TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      assertNotNull(agreementDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching all documents through the getAllDocuments endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: null and empty agreementId.
@@ -111,27 +117,30 @@ public class GetAgreementDocumentsApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getAllDocuments(ApiUtils.getValidHeaderParams(),
-                                    TestData.EMPTY_PARAM,
-                                    TestData.VERSION_ID,
-                                    TestData.PARTICIPANT_EMAIL,
-                                    TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(ApiUtils.getValidHeaderParams(),
+                                                                            TestData.EMPTY_PARAM,
+                                                                            TestData.VERSION_ID,
+                                                                            TestData.PARTICIPANT_EMAIL,
+                                                                            TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      assertNotNull(agreementDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      agreementsApi.getAllDocuments(ApiUtils.getValidHeaderParams(),
-                                    TestData.NULL_PARAM,
-                                    TestData.VERSION_ID,
-                                    TestData.PARTICIPANT_EMAIL,
-                                    TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(ApiUtils.getValidHeaderParams(),
+                                                                            TestData.NULL_PARAM,
+                                                                            TestData.VERSION_ID,
+                                                                            TestData.PARTICIPANT_EMAIL,
+                                                                            TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      assertNotNull(agreementDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching all documents through the getAllDocuments endpoint. Negative scenarios covered:
    * INVALID_VERSION_ID: empty versionId.
@@ -142,17 +151,19 @@ public class GetAgreementDocumentsApiTest {
   public void testInvalidVersionId() throws ApiException {
 
     try {
-      agreementsApi.getAllDocuments(ApiUtils.getValidHeaderParams(),
-                                    agreementId,
-                                    TestData.EMPTY_PARAM,
-                                    TestData.PARTICIPANT_EMAIL,
-                                    TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(ApiUtils.getValidHeaderParams(),
+                                                                            agreementId,
+                                                                            TestData.EMPTY_PARAM,
+                                                                            TestData.PARTICIPANT_EMAIL,
+                                                                            TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      assertNotNull(agreementDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_VERSION_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching all documents through the getAllDocuments endpoint. Negative scenarios covered:
    * INVALID_PARTICIPANT: empty participantId.
@@ -163,17 +174,19 @@ public class GetAgreementDocumentsApiTest {
   public void testInvalidParticipantEmail() throws ApiException {
 
     try {
-      agreementsApi.getAllDocuments(ApiUtils.getValidHeaderParams(),
-                                    agreementId,
-                                    TestData.VERSION_ID,
-                                    TestData.EMPTY_PARAM,
-                                    TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(ApiUtils.getValidHeaderParams(),
+                                                                            agreementId,
+                                                                            TestData.VERSION_ID,
+                                                                            TestData.EMPTY_PARAM,
+                                                                            TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+      assertNotNull(agreementDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_PARTICIPANT.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching all documents through the getAllDocuments endpoint.
    * Case covered is successful execution of the api call.

@@ -42,8 +42,8 @@ public class ReminderUtils {
       return reminderCreationResult;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.SEND_REMINDER, e);
-      return null;
+      ApiUtils.logError(Errors.SEND_REMINDER);
+      throw e;
     }
   }
   /**
@@ -91,7 +91,7 @@ public class ReminderUtils {
     Date waitingSince = nextParticipant.getWaitingSince();
 
     //Check if waiting time exceeds given limit
-    boolean timeExceeded = ((now.getTime() - waitingSince.getTime()) >= Constants.WAITING_TIME_LIMIT);
+    boolean timeExceeded = ((now.getTime() - waitingSince.getTime()) >= ApiUtils.getWaitingTimeLimit(Constants.WAITING_DAYS));
     return timeExceeded;
   }
 

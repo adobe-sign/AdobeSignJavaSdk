@@ -12,7 +12,7 @@
 */
 package com.adobe.sign.utils.validator;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.adobe.sign.model.users.UserCreationInfo;
 import com.adobe.sign.model.users.UserModificationInfo;
@@ -25,6 +25,15 @@ import com.adobe.sign.utils.ApiException;
  *
  */
 public class UsersApiValidator {
+
+  private static final String USER_CREATION_INFO = "userCreationInfo";
+  private static final String USER_MODIFICATION_INFO = "userModificationInfo";
+  private static final String USER_STATUS_UPDATE_INFO = "userStatusUpdateInfo";
+  private static final String FIRST_NAME = "firstName";
+  private static final String LAST_NAME = "lastName";
+  private static final String ROLES = "roles";
+  private static final String GROUP_ID = "groupId";
+  private static final String EMAIL = "email";
 
   /**
    * Validator for getUsers Api that fetches list of all users in the account of the user invoking this api.
@@ -44,12 +53,12 @@ public class UsersApiValidator {
   public static void createUserValidator(UserCreationInfo userCreationInfo) throws ApiException {
 
     // Null and empty check for required params.
-    ApiValidatorHelper.validateParameter(userCreationInfo);
+    ApiValidatorHelper.validateParameter(userCreationInfo, USER_CREATION_INFO);
 
-    ArrayList parameterList = new ArrayList();
-    parameterList.add(userCreationInfo.getFirstName());
-    parameterList.add(userCreationInfo.getLastName());
-    ApiValidatorHelper.validateRequiredParameters(parameterList);
+    HashMap<String, String> hashMap = new HashMap<String, String>();
+    hashMap.put(FIRST_NAME, userCreationInfo.getFirstName());
+    hashMap.put(LAST_NAME, userCreationInfo.getLastName());
+    ApiValidatorHelper.validateRequiredParameters(hashMap);
 
     ApiValidatorHelper.validateParameter(userCreationInfo.getEmail(),
                                          SdkErrorCodes.MUST_PROVIDE_EMAIL);
@@ -78,21 +87,21 @@ public class UsersApiValidator {
                                          UserModificationInfo userModificationInfo) throws ApiException {
     ApiValidatorHelper.validateId(userId,
                                   SdkErrorCodes.INVALID_USER_ID);
-    ApiValidatorHelper.validateParameter(userModificationInfo);
+    ApiValidatorHelper.validateParameter(userModificationInfo, USER_MODIFICATION_INFO);
 
-    ArrayList parameterList = new ArrayList();
-    parameterList.add(userModificationInfo.getFirstName());
-    parameterList.add(userModificationInfo.getLastName());
-    parameterList.add(userModificationInfo.getEmail());
-    parameterList.add(userModificationInfo.getGroupId());
-    ApiValidatorHelper.validateRequiredParameters(parameterList);
+    HashMap<String, String> hashMap = new HashMap<String, String>();
+    hashMap.put(FIRST_NAME, userModificationInfo.getFirstName());
+    hashMap.put(LAST_NAME, userModificationInfo.getLastName());
+    hashMap.put(EMAIL, userModificationInfo.getEmail());
+    hashMap.put(GROUP_ID, userModificationInfo.getGroupId());
+    ApiValidatorHelper.validateRequiredParameters(hashMap);
 
     ApiValidatorHelper.validateId(userModificationInfo.getGroupId(),
                                   SdkErrorCodes.INVALID_GROUP_ID);
 
     ApiValidatorHelper.validateEmailParamater(userModificationInfo.getEmail());
 
-    ApiValidatorHelper.validateParameter(userModificationInfo.getRoles());
+    ApiValidatorHelper.validateParameter(userModificationInfo.getRoles(), ROLES);
   }
 
   /**
@@ -107,7 +116,7 @@ public class UsersApiValidator {
     ApiValidatorHelper.validateId(userId,
                                   SdkErrorCodes.INVALID_USER_ID);
 
-    ApiValidatorHelper.validateParameter(userStatusUpdateInfo);
+    ApiValidatorHelper.validateParameter(userStatusUpdateInfo, USER_STATUS_UPDATE_INFO);
 
     ApiValidatorHelper.validateParameter(userStatusUpdateInfo.getUserStatus(),
                                          SdkErrorCodes.MUST_PROVIDE_VALID_USER_STATUS);

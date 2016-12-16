@@ -26,20 +26,20 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.MegaSignUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Put MegaSigns APIs.
+ * Junit test cases for Update MegaSigns endpoint.
  */
-public class PutMegaSignsApiTest {
+public class UpdateMegaSignStatusApiTest {
 
   private static MegaSignsApi megaSignsApi = null;
   private static String megaSignId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -48,8 +48,9 @@ public class PutMegaSignsApiTest {
     ApiUtils.configureProperty();
     megaSignId = MegaSignUtils.createMegaSign(ApiUtils.getMegaSignName());
     megaSignsApi = MegaSignUtils.getMegaSignsApi();
-    
+
   }
+
   /**
    * Test for cancelling all the child agreements of the specified megaSign agreement through the updateMegaSignStatus endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -63,18 +64,20 @@ public class PutMegaSignsApiTest {
     updateInfo.setValue(MegaSignStatusUpdateInfo.ValueEnum.CANCEL);
 
     try {
-      megaSignsApi.updateMegaSignStatus(ApiUtils.getNullAccessTokenHeaderParams(),
-                                        megaSignId,
-                                        updateInfo);
+      MegaSignStatusUpdateResponse megaSignStatusUpdateResponse = megaSignsApi.updateMegaSignStatus(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                                                    megaSignId,
+                                                                                                    updateInfo);
+      assertNotNull(megaSignStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      megaSignsApi.updateMegaSignStatus(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                        megaSignId,
-                                        updateInfo);
+      MegaSignStatusUpdateResponse megaSignStatusUpdateResponse = megaSignsApi.updateMegaSignStatus(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                                                    megaSignId,
+                                                                                                    updateInfo);
+      assertNotNull(megaSignStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
@@ -94,9 +97,10 @@ public class PutMegaSignsApiTest {
     updateInfo.setValue(MegaSignStatusUpdateInfo.ValueEnum.CANCEL);
 
     try {
-      megaSignsApi.updateMegaSignStatus(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                        megaSignId,
-                                        updateInfo);
+      MegaSignStatusUpdateResponse megaSignStatusUpdateResponse = megaSignsApi.updateMegaSignStatus(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                                                    megaSignId,
+                                                                                                    updateInfo);
+      assertNotNull(megaSignStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
@@ -115,18 +119,20 @@ public class PutMegaSignsApiTest {
     updateInfo.setValue(MegaSignStatusUpdateInfo.ValueEnum.CANCEL);
 
     try {
-      megaSignsApi.updateMegaSignStatus(ApiUtils.getValidHeaderParams(),
-                                        TestData.EMPTY_PARAM,
-                                        updateInfo);
+      MegaSignStatusUpdateResponse megaSignStatusUpdateResponse = megaSignsApi.updateMegaSignStatus(ApiUtils.getValidHeaderParams(),
+                                                                                                    TestData.EMPTY_PARAM,
+                                                                                                    updateInfo);
+      assertNotNull(megaSignStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_MEGASIGN_ID.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      megaSignsApi.updateMegaSignStatus(ApiUtils.getValidHeaderParams(),
-                                        TestData.NULL_PARAM,
-                                        updateInfo);
+      MegaSignStatusUpdateResponse megaSignStatusUpdateResponse = megaSignsApi.updateMegaSignStatus(ApiUtils.getValidHeaderParams(),
+                                                                                                    TestData.NULL_PARAM,
+                                                                                                    updateInfo);
+      assertNotNull(megaSignStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_MEGASIGN_ID.getApiCode().equals(e.getApiCode()));
@@ -143,9 +149,10 @@ public class PutMegaSignsApiTest {
   @Test
   public void testInvalidMegaSignStatus() throws ApiException {
     try {
-      megaSignsApi.updateMegaSignStatus(ApiUtils.getValidHeaderParams(),
-                                        megaSignId,
-                                        null);
+      MegaSignStatusUpdateResponse megaSignStatusUpdateResponse = megaSignsApi.updateMegaSignStatus(ApiUtils.getValidHeaderParams(),
+                                                                                                    megaSignId,
+                                                                                                    null);
+      assertNotNull(megaSignStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
@@ -155,9 +162,10 @@ public class PutMegaSignsApiTest {
     updateInfo.setValue(null);
 
     try {
-      megaSignsApi.updateMegaSignStatus(ApiUtils.getValidHeaderParams(),
-                                        megaSignId,
-                                        updateInfo);
+      MegaSignStatusUpdateResponse megaSignStatusUpdateResponse = megaSignsApi.updateMegaSignStatus(ApiUtils.getValidHeaderParams(),
+                                                                                                    megaSignId,
+                                                                                                    updateInfo);
+      assertNotNull(megaSignStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_MEGASIGN_STATUS.getApiCode().equals(e.getApiCode()));

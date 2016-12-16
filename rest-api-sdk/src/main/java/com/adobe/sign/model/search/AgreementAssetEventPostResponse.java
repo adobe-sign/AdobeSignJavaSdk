@@ -24,11 +24,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:55.943+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:33.916+05:30")
 public class AgreementAssetEventPostResponse   {
   
   private String currentPageCursor = null;
-  private List<DocumentEventForUser> events = new ArrayList<DocumentEventForUser>();
+  private List<DocumentEventForUser> events = null;
   private String nextPageCursor = null;
   private String searchId = null;
 
@@ -38,9 +38,16 @@ public class AgreementAssetEventPostResponse   {
    **/
   @ApiModelProperty(required = true, value = "The value of the page cursor corresponding to the current page")
   @JsonProperty("currentPageCursor")
+  /**
+   * @return String
+   **/
   public String getCurrentPageCursor() {
     return currentPageCursor;
   }
+  /**
+   * The value of the page cursor corresponding to the current page
+   * @param currentPageCursor
+   **/
   public void setCurrentPageCursor(String currentPageCursor) {
     this.currentPageCursor = currentPageCursor;
   }
@@ -51,9 +58,16 @@ public class AgreementAssetEventPostResponse   {
    **/
   @ApiModelProperty(required = true, value = "An ordered list of the events in the audit trail of this document")
   @JsonProperty("events")
+  /**
+   * @return List&lt;DocumentEventForUser&gt;
+   **/
   public List<DocumentEventForUser> getEvents() {
     return events;
   }
+  /**
+   * An ordered list of the events in the audit trail of this document
+   * @param events
+   **/
   public void setEvents(List<DocumentEventForUser> events) {
     this.events = events;
   }
@@ -64,9 +78,16 @@ public class AgreementAssetEventPostResponse   {
    **/
   @ApiModelProperty(required = true, value = "The page cursor of the next page to be fetched. If the next page cursor is blank then the given page is the last page")
   @JsonProperty("nextPageCursor")
+  /**
+   * @return String
+   **/
   public String getNextPageCursor() {
     return nextPageCursor;
   }
+  /**
+   * The page cursor of the next page to be fetched. If the next page cursor is blank then the given page is the last page
+   * @param nextPageCursor
+   **/
   public void setNextPageCursor(String nextPageCursor) {
     this.nextPageCursor = nextPageCursor;
   }
@@ -77,9 +98,16 @@ public class AgreementAssetEventPostResponse   {
    **/
   @ApiModelProperty(required = true, value = "The search Id corresponding to current search object. This searchId can be used in combination with pageCursors in the API to retrieve search results to fetch the result for further pages")
   @JsonProperty("searchId")
+  /**
+   * @return String
+   **/
   public String getSearchId() {
     return searchId;
   }
+  /**
+   * The search Id corresponding to current search object. This searchId can be used in combination with pageCursors in the API to retrieve search results to fetch the result for further pages
+   * @param searchId
+   **/
   public void setSearchId(String searchId) {
     this.searchId = searchId;
   }
@@ -87,6 +115,10 @@ public class AgreementAssetEventPostResponse   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class AgreementAssetEventPostResponse {\n");

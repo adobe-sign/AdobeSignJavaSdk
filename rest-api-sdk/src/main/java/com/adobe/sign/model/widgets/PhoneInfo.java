@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class PhoneInfo   {
   
   private String countryCode = null;
@@ -34,9 +34,16 @@ public class PhoneInfo   {
    **/
   @ApiModelProperty(value = "The phoneInfo country code required for the counter signer to view and sign the widget if authentication type is PHONE")
   @JsonProperty("countryCode")
+  /**
+   * @return String
+   **/
   public String getCountryCode() {
     return countryCode;
   }
+  /**
+   * The phoneInfo country code required for the counter signer to view and sign the widget if authentication type is PHONE
+   * @param countryCode
+   **/
   public void setCountryCode(String countryCode) {
     this.countryCode = countryCode;
   }
@@ -47,9 +54,16 @@ public class PhoneInfo   {
    **/
   @ApiModelProperty(required = true, value = "The phoneInfo country code required for the counter signer to view and sign the widget if authentication type is PHONE")
   @JsonProperty("phone")
+  /**
+   * @return String
+   **/
   public String getPhone() {
     return phone;
   }
+  /**
+   * The phoneInfo country code required for the counter signer to view and sign the widget if authentication type is PHONE
+   * @param phone
+   **/
   public void setPhone(String phone) {
     this.phone = phone;
   }
@@ -57,6 +71,10 @@ public class PhoneInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class PhoneInfo {\n");

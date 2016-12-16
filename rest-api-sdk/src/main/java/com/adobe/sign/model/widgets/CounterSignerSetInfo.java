@@ -14,8 +14,8 @@
 package com.adobe.sign.model.widgets;
 
 import com.adobe.sign.utils.StringUtil;
-import java.util.*;
 import com.adobe.sign.model.widgets.CounterSignerInfo;
+import java.util.*;
 
 
 
@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class CounterSignerSetInfo   {
   
-  private List<CounterSignerInfo> counterSignerSetMemberInfos = new ArrayList<CounterSignerInfo>();
+  private List<CounterSignerInfo> counterSignerSetMemberInfos = null;
 
 public enum CounterSignerSetRoleEnum {
   SIGNER("SIGNER"),
@@ -55,9 +55,16 @@ public enum CounterSignerSetRoleEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about the members of the counter signer set, currently we support only one member")
   @JsonProperty("counterSignerSetMemberInfos")
+  /**
+   * @return List&lt;CounterSignerInfo&gt;
+   **/
   public List<CounterSignerInfo> getCounterSignerSetMemberInfos() {
     return counterSignerSetMemberInfos;
   }
+  /**
+   * Information about the members of the counter signer set, currently we support only one member
+   * @param counterSignerSetMemberInfos
+   **/
   public void setCounterSignerSetMemberInfos(List<CounterSignerInfo> counterSignerSetMemberInfos) {
     this.counterSignerSetMemberInfos = counterSignerSetMemberInfos;
   }
@@ -68,9 +75,16 @@ public enum CounterSignerSetRoleEnum {
    **/
   @ApiModelProperty(required = true, value = "Specify the role of counter signer set")
   @JsonProperty("counterSignerSetRole")
+  /**
+   * @return CounterSignerSetRoleEnum
+   **/
   public CounterSignerSetRoleEnum getCounterSignerSetRole() {
     return counterSignerSetRole;
   }
+  /**
+   * Specify the role of counter signer set
+   * @param counterSignerSetRole
+   **/
   public void setCounterSignerSetRole(CounterSignerSetRoleEnum counterSignerSetRole) {
     this.counterSignerSetRole = counterSignerSetRole;
   }
@@ -78,6 +92,10 @@ public enum CounterSignerSetRoleEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class CounterSignerSetInfo {\n");

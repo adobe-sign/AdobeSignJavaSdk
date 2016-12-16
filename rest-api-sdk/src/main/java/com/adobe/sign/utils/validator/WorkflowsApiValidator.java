@@ -28,6 +28,11 @@ import com.adobe.sign.utils.ApiException;
  */
 public class WorkflowsApiValidator {
 
+  private static final String CUSTOM_WORKFLOW_AGREEMENT_CREATION_REQUEST = "customWorkflowAgreementCreationRequest";
+  private static final String DOCUMENT_CREATION_INFO = "documentCreationInfo";
+  private static final String NAME = "name";
+  private static final String RECIPIENTS = "recipients";
+
   /**
    * Validator for getWorkflows API that retrieves workflows for a user.
    *
@@ -68,11 +73,11 @@ public class WorkflowsApiValidator {
     ApiValidatorHelper.validateId(workflowId,
                                   SdkErrorCodes.INVALID_WORKFLOW_ID);
 
-    ApiValidatorHelper.validateParameter(customWorkflowAgreementCreationRequest);
+    ApiValidatorHelper.validateParameter(customWorkflowAgreementCreationRequest, CUSTOM_WORKFLOW_AGREEMENT_CREATION_REQUEST);
 
     DocumentCreationInfo documentCreationInfo = customWorkflowAgreementCreationRequest.getDocumentCreationInfo();
-    ApiValidatorHelper.validateParameter(documentCreationInfo);
-    ApiValidatorHelper.validateParameter(documentCreationInfo.getName());
+    ApiValidatorHelper.validateParameter(documentCreationInfo, DOCUMENT_CREATION_INFO);
+    ApiValidatorHelper.validateParameter(documentCreationInfo.getName(), NAME);
 
     List<CustomWorkflowFileInfo> fileInfos = documentCreationInfo.getFileInfos();
     if (fileInfos == null)
@@ -107,7 +112,7 @@ public class WorkflowsApiValidator {
   private static void validateRecipientSetInfos(List<RecipientsInfo> recipientSetInfos) throws ApiException {
 
     for (RecipientsInfo recipientSetInfo : recipientSetInfos) {
-      ApiValidatorHelper.validateParameter(recipientSetInfo.getRecipients());
+      ApiValidatorHelper.validateParameter(recipientSetInfo.getRecipients(), RECIPIENTS);
       List<RecipientInfo> recipientInfos = recipientSetInfo.getRecipients();
       int numberOfRecipients = recipientInfos.size();
 

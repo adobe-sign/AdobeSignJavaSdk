@@ -51,6 +51,7 @@ public class SendAgreementUsingLibraryDocument {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.SEND_AGREEMENT_USING_LIBRARY_DOCUMENT, e);
+      throw e;
     }
   }
 
@@ -67,13 +68,13 @@ public class SendAgreementUsingLibraryDocument {
     else {
       //List containing email ids of recipients
       List<String> recipientSetEmailList = new ArrayList<String>();
-      recipientSetEmailList.add(Constants.USER_EMAIL);
+      recipientSetEmailList.add(ApiUtils.getUserEmail(Constants.USER_EMAIL_PREFIX,Constants.USER_EMAIL_DOMAIN));
 
       //Create agreement using the first library document of the user
       AgreementCreationResponse agreementCreationResponse = AgreementUtils.createAgreement(recipientSetEmailList,
                                                                                            libraryDocumentId,
                                                                                            AgreementUtils.DocumentIdentifierType.LIBRARY_DOCUMENT_ID,
-                                                                                           Constants.AGREEMENT_NAME);
+                                                                                           ApiUtils.getAgreementName(Constants.AGREEMENT_NAME));
 
       //Get agreement info using the agreement id
       AgreementInfo agreementInfo = AgreementUtils.getAgreementInfo(agreementCreationResponse.getAgreementId());

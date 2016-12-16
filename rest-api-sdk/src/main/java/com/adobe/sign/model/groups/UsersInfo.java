@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.002+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:32.597+05:30")
 public class UsersInfo   {
   
-  private List<UserInfo> userInfoList = new ArrayList<UserInfo>();
+  private List<UserInfo> userInfoList = null;
 
   
   /**
@@ -35,9 +35,16 @@ public class UsersInfo   {
    **/
   @ApiModelProperty(required = true, value = "The list of users in the account")
   @JsonProperty("userInfoList")
+  /**
+   * @return List&lt;UserInfo&gt;
+   **/
   public List<UserInfo> getUserInfoList() {
     return userInfoList;
   }
+  /**
+   * The list of users in the account
+   * @param userInfoList
+   **/
   public void setUserInfoList(List<UserInfo> userInfoList) {
     this.userInfoList = userInfoList;
   }
@@ -45,6 +52,10 @@ public class UsersInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class UsersInfo {\n");

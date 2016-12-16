@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class WorkflowDefaultParams   {
   
   private String defaultValue = null;
@@ -36,9 +36,16 @@ public class WorkflowDefaultParams   {
    **/
   @ApiModelProperty(required = true, value = "default value of the field if input for this field is not provided and this field is required")
   @JsonProperty("defaultValue")
+  /**
+   * @return String
+   **/
   public String getDefaultValue() {
     return defaultValue;
   }
+  /**
+   * default value of the field if input for this field is not provided and this field is required
+   * @param defaultValue
+   **/
   public void setDefaultValue(String defaultValue) {
     this.defaultValue = defaultValue;
   }
@@ -49,9 +56,16 @@ public class WorkflowDefaultParams   {
    **/
   @ApiModelProperty(required = true, value = "Whether current field can be edited. If editable attribute for this field is false then this field should not be provided in the agreement creation request and default value of this field will be used in agreement creation")
   @JsonProperty("editable")
+  /**
+   * @return Boolean
+   **/
   public Boolean getEditable() {
     return editable;
   }
+  /**
+   * Whether current field can be edited. If editable attribute for this field is false then this field should not be provided in the agreement creation request and default value of this field will be used in agreement creation
+   * @param editable
+   **/
   public void setEditable(Boolean editable) {
     this.editable = editable;
   }
@@ -62,9 +76,16 @@ public class WorkflowDefaultParams   {
    **/
   @ApiModelProperty(required = true, value = "Whether this field is required or optional")
   @JsonProperty("required")
+  /**
+   * @return Boolean
+   **/
   public Boolean getRequired() {
     return required;
   }
+  /**
+   * Whether this field is required or optional
+   * @param required
+   **/
   public void setRequired(Boolean required) {
     this.required = required;
   }
@@ -75,9 +96,16 @@ public class WorkflowDefaultParams   {
    **/
   @ApiModelProperty(required = true, value = "Whether current field is visible or not. If visible attribute for this field is false then this field should not be visible in the agreement creation UI using this workflow to user")
   @JsonProperty("visible")
+  /**
+   * @return Boolean
+   **/
   public Boolean getVisible() {
     return visible;
   }
+  /**
+   * Whether current field is visible or not. If visible attribute for this field is false then this field should not be visible in the agreement creation UI using this workflow to user
+   * @param visible
+   **/
   public void setVisible(Boolean visible) {
     this.visible = visible;
   }
@@ -85,6 +113,10 @@ public class WorkflowDefaultParams   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WorkflowDefaultParams {\n");

@@ -29,12 +29,11 @@ import com.adobe.sign.model.agreements.URLFileInfo;
 import com.adobe.sign.model.agreements.UserAgreement;
 import com.adobe.sign.model.agreements.UserAgreements;
 
-public class AgreementsUtils extends ApiUtils {
+public class AgreementsUtils {
 
   private static AgreementsApi agreementsApi = new AgreementsApi();
 
   private static String agreementId = null;
-  private static String documentId = null;
   private static String libraryDocumentId = null;
   private static MultivaluedMap headers = ApiUtils.getValidHeaderParams();
 
@@ -42,19 +41,17 @@ public class AgreementsUtils extends ApiUtils {
 
     if(!isExistingAgreement(agreementName))
       agreementId = createAgreement(agreementName);
-
-    setDocumentId();
     return agreementId;
   }
 
   // Helper methods
-  
+
   public static String createAgreement(String name) throws ApiException {
 
     String agreementId = null;
     AgreementCreationInfo agreementCreationInfo = getAgreementCreationInfo(name);
     AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(headers,
-                                                                                        agreementCreationInfo);
+        agreementCreationInfo);
     agreementId = agreementCreationResponse.getAgreementId();
 
     return agreementId;
@@ -64,46 +61,46 @@ public class AgreementsUtils extends ApiUtils {
 
     String transientDocumentId = TransientDocumentsUtils.createTransientDocumentResource(TestData.TRANSIENT_DOCUMENT_NAME);
     return getAgreementCreationInfo(TestData.POST_EMAIL,
-                                    TestData.NULL_PARAM,
-                                    RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
-                                    TestData.NULL_PARAM,
-                                    TestData.NULL_PARAM,
-                                    transientDocumentId,
-                                    TestData.NULL_PARAM,
-                                    documentName,
-                                    DocumentCreationInfo.SignatureTypeEnum.ESIGN,
-                                    null);
+        TestData.NULL_PARAM,
+        RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
+        TestData.NULL_PARAM,
+        TestData.NULL_PARAM,
+        transientDocumentId,
+        TestData.NULL_PARAM,
+        documentName,
+        DocumentCreationInfo.SignatureTypeEnum.ESIGN,
+        null);
 
   }
 
   public  static AgreementCreationInfo getAgreementCreationInfo(String documentName,
-                                                         FileInfo fileInfo) {
+                                                                FileInfo fileInfo) {
     return getAgreementCreationInfo(TestData.POST_EMAIL,
-                                    TestData.NULL_PARAM,
-                                    RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
-                                    fileInfo.getLibraryDocumentId(),
-                                    fileInfo.getLibraryDocumentName(),
-                                    fileInfo.getTransientDocumentId(),
-                                    fileInfo.getDocumentURL() != null ? fileInfo.getDocumentURL().getUrl() : TestData.NULL_PARAM,
-                                    documentName,
-                                    DocumentCreationInfo.SignatureTypeEnum.ESIGN,
-                                    null);
+        TestData.NULL_PARAM,
+        RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
+        fileInfo.getLibraryDocumentId(),
+        fileInfo.getLibraryDocumentName(),
+        fileInfo.getTransientDocumentId(),
+        fileInfo.getDocumentURL() != null ? fileInfo.getDocumentURL().getUrl() : TestData.NULL_PARAM,
+        documentName,
+        DocumentCreationInfo.SignatureTypeEnum.ESIGN,
+        null);
 
   }
 
   public static AgreementCreationInfo getAgreementCreationInfo(String documentName,
-                                                         PostSignOptions options) throws ApiException {
+                                                               PostSignOptions options) throws ApiException {
     libraryDocumentId = getLibraryDocumentId();
     return getAgreementCreationInfo(TestData.POST_EMAIL,
-                                    TestData.NULL_PARAM,
-                                    RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
-                                    libraryDocumentId,
-                                    TestData.NULL_PARAM,
-                                    TestData.NULL_PARAM,
-                                    TestData.NULL_PARAM,
-                                    documentName,
-                                    DocumentCreationInfo.SignatureTypeEnum.ESIGN,
-                                    options);
+        TestData.NULL_PARAM,
+        RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
+        libraryDocumentId,
+        TestData.NULL_PARAM,
+        TestData.NULL_PARAM,
+        TestData.NULL_PARAM,
+        documentName,
+        DocumentCreationInfo.SignatureTypeEnum.ESIGN,
+        options);
 
   }
 
@@ -113,30 +110,30 @@ public class AgreementsUtils extends ApiUtils {
                                                                String documentName) throws ApiException {
     libraryDocumentId = getLibraryDocumentId();
     return getAgreementCreationInfo(recipientEmail,
-                                    recipientFax,
-                                    recipientRole,
-                                    libraryDocumentId,
-                                    TestData.NULL_PARAM,
-                                    TestData.NULL_PARAM,
-                                    TestData.NULL_PARAM,
-                                    documentName,
-                                    DocumentCreationInfo.SignatureTypeEnum.ESIGN,
-                                    null);
+        recipientFax,
+        recipientRole,
+        libraryDocumentId,
+        TestData.NULL_PARAM,
+        TestData.NULL_PARAM,
+        TestData.NULL_PARAM,
+        documentName,
+        DocumentCreationInfo.SignatureTypeEnum.ESIGN,
+        null);
 
   }
 
   public static AgreementCreationInfo getAgreementCreationInfo(DocumentCreationInfo.SignatureTypeEnum signatureType, String documentName) throws ApiException {
     libraryDocumentId = getLibraryDocumentId();
     return getAgreementCreationInfo(TestData.POST_EMAIL,
-                                    TestData.NULL_PARAM,
-                                    RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
-                                    libraryDocumentId,
-                                    TestData.NULL_PARAM,
-                                    TestData.NULL_PARAM,
-                                    TestData.NULL_PARAM,
-                                    documentName,
-                                    signatureType,
-                                    null);
+        TestData.NULL_PARAM,
+        RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
+        libraryDocumentId,
+        TestData.NULL_PARAM,
+        TestData.NULL_PARAM,
+        TestData.NULL_PARAM,
+        documentName,
+        signatureType,
+        null);
   }
 
   public static AgreementCreationInfo getAgreementCreationInfo(String recipientEmail,
@@ -198,28 +195,24 @@ public class AgreementsUtils extends ApiUtils {
     return agreementsApi;
   }
 
-  public static String getDocumentId(){
-    return documentId;
-  }
-  
-  private static void setDocumentId() throws ApiException {
+  public static String getFirstDocumentId() throws ApiException {
     AgreementDocuments agreementDocuments = agreementsApi.getAllDocuments(headers,
-                                                                          agreementId,
-                                                                          TestData.VERSION_ID,
-                                                                          TestData.PARTICIPANT_EMAIL,
-                                                                          TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
+        agreementId,
+        TestData.VERSION_ID,
+        TestData.PARTICIPANT_EMAIL,
+        TestData.AGREEMENT_SUPPORTING_DOCUMENT_CONTENT_FORMAT);
 
     ArrayList<Document> documents = (ArrayList<Document>) agreementDocuments.getDocuments();
-    documentId = documents.get(0).getDocumentId();
+    return documents.get(0).getDocumentId();
   }
 
   public static boolean isExistingAgreement(String agreementName) throws ApiException {
 
     UserAgreements userAgreements = agreementsApi.getAgreements(headers,
-                                                                TestData.AGREEMENT_QUERY,
-                                                                TestData.AGREEMENT_EXTERNAL_ID,
-                                                                TestData.AGREEMENT_EXTERNAL_GROUP,
-                                                                TestData.AGREEMENT_EXTERNAL_NAMESPACE);
+        TestData.AGREEMENT_QUERY,
+        TestData.AGREEMENT_EXTERNAL_ID,
+        TestData.AGREEMENT_EXTERNAL_GROUP,
+        TestData.AGREEMENT_EXTERNAL_NAMESPACE);
 
     for (UserAgreement agr : userAgreements.getUserAgreementList()) {
       if (agr.getStatus().equals(UserAgreement.StatusEnum.OUT_FOR_SIGNATURE) && agr.getName().equals(agreementName)) {

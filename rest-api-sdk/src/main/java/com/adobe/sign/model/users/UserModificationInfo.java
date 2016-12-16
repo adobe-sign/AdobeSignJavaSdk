@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.999+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:33.254+05:30")
 public class UserModificationInfo   {
   
   private String company = null;
@@ -69,7 +69,7 @@ public enum RolesEnum {
   }
 }
 
-  private List<RolesEnum> roles = new ArrayList<RolesEnum>();
+  private List<RolesEnum> roles = null;
   private String title = null;
 
   
@@ -78,9 +78,16 @@ public enum RolesEnum {
    **/
   @ApiModelProperty(value = "The new company name of the user. The server will reset to null if the value is not provided")
   @JsonProperty("company")
+  /**
+   * @return String
+   **/
   public String getCompany() {
     return company;
   }
+  /**
+   * The new company name of the user. The server will reset to null if the value is not provided
+   * @param company
+   **/
   public void setCompany(String company) {
     this.company = company;
   }
@@ -91,9 +98,16 @@ public enum RolesEnum {
    **/
   @ApiModelProperty(required = true, value = "The new email address of the user")
   @JsonProperty("email")
+  /**
+   * @return String
+   **/
   public String getEmail() {
     return email;
   }
+  /**
+   * The new email address of the user
+   * @param email
+   **/
   public void setEmail(String email) {
     this.email = email;
   }
@@ -104,9 +118,16 @@ public enum RolesEnum {
    **/
   @ApiModelProperty(required = true, value = "The new first name of the user")
   @JsonProperty("firstName")
+  /**
+   * @return String
+   **/
   public String getFirstName() {
     return firstName;
   }
+  /**
+   * The new first name of the user
+   * @param firstName
+   **/
   public void setFirstName(String firstName) {
     this.firstName = firstName;
   }
@@ -117,9 +138,16 @@ public enum RolesEnum {
    **/
   @ApiModelProperty(required = true, value = "The new group in which the user should be added. It can be obtained through a call to the API which retrieves the list of users. The server will reset to default if the value is not provided")
   @JsonProperty("groupId")
+  /**
+   * @return String
+   **/
   public String getGroupId() {
     return groupId;
   }
+  /**
+   * The new group in which the user should be added. It can be obtained through a call to the API which retrieves the list of users. The server will reset to default if the value is not provided
+   * @param groupId
+   **/
   public void setGroupId(String groupId) {
     this.groupId = groupId;
   }
@@ -130,9 +158,16 @@ public enum RolesEnum {
    **/
   @ApiModelProperty(required = true, value = "The new last name of the user")
   @JsonProperty("lastName")
+  /**
+   * @return String
+   **/
   public String getLastName() {
     return lastName;
   }
+  /**
+   * The new last name of the user
+   * @param lastName
+   **/
   public void setLastName(String lastName) {
     this.lastName = lastName;
   }
@@ -143,9 +178,16 @@ public enum RolesEnum {
    **/
   @ApiModelProperty(value = "Whether or not the user has opted in to receive the marketing information from Adobe Sign and its partners. The server will reset to null if the value is not provided.")
   @JsonProperty("optIn")
+  /**
+   * @return OptInEnum
+   **/
   public OptInEnum getOptIn() {
     return optIn;
   }
+  /**
+   * Whether or not the user has opted in to receive the marketing information from Adobe Sign and its partners. The server will reset to null if the value is not provided.
+   * @param optIn
+   **/
   public void setOptIn(OptInEnum optIn) {
     this.optIn = optIn;
   }
@@ -156,9 +198,16 @@ public enum RolesEnum {
    **/
   @ApiModelProperty(value = "The new phone number of the user. The server will reset to null if the value is not provided")
   @JsonProperty("phone")
+  /**
+   * @return String
+   **/
   public String getPhone() {
     return phone;
   }
+  /**
+   * The new phone number of the user. The server will reset to null if the value is not provided
+   * @param phone
+   **/
   public void setPhone(String phone) {
     this.phone = phone;
   }
@@ -169,9 +218,16 @@ public enum RolesEnum {
    **/
   @ApiModelProperty(required = true, value = "The new roles of the user")
   @JsonProperty("roles")
+  /**
+   * @return List&lt;RolesEnum&gt;
+   **/
   public List<RolesEnum> getRoles() {
     return roles;
   }
+  /**
+   * The new roles of the user
+   * @param roles
+   **/
   public void setRoles(List<RolesEnum> roles) {
     this.roles = roles;
   }
@@ -182,9 +238,16 @@ public enum RolesEnum {
    **/
   @ApiModelProperty(value = "The new job title of the user. The server will reset to null if the value is not provided")
   @JsonProperty("title")
+  /**
+   * @return String
+   **/
   public String getTitle() {
     return title;
   }
+  /**
+   * The new job title of the user. The server will reset to null if the value is not provided
+   * @param title
+   **/
   public void setTitle(String title) {
     this.title = title;
   }
@@ -192,6 +255,10 @@ public enum RolesEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserModificationInfo {\n");

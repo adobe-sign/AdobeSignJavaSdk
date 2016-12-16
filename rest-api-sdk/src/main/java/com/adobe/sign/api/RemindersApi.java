@@ -26,7 +26,7 @@ import com.adobe.sign.model.reminders.ReminderCreationInfo;
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:59.159+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.906+05:30")
     public class RemindersApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -44,8 +44,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * Sends a reminder for an agreement.
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_write 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_write 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param reminderCreationInfo The agreement identifier.
     * @return ReminderCreationResult

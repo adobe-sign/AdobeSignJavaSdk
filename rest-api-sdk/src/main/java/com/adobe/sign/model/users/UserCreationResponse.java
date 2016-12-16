@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.999+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:33.254+05:30")
 public class UserCreationResponse   {
   
   private String userId = null;
@@ -54,9 +54,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "The unique identifier for user in REST APIs. This identifier will not be compatible with any existing SOAP APIs and is different from user key that SOAP APIs provide and consume. userid being provided here and userkey that SOAP uses are different and the two can not be interchanged with each other")
   @JsonProperty("userId")
+  /**
+   * @return String
+   **/
   public String getUserId() {
     return userId;
   }
+  /**
+   * The unique identifier for user in REST APIs. This identifier will not be compatible with any existing SOAP APIs and is different from user key that SOAP APIs provide and consume. userid being provided here and userkey that SOAP uses are different and the two can not be interchanged with each other
+   * @param userId
+   **/
   public void setUserId(String userId) {
     this.userId = userId;
   }
@@ -67,9 +74,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Status of the user")
   @JsonProperty("userStatus")
+  /**
+   * @return UserStatusEnum
+   **/
   public UserStatusEnum getUserStatus() {
     return userStatus;
   }
+  /**
+   * Status of the user
+   * @param userStatus
+   **/
   public void setUserStatus(UserStatusEnum userStatus) {
     this.userStatus = userStatus;
   }
@@ -77,6 +91,10 @@ public enum UserStatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserCreationResponse {\n");

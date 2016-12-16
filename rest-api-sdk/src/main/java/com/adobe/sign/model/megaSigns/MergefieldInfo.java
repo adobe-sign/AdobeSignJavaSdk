@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.898+05:30")
 public class MergefieldInfo   {
   
   private String defaultValue = null;
@@ -34,9 +34,16 @@ public class MergefieldInfo   {
    **/
   @ApiModelProperty(value = "The default value of the field")
   @JsonProperty("defaultValue")
+  /**
+   * @return String
+   **/
   public String getDefaultValue() {
     return defaultValue;
   }
+  /**
+   * The default value of the field
+   * @param defaultValue
+   **/
   public void setDefaultValue(String defaultValue) {
     this.defaultValue = defaultValue;
   }
@@ -47,9 +54,16 @@ public class MergefieldInfo   {
    **/
   @ApiModelProperty(value = "The name of the field")
   @JsonProperty("fieldName")
+  /**
+   * @return String
+   **/
   public String getFieldName() {
     return fieldName;
   }
+  /**
+   * The name of the field
+   * @param fieldName
+   **/
   public void setFieldName(String fieldName) {
     this.fieldName = fieldName;
   }
@@ -57,6 +71,10 @@ public class MergefieldInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class MergefieldInfo {\n");

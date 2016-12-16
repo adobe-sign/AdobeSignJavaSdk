@@ -54,8 +54,8 @@ public class SearchUtils {
       return agreementAssetEventPostResponse;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.CREATE_SEARCH_FOR_AGREEMENT_ASSET_EVENT_FOR_USER,e);
-      return null;
+      ApiUtils.logError(Errors.CREATE_SEARCH_FOR_AGREEMENT_ASSET_EVENT_FOR_USER);
+      throw e;
     }
   }
 
@@ -80,8 +80,8 @@ public class SearchUtils {
       return agreementAssetEventGetResponse;
     }
     catch (Exception e) {
-      ApiUtils.logException(Errors.GET_SEARCH_AGREEMENT_ASSET_EVENT_FOR_USER, e);
-      return null;
+      ApiUtils.logError(Errors.GET_SEARCH_AGREEMENT_ASSET_EVENT_FOR_USER);
+      throw e;
     }
   }
 

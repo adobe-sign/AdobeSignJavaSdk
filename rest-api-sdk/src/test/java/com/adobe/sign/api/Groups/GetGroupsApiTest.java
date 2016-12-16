@@ -25,50 +25,52 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.GroupUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Groups API.
+ * Junit test cases for Get Groups endpoint.
  */
 public class GetGroupsApiTest {
-  
+
   private static GroupsApi groupsApi = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
-  
+
   @BeforeClass
   public static void setup() {
     ApiUtils.configureProperty();
     groupsApi = GroupUtils.getGroupsApi();
   }
-  
+
   /**
    * Test for getting groups in account. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
    * INVALID_ACCESS_TOKEN: empty access token.
-   * 
+   *
    * @throws ApiException
    */
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      groupsApi.getGroups(ApiUtils.getNullAccessTokenHeaderParams());
+      GroupsInfo groupsInfo = groupsApi.getGroups(ApiUtils.getNullAccessTokenHeaderParams());
+      assertNotNull(groupsInfo);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      groupsApi.getGroups(ApiUtils.getEmptyAccessTokenHeaderParams());
+      GroupsInfo groupsInfo = groupsApi.getGroups(ApiUtils.getEmptyAccessTokenHeaderParams());
+      assertNotNull(groupsInfo);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
     }
@@ -77,16 +79,17 @@ public class GetGroupsApiTest {
   /**
    * Test for getting groups in account. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
-   * 
+   *
    * @throws ApiException
    */
   @Test
   public void testInvalidXApiHeader() throws ApiException {
 
     try {
-      groupsApi.getGroups(ApiUtils.getEmptyXApiUserHeaderParams());
+      GroupsInfo groupsInfo = groupsApi.getGroups(ApiUtils.getEmptyXApiUserHeaderParams());
+      assertNotNull(groupsInfo);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
@@ -94,8 +97,8 @@ public class GetGroupsApiTest {
 
   /**
    * Test for getting groups in account.
-   * Case covered is successful execution of the API call.
-   * 
+   * Case covered is successful execution of the endpoint call.
+   *
    * @throws ApiException
    */
   @Test

@@ -30,7 +30,8 @@ public class BaseUriUtils {
       Context.setBaseUri(baseUriInfo.getApiAccessPoint());
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.SET_BASE_URI, e);
+      ApiUtils.logError(Errors.SET_BASE_URI);
+      throw e;
     }
   }
 }

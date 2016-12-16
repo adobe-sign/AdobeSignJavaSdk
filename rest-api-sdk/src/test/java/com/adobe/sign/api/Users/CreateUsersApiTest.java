@@ -26,18 +26,18 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.UserUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Post Users API.
+ * Junit test cases for Create Users endpoint.
  */
-public class PostUsersApiTest {
+public class CreateUsersApiTest {
 
   private static UsersApi usersApi = null;
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -67,8 +67,9 @@ public class PostUsersApiTest {
       UserCreationInfo userCreationInfo = UserUtils.getUserCreationInfo(TestData.FIRST_NAME,
                                                                         TestData.LAST_NAME,
                                                                         ApiUtils.getUserEmail());
-      usersApi.createUser(ApiUtils.getNullAccessTokenHeaderParams(),
-                          userCreationInfo);
+      UserCreationResponse userCreationResponse = usersApi.createUser(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                      userCreationInfo);
+      assertNotNull(userCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -79,8 +80,9 @@ public class PostUsersApiTest {
       UserCreationInfo userCreationInfo = UserUtils.getUserCreationInfo(TestData.FIRST_NAME,
                                                                         TestData.LAST_NAME,
                                                                         ApiUtils.getUserEmail());
-      usersApi.createUser(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                          userCreationInfo);
+      UserCreationResponse userCreationResponse = usersApi.createUser(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                      userCreationInfo);
+      assertNotNull(userCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -101,8 +103,9 @@ public class PostUsersApiTest {
       UserCreationInfo userCreationInfo = UserUtils.getUserCreationInfo(TestData.FIRST_NAME,
                                                                         TestData.LAST_NAME,
                                                                         ApiUtils.getUserEmail());
-      usersApi.createUser(ApiUtils.getEmptyXApiUserHeaderParams(),
-                          userCreationInfo);
+      UserCreationResponse userCreationResponse = usersApi.createUser(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                      userCreationInfo);
+      assertNotNull(userCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -124,8 +127,9 @@ public class PostUsersApiTest {
       UserCreationInfo userCreationInfo = UserUtils.getUserCreationInfo(TestData.NULL_PARAM,
                                                                         TestData.LAST_NAME,
                                                                         ApiUtils.getUserEmail());
-      usersApi.createUser(ApiUtils.getValidHeaderParams(),
-                          userCreationInfo);
+      UserCreationResponse userCreationResponse = usersApi.createUser(ApiUtils.getValidHeaderParams(),
+                                                                      userCreationInfo);
+      assertNotNull(userCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -136,8 +140,9 @@ public class PostUsersApiTest {
       UserCreationInfo userCreationInfo = UserUtils.getUserCreationInfo(TestData.FIRST_NAME,
                                                                         TestData.NULL_PARAM,
                                                                         ApiUtils.getUserEmail());
-      usersApi.createUser(ApiUtils.getValidHeaderParams(),
-                          userCreationInfo);
+      UserCreationResponse userCreationResponse = usersApi.createUser(ApiUtils.getValidHeaderParams(),
+                                                                      userCreationInfo);
+      assertNotNull(userCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -148,8 +153,9 @@ public class PostUsersApiTest {
       UserCreationInfo userCreationInfo = UserUtils.getUserCreationInfo(TestData.EMPTY_PARAM,
                                                                         TestData.LAST_NAME,
                                                                         ApiUtils.getUserEmail());
-      usersApi.createUser(ApiUtils.getValidHeaderParams(),
-                          userCreationInfo);
+      UserCreationResponse userCreationResponse = usersApi.createUser(ApiUtils.getValidHeaderParams(),
+                                                                      userCreationInfo);
+      assertNotNull(userCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -171,8 +177,9 @@ public class PostUsersApiTest {
       UserCreationInfo userCreationInfo = UserUtils.getUserCreationInfo(TestData.FIRST_NAME,
                                                                         TestData.LAST_NAME,
                                                                         TestData.NULL_PARAM);
-      usersApi.createUser(ApiUtils.getValidHeaderParams(),
-                          userCreationInfo);
+      UserCreationResponse userCreationResponse = usersApi.createUser(ApiUtils.getValidHeaderParams(),
+                                                                      userCreationInfo);
+      assertNotNull(userCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.MUST_PROVIDE_EMAIL.getApiCode().equals(e.getApiCode()));
@@ -182,8 +189,9 @@ public class PostUsersApiTest {
       UserCreationInfo userCreationInfo = UserUtils.getUserCreationInfo(TestData.FIRST_NAME,
                                                                         TestData.LAST_NAME,
                                                                         TestData.EMPTY_PARAM);
-      usersApi.createUser(ApiUtils.getValidHeaderParams(),
-                          userCreationInfo);
+      UserCreationResponse userCreationResponse = usersApi.createUser(ApiUtils.getValidHeaderParams(),
+                                                                      userCreationInfo);
+      assertNotNull(userCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.MUST_PROVIDE_EMAIL.getApiCode().equals(e.getApiCode()));
@@ -193,8 +201,10 @@ public class PostUsersApiTest {
       UserCreationInfo userCreationInfo = UserUtils.getUserCreationInfo(TestData.FIRST_NAME,
                                                                         TestData.LAST_NAME,
                                                                         TestData.INVALID_EMAIL);
-      usersApi.createUser(ApiUtils.getValidHeaderParams(),
-                          userCreationInfo);
+      UserCreationResponse userCreationResponse = usersApi.createUser(ApiUtils.getValidHeaderParams(),
+                                                                      userCreationInfo);
+      assertNotNull(userCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -214,9 +224,10 @@ public class PostUsersApiTest {
       UserCreationInfo userCreationInfo = UserUtils.getUserCreationInfo(TestData.FIRST_NAME,
                                                                         TestData.LAST_NAME,
                                                                         ApiUtils.getUserEmail());
-      UserCreationResponse response = usersApi.createUser(ApiUtils.getValidHeaderParams(),
-                                                          userCreationInfo);
-      assertNotNull(response.getUserId());
+      UserCreationResponse userCreationResponse = usersApi.createUser(ApiUtils.getValidHeaderParams(),
+                                                                      userCreationInfo);
+      assertNotNull(userCreationResponse);
+      assertNotNull(userCreationResponse.getUserId());
     }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));

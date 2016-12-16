@@ -14,8 +14,8 @@
 package com.adobe.sign.model.reminders;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.reminders.ParticipantEmailSetInfo;
 import java.util.*;
+import com.adobe.sign.model.reminders.ParticipantEmailSetInfo;
 
 
 
@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:59.159+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.906+05:30")
 public class ReminderCreationResult   {
   
-  private List<ParticipantEmailSetInfo> participantEmailsSet = new ArrayList<ParticipantEmailSetInfo>();
+  private List<ParticipantEmailSetInfo> participantEmailsSet = null;
   private String result = null;
 
   
@@ -36,9 +36,16 @@ public class ReminderCreationResult   {
    **/
   @ApiModelProperty(required = true, value = "The info of the party (participant sets) that was reminded.")
   @JsonProperty("participantEmailsSet")
+  /**
+   * @return List&lt;ParticipantEmailSetInfo&gt;
+   **/
   public List<ParticipantEmailSetInfo> getParticipantEmailsSet() {
     return participantEmailsSet;
   }
+  /**
+   * The info of the party (participant sets) that was reminded.
+   * @param participantEmailsSet
+   **/
   public void setParticipantEmailsSet(List<ParticipantEmailSetInfo> participantEmailsSet) {
     this.participantEmailsSet = participantEmailsSet;
   }
@@ -49,9 +56,16 @@ public class ReminderCreationResult   {
    **/
   @ApiModelProperty(required = true, value = "A status value indicating the result of the operation")
   @JsonProperty("result")
+  /**
+   * @return String
+   **/
   public String getResult() {
     return result;
   }
+  /**
+   * A status value indicating the result of the operation
+   * @param result
+   **/
   public void setResult(String result) {
     this.result = result;
   }
@@ -59,6 +73,10 @@ public class ReminderCreationResult   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class ReminderCreationResult {\n");

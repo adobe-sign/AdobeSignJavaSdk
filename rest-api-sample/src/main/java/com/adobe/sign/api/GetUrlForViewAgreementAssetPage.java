@@ -43,6 +43,7 @@ public class GetUrlForViewAgreementAssetPage {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.GET_URL_FOR_VIEW_AGREEMENT_ASSET_PAGE, e);
+      throw e;
      }
   }
 
@@ -51,7 +52,7 @@ public class GetUrlForViewAgreementAssetPage {
    */
   private void run() throws ApiException {
     //Get agreement asset ID
-    String agreementAssetId = AgreementUtils.getAgreementId(Constants.AGREEMENT_NAME);
+    String agreementAssetId = AgreementUtils.getAgreementId(ApiUtils.getAgreementName(Constants.AGREEMENT_NAME));
 
     // Make API call to get URL for view agreement page for given agreement asset.
     ViewUrl viewUrl = ViewUtils.getAgreementAssetUrl(agreementAssetId);

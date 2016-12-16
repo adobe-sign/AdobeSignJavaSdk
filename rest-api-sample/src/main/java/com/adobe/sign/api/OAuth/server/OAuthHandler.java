@@ -20,6 +20,7 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -236,10 +237,10 @@ public class OAuthHandler {
         clientSecret = parameters.get(key).toString();
     }
     AuthorizationRequest authorizationInfo = new AuthorizationRequest(clientId,
-                                                                redirectUri,
-                                                                scopes,
-                                                                state,
-                                                                Constants.RESPONSE_TYPE);
+        redirectUri,
+        scopes,
+        state,
+        Constants.RESPONSE_TYPE);
     String authorizationUrl = oAuthApi.getAuthorizationUrl(authorizationInfo);
     return authorizationUrl;
   }
@@ -250,31 +251,31 @@ public class OAuthHandler {
    * returns groupId
    * @throws Exception
    */
-  private static String createGroupWithAuthCode(String code) throws ApiException{
+  private static String createGroupWithAuthCode(String code) throws ApiException, UnsupportedEncodingException{
     OAuthApi oAuthApi = new OAuthApi();
     String groupId = null;
     //Fetch the access token.
     AccessTokenRequest accessTokenInfo = new AccessTokenRequest(clientId,
-                                                          clientSecret,
-                                                          redirectUri,
-                                                          code,
-                                                          Constants.ACCESS_TOKEN_GRANT_TYPE);
+        clientSecret,
+        redirectUri,
+        code,
+        Constants.ACCESS_TOKEN_GRANT_TYPE);
 
     //Access Token should be stored in the encrypted format
     AccessTokenResponse accessTokenResponse = oAuthApi.getAccessToken(accessTokenInfo);
 
     //Refresh the accessToken
     AccessTokenRefreshRequest refreshedAccessTokenInfo = new AccessTokenRefreshRequest(clientId,
-                                                                                     clientSecret,
-                                                                                     accessTokenResponse.getRefreshToken(),
-                                                                                     Constants.REFRESH_TOKEN_GRANT_TYPE);
+        clientSecret,
+        accessTokenResponse.getRefreshToken(),
+        Constants.REFRESH_TOKEN_GRANT_TYPE);
 
     //Refreshed Access Token should be stored in the encrypted format
     AccessTokenRefreshResponse refreshedAccessTokenResponse = oAuthApi.refreshAccessToken(refreshedAccessTokenInfo);
 
     //Make API call to create a group with access token from the server.
-    groupId = GroupUtils.createGroupWithOAuthWorkflow(Constants.GROUP_NAME,
-                                                      refreshedAccessTokenResponse.getAccessToken());
+    groupId = GroupUtils.createGroupWithOAuthWorkflow(ApiUtils.getGroupName(Constants.GROUP_NAME),
+        refreshedAccessTokenResponse.getAccessToken());
 
     Token token = new Token(refreshedAccessTokenResponse.getAccessToken());
     //Revoke the token
@@ -282,7 +283,7 @@ public class OAuthHandler {
 
     String response = EMPTY_STRING;
     if(groupId != null)
-      response = PATH_SEPARATOR + QUERY_SEPARATOR + GROUP_CREATED_MESSAGE + groupId;
+      response = PATH_SEPARATOR + QUERY_SEPARATOR + GROUP_CREATED_MESSAGE + URLEncoder.encode(groupId,"UTF-8");
     else
       response = GROUP_NOT_CREATED_MESSAGE;
     return response;

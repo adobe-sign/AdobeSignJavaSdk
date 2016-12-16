@@ -14,9 +14,9 @@
 package com.adobe.sign.model.agreements;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.agreements.SupportingDocument;
-import java.util.*;
 import com.adobe.sign.model.agreements.Document;
+import java.util.*;
+import com.adobe.sign.model.agreements.SupportingDocument;
 
 
 
@@ -25,11 +25,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class AgreementDocuments   {
   
-  private List<Document> documents = new ArrayList<Document>();
-  private List<SupportingDocument> supportingDocuments = new ArrayList<SupportingDocument>();
+  private List<Document> documents = null;
+  private List<SupportingDocument> supportingDocuments = null;
 
   
   /**
@@ -37,9 +37,16 @@ public class AgreementDocuments   {
    **/
   @ApiModelProperty(required = true, value = "A list of objects representing the documents")
   @JsonProperty("documents")
+  /**
+   * @return List&lt;Document&gt;
+   **/
   public List<Document> getDocuments() {
     return documents;
   }
+  /**
+   * A list of objects representing the documents
+   * @param documents
+   **/
   public void setDocuments(List<Document> documents) {
     this.documents = documents;
   }
@@ -50,9 +57,16 @@ public class AgreementDocuments   {
    **/
   @ApiModelProperty(value = "A list of supporting documents. This is returned only if there are any supporting document in the agreement")
   @JsonProperty("supportingDocuments")
+  /**
+   * @return List&lt;SupportingDocument&gt;
+   **/
   public List<SupportingDocument> getSupportingDocuments() {
     return supportingDocuments;
   }
+  /**
+   * A list of supporting documents. This is returned only if there are any supporting document in the agreement
+   * @param supportingDocuments
+   **/
   public void setSupportingDocuments(List<SupportingDocument> supportingDocuments) {
     this.supportingDocuments = supportingDocuments;
   }
@@ -60,6 +74,10 @@ public class AgreementDocuments   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class AgreementDocuments {\n");

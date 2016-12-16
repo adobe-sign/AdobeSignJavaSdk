@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.898+05:30")
 public class MegaSignStatusUpdateResponse   {
   
 
@@ -52,9 +52,16 @@ public enum CodeEnum {
    **/
   @ApiModelProperty(value = "The result of the attempt to cancel the MegaSign")
   @JsonProperty("code")
+  /**
+   * @return CodeEnum
+   **/
   public CodeEnum getCode() {
     return code;
   }
+  /**
+   * The result of the attempt to cancel the MegaSign
+   * @param code
+   **/
   public void setCode(CodeEnum code) {
     this.code = code;
   }
@@ -65,9 +72,16 @@ public enum CodeEnum {
    **/
   @ApiModelProperty(value = "String result message if there was no error")
   @JsonProperty("message")
+  /**
+   * @return String
+   **/
   public String getMessage() {
     return message;
   }
+  /**
+   * String result message if there was no error
+   * @param message
+   **/
   public void setMessage(String message) {
     this.message = message;
   }
@@ -78,9 +92,16 @@ public enum CodeEnum {
    **/
   @ApiModelProperty(value = "A status value showing the result of this operation")
   @JsonProperty("result")
+  /**
+   * @return String
+   **/
   public String getResult() {
     return result;
   }
+  /**
+   * A status value showing the result of this operation
+   * @param result
+   **/
   public void setResult(String result) {
     this.result = result;
   }
@@ -88,6 +109,10 @@ public enum CodeEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class MegaSignStatusUpdateResponse {\n");

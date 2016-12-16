@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class DocumentPageInfo   {
   
   private Double height = null;
@@ -36,9 +36,16 @@ public class DocumentPageInfo   {
    **/
   @ApiModelProperty(required = true, value = "Height of the page")
   @JsonProperty("height")
+  /**
+   * @return Double
+   **/
   public Double getHeight() {
     return height;
   }
+  /**
+   * Height of the page
+   * @param height
+   **/
   public void setHeight(Double height) {
     this.height = height;
   }
@@ -49,9 +56,16 @@ public class DocumentPageInfo   {
    **/
   @ApiModelProperty(required = true, value = "Number of the page in combined document starting from 1.")
   @JsonProperty("pageNumber")
+  /**
+   * @return Integer
+   **/
   public Integer getPageNumber() {
     return pageNumber;
   }
+  /**
+   * Number of the page in combined document starting from 1.
+   * @param pageNumber
+   **/
   public void setPageNumber(Integer pageNumber) {
     this.pageNumber = pageNumber;
   }
@@ -62,9 +76,16 @@ public class DocumentPageInfo   {
    **/
   @ApiModelProperty(required = true, value = "Rotation angle of the page in clockwise direction in degree.")
   @JsonProperty("rotation")
+  /**
+   * @return Double
+   **/
   public Double getRotation() {
     return rotation;
   }
+  /**
+   * Rotation angle of the page in clockwise direction in degree.
+   * @param rotation
+   **/
   public void setRotation(Double rotation) {
     this.rotation = rotation;
   }
@@ -75,9 +96,16 @@ public class DocumentPageInfo   {
    **/
   @ApiModelProperty(required = true, value = "Width of the page")
   @JsonProperty("width")
+  /**
+   * @return Double
+   **/
   public Double getWidth() {
     return width;
   }
+  /**
+   * Width of the page
+   * @param width
+   **/
   public void setWidth(Double width) {
     this.width = width;
   }
@@ -85,6 +113,10 @@ public class DocumentPageInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class DocumentPageInfo {\n");

@@ -25,19 +25,19 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WorkFlowUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Workflow Info APIs
+ * Junit test cases for Get Workflow Info endpoint
  */
 public class GetWorkflowInfoApiTest {
   private static WorkflowsApi workflowsApi = null;
   private static String workflowId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -58,8 +58,9 @@ public class GetWorkflowInfoApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      workflowsApi.getWorkflowInfo(ApiUtils.getNullAccessTokenHeaderParams(),
-                                   workflowId);
+      WorkflowDescription workflowDescription = workflowsApi.getWorkflowInfo(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                             workflowId);
+      assertNotNull(workflowDescription);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -67,8 +68,9 @@ public class GetWorkflowInfoApiTest {
     }
 
     try {
-      workflowsApi.getWorkflowInfo(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                   workflowId);
+      WorkflowDescription workflowDescription = workflowsApi.getWorkflowInfo(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                             workflowId);
+      assertNotNull(workflowDescription);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -85,8 +87,9 @@ public class GetWorkflowInfoApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      workflowsApi.getWorkflowInfo(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                   workflowId);
+      WorkflowDescription workflowDescription = workflowsApi.getWorkflowInfo(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                             workflowId);
+      assertNotNull(workflowDescription);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -103,8 +106,9 @@ public class GetWorkflowInfoApiTest {
   @Test
   public void testInvalidWorkflowId() throws ApiException {
     try {
-      workflowsApi.getWorkflowInfo(ApiUtils.getValidHeaderParams(),
-                                   TestData.NULL_PARAM);
+      WorkflowDescription workflowDescription = workflowsApi.getWorkflowInfo(ApiUtils.getValidHeaderParams(),
+                                                                             TestData.NULL_PARAM);
+      assertNotNull(workflowDescription);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -112,8 +116,9 @@ public class GetWorkflowInfoApiTest {
     }
 
     try {
-      workflowsApi.getWorkflowInfo(ApiUtils.getValidHeaderParams(),
-                                   TestData.EMPTY_PARAM);
+      WorkflowDescription workflowDescription = workflowsApi.getWorkflowInfo(ApiUtils.getValidHeaderParams(),
+                                                                             TestData.EMPTY_PARAM);
+      assertNotNull(workflowDescription);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),

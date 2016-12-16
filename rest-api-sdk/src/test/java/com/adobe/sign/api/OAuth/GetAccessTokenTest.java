@@ -21,18 +21,18 @@ import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.OAuthUtil;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import com.adobe.sign.utils.ApiUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get AccessToken API.
+ * Junit test cases for Get AccessToken endpoint.
  */
 public class GetAccessTokenTest {
 
   private static OAuthApi oAuthApi = null;
-  private static String  CODE = "code";
+  private static String CODE = "code";
 
 
   @BeforeClass
@@ -44,6 +44,7 @@ public class GetAccessTokenTest {
   /**
    * Test for fetching the access token through the getAccessToken endpoint. Negative scenarios covered:
    * MISSING_REQUIRED_PARAM: ClientId null in accessTokenRequest.
+   *
    * @throws ApiException
    */
   @Test
@@ -51,21 +52,23 @@ public class GetAccessTokenTest {
 
     //ClientId Null in AccessTokenRequest
     AccessTokenRequest accessTokenRequest = new AccessTokenRequest(TestData.NULL_PARAM,
-                                                          TestData.CLIENT_SECRET,
-                                                          TestData.REDIRECT_URI,
-                                                          CODE,
-                                                          TestData.ACCESS_TOKEN_GRANT_TYPE);
+                                                                   TestData.CLIENT_SECRET,
+                                                                   TestData.REDIRECT_URI,
+                                                                   CODE,
+                                                                   TestData.ACCESS_TOKEN_GRANT_TYPE);
     try {
       oAuthApi.getAccessToken(accessTokenRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
   }
 
   /**
    * Test for fetching the access token through the getAccessToken endpoint. Negative scenarios covered:
    * MISSING_REQUIRED_PARAM: ClientSecret null in accessTokenRequest.
+   *
    * @throws ApiException
    */
   @Test
@@ -73,21 +76,23 @@ public class GetAccessTokenTest {
 
     //ClientSecret Null in AccessTokenInfo
     AccessTokenRequest accessTokenRequest = new AccessTokenRequest(TestData.CLIENT_ID,
-                                                          TestData.NULL_PARAM,
-                                                          TestData.REDIRECT_URI,
-                                                          CODE,
-                                                          TestData.ACCESS_TOKEN_GRANT_TYPE);
+                                                                   TestData.NULL_PARAM,
+                                                                   TestData.REDIRECT_URI,
+                                                                   CODE,
+                                                                   TestData.ACCESS_TOKEN_GRANT_TYPE);
     try {
       oAuthApi.getAccessToken(accessTokenRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
   }
 
   /**
    * Test for fetching the access token through the getAccessToken endpoint. Negative scenarios covered:
    * MISSING_REQUIRED_PARAM: grantType null in accessTokenRequest.
+   *
    * @throws ApiException
    */
   @Test
@@ -95,15 +100,16 @@ public class GetAccessTokenTest {
 
     //grantType Null in AccessTokenInfo
     AccessTokenRequest accessTokenRequest = new AccessTokenRequest(TestData.CLIENT_ID,
-                                                          TestData.CLIENT_SECRET,
-                                                          TestData.REDIRECT_URI,
-                                                          CODE,
-                                                          TestData.NULL_PARAM);
+                                                                   TestData.CLIENT_SECRET,
+                                                                   TestData.REDIRECT_URI,
+                                                                   CODE,
+                                                                   TestData.NULL_PARAM);
     try {
       oAuthApi.getAccessToken(accessTokenRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
   }
 
@@ -111,6 +117,7 @@ public class GetAccessTokenTest {
    * Test for fetching the access token through the getAccessToken endpoint. Negative scenarios covered:
    * MISSING_REQUIRED_PARAM: redirectUri null in accessTokenRequest.
    * INVALID_REQUEST : Invalid redirectUri specified in accessTokenRequest.
+   *
    * @throws ApiException
    */
   @Test
@@ -118,45 +125,49 @@ public class GetAccessTokenTest {
 
     //redirectUri Null in AccessTokenInfo
     AccessTokenRequest accessTokenRequest = new AccessTokenRequest(TestData.CLIENT_ID,
-                                                          TestData.CLIENT_SECRET,
-                                                          TestData.NULL_PARAM,
-                                                          CODE,
-                                                          TestData.ACCESS_TOKEN_GRANT_TYPE);
+                                                                   TestData.CLIENT_SECRET,
+                                                                   TestData.NULL_PARAM,
+                                                                   CODE,
+                                                                   TestData.ACCESS_TOKEN_GRANT_TYPE);
     try {
       oAuthApi.getAccessToken(accessTokenRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
 
     //Invalid redirectUri in AccessTokenInfo
     accessTokenRequest.setRedirectUri(TestData.INVALID_URL);
     try {
       oAuthApi.getAccessToken(accessTokenRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.INVALID_REQUEST.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.INVALID_REQUEST.getApiCode().equals(e.getApiCode()));
     }
   }
 
   /**
    * Test for fetching the access token through the getAccessToken endpoint. Negative scenarios covered:
    * MISSING_REQUIRED_PARAM: code null in accessTokenRequest.
+   *
    * @throws ApiException
    */
   @Test
   public void testInvalidCode() throws ApiException {
 
     AccessTokenRequest accessTokenRequest = new AccessTokenRequest(TestData.CLIENT_ID,
-                                                          TestData.CLIENT_SECRET,
-                                                          TestData.REDIRECT_URI,
-                                                          TestData.NULL_PARAM,
-                                                          TestData.ACCESS_TOKEN_GRANT_TYPE);
+                                                                   TestData.CLIENT_SECRET,
+                                                                   TestData.REDIRECT_URI,
+                                                                   TestData.NULL_PARAM,
+                                                                   TestData.ACCESS_TOKEN_GRANT_TYPE);
     try {
       oAuthApi.getAccessToken(accessTokenRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
   }
 }

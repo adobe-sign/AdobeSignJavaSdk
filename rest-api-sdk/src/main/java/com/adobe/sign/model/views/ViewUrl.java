@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.045+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:34.537+05:30")
 public class ViewUrl   {
   
   private String viewURL = null;
@@ -33,9 +33,16 @@ public class ViewUrl   {
    **/
   @ApiModelProperty(required = true, value = "The output URL of the selected view.")
   @JsonProperty("viewURL")
+  /**
+   * @return String
+   **/
   public String getViewURL() {
     return viewURL;
   }
+  /**
+   * The output URL of the selected view.
+   * @param viewURL
+   **/
   public void setViewURL(String viewURL) {
     this.viewURL = viewURL;
   }
@@ -43,6 +50,10 @@ public class ViewUrl   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class ViewUrl {\n");

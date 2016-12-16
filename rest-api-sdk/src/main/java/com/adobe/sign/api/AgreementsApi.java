@@ -38,7 +38,7 @@ import com.adobe.sign.model.agreements.AgreementStatusUpdateResponse;
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
     public class AgreementsApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -56,8 +56,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param query The query string used for the search. Multiple search terms can be provided, separated by spaces. Some of the search terms include document name, participant name or company, and form data
     * @param externalId ExternalID for which you would like to retrieve agreement information. ExternalId is passed in the call to the agreement creation API
@@ -139,8 +139,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_send - If both authoringRequested and sendThroughWeb parameter are set to false agreement_write - If any of the authoringRequested or sendThroughWeb parameter is set to true user_login - Required additionally if the autoLoginUser parameter is set to true 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_send - If both authoringRequested and sendThroughWeb parameter are set to false agreement_write - If any of the authoringRequested or sendThroughWeb parameter is set to true user_login - Required additionally if the autoLoginUser parameter is set to true 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementCreationInfo Information about the agreement that you want to send and authoring options that you want to apply at the time of sending.
     * @return AgreementCreationResponse
@@ -208,8 +208,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @return AgreementInfo
@@ -278,8 +278,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_retention 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_retention 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @return void
@@ -347,8 +347,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * PDF file stream containing audit trail information
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @return byte[]
@@ -417,8 +417,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * A File Stream of combined PDF document
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @param versionId The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used.
@@ -503,8 +503,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @param includeSupportingDocumentsPagesInfo When set to true, returns info of all pages of supporting documents as well. Else, return the info of pages of only the original document.
@@ -577,8 +577,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @param versionId The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used.
@@ -663,8 +663,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @param versionId The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used.
@@ -745,8 +745,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_retention 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_retention 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @return void
@@ -814,13 +814,13 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @param versionId The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used.
     * @param participantEmail The email address of the participant to be used to retrieve its visible document page image urls.
-    * @param imageSizes A comma separated list of image sizes i.e. {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT}. Default sizes returned are {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT}.
+    * @param imageSizes A comma separated list of image sizes i.e. (FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT). Default sizes returned are (FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT).
     * @param includeSupportingDocumentsImageUrls When set to true, returns image urls of supporting documents as well. Else, return image urls of only the original document.
     * @param showImageAvailabilityOnly When set to true, returns only image availability. Else, returns both image urls and its availability.
     * @return DocumentImageUrls
@@ -904,8 +904,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * Raw stream of the file
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @param documentId The document identifier, as retrieved from the API which fetches the documents of a specified agreement
@@ -977,14 +977,14 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @param documentId The document identifier, as retrieved from the API which fetches the documents of a specified agreement
     * @param versionId The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used.
     * @param participantEmail The email address of the participant to be used to retrieve its visible document page image urls.
-    * @param imageSizes A comma separated list of image sizes i.e. {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT}. Default sizes returned are {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT}.
+    * @param imageSizes A comma separated list of image sizes i.e. (FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT). Default sizes returned are (FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT).
     * @param showImageAvailabilityOnly When set to true, returns only image availability. Else, returns both image urls and its availability.
     * @param startPage Start of page number range for which imageUrls are requested. Starting page number should be greater than 0.
     * @param endPage End of page number range for which imageUrls are requested.
@@ -1074,8 +1074,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @param documentId The document identifier, as retrieved from the API which fetches the documents of a specified agreement
@@ -1155,8 +1155,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * CSV file stream containing form data information
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @return byte[]
@@ -1225,8 +1225,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_write 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_write 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @param participantSetId The participant set identifier
@@ -1303,8 +1303,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_write 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_write 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @return SigningUrlResponse
@@ -1373,8 +1373,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_write 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_write 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementId The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
     * @param agreementStatusUpdateInfo Agreement status update information object.

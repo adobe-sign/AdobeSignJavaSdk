@@ -14,8 +14,8 @@
 package com.adobe.sign.model.agreements;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.agreements.SigningUrlSetInfo;
 import java.util.*;
+import com.adobe.sign.model.agreements.SigningUrlSetInfo;
 
 
 
@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class SigningUrlResponse   {
   
-  private List<SigningUrlSetInfo> signingUrlSetInfos = new ArrayList<SigningUrlSetInfo>();
+  private List<SigningUrlSetInfo> signingUrlSetInfos = null;
 
   
   /**
@@ -35,9 +35,16 @@ public class SigningUrlResponse   {
    **/
   @ApiModelProperty(required = true, value = "An array of urls for signer sets involved in this agreement.")
   @JsonProperty("signingUrlSetInfos")
+  /**
+   * @return List&lt;SigningUrlSetInfo&gt;
+   **/
   public List<SigningUrlSetInfo> getSigningUrlSetInfos() {
     return signingUrlSetInfos;
   }
+  /**
+   * An array of urls for signer sets involved in this agreement.
+   * @param signingUrlSetInfos
+   **/
   public void setSigningUrlSetInfos(List<SigningUrlSetInfo> signingUrlSetInfos) {
     this.signingUrlSetInfos = signingUrlSetInfos;
   }
@@ -45,6 +52,10 @@ public class SigningUrlResponse   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class SigningUrlResponse {\n");

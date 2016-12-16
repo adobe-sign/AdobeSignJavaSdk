@@ -103,11 +103,11 @@ $(document).ready(function(){initNavTree('classcom_1_1adobe_1_1sign_1_1api_1_1_t
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a1508b4806896975193af52ecede9cb4d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcom_1_1adobe_1_1sign_1_1model_1_1transient_documents_1_1_transient_document_response.html">TransientDocumentResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1adobe_1_1sign_1_1api_1_1_transient_documents_api.html#a1508b4806896975193af52ecede9cb4d">createTransientDocument</a> (MultivaluedMap headers, File file, String fileName, String mimeType)  throws ApiException </td></tr>
-<tr class="separator:a1508b4806896975193af52ecede9cb4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3016e0d9bf8e1ea74d6b8371e34eee5a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classcom_1_1adobe_1_1sign_1_1model_1_1transient_documents_1_1_transient_document_response.html">TransientDocumentResponse</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1adobe_1_1sign_1_1api_1_1_transient_documents_api.html#a3016e0d9bf8e1ea74d6b8371e34eee5a">createTransientDocument</a> (MultivaluedMap headers, String fileName, File file, String mimeType)  throws ApiException </td></tr>
+<tr class="separator:a3016e0d9bf8e1ea74d6b8371e34eee5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a1508b4806896975193af52ecede9cb4d"></a>
+<a class="anchor" id="a3016e0d9bf8e1ea74d6b8371e34eee5a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -120,14 +120,14 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">File&#160;</td>
-          <td class="paramname"><em>file</em>, </td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>fileName</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">String&#160;</td>
-          <td class="paramname"><em>fileName</em>, </td>
+          <td class="paramtype">File&#160;</td>
+          <td class="paramname"><em>file</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -145,10 +145,12 @@ Public Member Functions</h2></td></tr>
 <p>Uploads a document and obtains the ID of the document. The document uploaded through this call is referred to as transient since it is available only for 7 days after the upload. The returned transient document ID can be used to refer to the document in api calls like POST /agreements where uploaded file needs to be referred. The transient document request is a multipart request consisting of three parts - filename, mime type and the file stream. You can only upload one file at a time in this request. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with any of the following scopes: agreement_write agreement_send widget_write library_write 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
-    <tr><td class="paramname">file</td><td>The file part of the multipart request for document upload. You can upload only one file at a time. </td></tr>
     <tr><td class="paramname">fileName</td><td>A name for the document being uploaded. </td></tr>
+    <tr><td class="paramname">file</td><td>The file part of the multipart request for document upload. You can upload only one file at a time. </td></tr>
     <tr><td class="paramname">mimeType</td><td>The mime type of the document being uploaded. If not specified here then mime type is picked up from the file object. If mime type is not present there either then mime type is inferred from file name extension. </td></tr>
   </table>
   </dd>

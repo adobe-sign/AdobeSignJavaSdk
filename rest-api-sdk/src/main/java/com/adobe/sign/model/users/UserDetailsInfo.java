@@ -14,8 +14,8 @@
 package com.adobe.sign.model.users;
 
 import com.adobe.sign.utils.StringUtil;
-import java.util.*;
 import java.util.Date;
+import java.util.*;
 
 
 
@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.999+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:33.254+05:30")
 public class UserDetailsInfo   {
   
   private String account = null;
@@ -73,7 +73,7 @@ public enum CapabilityFlagsEnum {
   }
 }
 
-  private List<CapabilityFlagsEnum> capabilityFlags = new ArrayList<CapabilityFlagsEnum>();
+  private List<CapabilityFlagsEnum> capabilityFlags = null;
   private String channel = null;
   private String company = null;
   private String email = null;
@@ -123,7 +123,7 @@ public enum RolesEnum {
   }
 }
 
-  private List<RolesEnum> roles = new ArrayList<RolesEnum>();
+  private List<RolesEnum> roles = null;
   private String title = null;
 
 public enum UserStatusEnum {
@@ -153,9 +153,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "Nickname of the account to which the user belongs")
   @JsonProperty("account")
+  /**
+   * @return String
+   **/
   public String getAccount() {
     return account;
   }
+  /**
+   * Nickname of the account to which the user belongs
+   * @param account
+   **/
   public void setAccount(String account) {
     this.account = account;
   }
@@ -166,9 +173,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "Type of account to which the user belongs (null if no account)")
   @JsonProperty("accountType")
+  /**
+   * @return AccountTypeEnum
+   **/
   public AccountTypeEnum getAccountType() {
     return accountType;
   }
+  /**
+   * Type of account to which the user belongs (null if no account)
+   * @param accountType
+   **/
   public void setAccountType(AccountTypeEnum accountType) {
     this.accountType = accountType;
   }
@@ -179,9 +193,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "A set of capabilities applicable to the user")
   @JsonProperty("capabilityFlags")
+  /**
+   * @return List&lt;CapabilityFlagsEnum&gt;
+   **/
   public List<CapabilityFlagsEnum> getCapabilityFlags() {
     return capabilityFlags;
   }
+  /**
+   * A set of capabilities applicable to the user
+   * @param capabilityFlags
+   **/
   public void setCapabilityFlags(List<CapabilityFlagsEnum> capabilityFlags) {
     this.capabilityFlags = capabilityFlags;
   }
@@ -192,9 +213,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "Name of the channel to which the user belongs")
   @JsonProperty("channel")
+  /**
+   * @return String
+   **/
   public String getChannel() {
     return channel;
   }
+  /**
+   * Name of the channel to which the user belongs
+   * @param channel
+   **/
   public void setChannel(String channel) {
     this.channel = channel;
   }
@@ -205,9 +233,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "The name of company of the user")
   @JsonProperty("company")
+  /**
+   * @return String
+   **/
   public String getCompany() {
     return company;
   }
+  /**
+   * The name of company of the user
+   * @param company
+   **/
   public void setCompany(String company) {
     this.company = company;
   }
@@ -218,9 +253,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The email address of the user")
   @JsonProperty("email")
+  /**
+   * @return String
+   **/
   public String getEmail() {
     return email;
   }
+  /**
+   * The email address of the user
+   * @param email
+   **/
   public void setEmail(String email) {
     this.email = email;
   }
@@ -231,9 +273,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "The first name of the user")
   @JsonProperty("firstName")
+  /**
+   * @return String
+   **/
   public String getFirstName() {
     return firstName;
   }
+  /**
+   * The first name of the user
+   * @param firstName
+   **/
   public void setFirstName(String firstName) {
     this.firstName = firstName;
   }
@@ -244,9 +293,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "Name of the group to which the user belongs")
   @JsonProperty("group")
+  /**
+   * @return String
+   **/
   public String getGroup() {
     return group;
   }
+  /**
+   * Name of the group to which the user belongs
+   * @param group
+   **/
   public void setGroup(String group) {
     this.group = group;
   }
@@ -257,9 +313,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The identifier that can be used in group management methods")
   @JsonProperty("groupId")
+  /**
+   * @return String
+   **/
   public String getGroupId() {
     return groupId;
   }
+  /**
+   * The identifier that can be used in group management methods
+   * @param groupId
+   **/
   public void setGroupId(String groupId) {
     this.groupId = groupId;
   }
@@ -270,9 +333,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "The initials of the user")
   @JsonProperty("initials")
+  /**
+   * @return String
+   **/
   public String getInitials() {
     return initials;
   }
+  /**
+   * The initials of the user
+   * @param initials
+   **/
   public void setInitials(String initials) {
     this.initials = initials;
   }
@@ -283,9 +353,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "The last name of the user")
   @JsonProperty("lastName")
+  /**
+   * @return String
+   **/
   public String getLastName() {
     return lastName;
   }
+  /**
+   * The last name of the user
+   * @param lastName
+   **/
   public void setLastName(String lastName) {
     this.lastName = lastName;
   }
@@ -296,9 +373,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "The UI locale of the user")
   @JsonProperty("locale")
+  /**
+   * @return String
+   **/
   public String getLocale() {
     return locale;
   }
+  /**
+   * The UI locale of the user
+   * @param locale
+   **/
   public void setLocale(String locale) {
     this.locale = locale;
   }
@@ -309,9 +393,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "Whether or not the user has opted in to receive marketing information from Adobe Sign and its partners. Default value is UNKNOWN")
   @JsonProperty("optIn")
+  /**
+   * @return OptInEnum
+   **/
   public OptInEnum getOptIn() {
     return optIn;
   }
+  /**
+   * Whether or not the user has opted in to receive marketing information from Adobe Sign and its partners. Default value is UNKNOWN
+   * @param optIn
+   **/
   public void setOptIn(OptInEnum optIn) {
     this.optIn = optIn;
   }
@@ -322,9 +413,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "The date of password expiration")
   @JsonProperty("passwordExpiration")
+  /**
+   * @return Date
+   **/
   public Date getPasswordExpiration() {
     return passwordExpiration;
   }
+  /**
+   * The date of password expiration
+   * @param passwordExpiration
+   **/
   public void setPasswordExpiration(Date passwordExpiration) {
     this.passwordExpiration = passwordExpiration;
   }
@@ -335,9 +433,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "The phone number of the user")
   @JsonProperty("phone")
+  /**
+   * @return String
+   **/
   public String getPhone() {
     return phone;
   }
+  /**
+   * The phone number of the user
+   * @param phone
+   **/
   public void setPhone(String phone) {
     this.phone = phone;
   }
@@ -348,9 +453,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "The current roles of the user")
   @JsonProperty("roles")
+  /**
+   * @return List&lt;RolesEnum&gt;
+   **/
   public List<RolesEnum> getRoles() {
     return roles;
   }
+  /**
+   * The current roles of the user
+   * @param roles
+   **/
   public void setRoles(List<RolesEnum> roles) {
     this.roles = roles;
   }
@@ -361,9 +473,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "The job title of the user")
   @JsonProperty("title")
+  /**
+   * @return String
+   **/
   public String getTitle() {
     return title;
   }
+  /**
+   * The job title of the user
+   * @param title
+   **/
   public void setTitle(String title) {
     this.title = title;
   }
@@ -374,9 +493,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Status of the user")
   @JsonProperty("userStatus")
+  /**
+   * @return UserStatusEnum
+   **/
   public UserStatusEnum getUserStatus() {
     return userStatus;
   }
+  /**
+   * Status of the user
+   * @param userStatus
+   **/
   public void setUserStatus(UserStatusEnum userStatus) {
     this.userStatus = userStatus;
   }
@@ -384,6 +510,10 @@ public enum UserStatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserDetailsInfo {\n");

@@ -21,6 +21,7 @@ import com.adobe.sign.utils.ApiException;
  */
 public class SearchApiValidator {
 
+  private static final String AGREEMENT_ASSERT_EVENT_REQUEST = "agreementAssetEventRequest";
   /**
    * Validator for createAssetEvent API that creates a search object for agreement asset event.
    *
@@ -28,7 +29,7 @@ public class SearchApiValidator {
    * @throws ApiException
    */
   public static void createAssetEventValidator(AgreementAssetEventRequest agreementAssetEventRequest) throws ApiException {
-    ApiValidatorHelper.validateParameter(agreementAssetEventRequest);
+    ApiValidatorHelper.validateParameter(agreementAssetEventRequest, AGREEMENT_ASSERT_EVENT_REQUEST);
 
     ApiValidatorHelper.validateStartAndEndDatesParameter(agreementAssetEventRequest.getStartDate(),
                                                          agreementAssetEventRequest.getEndDate());
