@@ -23,6 +23,8 @@ import com.adobe.sign.utils.ApiException;
  */
 public class ViewsApiValidator {
 
+  private static final String TARGET_VIEW_REQUEST = "targetViewRequest";
+  private static final String AGREEMENT_ASSET_REQUEST = "agreementAssetRequest";
   /**
    * Validator for getAgreementAssetListUrl API that returns the URL for manage page.
    *
@@ -43,7 +45,7 @@ public class ViewsApiValidator {
    */
   public static void createAgreementAssetUrlValidator(AgreementAssetRequest agreementAssetRequest) throws ApiException {
 
-    ApiValidatorHelper.validateParameter(agreementAssetRequest);
+    ApiValidatorHelper.validateParameter(agreementAssetRequest, AGREEMENT_ASSET_REQUEST);
     ApiValidatorHelper.validateId(agreementAssetRequest.getAgreementAssetId(),
                                   SdkErrorCodes.INVALID_AGREEMENT_ASSET_ID);
 
@@ -57,7 +59,7 @@ public class ViewsApiValidator {
    */
   public static void createSettingsUrlValidator(TargetViewRequest targetViewRequest) throws ApiException {
 
-    ApiValidatorHelper.validateParameter(targetViewRequest);
+    ApiValidatorHelper.validateParameter(targetViewRequest, TARGET_VIEW_REQUEST);
     ApiValidatorHelper.validateParameter(targetViewRequest.getTargetView(),
                                          SdkErrorCodes.INVALID_TARGET_VIEW);
   }

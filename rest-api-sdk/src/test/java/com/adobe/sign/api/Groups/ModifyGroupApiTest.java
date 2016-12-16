@@ -26,19 +26,18 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.GroupUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Put Groups API.
+ * Junit test cases for Modify Groups endpoint.
  */
-public class PutGroupApiTest {
+public class ModifyGroupApiTest {
 
   private static String groupId = null;
   private static GroupsApi groupsApi = null;
-
 
 
   @Rule
@@ -63,9 +62,10 @@ public class PutGroupApiTest {
     GroupModificationInfo groupModificationInfo = new GroupModificationInfo();
 
     try {
-      groupsApi.modifyGroup(ApiUtils.getNullAccessTokenHeaderParams(),
-                            groupId,
-                            groupModificationInfo);
+      GroupModificationResponse groupModificationResponse = groupsApi.modifyGroup(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                                  groupId,
+                                                                                  groupModificationInfo);
+      assertNotNull(groupModificationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -73,9 +73,10 @@ public class PutGroupApiTest {
     }
 
     try {
-      groupsApi.modifyGroup(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                            groupId,
-                            groupModificationInfo);
+      GroupModificationResponse groupModificationResponse = groupsApi.modifyGroup(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                                  groupId,
+                                                                                  groupModificationInfo);
+      assertNotNull(groupModificationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -94,9 +95,10 @@ public class PutGroupApiTest {
     GroupModificationInfo groupModificationInfo = new GroupModificationInfo();
 
     try {
-      groupsApi.modifyGroup(ApiUtils.getEmptyXApiUserHeaderParams(),
-                            groupId,
-                            groupModificationInfo);
+      GroupModificationResponse groupModificationResponse = groupsApi.modifyGroup(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                                  groupId,
+                                                                                  groupModificationInfo);
+      assertNotNull(groupModificationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -117,9 +119,10 @@ public class PutGroupApiTest {
     groupModificationInfo.setGroupName(TestData.NULL_PARAM);
 
     try {
-      groupsApi.modifyGroup(ApiUtils.getValidHeaderParams(),
-                            groupId,
-                            groupModificationInfo);
+      GroupModificationResponse groupModificationResponse = groupsApi.modifyGroup(ApiUtils.getValidHeaderParams(),
+                                                                                  groupId,
+                                                                                  groupModificationInfo);
+      assertNotNull(groupModificationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -129,9 +132,10 @@ public class PutGroupApiTest {
     groupModificationInfo.setGroupName(TestData.EMPTY_PARAM);
 
     try {
-      groupsApi.modifyGroup(ApiUtils.getValidHeaderParams(),
-                            groupId,
-                            groupModificationInfo);
+      GroupModificationResponse groupModificationResponse = groupsApi.modifyGroup(ApiUtils.getValidHeaderParams(),
+                                                                                  groupId,
+                                                                                  groupModificationInfo);
+      assertNotNull(groupModificationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -152,9 +156,10 @@ public class PutGroupApiTest {
     groupModificationInfo.setGroupName(TestData.MODIFIED_GROUP_NAME);
 
     try {
-      groupsApi.modifyGroup(ApiUtils.getValidHeaderParams(),
-                            TestData.NULL_PARAM,
-                            groupModificationInfo);
+      GroupModificationResponse groupModificationResponse = groupsApi.modifyGroup(ApiUtils.getValidHeaderParams(),
+                                                                                  TestData.NULL_PARAM,
+                                                                                  groupModificationInfo);
+      assertNotNull(groupModificationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -162,9 +167,10 @@ public class PutGroupApiTest {
     }
 
     try {
-      groupsApi.modifyGroup(ApiUtils.getValidHeaderParams(),
-                            TestData.EMPTY_PARAM,
-                            groupModificationInfo);
+      GroupModificationResponse groupModificationResponse = groupsApi.modifyGroup(ApiUtils.getValidHeaderParams(),
+                                                                                  TestData.EMPTY_PARAM,
+                                                                                  groupModificationInfo);
+      assertNotNull(groupModificationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),

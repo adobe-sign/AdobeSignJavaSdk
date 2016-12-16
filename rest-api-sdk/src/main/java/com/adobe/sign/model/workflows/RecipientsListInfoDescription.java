@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class RecipientsListInfoDescription   {
   
   private Boolean allowfax = null;
@@ -61,9 +61,16 @@ public enum AuthenticationMethodEnum {
    **/
   @ApiModelProperty(required = true, value = "whether fax is allowed or not")
   @JsonProperty("allowfax")
+  /**
+   * @return Boolean
+   **/
   public Boolean getAllowfax() {
     return allowfax;
   }
+  /**
+   * whether fax is allowed or not
+   * @param allowfax
+   **/
   public void setAllowfax(Boolean allowfax) {
     this.allowfax = allowfax;
   }
@@ -74,9 +81,16 @@ public enum AuthenticationMethodEnum {
    **/
   @ApiModelProperty(required = true, value = "whether sender is allowed as a recipient")
   @JsonProperty("allowSender")
+  /**
+   * @return Boolean
+   **/
   public Boolean getAllowSender() {
     return allowSender;
   }
+  /**
+   * whether sender is allowed as a recipient
+   * @param allowSender
+   **/
   public void setAllowSender(Boolean allowSender) {
     this.allowSender = allowSender;
   }
@@ -87,9 +101,16 @@ public enum AuthenticationMethodEnum {
    **/
   @ApiModelProperty(required = true, value = "authentication method for the current recipient list to have access to view and sign the document")
   @JsonProperty("authenticationMethod")
+  /**
+   * @return AuthenticationMethodEnum
+   **/
   public AuthenticationMethodEnum getAuthenticationMethod() {
     return authenticationMethod;
   }
+  /**
+   * authentication method for the current recipient list to have access to view and sign the document
+   * @param authenticationMethod
+   **/
   public void setAuthenticationMethod(AuthenticationMethodEnum authenticationMethod) {
     this.authenticationMethod = authenticationMethod;
   }
@@ -100,9 +121,16 @@ public enum AuthenticationMethodEnum {
    **/
   @ApiModelProperty(required = true, value = "A default email or fax number")
   @JsonProperty("defaultValue")
+  /**
+   * @return String
+   **/
   public String getDefaultValue() {
     return defaultValue;
   }
+  /**
+   * A default email or fax number
+   * @param defaultValue
+   **/
   public void setDefaultValue(String defaultValue) {
     this.defaultValue = defaultValue;
   }
@@ -113,9 +141,16 @@ public enum AuthenticationMethodEnum {
    **/
   @ApiModelProperty(required = true, value = "Whether current field can be edited. If editable attribute for this field is false then this field should not be provided in the agreement creation request and default value of this field will be used in agreement creation")
   @JsonProperty("editable")
+  /**
+   * @return Boolean
+   **/
   public Boolean getEditable() {
     return editable;
   }
+  /**
+   * Whether current field can be edited. If editable attribute for this field is false then this field should not be provided in the agreement creation request and default value of this field will be used in agreement creation
+   * @param editable
+   **/
   public void setEditable(Boolean editable) {
     this.editable = editable;
   }
@@ -126,9 +161,16 @@ public enum AuthenticationMethodEnum {
    **/
   @ApiModelProperty(required = true, value = "A display text for the workflow user that can be used for the current recipients list")
   @JsonProperty("label")
+  /**
+   * @return String
+   **/
   public String getLabel() {
     return label;
   }
+  /**
+   * A display text for the workflow user that can be used for the current recipients list
+   * @param label
+   **/
   public void setLabel(String label) {
     this.label = label;
   }
@@ -139,9 +181,16 @@ public enum AuthenticationMethodEnum {
    **/
   @ApiModelProperty(required = true, value = "maximum number of entries allowed in the current recipient list")
   @JsonProperty("maxListCount")
+  /**
+   * @return Integer
+   **/
   public Integer getMaxListCount() {
     return maxListCount;
   }
+  /**
+   * maximum number of entries allowed in the current recipient list
+   * @param maxListCount
+   **/
   public void setMaxListCount(Integer maxListCount) {
     this.maxListCount = maxListCount;
   }
@@ -152,9 +201,16 @@ public enum AuthenticationMethodEnum {
    **/
   @ApiModelProperty(required = true, value = "minimum number of entries allowed in the current recipient list")
   @JsonProperty("minListCount")
+  /**
+   * @return Integer
+   **/
   public Integer getMinListCount() {
     return minListCount;
   }
+  /**
+   * minimum number of entries allowed in the current recipient list
+   * @param minListCount
+   **/
   public void setMinListCount(Integer minListCount) {
     this.minListCount = minListCount;
   }
@@ -165,9 +221,16 @@ public enum AuthenticationMethodEnum {
    **/
   @ApiModelProperty(required = true, value = "Name of the current RecipientInfo list")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * Name of the current RecipientInfo list
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -178,9 +241,16 @@ public enum AuthenticationMethodEnum {
    **/
   @ApiModelProperty(required = true, value = "Whether current field is visible. If visible attribute for this field is false then this field should not be shown in the agreement creation UI using this workflow to user")
   @JsonProperty("visible")
+  /**
+   * @return Boolean
+   **/
   public Boolean getVisible() {
     return visible;
   }
+  /**
+   * Whether current field is visible. If visible attribute for this field is false then this field should not be shown in the agreement creation UI using this workflow to user
+   * @param visible
+   **/
   public void setVisible(Boolean visible) {
     this.visible = visible;
   }
@@ -188,6 +258,10 @@ public enum AuthenticationMethodEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class RecipientsListInfoDescription {\n");

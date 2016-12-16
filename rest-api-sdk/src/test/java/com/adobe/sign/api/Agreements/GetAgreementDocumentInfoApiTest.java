@@ -21,23 +21,22 @@ import com.adobe.sign.api.AgreementsApi;
 import com.adobe.sign.utils.AgreementsUtils;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Agreement Document Info API.
+ * Junit test cases for Get Agreement Document Info endpoint.
  */
 public class GetAgreementDocumentInfoApiTest {
   private static AgreementsApi agreementsApi = null;
   private static String agreementId = null;
   private static String documentId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -46,8 +45,9 @@ public class GetAgreementDocumentInfoApiTest {
     ApiUtils.configureProperty();
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
-    documentId = AgreementsUtils.getDocumentId();
+    documentId = AgreementsUtils.getFirstDocumentId();
   }
+
   /**
    * Test for fetching document file stream through the getDocument endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -59,9 +59,10 @@ public class GetAgreementDocumentInfoApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getDocument(ApiUtils.getNullAccessTokenHeaderParams(),
-                                agreementId,
-                                documentId);
+      byte[] document = agreementsApi.getDocument(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                  agreementId,
+                                                  documentId);
+      assertNotNull(document);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -69,15 +70,17 @@ public class GetAgreementDocumentInfoApiTest {
     }
 
     try {
-      agreementsApi.getDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                agreementId,
-                                documentId);
+      byte[] document = agreementsApi.getDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                  agreementId,
+                                                  documentId);
+      assertNotNull(document);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching document file stream through the getDocument endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -88,15 +91,17 @@ public class GetAgreementDocumentInfoApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                agreementId,
-                                documentId);
+      byte[] document = agreementsApi.getDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                  agreementId,
+                                                  documentId);
+      assertNotNull(document);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching document file stream through the getDocument endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: empty and null agreementId.
@@ -107,9 +112,10 @@ public class GetAgreementDocumentInfoApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getDocument(ApiUtils.getValidHeaderParams(),
-                                TestData.EMPTY_PARAM,
-                                documentId);
+      byte[] document = agreementsApi.getDocument(ApiUtils.getValidHeaderParams(),
+                                                  TestData.EMPTY_PARAM,
+                                                  documentId);
+      assertNotNull(document);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -117,15 +123,17 @@ public class GetAgreementDocumentInfoApiTest {
     }
 
     try {
-      agreementsApi.getDocument(ApiUtils.getValidHeaderParams(),
-                                TestData.NULL_PARAM,
-                                documentId);
+      byte[] document = agreementsApi.getDocument(ApiUtils.getValidHeaderParams(),
+                                                  TestData.NULL_PARAM,
+                                                  documentId);
+      assertNotNull(document);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching imageUrl of given document through the getDocumentImageUrls endpoint. Negative scenarios covered:
    * INVALID_DOCUMENT_ID: null and empty documentId.
@@ -136,25 +144,28 @@ public class GetAgreementDocumentInfoApiTest {
   public void testInvalidDocumentId() throws ApiException {
 
     try {
-      agreementsApi.getDocument(ApiUtils.getValidHeaderParams(),
-                                agreementId,
-                                TestData.EMPTY_PARAM);
+      byte[] document = agreementsApi.getDocument(ApiUtils.getValidHeaderParams(),
+                                                  agreementId,
+                                                  TestData.EMPTY_PARAM);
+      assertNotNull(document);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
-                 SdkErrorCodes. INVALID_DOCUMENT_ID.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.INVALID_DOCUMENT_ID.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      agreementsApi.getDocument(ApiUtils.getValidHeaderParams(),
-                                agreementId,
-                                TestData.NULL_PARAM);
+      byte[] document = agreementsApi.getDocument(ApiUtils.getValidHeaderParams(),
+                                                  agreementId,
+                                                  TestData.NULL_PARAM);
+      assertNotNull(document);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
-                 SdkErrorCodes. INVALID_DOCUMENT_ID.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.INVALID_DOCUMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching document file stream through the getDocument endpoint.
    * Case covered is successful execution of the api call.

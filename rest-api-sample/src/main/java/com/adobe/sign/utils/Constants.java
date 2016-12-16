@@ -16,8 +16,9 @@ import java.util.Date;
 import java.util.Properties;
 
 public class Constants {
-
-  private static final String CONFIG_PATH = ApiUtils.getSampleAbsolutePath() + "src/main/java/com/adobe/sign/resources/config.properties";
+  
+  private static final String SAMPLE_PREFIX_PATH = ApiUtils.getSampleAbsolutePath();
+  private static final String CONFIG_PATH = SAMPLE_PREFIX_PATH + "src/main/java/com/adobe/sign/resources/config.properties";
   private static Properties properties= ApiUtils.getProperties(CONFIG_PATH);
   private static final String MINUS_ONE = "-1";
   private static final String ACCESS_TOKEN_KEY= "accessToken";
@@ -52,7 +53,8 @@ public class Constants {
 
   private static final String MIME_TYPE_PDF_KEY = "mimeTypePdf";
   private static final String WAITING_DAYS_KEY = "waitingDays";
-  private static final String DAYS_BEFORE_CURRENT_DATE_KEY = "daysBeforeCurrentDate";
+  private static final String DAYS_BETWEEN_START_DATE_AND_CURRENT_DATE_KEY = "daysBetweenStartDateAndCurrentDate";
+  private static final String DAYS_BETWEEN_END_DATE_AND_CURRENT_DATE_KEY = "daysBetweenEndDateAndCurrentDate";
 
   private static final String MAX_EVENTS_SIZE_KEY = "maxEventsSize";
   private static final String FILE_OFFSET_KEY = "fileOffset";
@@ -75,8 +77,6 @@ public class Constants {
   private static final String USER_EMAIL_DOMAIN_KEY = "userEmailDomain";
   private static final String RECIPIENT_SET_NAME_KEY = "recipientSetName";
 
-
-
   //Common Parameters
   public static final String ACCESS_TOKEN = properties.getProperty(ACCESS_TOKEN_KEY).equals("null") ? null : properties.getProperty(ACCESS_TOKEN_KEY);
   public static final String X_API_USER = properties.getProperty(X_API_USER_KEY).equals("null") ? null : properties.getProperty(X_API_USER_KEY);
@@ -84,29 +84,26 @@ public class Constants {
   public static final String USER_LAST_NAME = properties.getProperty(USER_LAST_NAME_KEY).equals("null") ? null : properties.getProperty(USER_LAST_NAME_KEY);
   public static final String X_USER_EMAIL = properties.getProperty(X_USER_EMAIL_KEY).equals("null") ? null : properties.getProperty(X_USER_EMAIL_KEY);
   public static final String ALTERNATE_PARTICIPANT_EMAIL = properties.getProperty(ALTERNATE_PARTICIPANT_EMAIL_KEY).equals("null") ? null : properties.getProperty(ALTERNATE_PARTICIPANT_EMAIL_KEY);
-  public static final String GROUP_NAME = ApiUtils.getGroupName(properties.getProperty(GROUP_NAME_KEY).equals("null") ? null : properties.getProperty(GROUP_NAME_KEY));
-  public static final String AGREEMENT_NAME = ApiUtils.getAgreementName(properties.getProperty(AGREEMENT_NAME_KEY).equals("null") ? null : properties.getProperty(AGREEMENT_NAME_KEY));
-  public static final String MEGASIGN_NAME = ApiUtils.getMegaSignName(properties.getProperty(MEGA_SIGN_NAME).equals("null") ? null : properties.getProperty(MEGA_SIGN_NAME));
-  public static final String WIDGET_NAME = ApiUtils.getWidgetName(properties.getProperty(WIDGET_NAME_KEY).equals("null") ? null : properties.getProperty(WIDGET_NAME_KEY));
+  public static final String GROUP_NAME = properties.getProperty(GROUP_NAME_KEY).equals("null") ? null : properties.getProperty(GROUP_NAME_KEY);
+  public static final String AGREEMENT_NAME = properties.getProperty(AGREEMENT_NAME_KEY).equals("null") ? null : properties.getProperty(AGREEMENT_NAME_KEY);
+  public static final String MEGASIGN_NAME = properties.getProperty(MEGA_SIGN_NAME).equals("null") ? null : properties.getProperty(MEGA_SIGN_NAME);
+  public static final String WIDGET_NAME = properties.getProperty(WIDGET_NAME_KEY).equals("null") ? null : properties.getProperty(WIDGET_NAME_KEY);
   public static final String ALTERNATE_PARTICIPANT_MESSAGE = properties.getProperty(ALTERNATE_PARTICIPANT_MESSAGE_KEY).equals("null") ? null : properties.getProperty(ALTERNATE_PARTICIPANT_MESSAGE_KEY);
   public static final String EXTERNAL_ID = properties.getProperty(EXTERNAL_ID_KEY).equals("null") ? null : properties.getProperty(EXTERNAL_ID_KEY);
   public static final String EXTERNAL_GROUP = properties.getProperty(EXTERNAL_GROUP_KEY).equals("null") ? null : properties.getProperty(EXTERNAL_GROUP_KEY);
   public static final String EXTERNAL_NAMESPACE = properties.getProperty(EXTERNAL_NAMESPACE_KEY).equals("null") ? null : properties.getProperty(EXTERNAL_NAMESPACE_KEY);
   public static final String QUERY = properties.getProperty(QUERY_KEY).equals("null") ? null : properties.getProperty(QUERY_KEY);
   public static final String INPUT_FILE_NAME = properties.getProperty(INPUT_FILE_NAME_KEY).equals("null") ? null : properties.getProperty(INPUT_FILE_NAME_KEY);
-  public static final String REQUEST_PATH = properties.getProperty(REQUEST_PATH_KEY).equals("null") ? null : ApiUtils.getSampleAbsolutePath() +  properties.getProperty(REQUEST_PATH_KEY) + FILE_SEP;
-  public static final String OUTPUT_PATH = ApiUtils.getSampleAbsolutePath() + (properties.getProperty(OUTPUT_PATH_KEY).equals("null") ? null : properties.getProperty(OUTPUT_PATH_KEY)) + FILE_SEP;
+  public static final String REQUEST_PATH = properties.getProperty(REQUEST_PATH_KEY).equals("null") ? null : SAMPLE_PREFIX_PATH +  properties.getProperty(REQUEST_PATH_KEY) + FILE_SEP;
+  public static final String OUTPUT_PATH = SAMPLE_PREFIX_PATH + (properties.getProperty(OUTPUT_PATH_KEY).equals("null") ? null : properties.getProperty(OUTPUT_PATH_KEY)) + FILE_SEP;
   public static final String AGREEMENT_DOCUMENT = properties.getProperty(AGREEMENT_DOCUMENT_KEY).equals("null") ? null : properties.getProperty(AGREEMENT_DOCUMENT_KEY) + FILE_SEP;
   public static final String ARCHIVE = properties.getProperty(ARCHIVE_KEY).equals("null") ? null : properties.getProperty(ARCHIVE_KEY) + FILE_SEP;
   public static final String AUDIT_TRAIL = properties.getProperty(AUDIT_TRAIL_KEY).equals("null") ? null : properties.getProperty(AUDIT_TRAIL_KEY) + FILE_SEP;
   public static final String FORM_DATA = properties.getProperty(FORM_DATA_KEY).equals("null") ? null : properties.getProperty(FORM_DATA_KEY) + FILE_SEP;
   public static final String MIME_TYPE_PDF = properties.getProperty(MIME_TYPE_PDF_KEY).equals("null") ? null : properties.getProperty(MIME_TYPE_PDF_KEY);
-  public static final int MILLISECS_PER_DAY = ApiUtils.getMilliSecsPerDay();
   public static final int WAITING_DAYS = Integer.parseInt(properties.getProperty(WAITING_DAYS_KEY).equals("null") ? MINUS_ONE : properties.getProperty(WAITING_DAYS_KEY));
-  public static final int WAITING_TIME_LIMIT = WAITING_DAYS * MILLISECS_PER_DAY;
-  public static final int DAYS_BEFORE_CURRENT_DATE = Integer.parseInt(properties.getProperty(DAYS_BEFORE_CURRENT_DATE_KEY).equals("null") ? MINUS_ONE : properties.getProperty(DAYS_BEFORE_CURRENT_DATE_KEY));
-  public static final Date START_DATE = ApiUtils.getStartDate();
-  public static final Date END_DATE = ApiUtils.getEndDate();
+  public static final int DAYS_BETWEEN_START_DATE_AND_CURRENT_DATE = Integer.parseInt(properties.getProperty(DAYS_BETWEEN_START_DATE_AND_CURRENT_DATE_KEY).equals("null") ? MINUS_ONE : properties.getProperty(DAYS_BETWEEN_START_DATE_AND_CURRENT_DATE_KEY));
+  public static final int DAYS_BETWEEN_END_DATE_AND_CURRENT_DATE = Integer.parseInt(properties.getProperty(DAYS_BETWEEN_END_DATE_AND_CURRENT_DATE_KEY).equals("null") ? MINUS_ONE : properties.getProperty(DAYS_BETWEEN_END_DATE_AND_CURRENT_DATE_KEY));
   public static final int MAX_EVENTS_SIZE = Integer.parseInt(properties.getProperty(MAX_EVENTS_SIZE_KEY).equals("null") ? MINUS_ONE : properties.getProperty(MAX_EVENTS_SIZE_KEY));
   public static final int FILE_OFFSET = Integer.parseInt(properties.getProperty(FILE_OFFSET_KEY).equals("null") ? MINUS_ONE : properties.getProperty(FILE_OFFSET_KEY));
   public static final int PAGE_SIZE = Integer.parseInt(properties.getProperty(PAGE_SIZE_KEY).equals("null") ? MINUS_ONE : properties.getProperty(PAGE_SIZE_KEY));
@@ -115,9 +112,8 @@ public class Constants {
   public static final int AGREEMENT_COUNT_LIMIT = Integer.parseInt(properties.getProperty(AGREEMENT_COUNT_LIMIT_KEY).equals("null") ? MINUS_ONE : properties.getProperty(AGREEMENT_COUNT_LIMIT_KEY));
   public static final String ENV_HOST_NAME = properties.getProperty(ENV_HOST_NAME_KEY).equals("null") ? null : properties.getProperty(ENV_HOST_NAME_KEY);
 
-  private static final String USER_EMAIL_PREFIX = properties.getProperty(USER_EMAIL_PREFIX_KEY).equals("null") ? null : properties.getProperty(USER_EMAIL_PREFIX_KEY);
-  private static final String USER_EMAIL_DOMAIN = properties.getProperty(USER_EMAIL_DOMAIN_KEY).equals("null") ? null : properties.getProperty(USER_EMAIL_DOMAIN_KEY);
-  public static final String USER_EMAIL = ApiUtils.getUserEmail(USER_EMAIL_PREFIX,USER_EMAIL_DOMAIN);
+  public static final String USER_EMAIL_PREFIX = properties.getProperty(USER_EMAIL_PREFIX_KEY).equals("null") ? null : properties.getProperty(USER_EMAIL_PREFIX_KEY);
+  public static final String USER_EMAIL_DOMAIN = properties.getProperty(USER_EMAIL_DOMAIN_KEY).equals("null") ? null : properties.getProperty(USER_EMAIL_DOMAIN_KEY);
 
   //OAuth workflow parameters
   public static final String REDIRECT_URI = properties.getProperty(REDIRECT_URI_KEY).equals("null") ? null : properties.getProperty(REDIRECT_URI_KEY);
@@ -129,11 +125,11 @@ public class Constants {
   public static final String RESPONSE_TYPE = properties.getProperty(RESPONSE_TYPE_KEY).equals("null") ? null : properties.getProperty(RESPONSE_TYPE_KEY);
 
 
-  public static final String LOG_CONFIG_PATH = ApiUtils.getSampleAbsolutePath() + "src/main/java/com/adobe/sign/resources/log4j.properties";
+  public static final String LOG_CONFIG_PATH = SAMPLE_PREFIX_PATH + "src/main/java/com/adobe/sign/resources/log4j.properties";
   private static Properties logProperties=ApiUtils.getProperties(LOG_CONFIG_PATH);
   public static final String LOG_KEY="log";
   public static final String LOG = logProperties.getProperty(LOG_KEY).equals("null") ? null : logProperties.getProperty(LOG_KEY);
-  public static final String SERVER_PATH = ApiUtils.getSampleAbsolutePath() + "src/main/java/com/adobe/sign/api/OAuth/server/";
+  public static final String SERVER_PATH = SAMPLE_PREFIX_PATH + "src/main/java/com/adobe/sign/api/OAuth/server/";
   public static final int SERVER_PORT = Integer.parseInt(properties.getProperty(SERVER_PORT_KEY).equals("null") ? MINUS_ONE : properties.getProperty(SERVER_PORT_KEY));
   public static final String KEY_STORE_FILE = properties.getProperty(KEY_STORE_FILE_KEY).equals("null") ? null : properties.getProperty(KEY_STORE_FILE_KEY);
   public static final String KEY_STORE_PASSWORD = properties.getProperty(KEY_STORE_PASSWORD_KEY).equals("null") ? null : properties.getProperty(KEY_STORE_PASSWORD_KEY);

@@ -27,45 +27,45 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.UserUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Put Users API.
+ * Junit test cases for Modify Users endpoint.
  */
-public class PutUsersApiTest {
+public class ModifyUsersApiTest {
 
-	private static UsersApi usersApi = null;
-	private static String userId = null;
+  private static UsersApi usersApi = null;
+  private static String userId = null;
 
 
   @Rule
   public Retry retry = new Retry();
 
-	/**
-	 * Setting up the UsersApi BeforeClass the tests are run.
-	 *
-	 * @throws ApiException
-	 */
-	@BeforeClass
-	public static void setup() throws ApiException {
+  /**
+   * Setting up the UsersApi BeforeClass the tests are run.
+   *
+   * @throws ApiException
+   */
+  @BeforeClass
+  public static void setup() throws ApiException {
     ApiUtils.configureProperty();
     userId = UserUtils.createUser(ApiUtils.getUserEmail());
-		usersApi = UserUtils.getUsersApi();
-	}
+    usersApi = UserUtils.getUsersApi();
+  }
 
-	/**
-	 * Test to modify user details through modifyUser endpoint. Negative
-	 * scenarios covered: NO_ACCESS_TOKEN_HEADER: null access token.
-	 * INVALID_ACCESS_TOKEN: empty access token.
-	 *
-	 * @throws ApiException
-	 */
-	@Test
-	public void testNullAndEmptyAccessToken() throws ApiException {
-		UserModificationInfo userModificationInfo = new UserModificationInfo();
+  /**
+   * Test to modify user details through modifyUser endpoint. Negative
+   * scenarios covered: NO_ACCESS_TOKEN_HEADER: null access token.
+   * INVALID_ACCESS_TOKEN: empty access token.
+   *
+   * @throws ApiException
+   */
+  @Test
+  public void testNullAndEmptyAccessToken() throws ApiException {
+    UserModificationInfo userModificationInfo = new UserModificationInfo();
 
     try {
       usersApi.modifyUser(ApiUtils.getNullAccessTokenHeaderParams(),
@@ -166,7 +166,7 @@ public class PutUsersApiTest {
   public void testNullAndInvalidParams() throws ApiException {
     UserDetailsInfo userDetailsInfo = usersApi.getUserDetail(ApiUtils.getValidHeaderParams(),
                                                              userId);
-                                                             
+
     try {
       UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
                                                                                     TestData.NULL_PARAM,
@@ -257,7 +257,7 @@ public class PutUsersApiTest {
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
-              SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
 
     try {
@@ -273,57 +273,57 @@ public class PutUsersApiTest {
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
-              SdkErrorCodes.INVALID_EMAIL.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.INVALID_EMAIL.getApiCode().equals(e.getApiCode()));
     }
 
 
     try {
-          UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
-                                                                                        userDetailsInfo.getFirstName(),
-                                                                                        userDetailsInfo.getLastName(),
-                                                                                        userDetailsInfo.getEmail(),
-                                                                                        TestData.NULL_PARAM,
-                                                                                        Arrays.asList(RolesEnum.NORMAL_USER));
-          usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
-                              userId,
-                              userModificationInfo);
-      }
-      catch (ApiException e) {
-          assertTrue(e.getMessage(),
-                     SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
-      }
+      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
+                                                                                    userDetailsInfo.getFirstName(),
+                                                                                    userDetailsInfo.getLastName(),
+                                                                                    userDetailsInfo.getEmail(),
+                                                                                    TestData.NULL_PARAM,
+                                                                                    Arrays.asList(RolesEnum.NORMAL_USER));
+      usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
+                          userId,
+                          userModificationInfo);
+    }
+    catch (ApiException e) {
+      assertTrue(e.getMessage(),
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+    }
 
-      try {
-          UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
-                                                                                        userDetailsInfo.getFirstName(),
-                                                                                        userDetailsInfo.getLastName(),
-                                                                                        userDetailsInfo.getEmail(),
-                                                                                        TestData.EMPTY_PARAM,
-                                                                                        Arrays.asList(RolesEnum.NORMAL_USER));
-          usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
-                              userId,
-                              userModificationInfo);
-      }
-      catch (ApiException e) {
-          assertTrue(e.getMessage(),
-                     SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
-      }
     try {
-          UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
+      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
+                                                                                    userDetailsInfo.getFirstName(),
+                                                                                    userDetailsInfo.getLastName(),
+                                                                                    userDetailsInfo.getEmail(),
+                                                                                    TestData.EMPTY_PARAM,
+                                                                                    Arrays.asList(RolesEnum.NORMAL_USER));
+      usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
+                          userId,
+                          userModificationInfo);
+    }
+    catch (ApiException e) {
+      assertTrue(e.getMessage(),
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+    }
+    try {
+      UserModificationInfo userModificationInfo = UserUtils.getUserModificationInfo(userId,
                                                                                     userDetailsInfo.getFirstName(),
                                                                                     userDetailsInfo.getLastName(),
                                                                                     userDetailsInfo.getEmail(),
                                                                                     userDetailsInfo.getGroupId(),
                                                                                     null);
-          usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
-                            userId,
-                            userModificationInfo);
+      usersApi.modifyUser(ApiUtils.getValidHeaderParams(),
+                          userId,
+                          userModificationInfo);
     }
     catch (ApiException e) {
-          assertTrue(e.getMessage(),
-                     SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+      assertTrue(e.getMessage(),
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
-    
+
   }
 }
 

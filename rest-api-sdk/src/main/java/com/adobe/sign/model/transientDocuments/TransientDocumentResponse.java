@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:04:00.006+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:36.483+05:30")
 public class TransientDocumentResponse   {
   
   private String transientDocumentId = null;
@@ -33,9 +33,16 @@ public class TransientDocumentResponse   {
    **/
   @ApiModelProperty(required = true, value = "The unique identifier of the uploaded document that can be used in an agreement or a megaSign or widget creation call")
   @JsonProperty("transientDocumentId")
+  /**
+   * @return String
+   **/
   public String getTransientDocumentId() {
     return transientDocumentId;
   }
+  /**
+   * The unique identifier of the uploaded document that can be used in an agreement or a megaSign or widget creation call
+   * @param transientDocumentId
+   **/
   public void setTransientDocumentId(String transientDocumentId) {
     this.transientDocumentId = transientDocumentId;
   }
@@ -43,6 +50,10 @@ public class TransientDocumentResponse   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class TransientDocumentResponse {\n");

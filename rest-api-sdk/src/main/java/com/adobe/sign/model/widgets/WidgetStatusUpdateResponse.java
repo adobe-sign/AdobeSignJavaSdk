@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class WidgetStatusUpdateResponse   {
   
 
@@ -52,9 +52,16 @@ public enum CodeEnum {
    **/
   @ApiModelProperty(required = true, value = "The result of the attempt to disable or enable the widget")
   @JsonProperty("code")
+  /**
+   * @return CodeEnum
+   **/
   public CodeEnum getCode() {
     return code;
   }
+  /**
+   * The result of the attempt to disable or enable the widget
+   * @param code
+   **/
   public void setCode(CodeEnum code) {
     this.code = code;
   }
@@ -65,9 +72,16 @@ public enum CodeEnum {
    **/
   @ApiModelProperty(value = "String result message if there was no error")
   @JsonProperty("message")
+  /**
+   * @return String
+   **/
   public String getMessage() {
     return message;
   }
+  /**
+   * String result message if there was no error
+   * @param message
+   **/
   public void setMessage(String message) {
     this.message = message;
   }
@@ -75,6 +89,10 @@ public enum CodeEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetStatusUpdateResponse {\n");

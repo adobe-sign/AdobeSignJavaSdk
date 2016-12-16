@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class VaultingInfo   {
   
   private Boolean enabled = null;
@@ -33,9 +33,16 @@ public class VaultingInfo   {
    **/
   @ApiModelProperty(value = "For accounts set up for document vaulting and the option to enable per agreement, this determines whether the document is to be vaulted")
   @JsonProperty("enabled")
+  /**
+   * @return Boolean
+   **/
   public Boolean getEnabled() {
     return enabled;
   }
+  /**
+   * For accounts set up for document vaulting and the option to enable per agreement, this determines whether the document is to be vaulted
+   * @param enabled
+   **/
   public void setEnabled(Boolean enabled) {
     this.enabled = enabled;
   }
@@ -43,6 +50,10 @@ public class VaultingInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class VaultingInfo {\n");

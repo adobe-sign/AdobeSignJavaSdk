@@ -69,8 +69,8 @@ public class WidgetUtils {
       return widgetCreationResponse;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.CREATE_WIDGET, e);
-      return null;
+      ApiUtils.logError(Errors.CREATE_WIDGET);
+      throw e;
     }
   }
 
@@ -223,8 +223,8 @@ public class WidgetUtils {
       return widgetFormaData;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_WIDGET_FORM_DATA, e);
-      return null;
+      ApiUtils.logError(Errors.GET_WIDGET_FORM_DATA);
+      throw e;
     }
   }
 
@@ -241,8 +241,8 @@ public class WidgetUtils {
       return widgetInfo;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_WIDGET_FORM_DATA, e);
-      return  null;
+      ApiUtils.logError(Errors.GET_WIDGET_FORM_DATA);
+      throw e;
     }
   }
 
@@ -257,8 +257,8 @@ public class WidgetUtils {
       return userWidgets;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_WIDGETS, e);
-      return null;
+      ApiUtils.logError(Errors.GET_WIDGETS);
+      throw e;
     }
   }
 
@@ -279,10 +279,11 @@ public class WidgetUtils {
           return userWidget.getWidgetId();
         }
       }
+      return null;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_FIRST_WIDGET, e);
+      ApiUtils.logError(Errors.GET_FIRST_WIDGET);
+      throw e;
     }
-    return null;
   }
 }

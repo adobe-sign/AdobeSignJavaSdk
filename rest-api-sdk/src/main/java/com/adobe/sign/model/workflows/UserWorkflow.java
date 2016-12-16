@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class UserWorkflow   {
   
   private Date created = null;
@@ -76,9 +76,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The day on which the workflow was created")
   @JsonProperty("created")
+  /**
+   * @return Date
+   **/
   public Date getCreated() {
     return created;
   }
+  /**
+   * The day on which the workflow was created
+   * @param created
+   **/
   public void setCreated(Date created) {
     this.created = created;
   }
@@ -89,9 +96,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Description provided for this workflow at the time of its creation")
   @JsonProperty("description")
+  /**
+   * @return String
+   **/
   public String getDescription() {
     return description;
   }
+  /**
+   * Description provided for this workflow at the time of its creation
+   * @param description
+   **/
   public void setDescription(String description) {
     this.description = description;
   }
@@ -102,9 +116,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The display name of the workflow.")
   @JsonProperty("displayName")
+  /**
+   * @return String
+   **/
   public String getDisplayName() {
     return displayName;
   }
+  /**
+   * The display name of the workflow.
+   * @param displayName
+   **/
   public void setDisplayName(String displayName) {
     this.displayName = displayName;
   }
@@ -115,9 +136,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The name of the workflow.")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * The name of the workflow.
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -128,9 +156,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The workflow scope (ACCOUNT or GROUP or OTHER)")
   @JsonProperty("scope")
+  /**
+   * @return ScopeEnum
+   **/
   public ScopeEnum getScope() {
     return scope;
   }
+  /**
+   * The workflow scope (ACCOUNT or GROUP or OTHER)
+   * @param scope
+   **/
   public void setScope(ScopeEnum scope) {
     this.scope = scope;
   }
@@ -141,9 +176,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "Identifier of scope. Currently it is applicable for scope GROUP only and the value will be groupId.")
   @JsonProperty("scopeId")
+  /**
+   * @return String
+   **/
   public String getScopeId() {
     return scopeId;
   }
+  /**
+   * Identifier of scope. Currently it is applicable for scope GROUP only and the value will be groupId.
+   * @param scopeId
+   **/
   public void setScopeId(String scopeId) {
     this.scopeId = scopeId;
   }
@@ -154,9 +196,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The workflow status (ACTIVE or DRAFT or OTHER)")
   @JsonProperty("status")
+  /**
+   * @return StatusEnum
+   **/
   public StatusEnum getStatus() {
     return status;
   }
+  /**
+   * The workflow status (ACTIVE or DRAFT or OTHER)
+   * @param status
+   **/
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -167,9 +216,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The unique identifier of a workflow")
   @JsonProperty("workflowId")
+  /**
+   * @return String
+   **/
   public String getWorkflowId() {
     return workflowId;
   }
+  /**
+   * The unique identifier of a workflow
+   * @param workflowId
+   **/
   public void setWorkflowId(String workflowId) {
     this.workflowId = workflowId;
   }
@@ -177,6 +233,10 @@ public enum StatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserWorkflow {\n");

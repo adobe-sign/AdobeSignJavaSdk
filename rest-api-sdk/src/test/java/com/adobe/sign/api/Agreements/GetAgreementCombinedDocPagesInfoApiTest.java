@@ -25,13 +25,13 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Agreement Combined Document Pages Info API.
+ * Junit test cases for Get Agreement Combined Document Pages Info endpoint.
  */
 public class GetAgreementCombinedDocPagesInfoApiTest {
   private static AgreementsApi agreementsApi = null;
@@ -47,6 +47,7 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
+
   /**
    * Test for fetching info of all pages of a combined PDF document for the documents associated with an agreement through the getCombinedDocumentPagesInfo endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -58,9 +59,10 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getNullAccessTokenHeaderParams(),
-                                                 agreementId,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
+      CombinedDocumentPagesInfo combinedDocumentPagesInfo = agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                                                       agreementId,
+                                                                                                       TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
+      assertNotNull(combinedDocumentPagesInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -68,15 +70,17 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
     }
 
     try {
-      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                                 agreementId,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
+      CombinedDocumentPagesInfo combinedDocumentPagesInfo = agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                                                       agreementId,
+                                                                                                       TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
+      assertNotNull(combinedDocumentPagesInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching all documents through the postGroup endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -87,15 +91,17 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                                 agreementId,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
+      CombinedDocumentPagesInfo combinedDocumentPagesInfo = agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                                                       agreementId,
+                                                                                                       TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
+      assertNotNull(combinedDocumentPagesInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching info of all pages of a combined PDF document for the documents associated with an agreement through the getCombinedDocumentPagesInfo endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: empty and null agreementId.
@@ -106,9 +112,10 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getValidHeaderParams(),
-                                                 TestData.EMPTY_PARAM,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
+      CombinedDocumentPagesInfo combinedDocumentPagesInfo = agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getValidHeaderParams(),
+                                                                                                       TestData.EMPTY_PARAM,
+                                                                                                       TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
+      assertNotNull(combinedDocumentPagesInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -116,44 +123,17 @@ public class GetAgreementCombinedDocPagesInfoApiTest {
     }
 
     try {
-      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getValidHeaderParams(),
-                                                 TestData.NULL_PARAM,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
+      CombinedDocumentPagesInfo combinedDocumentPagesInfo = agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getValidHeaderParams(),
+                                                                                                       TestData.NULL_PARAM,
+                                                                                                       TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
+      assertNotNull(combinedDocumentPagesInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
-  /**
-   * Test for fetching info of all pages of a combined PDF document for the documents associated with an agreement through the getCombinedDocumentPagesInfo endpoint. Negative scenarios covered:
-   * INVALID_DOCUMENT_ID: null and empty documentId.
-   *
-   * @throws ApiException
-   */
-  @Test
-  public void testInvalidDocumentId() throws ApiException {
 
-    try {
-      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getValidHeaderParams(),
-                                                 agreementId,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
-    }
-    catch (ApiException e) {
-      assertTrue(e.getMessage(),
-                 SdkErrorCodes. INVALID_DOCUMENT_ID.getApiCode().equals(e.getApiCode()));
-    }
-
-    try {
-      agreementsApi.getCombinedDocumentPagesInfo(ApiUtils.getValidHeaderParams(),
-                                                 agreementId,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENTS_PAGES_INFO);
-    }
-    catch (ApiException e) {
-      assertTrue(e.getMessage(),
-                 SdkErrorCodes. INVALID_DOCUMENT_ID.getApiCode().equals(e.getApiCode()));
-    }
-  }
   /**
    * Test for fetching info of all pages of a combined PDF document for the documents associated with an agreement through the getCombinedDocumentPagesInfo endpoint.
    * Case covered is successful execution of the api call.

@@ -40,6 +40,7 @@ public class CreateNewUserInAccount {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.CREATE_NEW_USER_IN_ACCOUNT, e);
+      throw e;
     }
   }
 
@@ -48,7 +49,7 @@ public class CreateNewUserInAccount {
    */
   private void run() throws ApiException{
     //Make API call to create a user
-    String userId = UserUtils.createUser(Constants.USER_EMAIL,
+    String userId = UserUtils.createUser(ApiUtils.getUserEmail(Constants.USER_EMAIL_PREFIX,Constants.USER_EMAIL_DOMAIN),
                                          Constants.USER_FIRST_NAME,
                                          Constants.USER_LAST_NAME);
 

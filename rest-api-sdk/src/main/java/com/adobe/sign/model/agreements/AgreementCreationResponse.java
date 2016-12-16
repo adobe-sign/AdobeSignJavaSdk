@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * A JSON that contains both the id of the newly created agreement and URL / embedded code to direct the user to tne next step in the creation process.
  **/
 @ApiModel(description = "A JSON that contains both the id of the newly created agreement and URL / embedded code to direct the user to tne next step in the creation process.")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class AgreementCreationResponse   {
   
   private String agreementId = null;
@@ -40,9 +40,16 @@ public class AgreementCreationResponse   {
    **/
   @ApiModelProperty(required = true, value = "The unique identifier that can be used to query status and download signed documents")
   @JsonProperty("agreementId")
+  /**
+   * @return String
+   **/
   public String getAgreementId() {
     return agreementId;
   }
+  /**
+   * The unique identifier that can be used to query status and download signed documents
+   * @param agreementId
+   **/
   public void setAgreementId(String agreementId) {
     this.agreementId = agreementId;
   }
@@ -53,9 +60,16 @@ public class AgreementCreationResponse   {
    **/
   @ApiModelProperty(value = "Javascript snippet suitable for an embedded page taking a user to a URL")
   @JsonProperty("embeddedCode")
+  /**
+   * @return String
+   **/
   public String getEmbeddedCode() {
     return embeddedCode;
   }
+  /**
+   * Javascript snippet suitable for an embedded page taking a user to a URL
+   * @param embeddedCode
+   **/
   public void setEmbeddedCode(String embeddedCode) {
     this.embeddedCode = embeddedCode;
   }
@@ -66,9 +80,16 @@ public class AgreementCreationResponse   {
    **/
   @ApiModelProperty(value = "Expiration date for autologin. This is based on the user setting, API_AUTO_LOGIN_LIFETIME")
   @JsonProperty("expiration")
+  /**
+   * @return Date
+   **/
   public Date getExpiration() {
     return expiration;
   }
+  /**
+   * Expiration date for autologin. This is based on the user setting, API_AUTO_LOGIN_LIFETIME
+   * @param expiration
+   **/
   public void setExpiration(Date expiration) {
     this.expiration = expiration;
   }
@@ -79,9 +100,16 @@ public class AgreementCreationResponse   {
    **/
   @ApiModelProperty(value = "Standalone URL to direct end users to")
   @JsonProperty("url")
+  /**
+   * @return String
+   **/
   public String getUrl() {
     return url;
   }
+  /**
+   * Standalone URL to direct end users to
+   * @param url
+   **/
   public void setUrl(String url) {
     this.url = url;
   }
@@ -89,6 +117,10 @@ public class AgreementCreationResponse   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class AgreementCreationResponse {\n");

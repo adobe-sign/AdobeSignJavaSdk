@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:51.876+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.195+05:30")
 public class LibraryCreationInfo   {
   
   private LibraryDocumentCreationInfo libraryDocumentCreationInfo = null;
@@ -36,9 +36,16 @@ public class LibraryCreationInfo   {
    **/
   @ApiModelProperty(required = true, value = "Information about the library document you want to create")
   @JsonProperty("libraryDocumentCreationInfo")
+  /**
+   * @return LibraryDocumentCreationInfo
+   **/
   public LibraryDocumentCreationInfo getLibraryDocumentCreationInfo() {
     return libraryDocumentCreationInfo;
   }
+  /**
+   * Information about the library document you want to create
+   * @param libraryDocumentCreationInfo
+   **/
   public void setLibraryDocumentCreationInfo(LibraryDocumentCreationInfo libraryDocumentCreationInfo) {
     this.libraryDocumentCreationInfo = libraryDocumentCreationInfo;
   }
@@ -49,9 +56,16 @@ public class LibraryCreationInfo   {
    **/
   @ApiModelProperty(value = "Options for authoring and sending the agreement")
   @JsonProperty("options")
+  /**
+   * @return InteractiveOptions
+   **/
   public InteractiveOptions getOptions() {
     return options;
   }
+  /**
+   * Options for authoring and sending the agreement
+   * @param options
+   **/
   public void setOptions(InteractiveOptions options) {
     this.options = options;
   }
@@ -59,6 +73,10 @@ public class LibraryCreationInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class LibraryCreationInfo {\n");

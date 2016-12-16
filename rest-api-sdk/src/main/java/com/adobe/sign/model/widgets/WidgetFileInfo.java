@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class WidgetFileInfo   {
   
   private WidgetURLFileInfo documentURL = null;
@@ -37,9 +37,16 @@ public class WidgetFileInfo   {
    **/
   @ApiModelProperty(value = "File at a public URL location")
   @JsonProperty("documentURL")
+  /**
+   * @return WidgetURLFileInfo
+   **/
   public WidgetURLFileInfo getDocumentURL() {
     return documentURL;
   }
+  /**
+   * File at a public URL location
+   * @param documentURL
+   **/
   public void setDocumentURL(WidgetURLFileInfo documentURL) {
     this.documentURL = documentURL;
   }
@@ -50,9 +57,16 @@ public class WidgetFileInfo   {
    **/
   @ApiModelProperty(value = "The ID for a library document that is available to the sender. Note only applicable when used as formFieldLayerTemplates")
   @JsonProperty("libraryDocumentId")
+  /**
+   * @return String
+   **/
   public String getLibraryDocumentId() {
     return libraryDocumentId;
   }
+  /**
+   * The ID for a library document that is available to the sender. Note only applicable when used as formFieldLayerTemplates
+   * @param libraryDocumentId
+   **/
   public void setLibraryDocumentId(String libraryDocumentId) {
     this.libraryDocumentId = libraryDocumentId;
   }
@@ -63,9 +77,16 @@ public class WidgetFileInfo   {
    **/
   @ApiModelProperty(value = "The name of a library document that is available to the sender. Note only applicable when used as formFieldLayerTemplates")
   @JsonProperty("libraryDocumentName")
+  /**
+   * @return String
+   **/
   public String getLibraryDocumentName() {
     return libraryDocumentName;
   }
+  /**
+   * The name of a library document that is available to the sender. Note only applicable when used as formFieldLayerTemplates
+   * @param libraryDocumentName
+   **/
   public void setLibraryDocumentName(String libraryDocumentName) {
     this.libraryDocumentName = libraryDocumentName;
   }
@@ -76,9 +97,16 @@ public class WidgetFileInfo   {
    **/
   @ApiModelProperty(value = "The documentID as returned from the transient document creation API")
   @JsonProperty("transientDocumentId")
+  /**
+   * @return String
+   **/
   public String getTransientDocumentId() {
     return transientDocumentId;
   }
+  /**
+   * The documentID as returned from the transient document creation API
+   * @param transientDocumentId
+   **/
   public void setTransientDocumentId(String transientDocumentId) {
     this.transientDocumentId = transientDocumentId;
   }
@@ -86,6 +114,10 @@ public class WidgetFileInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetFileInfo {\n");

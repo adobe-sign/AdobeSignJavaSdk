@@ -29,19 +29,19 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WidgetUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Put Widget Status API.
+ * Junit test cases for Update Widget Status endpoint.
  */
-public class PutWidgetStatusApiTest {
+public class UpdateWidgetStatusApiTest {
   private static WidgetsApi widgetsApi = null;
   private static String widgetId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -51,6 +51,7 @@ public class PutWidgetStatusApiTest {
     widgetId = WidgetUtils.createWidget(ApiUtils.getWidgetName());
     widgetsApi = WidgetUtils.getWidgetsApi();
   }
+
   /**
    * Test for updating the status of a widget through the getWidgetPersonalizeResponse endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -65,9 +66,10 @@ public class PutWidgetStatusApiTest {
     widgetStatusUpdateInfo.setValue(WidgetStatusUpdateInfo.ValueEnum.DISABLE);
 
     try {
-      widgetsApi.updateWidgetStatus(ApiUtils.getNullAccessTokenHeaderParams(),
-                                    widgetId,
-                                    widgetStatusUpdateInfo);
+      WidgetStatusUpdateResponse widgetStatusUpdateResponse = widgetsApi.updateWidgetStatus(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                                            widgetId,
+                                                                                            widgetStatusUpdateInfo);
+      assertNotNull(widgetStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -75,9 +77,10 @@ public class PutWidgetStatusApiTest {
     }
 
     try {
-      widgetsApi.updateWidgetStatus(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                    widgetId,
-                                    widgetStatusUpdateInfo);
+      WidgetStatusUpdateResponse widgetStatusUpdateResponse = widgetsApi.updateWidgetStatus(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                                            widgetId,
+                                                                                            widgetStatusUpdateInfo);
+      assertNotNull(widgetStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -98,9 +101,11 @@ public class PutWidgetStatusApiTest {
     widgetStatusUpdateInfo.setValue(WidgetStatusUpdateInfo.ValueEnum.DISABLE);
 
     try {
-      widgetsApi.updateWidgetStatus(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                    widgetId,
-                                    widgetStatusUpdateInfo);
+      WidgetStatusUpdateResponse widgetStatusUpdateResponse = widgetsApi.updateWidgetStatus(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                                            widgetId,
+                                                                                            widgetStatusUpdateInfo);
+      assertNotNull(widgetStatusUpdateResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -121,9 +126,11 @@ public class PutWidgetStatusApiTest {
     widgetStatusUpdateInfo.setValue(WidgetStatusUpdateInfo.ValueEnum.DISABLE);
 
     try {
-      widgetsApi.updateWidgetStatus(ApiUtils.getValidHeaderParams(),
-                                    TestData.EMPTY_PARAM,
-                                    widgetStatusUpdateInfo);
+      WidgetStatusUpdateResponse widgetStatusUpdateResponse = widgetsApi.updateWidgetStatus(ApiUtils.getValidHeaderParams(),
+                                                                                            TestData.EMPTY_PARAM,
+                                                                                            widgetStatusUpdateInfo);
+      assertNotNull(widgetStatusUpdateResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -131,9 +138,11 @@ public class PutWidgetStatusApiTest {
     }
 
     try {
-      widgetsApi.updateWidgetStatus(ApiUtils.getValidHeaderParams(),
-                                    TestData.NULL_PARAM,
-                                    widgetStatusUpdateInfo);
+      WidgetStatusUpdateResponse widgetStatusUpdateResponse = widgetsApi.updateWidgetStatus(ApiUtils.getValidHeaderParams(),
+                                                                                            TestData.NULL_PARAM,
+                                                                                            widgetStatusUpdateInfo);
+      assertNotNull(widgetStatusUpdateResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -155,9 +164,11 @@ public class PutWidgetStatusApiTest {
     widgetStatusUpdateInfo.setValue(WidgetStatusUpdateInfo.ValueEnum.DISABLE);
 
     try {
-      widgetsApi.updateWidgetStatus(ApiUtils.getValidHeaderParams(),
-                                    widgetId,
-                                    widgetStatusUpdateInfo);
+      WidgetStatusUpdateResponse widgetStatusUpdateResponse = widgetsApi.updateWidgetStatus(ApiUtils.getValidHeaderParams(),
+                                                                                            widgetId,
+                                                                                            widgetStatusUpdateInfo);
+      assertNotNull(widgetStatusUpdateResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -167,9 +178,10 @@ public class PutWidgetStatusApiTest {
     widgetStatusUpdateInfo.setRedirectUrl(TestData.INVALID_URL);
 
     try {
-      widgetsApi.updateWidgetStatus(ApiUtils.getValidHeaderParams(),
-                                    widgetId,
-                                    widgetStatusUpdateInfo);
+      WidgetStatusUpdateResponse widgetStatusUpdateResponse = widgetsApi.updateWidgetStatus(ApiUtils.getValidHeaderParams(),
+                                                                                            widgetId,
+                                                                                            widgetStatusUpdateInfo);
+      assertNotNull(widgetStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -180,9 +192,10 @@ public class PutWidgetStatusApiTest {
     widgetStatusUpdateInfo.setMessage(TestData.WIDGET_UPDATE_MESSAGE);
 
     try {
-      widgetsApi.updateWidgetStatus(ApiUtils.getValidHeaderParams(),
-                                    widgetId,
-                                    widgetStatusUpdateInfo);
+      WidgetStatusUpdateResponse widgetStatusUpdateResponse = widgetsApi.updateWidgetStatus(ApiUtils.getValidHeaderParams(),
+                                                                                            widgetId,
+                                                                                            widgetStatusUpdateInfo);
+      assertNotNull(widgetStatusUpdateResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),

@@ -44,6 +44,7 @@ public class GetNextParticipantInfoOfAllWaitingAgreements {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.GET_NEXT_PARTICIPANT_SET_INFO, e);
+      throw e;
     }
   }
 

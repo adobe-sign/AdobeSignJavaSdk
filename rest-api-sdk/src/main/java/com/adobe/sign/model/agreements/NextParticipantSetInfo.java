@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class NextParticipantSetInfo   {
   
-  private List<NextParticipantInfo> nextParticipantSetMemberInfos = new ArrayList<NextParticipantInfo>();
+  private List<NextParticipantInfo> nextParticipantSetMemberInfos = null;
   private String nextParticipantSetName = null;
 
   
@@ -36,9 +36,16 @@ public class NextParticipantSetInfo   {
    **/
   @ApiModelProperty(required = true, value = "Information about the members of the next participant set")
   @JsonProperty("nextParticipantSetMemberInfos")
+  /**
+   * @return List&lt;NextParticipantInfo&gt;
+   **/
   public List<NextParticipantInfo> getNextParticipantSetMemberInfos() {
     return nextParticipantSetMemberInfos;
   }
+  /**
+   * Information about the members of the next participant set
+   * @param nextParticipantSetMemberInfos
+   **/
   public void setNextParticipantSetMemberInfos(List<NextParticipantInfo> nextParticipantSetMemberInfos) {
     this.nextParticipantSetMemberInfos = nextParticipantSetMemberInfos;
   }
@@ -49,9 +56,16 @@ public class NextParticipantSetInfo   {
    **/
   @ApiModelProperty(value = "The name of the next participant set. Returned only, if the API caller is the sender of agreement.")
   @JsonProperty("nextParticipantSetName")
+  /**
+   * @return String
+   **/
   public String getNextParticipantSetName() {
     return nextParticipantSetName;
   }
+  /**
+   * The name of the next participant set. Returned only, if the API caller is the sender of agreement.
+   * @param nextParticipantSetName
+   **/
   public void setNextParticipantSetName(String nextParticipantSetName) {
     this.nextParticipantSetName = nextParticipantSetName;
   }
@@ -59,6 +73,10 @@ public class NextParticipantSetInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class NextParticipantSetInfo {\n");

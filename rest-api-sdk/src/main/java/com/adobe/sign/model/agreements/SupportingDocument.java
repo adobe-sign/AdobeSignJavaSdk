@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class SupportingDocument   {
   
   private String displayLabel = null;
@@ -37,9 +37,16 @@ public class SupportingDocument   {
    **/
   @ApiModelProperty(required = true, value = "Display name of the document")
   @JsonProperty("displayLabel")
+  /**
+   * @return String
+   **/
   public String getDisplayLabel() {
     return displayLabel;
   }
+  /**
+   * Display name of the document
+   * @param displayLabel
+   **/
   public void setDisplayLabel(String displayLabel) {
     this.displayLabel = displayLabel;
   }
@@ -50,9 +57,16 @@ public class SupportingDocument   {
    **/
   @ApiModelProperty(required = true, value = "The name of the supporting document field")
   @JsonProperty("fieldName")
+  /**
+   * @return String
+   **/
   public String getFieldName() {
     return fieldName;
   }
+  /**
+   * The name of the supporting document field
+   * @param fieldName
+   **/
   public void setFieldName(String fieldName) {
     this.fieldName = fieldName;
   }
@@ -63,9 +77,16 @@ public class SupportingDocument   {
    **/
   @ApiModelProperty(required = true, value = "Mime-type of the document")
   @JsonProperty("mimeType")
+  /**
+   * @return String
+   **/
   public String getMimeType() {
     return mimeType;
   }
+  /**
+   * Mime-type of the document
+   * @param mimeType
+   **/
   public void setMimeType(String mimeType) {
     this.mimeType = mimeType;
   }
@@ -76,9 +97,16 @@ public class SupportingDocument   {
    **/
   @ApiModelProperty(required = true, value = "Number of pages in the document")
   @JsonProperty("numPages")
+  /**
+   * @return Integer
+   **/
   public Integer getNumPages() {
     return numPages;
   }
+  /**
+   * Number of pages in the document
+   * @param numPages
+   **/
   public void setNumPages(Integer numPages) {
     this.numPages = numPages;
   }
@@ -89,9 +117,16 @@ public class SupportingDocument   {
    **/
   @ApiModelProperty(required = true, value = "Id representing the document")
   @JsonProperty("supportingDocumentId")
+  /**
+   * @return String
+   **/
   public String getSupportingDocumentId() {
     return supportingDocumentId;
   }
+  /**
+   * Id representing the document
+   * @param supportingDocumentId
+   **/
   public void setSupportingDocumentId(String supportingDocumentId) {
     this.supportingDocumentId = supportingDocumentId;
   }
@@ -99,6 +134,10 @@ public class SupportingDocument   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class SupportingDocument {\n");

@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.898+05:30")
 public class MegaSign   {
   
   private Date displayDate = null;
@@ -67,9 +67,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The display date for the MegaSign parent agreement")
   @JsonProperty("displayDate")
+  /**
+   * @return Date
+   **/
   public Date getDisplayDate() {
     return displayDate;
   }
+  /**
+   * The display date for the MegaSign parent agreement
+   * @param displayDate
+   **/
   public void setDisplayDate(Date displayDate) {
     this.displayDate = displayDate;
   }
@@ -80,9 +87,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "True if this is an e-sign document")
   @JsonProperty("esign")
+  /**
+   * @return Boolean
+   **/
   public Boolean getEsign() {
     return esign;
   }
+  /**
+   * True if this is an e-sign document
+   * @param esign
+   **/
   public void setEsign(Boolean esign) {
     this.esign = esign;
   }
@@ -93,9 +107,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Unique identifier of the MegaSign parent agreement")
   @JsonProperty("megaSignId")
+  /**
+   * @return String
+   **/
   public String getMegaSignId() {
     return megaSignId;
   }
+  /**
+   * Unique identifier of the MegaSign parent agreement
+   * @param megaSignId
+   **/
   public void setMegaSignId(String megaSignId) {
     this.megaSignId = megaSignId;
   }
@@ -106,9 +127,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Name of the MegaSign parent agreement")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * Name of the MegaSign parent agreement
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -119,9 +147,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Current status of the MegaSign parent agreement from the perspective of the user")
   @JsonProperty("status")
+  /**
+   * @return StatusEnum
+   **/
   public StatusEnum getStatus() {
     return status;
   }
+  /**
+   * Current status of the MegaSign parent agreement from the perspective of the user
+   * @param status
+   **/
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -129,6 +164,10 @@ public enum StatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class MegaSign {\n");

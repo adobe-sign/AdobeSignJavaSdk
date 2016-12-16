@@ -44,14 +44,14 @@ public class TransientDocumentUtils {
 
       //Make API call to create transient document.
       TransientDocumentResponse  transientDocumentResponse = transientDocumentsApi.createTransientDocument(headers,
-                                                                                                           file.getAbsoluteFile(),
                                                                                                            fileName,
+                                                                                                           file.getAbsoluteFile(),
                                                                                                            Constants.MIME_TYPE_PDF);
       return transientDocumentResponse;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.CREATE_TRANSIENT_DOCUMENT, e);
-      return null;
+      ApiUtils.logError(Errors.CREATE_TRANSIENT_DOCUMENT);
+      throw e;
     }
   }
 }

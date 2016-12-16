@@ -68,8 +68,8 @@ public class AgreementUtils {
      return createAgreementWithRecipientSetName(recipientSetEmailList, null, documentId, documentIdentifierType, agreementName);
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.CREATE_AGREEMENT, e);
-      return null;
+      ApiUtils.logError(Errors.CREATE_AGREEMENT);
+      throw e;
     }
   }
 
@@ -189,8 +189,8 @@ public class AgreementUtils {
       return userAgreements;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_AGREEMENTS, e);
-      return null;
+      ApiUtils.logError(Errors.GET_AGREEMENTS);
+      throw e;
     }
   }
 
@@ -230,8 +230,8 @@ public class AgreementUtils {
       return alternateParticipantResponse;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.CREATE_ALTERNATE_PARTICIPANT_FOR_AGREEMENT, e);
-      return null;
+      ApiUtils.logError(Errors.CREATE_ALTERNATE_PARTICIPANT_FOR_AGREEMENT);
+      throw e;
     }
   }
 
@@ -248,8 +248,8 @@ public class AgreementUtils {
       return agreementInfo;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_AGREEMENT_DETAILS, e);
-      return null;
+      ApiUtils.logError(Errors.GET_AGREEMENT_DETAILS);
+      throw e;
     }
   }
 
@@ -315,8 +315,8 @@ public class AgreementUtils {
       return auditTrail;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_AUDIT_TRAIL, e);
-      return null;
+      ApiUtils.logError(Errors.GET_AUDIT_TRAIL);
+      throw e;
     }
   }
 
@@ -339,8 +339,8 @@ public class AgreementUtils {
       return responseBytes;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_COMBINED_DOCUMENT, e);
-      return null;
+      ApiUtils.logError(Errors.GET_COMBINED_DOCUMENT);
+      throw e;
     }
   }
 
@@ -361,8 +361,8 @@ public class AgreementUtils {
       return agreementDocuments;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_AGREEMENTS_DOCUMENTS, e);
-      return null;
+      ApiUtils.logError(Errors.GET_AGREEMENTS_DOCUMENTS);
+      throw e;
     }
   }
 
@@ -385,8 +385,8 @@ public class AgreementUtils {
       return docStream;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.SAVE_DOCUMENTS, e);
-      return null;
+      ApiUtils.logError(Errors.SAVE_DOCUMENTS);
+      throw e;
     }
   }
 
@@ -411,8 +411,8 @@ public class AgreementUtils {
       return null;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.CHECK_AGREEMENT_EXIST, e);
-      return null;
+      ApiUtils.logError(Errors.CHECK_AGREEMENT_EXIST);
+      throw e;
     }
   }
 
@@ -438,7 +438,7 @@ public class AgreementUtils {
 
       //List containing email ids of recipients.
       List<String> recipientSetEmailList = new ArrayList<String>();
-      recipientSetEmailList.add(Constants.USER_EMAIL);
+      recipientSetEmailList.add(ApiUtils.getUserEmail(Constants.USER_EMAIL_PREFIX,Constants.USER_EMAIL_DOMAIN));
 
       //Create agreement using the transient document.
       AgreementCreationResponse agreementCreationResponse =  AgreementUtils.createAgreement(recipientSetEmailList,
@@ -448,8 +448,8 @@ public class AgreementUtils {
       return agreementCreationResponse.getAgreementId();
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_AGREEMENT_ID, e);
-      return null;
+      ApiUtils.logError(Errors.GET_AGREEMENT_ID);
+      throw e;
     }
   }
 
@@ -468,8 +468,8 @@ public class AgreementUtils {
       return signingUrlResponse.getSigningUrlSetInfos();
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_SIGNING_URL, e);
-      return null;
+      ApiUtils.logError(Errors.GET_SIGNING_URL);
+      throw e;
     }
   }
 
@@ -503,8 +503,8 @@ public class AgreementUtils {
       return agreementCreationResponse;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.CREATE_AGREEMENT, e);
-      return null;
+      ApiUtils.logError(Errors.CREATE_AGREEMENT);
+      throw e;
     }
   }
 }

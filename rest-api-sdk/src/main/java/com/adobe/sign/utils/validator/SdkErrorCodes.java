@@ -34,7 +34,7 @@ public enum SdkErrorCodes {
   INVALID_TRANSIENTDOCUMENT_ID("The Transient Document ID specified is invalid", Response.Status.NOT_FOUND),
   INVALID_X_API_USER_HEADER("Value provided in x-api-user header is in invalid format", Response.Status.BAD_REQUEST),
   INVALID_VERSION_ID("The Version ID specified is invalid", Response.Status.NOT_FOUND),
-  MISSING_REQUIRED_PARAM("Required parameters are missing.", Response.Status.BAD_REQUEST),
+  MISSING_REQUIRED_PARAM("Required parameter is missing", Response.Status.BAD_REQUEST),
   MIN_ADDRESSES_NOT_MET("Some fields minimum entries requirement is not met.", Response.Status.BAD_REQUEST),
   MUST_PROVIDE_EMAIL("Must provide email for user creation", Response.Status.BAD_REQUEST),
   NO_ACCESS_TOKEN_HEADER("Access token header not provided", Response.Status.UNAUTHORIZED),
@@ -87,6 +87,13 @@ public enum SdkErrorCodes {
    */
   public String getMessage() {
     return message;
+  }
+
+  /**
+   * @return the textual message associated with the error code.
+   */
+  public void setMessage(String message) {
+    this.message = message;
   }
 
   /**

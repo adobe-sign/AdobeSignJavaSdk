@@ -26,19 +26,19 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WidgetUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Widgets API.
+ * Junit test cases for Get Widgets endpoint.
  */
 public class GetWidgetsApiTest {
 
   private static WidgetsApi widgetsApi = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -58,7 +58,8 @@ public class GetWidgetsApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      widgetsApi.getWidgets(ApiUtils.getNullAccessTokenHeaderParams());
+      UserWidgets userWidgets = widgetsApi.getWidgets(ApiUtils.getNullAccessTokenHeaderParams());
+      assertNotNull(userWidgets);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -66,7 +67,8 @@ public class GetWidgetsApiTest {
     }
 
     try {
-      widgetsApi.getWidgets(ApiUtils.getEmptyAccessTokenHeaderParams());
+      UserWidgets userWidgets = widgetsApi.getWidgets(ApiUtils.getEmptyAccessTokenHeaderParams());
+      assertNotNull(userWidgets);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -83,7 +85,8 @@ public class GetWidgetsApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      widgetsApi.getWidgets(ApiUtils.getEmptyXApiUserHeaderParams());
+      UserWidgets userWidgets = widgetsApi.getWidgets(ApiUtils.getEmptyXApiUserHeaderParams());
+      assertNotNull(userWidgets);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -107,8 +110,6 @@ public class GetWidgetsApiTest {
       fail(ApiUtils.getMessage(e));
     }
   }
-
-
 
 
 }

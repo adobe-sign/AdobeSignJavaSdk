@@ -19,24 +19,24 @@ import static org.junit.Assert.fail;
 
 import com.adobe.sign.api.GroupsApi;
 import com.adobe.sign.model.groups.GroupCreationInfo;
+import com.adobe.sign.model.groups.GroupCreationResponse;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.GroupUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Post Groups API.
+ * Junit test cases for Create Groups endpoint.
  */
-public class PostGroupsApiTest {
-  
-  private static GroupsApi groupsApi = null;
+public class CreateGroupsApiTest {
 
+  private static GroupsApi groupsApi = null;
 
 
   @Rule
@@ -52,7 +52,7 @@ public class PostGroupsApiTest {
    * Test for creating group through the createGroup endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
    * INVALID_ACCESS_TOKEN: empty access token.
-   * 
+   *
    * @throws ApiException
    */
   @Test
@@ -61,19 +61,21 @@ public class PostGroupsApiTest {
     groupCreationInfo.setGroupName(ApiUtils.getGroupName());
 
     try {
-      groupsApi.createGroup(ApiUtils.getNullAccessTokenHeaderParams(),
-                            groupCreationInfo);
+      GroupCreationResponse groupCreationResponse = groupsApi.createGroup(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                          groupCreationInfo);
+      assertNotNull(groupCreationResponse);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      groupsApi.createGroup(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                            groupCreationInfo);
+      GroupCreationResponse groupCreationResponse = groupsApi.createGroup(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                          groupCreationInfo);
+      assertNotNull(groupCreationResponse);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
     }
@@ -82,7 +84,7 @@ public class PostGroupsApiTest {
   /**
    * Test for creating group through the createGroup endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
-   * 
+   *
    * @throws ApiException
    */
   @Test
@@ -91,10 +93,11 @@ public class PostGroupsApiTest {
     groupCreationInfo.setGroupName(ApiUtils.getGroupName());
 
     try {
-      groupsApi.createGroup(ApiUtils.getValidHeaderParams(),
-                            groupCreationInfo);
+      GroupCreationResponse groupCreationResponse = groupsApi.createGroup(ApiUtils.getValidHeaderParams(),
+                                                                          groupCreationInfo);
+      assertNotNull(groupCreationResponse);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
@@ -103,7 +106,7 @@ public class PostGroupsApiTest {
   /**
    * Test for creating group through the createGroup endpoint.
    * Case covered: Successful creation of group.
-   * 
+   *
    * @throws ApiException
    */
   @Test
@@ -112,14 +115,15 @@ public class PostGroupsApiTest {
     groupCreationInfo.setGroupName(ApiUtils.getGroupName());
 
     try {
-      String groupId = groupsApi.createGroup(ApiUtils.getValidHeaderParams(),
-                                             groupCreationInfo).getGroupId();
+      GroupCreationResponse groupCreationResponse = groupsApi.createGroup(ApiUtils.getValidHeaderParams(),
+                                                                          groupCreationInfo);
+      assertNotNull(groupCreationResponse);
+      String groupId = groupCreationResponse.getGroupId();
       assertNotNull(groupId);
-
       groupsApi.deleteGroup(ApiUtils.getValidHeaderParams(),
                             groupId);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       fail(ApiUtils.getMessage(e));
     }
   }
@@ -128,7 +132,7 @@ public class PostGroupsApiTest {
    * Test for creating group through the createGroup endpoint. Negative scenarios covered:
    * INVALID_GROUP_NAME: empty group name.
    * MISSING_REQUIRED_PARAM: null groupname.
-   * 
+   *
    * @throws ApiException
    */
   @Test
@@ -137,10 +141,11 @@ public class PostGroupsApiTest {
     groupCreationInfo.setGroupName(TestData.EMPTY_PARAM);
 
     try {
-      groupsApi.createGroup(ApiUtils.getValidHeaderParams(),
-                            groupCreationInfo).getGroupId();
+      GroupCreationResponse groupCreationResponse = groupsApi.createGroup(ApiUtils.getValidHeaderParams(),
+                                                                          groupCreationInfo);
+      assertNotNull(groupCreationResponse);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_GROUP_NAME.getApiCode().equals(e.getApiCode()));
     }
@@ -148,10 +153,11 @@ public class PostGroupsApiTest {
     groupCreationInfo.setGroupName(TestData.NULL_PARAM);
 
     try {
-      groupsApi.createGroup(ApiUtils.getValidHeaderParams(),
-                            groupCreationInfo);
+      GroupCreationResponse groupCreationResponse = groupsApi.createGroup(ApiUtils.getValidHeaderParams(),
+                                                                          groupCreationInfo);
+      assertNotNull(groupCreationResponse);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_GROUP_NAME.getApiCode().equals(e.getApiCode()));
     }

@@ -41,6 +41,7 @@ public class DownloadAuditTrail {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.DOWNLOAD_AUDIT_TRAIL, e);
+      throw e;
     }
   }
 
@@ -49,7 +50,7 @@ public class DownloadAuditTrail {
    */
   private void run() throws ApiException{
     //Get agreement ID
-    String agreementId = AgreementUtils.getAgreementId(Constants.AGREEMENT_NAME);
+    String agreementId = AgreementUtils.getAgreementId(ApiUtils.getAgreementName(Constants.AGREEMENT_NAME));
 
     //Display name of the agreement associated with the specified agreement ID.
     AgreementInfo agreementInfo = AgreementUtils.getAgreementInfo(agreementId);

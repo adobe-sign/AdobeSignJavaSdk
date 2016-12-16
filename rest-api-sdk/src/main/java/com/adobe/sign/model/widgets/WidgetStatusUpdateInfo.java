@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class WidgetStatusUpdateInfo   {
   
   private String message = null;
@@ -52,9 +52,16 @@ public enum ValueEnum {
    **/
   @ApiModelProperty(required = true, value = "Display this custom message to the user when the widget is accessed. Note that this can contain wiki markup to include clickable links in the message. This is required if redirectUrl is not provided. Both message and redirectUrl can not be specified.")
   @JsonProperty("message")
+  /**
+   * @return String
+   **/
   public String getMessage() {
     return message;
   }
+  /**
+   * Display this custom message to the user when the widget is accessed. Note that this can contain wiki markup to include clickable links in the message. This is required if redirectUrl is not provided. Both message and redirectUrl can not be specified.
+   * @param message
+   **/
   public void setMessage(String message) {
     this.message = message;
   }
@@ -65,9 +72,16 @@ public enum ValueEnum {
    **/
   @ApiModelProperty(required = true, value = "Redirect the user to this URL when the widget is accessed. This is required if message is not provided. Both message and redirectUrl can not be specified.")
   @JsonProperty("redirectUrl")
+  /**
+   * @return String
+   **/
   public String getRedirectUrl() {
     return redirectUrl;
   }
+  /**
+   * Redirect the user to this URL when the widget is accessed. This is required if message is not provided. Both message and redirectUrl can not be specified.
+   * @param redirectUrl
+   **/
   public void setRedirectUrl(String redirectUrl) {
     this.redirectUrl = redirectUrl;
   }
@@ -78,9 +92,16 @@ public enum ValueEnum {
    **/
   @ApiModelProperty(required = true, value = "The status to which the widget is to be updated. The possible values for this variable are ENABLE and DISABLE")
   @JsonProperty("value")
+  /**
+   * @return ValueEnum
+   **/
   public ValueEnum getValue() {
     return value;
   }
+  /**
+   * The status to which the widget is to be updated. The possible values for this variable are ENABLE and DISABLE
+   * @param value
+   **/
   public void setValue(ValueEnum value) {
     this.value = value;
   }
@@ -88,6 +109,10 @@ public enum ValueEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetStatusUpdateInfo {\n");

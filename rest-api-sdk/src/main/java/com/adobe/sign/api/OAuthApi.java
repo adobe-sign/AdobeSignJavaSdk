@@ -46,8 +46,8 @@ public class OAuthApi {
    * @throws ApiException
    */
   public String getAuthorizationUrl(AuthorizationRequest authorizationRequest) throws ApiException {
-    String baseUri = apiClient.getEnvHostName();
-    String subPath = "/public/oauth";
+    String baseUri = apiClient.getEnvHostName().replace("api","secure");
+    String subPath = "public/oauth";
 
     //Validate Request
     OAuthApiValidator.getAuthorizationUrlValidator(authorizationRequest);
@@ -69,7 +69,7 @@ public class OAuthApi {
     OAuthApiValidator.getAccessTokenValidator(accessTokenRequest);
 
     //Create path and map variables
-    String path = "/oauth/token";
+    String path = "oauth/token";
 
     Object postBody = null;
     byte[] postBinaryBody = null;
@@ -118,7 +118,7 @@ public class OAuthApi {
     //Validate Request
     OAuthApiValidator.refreshAccessTokenValidator(accessTokenRefreshRequest);
     //Create path and map variables
-    String path = "/oauth/refresh";
+    String path = "oauth/refresh";
 
     Object postBody = null;
     byte[] postBinaryBody = null;
@@ -165,7 +165,7 @@ public class OAuthApi {
     OAuthApiValidator.revokeTokenValidator(token);
 
     //Create path and map variables
-    String path = "/oauth/revoke";
+    String path = "oauth/revoke";
 
     Object postBody = null;
     byte[] postBinaryBody = null;

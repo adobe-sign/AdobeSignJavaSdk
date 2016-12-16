@@ -32,21 +32,21 @@ import com.adobe.sign.utils.MegaSignUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.TransientDocumentsUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Post MegaSign APIs.
+ * Junit test cases for Create MegaSign endpoint.
  */
-public class PostMegaSignApiTest {
-  
+public class CreateMegaSignApiTest {
+
   private static MegaSignsApi megaSignsApi = null;
   private static String libraryDocumentId = null;
   private static String transientDocumentId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -71,16 +71,18 @@ public class PostMegaSignApiTest {
     MegaSignCreationRequest megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME);
 
     try {
-      megaSignsApi.createMegaSign(ApiUtils.getNullAccessTokenHeaderParams(),
-                                  megaSignCreationRequest);
+      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                                      megaSignCreationRequest);
+      assertNotNull(megaSignCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      megaSignsApi.createMegaSign(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                  megaSignCreationRequest);
+      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                                      megaSignCreationRequest);
+      assertNotNull(megaSignCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
@@ -101,8 +103,9 @@ public class PostMegaSignApiTest {
   @Test
   public void testInvalidMegaSignCreationInfo() throws ApiException {
     try {
-      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
-                                  null);
+      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                                                                      null);
+      assertNotNull(megaSignCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
@@ -111,8 +114,9 @@ public class PostMegaSignApiTest {
     MegaSignCreationRequest megaSignCreationRequest = getMegaSignCreationRequest(TestData.NULL_PARAM);
 
     try {
-      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
-                                  megaSignCreationRequest);
+      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                                                                      megaSignCreationRequest);
+      assertNotNull(megaSignCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
@@ -122,8 +126,9 @@ public class PostMegaSignApiTest {
     megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME, fileInfo);
 
     try {
-      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
-                                  megaSignCreationRequest);
+      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                                                                      megaSignCreationRequest);
+      assertNotNull(megaSignCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_FILE_INFO.getApiCode().equals(e.getApiCode()));
@@ -136,8 +141,9 @@ public class PostMegaSignApiTest {
     megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME, fileInfo);
 
     try {
-      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
-                                  megaSignCreationRequest);
+      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                                                                      megaSignCreationRequest);
+      assertNotNull(megaSignCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.URL_INVALID.getApiCode().equals(e.getApiCode()));
@@ -150,8 +156,9 @@ public class PostMegaSignApiTest {
     megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME, fileInfo);
 
     try {
-      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
-                                  megaSignCreationRequest);
+      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                                                                      megaSignCreationRequest);
+      assertNotNull(megaSignCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_FILE_INFO.getApiCode().equals(e.getApiCode()));
@@ -163,8 +170,9 @@ public class PostMegaSignApiTest {
     megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME, options);
 
     try {
-      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
-                                  megaSignCreationRequest);
+      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                                                                      megaSignCreationRequest);
+      assertNotNull(megaSignCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.EMPTY_REDIRECT_URL.getApiCode().equals(e.getApiCode()));
@@ -174,8 +182,9 @@ public class PostMegaSignApiTest {
     megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME, options);
 
     try {
-      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
-                                  megaSignCreationRequest);
+      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                                                                      megaSignCreationRequest);
+      assertNotNull(megaSignCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_REDIRECT_URL.getApiCode().equals(e.getApiCode()));
@@ -187,8 +196,9 @@ public class PostMegaSignApiTest {
     megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME, options);
 
     try {
-      megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
-                                  megaSignCreationRequest);
+      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(ApiUtils.getValidHeaderParams(),
+                                                                                      megaSignCreationRequest);
+      assertNotNull(megaSignCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_REDIRECT_DELAY.getApiCode().equals(e.getApiCode()));
@@ -206,8 +216,9 @@ public class PostMegaSignApiTest {
     MegaSignCreationRequest megaSignCreationRequest = getMegaSignCreationRequest(TestData.MEGASIGN_NAME);
 
     try {
-      megaSignsApi.createMegaSign(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                  megaSignCreationRequest);
+      MegaSignCreationResponse megaSignCreationResponse = megaSignsApi.createMegaSign(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                                      megaSignCreationRequest);
+      assertNotNull(megaSignCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));

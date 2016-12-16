@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:59.159+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.906+05:30")
 public class ReminderCreationInfo   {
   
   private String agreementId = null;
@@ -34,9 +34,16 @@ public class ReminderCreationInfo   {
    **/
   @ApiModelProperty(required = true, value = "The agreement identifier")
   @JsonProperty("agreementId")
+  /**
+   * @return String
+   **/
   public String getAgreementId() {
     return agreementId;
   }
+  /**
+   * The agreement identifier
+   * @param agreementId
+   **/
   public void setAgreementId(String agreementId) {
     this.agreementId = agreementId;
   }
@@ -47,9 +54,16 @@ public class ReminderCreationInfo   {
    **/
   @ApiModelProperty(value = "An optional message sent to the recipients, describing what is being sent and why their signatures are required.")
   @JsonProperty("comment")
+  /**
+   * @return String
+   **/
   public String getComment() {
     return comment;
   }
+  /**
+   * An optional message sent to the recipients, describing what is being sent and why their signatures are required.
+   * @param comment
+   **/
   public void setComment(String comment) {
     this.comment = comment;
   }
@@ -57,6 +71,10 @@ public class ReminderCreationInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class ReminderCreationInfo {\n");

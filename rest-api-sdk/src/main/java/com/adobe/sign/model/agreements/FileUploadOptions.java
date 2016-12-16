@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class FileUploadOptions   {
   
   private Boolean libraryDocument = null;
@@ -35,9 +35,16 @@ public class FileUploadOptions   {
    **/
   @ApiModelProperty(value = "Whether library documents link should appear or not. Default value is taken as true")
   @JsonProperty("libraryDocument")
+  /**
+   * @return Boolean
+   **/
   public Boolean getLibraryDocument() {
     return libraryDocument;
   }
+  /**
+   * Whether library documents link should appear or not. Default value is taken as true
+   * @param libraryDocument
+   **/
   public void setLibraryDocument(Boolean libraryDocument) {
     this.libraryDocument = libraryDocument;
   }
@@ -48,9 +55,16 @@ public class FileUploadOptions   {
    **/
   @ApiModelProperty(value = "Whether local file upload button should appear or not. Default value is taken as true")
   @JsonProperty("localFile")
+  /**
+   * @return Boolean
+   **/
   public Boolean getLocalFile() {
     return localFile;
   }
+  /**
+   * Whether local file upload button should appear or not. Default value is taken as true
+   * @param localFile
+   **/
   public void setLocalFile(Boolean localFile) {
     this.localFile = localFile;
   }
@@ -61,9 +75,16 @@ public class FileUploadOptions   {
    **/
   @ApiModelProperty(value = "Whether link to attach documents from web sources like Dropbox should appear or not. Default value is taken as true")
   @JsonProperty("webConnectors")
+  /**
+   * @return Boolean
+   **/
   public Boolean getWebConnectors() {
     return webConnectors;
   }
+  /**
+   * Whether link to attach documents from web sources like Dropbox should appear or not. Default value is taken as true
+   * @param webConnectors
+   **/
   public void setWebConnectors(Boolean webConnectors) {
     this.webConnectors = webConnectors;
   }
@@ -71,6 +92,10 @@ public class FileUploadOptions   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class FileUploadOptions {\n");

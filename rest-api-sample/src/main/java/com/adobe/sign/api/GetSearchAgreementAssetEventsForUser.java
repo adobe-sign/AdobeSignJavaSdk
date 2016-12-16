@@ -42,6 +42,7 @@ public class GetSearchAgreementAssetEventsForUser {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.SEARCH_AGREEMENT_ASSET_EVENT_FOR_USER, e);
+      throw e;
     }
   }
 
@@ -51,8 +52,8 @@ public class GetSearchAgreementAssetEventsForUser {
   private void run() throws ApiException{
 
     //Make API call to create the search for agreementAssetEvent
-    AgreementAssetEventPostResponse agreementAssetEventPostResponse = SearchUtils.createSearchForAgreementAssetEvent(Constants.START_DATE,
-                                                                                                                     Constants.END_DATE);
+    AgreementAssetEventPostResponse agreementAssetEventPostResponse = SearchUtils.createSearchForAgreementAssetEvent(ApiUtils.getDate(Constants.DAYS_BETWEEN_START_DATE_AND_CURRENT_DATE),
+                                                                                                                     ApiUtils.getDate(Constants.DAYS_BETWEEN_END_DATE_AND_CURRENT_DATE));
     //Display events on page referenced by currentPageCursor
     SearchUtils.printEvents(agreementAssetEventPostResponse.getEvents());
 

@@ -34,7 +34,7 @@ import com.adobe.sign.model.widgets.WidgetStatusUpdateInfo;
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
     public class WidgetsApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -52,8 +52,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: widget_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: widget_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @return UserWidgets
     */
@@ -119,8 +119,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: widget_write 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: widget_write 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param widgetCreationRequest Information about the widget that you want to create.
     * @return WidgetCreationResponse
@@ -188,8 +188,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: widget_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: widget_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @return WidgetInfo
@@ -258,8 +258,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: widget_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: widget_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @return WidgetAgreements
@@ -328,8 +328,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * PDF file stream containing audit trail information
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: widget_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: widget_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @return byte[]
@@ -398,8 +398,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * A File Stream of combined PDF document
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: widget_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: widget_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @param versionId The version identifier of widget as provided by the API which retrieves information of a specific widget. If not provided then latest version will be used.
@@ -480,8 +480,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: widget_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: widget_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @param versionId The version identifier of widget as provided by the API which retrieves information of a specific widget. If not provided then latest version will be used.
@@ -558,8 +558,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * Raw stream of the file
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: widget_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: widget_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @param documentId The document identifier, as retrieved from the API which fetches the documents of a specified widget
@@ -631,8 +631,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * CSV file stream containing form data information
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: widget_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: widget_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @return byte[]
@@ -701,8 +701,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: widget_write 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: widget_write 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @param widgetPersonalizationInfo Widget Personalize update information object
@@ -773,8 +773,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: widget_write 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: widget_write 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param widgetId The widget identifier, as returned by the widget creation API or retrieved from the API to fetch widgets.
     * @param widgetStatusUpdateInfo Widget status update information object.

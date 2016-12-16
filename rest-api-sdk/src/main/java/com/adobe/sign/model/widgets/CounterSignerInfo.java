@@ -14,8 +14,8 @@
 package com.adobe.sign.model.widgets;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.widgets.WidgetSignerSecurityOption;
 import java.util.*;
+import com.adobe.sign.model.widgets.WidgetSignerSecurityOption;
 
 
 
@@ -24,11 +24,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class CounterSignerInfo   {
   
   private String email = null;
-  private List<WidgetSignerSecurityOption> securityOptions = new ArrayList<WidgetSignerSecurityOption>();
+  private List<WidgetSignerSecurityOption> securityOptions = null;
 
   
   /**
@@ -36,9 +36,16 @@ public class CounterSignerInfo   {
    **/
   @ApiModelProperty(required = true, value = "Email of the recipient")
   @JsonProperty("email")
+  /**
+   * @return String
+   **/
   public String getEmail() {
     return email;
   }
+  /**
+   * Email of the recipient
+   * @param email
+   **/
   public void setEmail(String email) {
     this.email = email;
   }
@@ -49,9 +56,16 @@ public class CounterSignerInfo   {
    **/
   @ApiModelProperty(value = "Security options that apply to the counter signers")
   @JsonProperty("securityOptions")
+  /**
+   * @return List&lt;WidgetSignerSecurityOption&gt;
+   **/
   public List<WidgetSignerSecurityOption> getSecurityOptions() {
     return securityOptions;
   }
+  /**
+   * Security options that apply to the counter signers
+   * @param securityOptions
+   **/
   public void setSecurityOptions(List<WidgetSignerSecurityOption> securityOptions) {
     this.securityOptions = securityOptions;
   }
@@ -59,6 +73,10 @@ public class CounterSignerInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class CounterSignerInfo {\n");

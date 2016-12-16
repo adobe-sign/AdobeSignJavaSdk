@@ -24,20 +24,20 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Agreement Combined Document API.
+ * Junit test cases for Get Agreement Combined Document endpoint.
  */
 public class GetAgreementCombinedDocumentApiTest {
 
   private static AgreementsApi agreementsApi = null;
   private static String agreementId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -47,6 +47,7 @@ public class GetAgreementCombinedDocumentApiTest {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
+
   /**
    * Test for fetching a single combined PDF document for the documents associated with an agreement through the getCombinedDocument endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -59,12 +60,13 @@ public class GetAgreementCombinedDocumentApiTest {
 
 
     try {
-      agreementsApi.getCombinedDocument(ApiUtils.getNullAccessTokenHeaderParams(),
-                                        agreementId,
-                                        TestData.VERSION_ID,
-                                        TestData.PARTICIPANT_EMAIL,
-                                        TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                        TestData.AUDIT_REPORT);
+      byte[] combinedDocument = agreementsApi.getCombinedDocument(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                  agreementId,
+                                                                  TestData.VERSION_ID,
+                                                                  TestData.PARTICIPANT_EMAIL,
+                                                                  TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                  TestData.AUDIT_REPORT);
+      assertNotNull(combinedDocument);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -72,18 +74,20 @@ public class GetAgreementCombinedDocumentApiTest {
     }
 
     try {
-      agreementsApi.getCombinedDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                        agreementId,
-                                        TestData.VERSION_ID,
-                                        TestData.PARTICIPANT_EMAIL,
-                                        TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                        TestData.AUDIT_REPORT);
+      byte[] combinedDocument = agreementsApi.getCombinedDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                  agreementId,
+                                                                  TestData.VERSION_ID,
+                                                                  TestData.PARTICIPANT_EMAIL,
+                                                                  TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                  TestData.AUDIT_REPORT);
+      assertNotNull(combinedDocument);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching a single combined PDF document for the documents associated with an agreement through the getCombinedDocument endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -94,18 +98,20 @@ public class GetAgreementCombinedDocumentApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                        agreementId,
-                                        TestData.VERSION_ID,
-                                        TestData.PARTICIPANT_EMAIL,
-                                        TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                        TestData.AUDIT_REPORT);
+      byte[] combinedDocument = agreementsApi.getCombinedDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                  agreementId,
+                                                                  TestData.VERSION_ID,
+                                                                  TestData.PARTICIPANT_EMAIL,
+                                                                  TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                  TestData.AUDIT_REPORT);
+      assertNotNull(combinedDocument);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching a single combined PDF document for the documents associated with an agreement through the getCombinedDocument endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: empty and null agreementId.
@@ -116,12 +122,13 @@ public class GetAgreementCombinedDocumentApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocument(ApiUtils.getValidHeaderParams(),
-                                        TestData.EMPTY_PARAM,
-                                        TestData.VERSION_ID,
-                                        TestData.PARTICIPANT_EMAIL,
-                                        TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                        TestData.AUDIT_REPORT);
+      byte[] combinedDocument = agreementsApi.getCombinedDocument(ApiUtils.getValidHeaderParams(),
+                                                                  TestData.EMPTY_PARAM,
+                                                                  TestData.VERSION_ID,
+                                                                  TestData.PARTICIPANT_EMAIL,
+                                                                  TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                  TestData.AUDIT_REPORT);
+      assertNotNull(combinedDocument);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -129,18 +136,20 @@ public class GetAgreementCombinedDocumentApiTest {
     }
 
     try {
-      agreementsApi.getCombinedDocument(ApiUtils.getValidHeaderParams(),
-                                        TestData.NULL_PARAM,
-                                        TestData.VERSION_ID,
-                                        TestData.PARTICIPANT_EMAIL,
-                                        TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                        TestData.AUDIT_REPORT);
+      byte[] combinedDocument = agreementsApi.getCombinedDocument(ApiUtils.getValidHeaderParams(),
+                                                                  TestData.NULL_PARAM,
+                                                                  TestData.VERSION_ID,
+                                                                  TestData.PARTICIPANT_EMAIL,
+                                                                  TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                  TestData.AUDIT_REPORT);
+      assertNotNull(combinedDocument);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching a single combined PDF document for the documents associated with an agreement through the getCombinedDocument endpoint. Negative scenarios covered:
    * INVALID_VERSION_ID: empty versionId.
@@ -151,18 +160,20 @@ public class GetAgreementCombinedDocumentApiTest {
   public void testInvalidVersionId() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocument(ApiUtils.getValidHeaderParams(),
-                                        agreementId,
-                                        TestData.EMPTY_PARAM,
-                                        TestData.PARTICIPANT_EMAIL,
-                                        TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                        TestData.AUDIT_REPORT);
+      byte[] combinedDocument = agreementsApi.getCombinedDocument(ApiUtils.getValidHeaderParams(),
+                                                                  agreementId,
+                                                                  TestData.EMPTY_PARAM,
+                                                                  TestData.PARTICIPANT_EMAIL,
+                                                                  TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                  TestData.AUDIT_REPORT);
+      assertNotNull(combinedDocument);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_VERSION_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching a single combined PDF document for the documents associated with an agreement through the getCombinedDocument endpoint. Negative scenarios covered:
    * INVALID_PARTICIPANT: empty participantId.
@@ -173,17 +184,20 @@ public class GetAgreementCombinedDocumentApiTest {
   public void testInvalidParticipantEmail() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocument(ApiUtils.getValidHeaderParams(),
-                                        agreementId,
-                                        TestData.VERSION_ID,
-                                        TestData.EMPTY_PARAM,
-                                        TestData.ATTACH_SUPPORTING_DOCUMENTS,
-                                        TestData.AUDIT_REPORT);
-    } catch (ApiException e) {
+      byte[] combinedDocument = agreementsApi.getCombinedDocument(ApiUtils.getValidHeaderParams(),
+                                                                  agreementId,
+                                                                  TestData.VERSION_ID,
+                                                                  TestData.EMPTY_PARAM,
+                                                                  TestData.ATTACH_SUPPORTING_DOCUMENTS,
+                                                                  TestData.AUDIT_REPORT);
+      assertNotNull(combinedDocument);
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_PARTICIPANT.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching a single combined PDF document for the documents associated with an agreement through the getCombinedDocument endpoint.
    * Case covered is successful execution of the api call.

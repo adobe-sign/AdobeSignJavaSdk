@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class AgreementStatusUpdateResponse   {
   
   private String result = null;
@@ -33,9 +33,16 @@ public class AgreementStatusUpdateResponse   {
    **/
   @ApiModelProperty(required = true, value = "A status value showing the result of this operation")
   @JsonProperty("result")
+  /**
+   * @return String
+   **/
   public String getResult() {
     return result;
   }
+  /**
+   * A status value showing the result of this operation
+   * @param result
+   **/
   public void setResult(String result) {
     this.result = result;
   }
@@ -43,6 +50,10 @@ public class AgreementStatusUpdateResponse   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class AgreementStatusUpdateResponse {\n");

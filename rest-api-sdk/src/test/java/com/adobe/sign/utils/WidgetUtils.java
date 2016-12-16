@@ -27,11 +27,10 @@ import com.adobe.sign.model.widgets.WidgetFileInfo;
 import com.adobe.sign.model.widgets.WidgetOriginalDocument;
 import com.adobe.sign.model.widgets.WidgetURLFileInfo;
 
-public class WidgetUtils extends ApiUtils{
+public class WidgetUtils {
   private static WidgetsApi widgetsApi = new WidgetsApi();
   private static MultivaluedMap headers = ApiUtils.getValidHeaderParams();
 
-  private static String documentId = null;
   private static String widgetId = null;
 
   public static String getResourceId(String widgetName) throws ApiException {
@@ -39,7 +38,6 @@ public class WidgetUtils extends ApiUtils{
     if (!isExistingWidget(widgetName))
       widgetId=createWidget(widgetName);
 
-    setDocumentId(widgetId);
     return widgetId;
   }
 
@@ -132,7 +130,7 @@ public class WidgetUtils extends ApiUtils{
     return false;
   }
 
-  private static void setDocumentId(String widgetId) throws ApiException {
+  public static String getFirstDocumentId() throws ApiException {
     WidgetDocuments documentsSubResource = null;
 
     documentsSubResource = widgetsApi.getWidgetDocuments (headers,
@@ -140,15 +138,11 @@ public class WidgetUtils extends ApiUtils{
                                                           TestData.VERSION_ID,
                                                           TestData.PARTICIPANT_EMAIL);
     List<WidgetOriginalDocument> widgetsDocumentsList = documentsSubResource.getDocuments();
-    documentId = widgetsDocumentsList.get(0).getDocumentId();
+    return widgetsDocumentsList.get(0).getDocumentId();
   }
 
   public static WidgetsApi getWidgetsApi() {
     return widgetsApi;
-  }
-
-  public static String getDocumentId() {
-    return documentId;
   }
 
 }

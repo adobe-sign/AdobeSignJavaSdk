@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * A JSON object describing the personalize widget
  **/
 @ApiModel(description = "A JSON object describing the personalize widget")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class WidgetPersonalizeResponse   {
   
   private String javascript = null;
@@ -38,9 +38,16 @@ public class WidgetPersonalizeResponse   {
    **/
   @ApiModelProperty(required = true, value = "Javascript snippet suitable for an embedded page taking a user to a URL")
   @JsonProperty("javascript")
+  /**
+   * @return String
+   **/
   public String getJavascript() {
     return javascript;
   }
+  /**
+   * Javascript snippet suitable for an embedded page taking a user to a URL
+   * @param javascript
+   **/
   public void setJavascript(String javascript) {
     this.javascript = javascript;
   }
@@ -51,9 +58,16 @@ public class WidgetPersonalizeResponse   {
    **/
   @ApiModelProperty(required = true, value = "Standalone URL to direct end users to")
   @JsonProperty("url")
+  /**
+   * @return String
+   **/
   public String getUrl() {
     return url;
   }
+  /**
+   * Standalone URL to direct end users to
+   * @param url
+   **/
   public void setUrl(String url) {
     this.url = url;
   }
@@ -64,9 +78,16 @@ public class WidgetPersonalizeResponse   {
    **/
   @ApiModelProperty(required = true, value = "The unique identifier of widget which can be used to retrieve the data entered by the signers.")
   @JsonProperty("widgetId")
+  /**
+   * @return String
+   **/
   public String getWidgetId() {
     return widgetId;
   }
+  /**
+   * The unique identifier of widget which can be used to retrieve the data entered by the signers.
+   * @param widgetId
+   **/
   public void setWidgetId(String widgetId) {
     this.widgetId = widgetId;
   }
@@ -74,6 +95,10 @@ public class WidgetPersonalizeResponse   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetPersonalizeResponse {\n");

@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.999+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:33.254+05:30")
 public class UserStatusUpdateResponse   {
   
 
@@ -75,9 +75,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The result of the attempt to activate or deactivate the user")
   @JsonProperty("code")
+  /**
+   * @return CodeEnum
+   **/
   public CodeEnum getCode() {
     return code;
   }
+  /**
+   * The result of the attempt to activate or deactivate the user
+   * @param code
+   **/
   public void setCode(CodeEnum code) {
     this.code = code;
   }
@@ -88,9 +95,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "String result message if there was no error")
   @JsonProperty("message")
+  /**
+   * @return String
+   **/
   public String getMessage() {
     return message;
   }
+  /**
+   * String result message if there was no error
+   * @param message
+   **/
   public void setMessage(String message) {
     this.message = message;
   }
@@ -101,9 +115,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(required = true, value = "A status value showing the result of this operation")
   @JsonProperty("userStatus")
+  /**
+   * @return UserStatusEnum
+   **/
   public UserStatusEnum getUserStatus() {
     return userStatus;
   }
+  /**
+   * A status value showing the result of this operation
+   * @param userStatus
+   **/
   public void setUserStatus(UserStatusEnum userStatus) {
     this.userStatus = userStatus;
   }
@@ -111,6 +132,10 @@ public enum UserStatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserStatusUpdateResponse {\n");

@@ -14,8 +14,8 @@
 package com.adobe.sign.model.reminders;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.reminders.ParticipantEmailInfo;
 import java.util.*;
+import com.adobe.sign.model.reminders.ParticipantEmailInfo;
 
 
 
@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:59.159+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.906+05:30")
 public class ParticipantEmailSetInfo   {
   
-  private List<ParticipantEmailInfo> participantEmailSetInfo = new ArrayList<ParticipantEmailInfo>();
+  private List<ParticipantEmailInfo> participantEmailSetInfo = null;
 
   
   /**
@@ -35,9 +35,16 @@ public class ParticipantEmailSetInfo   {
    **/
   @ApiModelProperty(required = true, value = "The info about the members of the participant set")
   @JsonProperty("participantEmailSetInfo")
+  /**
+   * @return List&lt;ParticipantEmailInfo&gt;
+   **/
   public List<ParticipantEmailInfo> getParticipantEmailSetInfo() {
     return participantEmailSetInfo;
   }
+  /**
+   * The info about the members of the participant set
+   * @param participantEmailSetInfo
+   **/
   public void setParticipantEmailSetInfo(List<ParticipantEmailInfo> participantEmailSetInfo) {
     this.participantEmailSetInfo = participantEmailSetInfo;
   }
@@ -45,6 +52,10 @@ public class ParticipantEmailSetInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class ParticipantEmailSetInfo {\n");

@@ -50,8 +50,8 @@ public class MegaSignUtils {
       return megaSigns;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_MEGASIGNS, e);
-      return null;
+      ApiUtils.logError(Errors.GET_MEGASIGNS);
+      throw e;
     }
   }
 
@@ -132,8 +132,8 @@ public class MegaSignUtils {
       return megaSignCreationResponse;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.CREATE_MEGASIGN, e);
-      return null;
+      ApiUtils.logError(Errors.CREATE_MEGASIGN);
+      throw e;
     }
   }
 
@@ -149,8 +149,8 @@ public class MegaSignUtils {
       return megaSignInfo;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_MEGASIGN_DETAILS, e);
-      return null;
+      ApiUtils.logError(Errors.GET_MEGASIGN_DETAILS);
+      throw e;
     }
   }
 
@@ -164,7 +164,7 @@ public class MegaSignUtils {
     MegaSignCreationInfo megaSignCreationInfo = new MegaSignCreationInfo();
     megaSignCreationInfo.setRecipientSetInfos(recipientSetInfos);
     megaSignCreationInfo.setFileInfos(fileInfos);
-    megaSignCreationInfo.setName(Constants.MEGASIGN_NAME);
+    megaSignCreationInfo.setName(ApiUtils.getMegaSignName(Constants.MEGASIGN_NAME));
     megaSignCreationInfo.setSignatureType(MegaSignCreationInfo.SignatureTypeEnum.ESIGN);
 
     return megaSignCreationInfo;

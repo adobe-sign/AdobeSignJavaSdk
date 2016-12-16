@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class WidgetCompletionInfo   {
   
   private Boolean deframe = null;
@@ -35,9 +35,16 @@ public class WidgetCompletionInfo   {
    **/
   @ApiModelProperty(value = "If deframe is false, the success page will be shown inside the widget frame. If deframe is true, the success page will be shown in the full browser window. Note that if this widget is loaded through javascript returned from this end point, browser security restrictions do not permit automatic redirection in the full browser window, so if deframe is true the user will instead just see a link to the success page. We recommend this scenario be avoided - in other words, setting deframe to false is recommended for this case.")
   @JsonProperty("deframe")
+  /**
+   * @return Boolean
+   **/
   public Boolean getDeframe() {
     return deframe;
   }
+  /**
+   * If deframe is false, the success page will be shown inside the widget frame. If deframe is true, the success page will be shown in the full browser window. Note that if this widget is loaded through javascript returned from this end point, browser security restrictions do not permit automatic redirection in the full browser window, so if deframe is true the user will instead just see a link to the success page. We recommend this scenario be avoided - in other words, setting deframe to false is recommended for this case.
+   * @param deframe
+   **/
   public void setDeframe(Boolean deframe) {
     this.deframe = deframe;
   }
@@ -48,9 +55,16 @@ public class WidgetCompletionInfo   {
    **/
   @ApiModelProperty(value = "The delay (in seconds) before the user is taken to the success page. If this value is greater than 0, the user will first see the standard Adobe Sign success message, and then after a delay will be redirected to your success page. Note that this parameter has no effect for widgets loaded with javascript when deframe is true.")
   @JsonProperty("delay")
+  /**
+   * @return Integer
+   **/
   public Integer getDelay() {
     return delay;
   }
+  /**
+   * The delay (in seconds) before the user is taken to the success page. If this value is greater than 0, the user will first see the standard Adobe Sign success message, and then after a delay will be redirected to your success page. Note that this parameter has no effect for widgets loaded with javascript when deframe is true.
+   * @param delay
+   **/
   public void setDelay(Integer delay) {
     this.delay = delay;
   }
@@ -61,9 +75,16 @@ public class WidgetCompletionInfo   {
    **/
   @ApiModelProperty(required = true, value = "A publicly accessible url to which the user will be sent after successfully completing the widget. If the URL you provide includes information that allows you to identify the specific transaction, such as your own unique identifier, you can use the browser request to this URL as a callback to notify you that this transaction is completed. In addition, Adobe Sign will append a documentKey parameter to the URL which will contain the Adobe Sign DocumentKey for this signed widget, but only if the sender is the same as the API key user. Your application can use this value to get the form data for this widget.")
   @JsonProperty("url")
+  /**
+   * @return String
+   **/
   public String getUrl() {
     return url;
   }
+  /**
+   * A publicly accessible url to which the user will be sent after successfully completing the widget. If the URL you provide includes information that allows you to identify the specific transaction, such as your own unique identifier, you can use the browser request to this URL as a callback to notify you that this transaction is completed. In addition, Adobe Sign will append a documentKey parameter to the URL which will contain the Adobe Sign DocumentKey for this signed widget, but only if the sender is the same as the API key user. Your application can use this value to get the form data for this widget.
+   * @param url
+   **/
   public void setUrl(String url) {
     this.url = url;
   }
@@ -71,6 +92,10 @@ public class WidgetCompletionInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetCompletionInfo {\n");

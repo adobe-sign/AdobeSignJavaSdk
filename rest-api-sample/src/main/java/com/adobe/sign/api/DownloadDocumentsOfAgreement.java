@@ -45,6 +45,7 @@ public class DownloadDocumentsOfAgreement {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.DOWNLOAD_DOCUMENT, e);
+      throw e;
     }
   }
 
@@ -53,7 +54,7 @@ public class DownloadDocumentsOfAgreement {
    */
   private void run() throws ApiException{
     //Get agreement ID
-    String agreementId = AgreementUtils.getAgreementId(Constants.AGREEMENT_NAME);
+    String agreementId = AgreementUtils.getAgreementId(ApiUtils.getAgreementName(Constants.AGREEMENT_NAME));
 
     //Fetch list of documents associated with the specified agreement.
     AgreementDocuments agreementDocuments = AgreementUtils.getAllDocuments(agreementId);

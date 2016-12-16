@@ -44,6 +44,7 @@ public class GetUrlForSettingsPage {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.GET_URL_FOR_SETTINGS_PAGE, e);
+      throw e;
     }
   }
 

@@ -26,20 +26,20 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WidgetUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Widget Info API.
+ * Junit test cases for Get Widget Info endpoint.
  */
 public class GetWidgetInfoApiTest {
 
   private static WidgetsApi widgetsApi = null;
   private static String widgetId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -60,8 +60,9 @@ public class GetWidgetInfoApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      widgetsApi.getWidgetInfo(ApiUtils.getNullAccessTokenHeaderParams(),
-                               widgetId);
+      WidgetInfo widgetInfo = widgetsApi.getWidgetInfo(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                       widgetId);
+      assertNotNull(widgetInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -69,8 +70,9 @@ public class GetWidgetInfoApiTest {
     }
 
     try {
-      widgetsApi.getWidgetInfo(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                               widgetId);
+      WidgetInfo widgetInfo = widgetsApi.getWidgetInfo(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                       widgetId);
+      assertNotNull(widgetInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -87,8 +89,9 @@ public class GetWidgetInfoApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      widgetsApi.getWidgetInfo(ApiUtils.getEmptyXApiUserHeaderParams(),
-                               widgetId);
+      WidgetInfo widgetInfo = widgetsApi.getWidgetInfo(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                       widgetId);
+      assertNotNull(widgetInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -105,8 +108,9 @@ public class GetWidgetInfoApiTest {
   @Test
   public void testInvalidWidgetId() throws ApiException {
     try {
-      widgetsApi.getWidgetInfo(ApiUtils.getValidHeaderParams(),
-                               TestData.EMPTY_PARAM);
+      WidgetInfo widgetInfo = widgetsApi.getWidgetInfo(ApiUtils.getValidHeaderParams(),
+                                                       TestData.EMPTY_PARAM);
+      assertNotNull(widgetInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -114,8 +118,9 @@ public class GetWidgetInfoApiTest {
     }
 
     try {
-      widgetsApi.getWidgetInfo(ApiUtils.getValidHeaderParams(),
-                               TestData.NULL_PARAM);
+      WidgetInfo widgetInfo = widgetsApi.getWidgetInfo(ApiUtils.getValidHeaderParams(),
+                                                       TestData.NULL_PARAM);
+      assertNotNull(widgetInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),

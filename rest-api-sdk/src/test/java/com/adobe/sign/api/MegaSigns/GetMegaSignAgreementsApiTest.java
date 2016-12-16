@@ -25,16 +25,16 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.MegaSignUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get MegaSign Agreements APIs.
+ * Junit test cases for Get MegaSign Agreements endpoint.
  */
 public class GetMegaSignAgreementsApiTest {
-  
+
   private static MegaSignsApi megaSignsApi = null;
   private static String megaSignId = null;
 
@@ -60,18 +60,20 @@ public class GetMegaSignAgreementsApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      megaSignsApi.getMegaSignChildAgreements(ApiUtils.getNullAccessTokenHeaderParams(),
-                                              megaSignId);
-    } 
+      MegaSignChildAgreements megaSignChildAgreements = megaSignsApi.getMegaSignChildAgreements(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                                                megaSignId);
+      assertNotNull(megaSignChildAgreements);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      megaSignsApi.getMegaSignChildAgreements(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                              megaSignId);
-    } 
+      MegaSignChildAgreements megaSignChildAgreements = megaSignsApi.getMegaSignChildAgreements(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                                                megaSignId);
+      assertNotNull(megaSignChildAgreements);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
@@ -87,9 +89,10 @@ public class GetMegaSignAgreementsApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      megaSignsApi.getMegaSignChildAgreements(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                              megaSignId);
-    } 
+      MegaSignChildAgreements megaSignChildAgreements = megaSignsApi.getMegaSignChildAgreements(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                                                megaSignId);
+      assertNotNull(megaSignChildAgreements);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
@@ -105,18 +108,20 @@ public class GetMegaSignAgreementsApiTest {
   @Test
   public void testInvalidMegaSignId() throws ApiException {
     try {
-      megaSignsApi.getMegaSignChildAgreements(ApiUtils.getValidHeaderParams(),
-                                              TestData.EMPTY_PARAM);
-    } 
+      MegaSignChildAgreements megaSignChildAgreements = megaSignsApi.getMegaSignChildAgreements(ApiUtils.getValidHeaderParams(),
+                                                                                                TestData.EMPTY_PARAM);
+      assertNotNull(megaSignChildAgreements);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_MEGASIGN_ID.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      megaSignsApi.getMegaSignChildAgreements(ApiUtils.getValidHeaderParams(),
-                                              TestData.NULL_PARAM);
-    } 
+      MegaSignChildAgreements megaSignChildAgreements = megaSignsApi.getMegaSignChildAgreements(ApiUtils.getValidHeaderParams(),
+                                                                                                TestData.NULL_PARAM);
+      assertNotNull(megaSignChildAgreements);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_MEGASIGN_ID.getApiCode().equals(e.getApiCode()));
@@ -135,7 +140,7 @@ public class GetMegaSignAgreementsApiTest {
       MegaSignChildAgreements megaSignChildAgreements = megaSignsApi.getMegaSignChildAgreements(ApiUtils.getValidHeaderParams(),
                                                                                                 megaSignId);
       assertNotNull(megaSignChildAgreements);
-    } 
+    }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));
     }

@@ -14,9 +14,8 @@ package com.adobe.sign.utils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 
 public class FileUtils {
@@ -37,25 +36,26 @@ public class FileUtils {
         path.mkdirs();
       }
 
-      //Print file name.
-      ApiUtils.getLogger().info("Saving result in '" + fileName + "'.");
-
       //Create file and write data into the file.
       outStream = new BufferedOutputStream(new FileOutputStream(dirPath + fileName));
       outStream.write(fileData,
-              Constants.FILE_OFFSET,
-              fileData.length);
+          Constants.FILE_OFFSET,
+          fileData.length);
+      //Print file name.
+      ApiUtils.getLogger().info("Saving result in '" + fileName + "'.");
       ApiUtils.getLogger().info("Successfully saved document in '" + dirPath + "'.");
     }
     catch (IOException e) {
-      ApiUtils.logException(Errors.FILE_NOT_SAVED, e);
+      ApiUtils.logError(Errors.FILE_NOT_SAVED);
+      throw new ApiException(e);
     }
     finally {
       if(outStream != null)
         try {
           outStream.close();
         } catch (IOException e) {
-          ApiUtils.logException(Errors.FILE_NOT_CLOSED, e);
+          ApiUtils.logError(Errors.FILE_NOT_CLOSED);
+          throw new ApiException(e);
         }
     }
   }

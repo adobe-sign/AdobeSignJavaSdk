@@ -27,20 +27,20 @@ import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ViewsUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Post View Agreement Assets APIs
+ * Junit test cases for Create View Agreement Assets endpoint
  */
-public class PostViewAgreementAssetsApiTest {
-  
+public class CreateViewAgreementAssetsApiTest {
+
   private static ViewsApi viewsApi = null;
   private static String libraryDocumentId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -50,7 +50,7 @@ public class PostViewAgreementAssetsApiTest {
     viewsApi = ViewsUtils.getViewsApi();
     libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);
   }
-  
+
   /**
    * Test for returning the URL which shows the view page of given agreement asset through the getAgreementAssetUrl endpoint.
    * Negative scenarios covered:
@@ -65,8 +65,9 @@ public class PostViewAgreementAssetsApiTest {
     agreementAssetRequest.setAgreementAssetId(libraryDocumentId);
 
     try {
-      viewsApi.createAgreementAssetUrl(ApiUtils.getNullAccessTokenHeaderParams(),
-                                       agreementAssetRequest);
+      ViewUrl viewUrl = viewsApi.createAgreementAssetUrl(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                         agreementAssetRequest);
+      assertNotNull(viewUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -74,8 +75,9 @@ public class PostViewAgreementAssetsApiTest {
     }
 
     try {
-      viewsApi.createAgreementAssetUrl(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                       agreementAssetRequest);
+      ViewUrl viewUrl = viewsApi.createAgreementAssetUrl(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                         agreementAssetRequest);
+      assertNotNull(viewUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -96,8 +98,9 @@ public class PostViewAgreementAssetsApiTest {
     agreementAssetRequest.setAgreementAssetId(libraryDocumentId);
 
     try {
-      viewsApi.createAgreementAssetUrl(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                       agreementAssetRequest);
+      ViewUrl viewUrl = viewsApi.createAgreementAssetUrl(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                         agreementAssetRequest);
+      assertNotNull(viewUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -118,8 +121,9 @@ public class PostViewAgreementAssetsApiTest {
     agreementAssetRequest.setAgreementAssetId(TestData.NULL_PARAM);
 
     try {
-      viewsApi.createAgreementAssetUrl(ApiUtils.getValidHeaderParams(),
-                                       agreementAssetRequest);
+      ViewUrl viewUrl = viewsApi.createAgreementAssetUrl(ApiUtils.getValidHeaderParams(),
+                                                         agreementAssetRequest);
+      assertNotNull(viewUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -129,8 +133,9 @@ public class PostViewAgreementAssetsApiTest {
     agreementAssetRequest.setAgreementAssetId(TestData.EMPTY_PARAM);
 
     try {
-      viewsApi.createAgreementAssetUrl(ApiUtils.getValidHeaderParams(),
-                                       agreementAssetRequest);
+      ViewUrl viewUrl = viewsApi.createAgreementAssetUrl(ApiUtils.getValidHeaderParams(),
+                                                         agreementAssetRequest);
+      assertNotNull(viewUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),

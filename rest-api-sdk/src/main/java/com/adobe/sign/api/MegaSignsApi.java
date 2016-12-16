@@ -31,7 +31,7 @@ import com.adobe.sign.model.megaSigns.MegaSignStatusUpdateResponse;
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.898+05:30")
     public class MegaSignsApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -49,8 +49,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param query The query string used for the search. Multiple search terms can be provided, separated by spaces. Some of the search terms include document name, participant name or company, and form data
     * @return MegaSigns
@@ -120,8 +120,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_send 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_send 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param megaSignCreationRequest Information about the MegaSign that you want to send.
     * @return MegaSignCreationResponse
@@ -189,8 +189,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param megaSignId The identifier of the MegaSign parent agreement, as returned by the megaSign creation API or retrieved from the API to fetch megaSign agreements
     * @return MegaSignInfo
@@ -259,8 +259,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param megaSignId The identifier of the MegaSign parent agreement, as returned by the megaSign creation API or retrieved from the API to fetch megaSign agreements
     * @return MegaSignChildAgreements
@@ -329,9 +329,9 @@ import javax.ws.rs.core.MultivaluedMap;
     * CSV file stream containing form data information
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read 
-    accept(key) Specify media types which are acceptable for the response. Currently only text/csv is supported. 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+    <br>accept(key) Specify media types which are acceptable for the response. Currently only text/csv is supported. 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param megaSignId The identifier of the MegaSign parent agreement, as returned by the megaSign creation API or retrieved from the API to fetch megaSign agreements
     * @return byte[]
@@ -400,8 +400,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * 
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_write 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_write 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param megaSignId The identifier of the MegaSign parent agreement, as returned by the megaSign creation API or retrieved from the API to fetch megaSign agreements
     * @param megaSignStatusUpdateInfo MegaSign status update information object.

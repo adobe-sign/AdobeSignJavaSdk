@@ -23,10 +23,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class CcsInfo   {
   
-  private List<String> emails = new ArrayList<String>();
+  private List<String> emails = null;
   private String name = null;
 
   
@@ -35,9 +35,16 @@ public class CcsInfo   {
    **/
   @ApiModelProperty(value = "A list of one or more email addresses that you want to copy on this transaction. The email addresses will each receive an email at the beginning of the transaction and also when the final document is signed. The email addresses will also receive a copy of the document, attached as a PDF file")
   @JsonProperty("emails")
+  /**
+   * @return List&lt;String&gt;
+   **/
   public List<String> getEmails() {
     return emails;
   }
+  /**
+   * A list of one or more email addresses that you want to copy on this transaction. The email addresses will each receive an email at the beginning of the transaction and also when the final document is signed. The email addresses will also receive a copy of the document, attached as a PDF file
+   * @param emails
+   **/
   public void setEmails(List<String> emails) {
     this.emails = emails;
   }
@@ -48,9 +55,16 @@ public class CcsInfo   {
    **/
   @ApiModelProperty(required = true, value = "Name of the CC list as returned in workflow description")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * Name of the CC list as returned in workflow description
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -58,6 +72,10 @@ public class CcsInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class CcsInfo {\n");

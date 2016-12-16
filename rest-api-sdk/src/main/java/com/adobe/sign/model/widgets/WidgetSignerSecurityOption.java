@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class WidgetSignerSecurityOption   {
   
 
@@ -50,7 +50,7 @@ public enum AuthenticationMethodEnum {
 
   private AuthenticationMethodEnum authenticationMethod = null;
   private String password = null;
-  private List<PhoneInfo> phoneInfos = new ArrayList<PhoneInfo>();
+  private List<PhoneInfo> phoneInfos = null;
 
   
   /**
@@ -58,9 +58,16 @@ public enum AuthenticationMethodEnum {
    **/
   @ApiModelProperty(required = true, value = "The authentication method for the recipients to have access to view and sign the widget. PHONE authentication is only applicable to counter signers but not to widget signer")
   @JsonProperty("authenticationMethod")
+  /**
+   * @return AuthenticationMethodEnum
+   **/
   public AuthenticationMethodEnum getAuthenticationMethod() {
     return authenticationMethod;
   }
+  /**
+   * The authentication method for the recipients to have access to view and sign the widget. PHONE authentication is only applicable to counter signers but not to widget signer
+   * @param authenticationMethod
+   **/
   public void setAuthenticationMethod(AuthenticationMethodEnum authenticationMethod) {
     this.authenticationMethod = authenticationMethod;
   }
@@ -71,9 +78,16 @@ public enum AuthenticationMethodEnum {
    **/
   @ApiModelProperty(value = "The password required for the recipient to view and sign the widget")
   @JsonProperty("password")
+  /**
+   * @return String
+   **/
   public String getPassword() {
     return password;
   }
+  /**
+   * The password required for the recipient to view and sign the widget
+   * @param password
+   **/
   public void setPassword(String password) {
     this.password = password;
   }
@@ -84,9 +98,16 @@ public enum AuthenticationMethodEnum {
    **/
   @ApiModelProperty(value = "The phoneInfo required for the counter signer to view and sign the widget if authentication method is PHONE. Not applicable to widget signer")
   @JsonProperty("phoneInfos")
+  /**
+   * @return List&lt;PhoneInfo&gt;
+   **/
   public List<PhoneInfo> getPhoneInfos() {
     return phoneInfos;
   }
+  /**
+   * The phoneInfo required for the counter signer to view and sign the widget if authentication method is PHONE. Not applicable to widget signer
+   * @param phoneInfos
+   **/
   public void setPhoneInfos(List<PhoneInfo> phoneInfos) {
     this.phoneInfos = phoneInfos;
   }
@@ -94,6 +115,10 @@ public enum AuthenticationMethodEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetSignerSecurityOption {\n");

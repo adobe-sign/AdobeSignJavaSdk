@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class UserWidget   {
   
   private String javascript = null;
@@ -58,9 +58,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The embedded javascript code of the widget")
   @JsonProperty("javascript")
+  /**
+   * @return String
+   **/
   public String getJavascript() {
     return javascript;
   }
+  /**
+   * The embedded javascript code of the widget
+   * @param javascript
+   **/
   public void setJavascript(String javascript) {
     this.javascript = javascript;
   }
@@ -71,9 +78,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The day on which the widget was last modified")
   @JsonProperty("modifiedDate")
+  /**
+   * @return Date
+   **/
   public Date getModifiedDate() {
     return modifiedDate;
   }
+  /**
+   * The day on which the widget was last modified
+   * @param modifiedDate
+   **/
   public void setModifiedDate(Date modifiedDate) {
     this.modifiedDate = modifiedDate;
   }
@@ -84,9 +98,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The name of the widget.")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * The name of the widget.
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -97,9 +118,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The widget status (enabled or disabled or aborted or other)")
   @JsonProperty("status")
+  /**
+   * @return StatusEnum
+   **/
   public StatusEnum getStatus() {
     return status;
   }
+  /**
+   * The widget status (enabled or disabled or aborted or other)
+   * @param status
+   **/
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -110,9 +138,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The hosted url of the widget")
   @JsonProperty("url")
+  /**
+   * @return String
+   **/
   public String getUrl() {
     return url;
   }
+  /**
+   * The hosted url of the widget
+   * @param url
+   **/
   public void setUrl(String url) {
     this.url = url;
   }
@@ -123,9 +158,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The unique identifier of a widget")
   @JsonProperty("widgetId")
+  /**
+   * @return String
+   **/
   public String getWidgetId() {
     return widgetId;
   }
+  /**
+   * The unique identifier of a widget
+   * @param widgetId
+   **/
   public void setWidgetId(String widgetId) {
     this.widgetId = widgetId;
   }
@@ -133,6 +175,10 @@ public enum StatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserWidget {\n");

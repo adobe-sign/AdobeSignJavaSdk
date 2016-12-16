@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class SigningUrl   {
   
   private String email = null;
@@ -34,9 +34,16 @@ public class SigningUrl   {
    **/
   @ApiModelProperty(required = true, value = "The email address of the signer associated with this signing url")
   @JsonProperty("email")
+  /**
+   * @return String
+   **/
   public String getEmail() {
     return email;
   }
+  /**
+   * The email address of the signer associated with this signing url
+   * @param email
+   **/
   public void setEmail(String email) {
     this.email = email;
   }
@@ -47,9 +54,16 @@ public class SigningUrl   {
    **/
   @ApiModelProperty(required = true, value = "The email address of the signer associated with this signing url")
   @JsonProperty("esignUrl")
+  /**
+   * @return String
+   **/
   public String getEsignUrl() {
     return esignUrl;
   }
+  /**
+   * The email address of the signer associated with this signing url
+   * @param esignUrl
+   **/
   public void setEsignUrl(String esignUrl) {
     this.esignUrl = esignUrl;
   }
@@ -57,6 +71,10 @@ public class SigningUrl   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class SigningUrl {\n");

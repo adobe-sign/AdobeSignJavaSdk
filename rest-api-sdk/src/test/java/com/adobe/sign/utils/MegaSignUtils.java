@@ -27,7 +27,7 @@ import com.adobe.sign.model.megaSigns.RecipientInfo;
 import com.adobe.sign.model.megaSigns.RecipientSetInfo;
 import com.adobe.sign.model.megaSigns.URLFileInfo;
 
-public class MegaSignUtils extends ApiUtils{
+public class MegaSignUtils {
   private static MegaSignsApi megaSignsApi = new MegaSignsApi();
   private static MultivaluedMap headers = ApiUtils.getValidHeaderParams();
 

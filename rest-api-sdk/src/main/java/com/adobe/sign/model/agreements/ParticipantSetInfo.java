@@ -14,8 +14,8 @@
 package com.adobe.sign.model.agreements;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.agreements.ParticipantInfo;
 import java.util.*;
+import com.adobe.sign.model.agreements.ParticipantInfo;
 
 
 
@@ -24,11 +24,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class ParticipantSetInfo   {
   
   private String participantSetId = null;
-  private List<ParticipantInfo> participantSetMemberInfos = new ArrayList<ParticipantInfo>();
+  private List<ParticipantInfo> participantSetMemberInfos = null;
   private String participantSetName = null;
   private String privateMessage = null;
 
@@ -55,7 +55,7 @@ public enum RolesEnum {
   }
 }
 
-  private List<RolesEnum> roles = new ArrayList<RolesEnum>();
+  private List<RolesEnum> roles = null;
 
 public enum SecurityOptionsEnum {
   PASSWORD("PASSWORD"),
@@ -76,7 +76,7 @@ public enum SecurityOptionsEnum {
   }
 }
 
-  private List<SecurityOptionsEnum> securityOptions = new ArrayList<SecurityOptionsEnum>();
+  private List<SecurityOptionsEnum> securityOptions = null;
   private Integer signingOrder = null;
 
 public enum StatusEnum {
@@ -122,9 +122,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The unique identifier of the participant set")
   @JsonProperty("participantSetId")
+  /**
+   * @return String
+   **/
   public String getParticipantSetId() {
     return participantSetId;
   }
+  /**
+   * The unique identifier of the participant set
+   * @param participantSetId
+   **/
   public void setParticipantSetId(String participantSetId) {
     this.participantSetId = participantSetId;
   }
@@ -135,9 +142,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about the members of the recipient set")
   @JsonProperty("participantSetMemberInfos")
+  /**
+   * @return List&lt;ParticipantInfo&gt;
+   **/
   public List<ParticipantInfo> getParticipantSetMemberInfos() {
     return participantSetMemberInfos;
   }
+  /**
+   * Information about the members of the recipient set
+   * @param participantSetMemberInfos
+   **/
   public void setParticipantSetMemberInfos(List<ParticipantInfo> participantSetMemberInfos) {
     this.participantSetMemberInfos = participantSetMemberInfos;
   }
@@ -148,9 +162,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "The name of the participant set. Returned only, if the API caller is the sender of agreement")
   @JsonProperty("participantSetName")
+  /**
+   * @return String
+   **/
   public String getParticipantSetName() {
     return participantSetName;
   }
+  /**
+   * The name of the participant set. Returned only, if the API caller is the sender of agreement
+   * @param participantSetName
+   **/
   public void setParticipantSetName(String participantSetName) {
     this.participantSetName = participantSetName;
   }
@@ -161,9 +182,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "Private message for the participants in the set")
   @JsonProperty("privateMessage")
+  /**
+   * @return String
+   **/
   public String getPrivateMessage() {
     return privateMessage;
   }
+  /**
+   * Private message for the participants in the set
+   * @param privateMessage
+   **/
   public void setPrivateMessage(String privateMessage) {
     this.privateMessage = privateMessage;
   }
@@ -174,9 +202,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The current roles of the participant set. A participant set can have one or more roles")
   @JsonProperty("roles")
+  /**
+   * @return List&lt;RolesEnum&gt;
+   **/
   public List<RolesEnum> getRoles() {
     return roles;
   }
+  /**
+   * The current roles of the participant set. A participant set can have one or more roles
+   * @param roles
+   **/
   public void setRoles(List<RolesEnum> roles) {
     this.roles = roles;
   }
@@ -187,9 +222,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "Security options that apply to the participant")
   @JsonProperty("securityOptions")
+  /**
+   * @return List&lt;SecurityOptionsEnum&gt;
+   **/
   public List<SecurityOptionsEnum> getSecurityOptions() {
     return securityOptions;
   }
+  /**
+   * Security options that apply to the participant
+   * @param securityOptions
+   **/
   public void setSecurityOptions(List<SecurityOptionsEnum> securityOptions) {
     this.securityOptions = securityOptions;
   }
@@ -200,9 +242,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "Index indicating sequential signing group (specified for hybrid routing)")
   @JsonProperty("signingOrder")
+  /**
+   * @return Integer
+   **/
   public Integer getSigningOrder() {
     return signingOrder;
   }
+  /**
+   * Index indicating sequential signing group (specified for hybrid routing)
+   * @param signingOrder
+   **/
   public void setSigningOrder(Integer signingOrder) {
     this.signingOrder = signingOrder;
   }
@@ -213,9 +262,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The status of the participant set with respect to the widget")
   @JsonProperty("status")
+  /**
+   * @return StatusEnum
+   **/
   public StatusEnum getStatus() {
     return status;
   }
+  /**
+   * The status of the participant set with respect to the widget
+   * @param status
+   **/
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -223,6 +279,10 @@ public enum StatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class ParticipantSetInfo {\n");

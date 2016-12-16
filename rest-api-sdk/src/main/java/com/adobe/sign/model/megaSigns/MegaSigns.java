@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.898+05:30")
 public class MegaSigns   {
   
-  private List<MegaSign> megaSignList = new ArrayList<MegaSign>();
+  private List<MegaSign> megaSignList = null;
 
   
   /**
@@ -35,9 +35,16 @@ public class MegaSigns   {
    **/
   @ApiModelProperty(required = true, value = "An array of MegaSign parent agreements")
   @JsonProperty("megaSignList")
+  /**
+   * @return List&lt;MegaSign&gt;
+   **/
   public List<MegaSign> getMegaSignList() {
     return megaSignList;
   }
+  /**
+   * An array of MegaSign parent agreements
+   * @param megaSignList
+   **/
   public void setMegaSignList(List<MegaSign> megaSignList) {
     this.megaSignList = megaSignList;
   }
@@ -45,6 +52,10 @@ public class MegaSigns   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class MegaSigns {\n");

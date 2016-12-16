@@ -45,6 +45,7 @@ public class GetStatusOfMegaSigns {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.GET_MEGASIGN_STATUS, e);
+      throw e;
     }
   }
 

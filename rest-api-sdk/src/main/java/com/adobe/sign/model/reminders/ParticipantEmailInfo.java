@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:59.159+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.906+05:30")
 public class ParticipantEmailInfo   {
   
   private String participantEmail = null;
@@ -33,9 +33,16 @@ public class ParticipantEmailInfo   {
    **/
   @ApiModelProperty(required = true, value = "The email address of the user to whom the reminder was sent. This may either be the sender or the recipient of the document depending on the selected workflow, and on whose turn it was to sign. In the current release, the reminder is sent to that user that is currently expected to sign a given document")
   @JsonProperty("participantEmail")
+  /**
+   * @return String
+   **/
   public String getParticipantEmail() {
     return participantEmail;
   }
+  /**
+   * The email address of the user to whom the reminder was sent. This may either be the sender or the recipient of the document depending on the selected workflow, and on whose turn it was to sign. In the current release, the reminder is sent to that user that is currently expected to sign a given document
+   * @param participantEmail
+   **/
   public void setParticipantEmail(String participantEmail) {
     this.participantEmail = participantEmail;
   }
@@ -43,6 +50,10 @@ public class ParticipantEmailInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class ParticipantEmailInfo {\n");

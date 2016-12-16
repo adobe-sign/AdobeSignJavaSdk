@@ -35,14 +35,12 @@ public class LibraryDocumentsUtils {
   private static LibraryDocumentsApi libraryDocumentsApi = new LibraryDocumentsApi();
   private static MultivaluedMap headers = ApiUtils.getValidHeaderParams();
   
-  private static String documentId = null;
   private static String libraryDocumentId = null;
 
   public static String getResourceId(String libraryDocumentName) throws ApiException {
     if (!isExistingLibraryDocument(libraryDocumentName))
       libraryDocumentId = createLibraryDocument(libraryDocumentName);
 
-    setDocumentId(libraryDocumentId);
     return libraryDocumentId;
   }
  
@@ -131,17 +129,13 @@ public class LibraryDocumentsUtils {
  public static LibraryDocumentsApi getLibraryDocumentsApi() {
    return libraryDocumentsApi;
  }
- 
- public static String getDocumentId() {
-   return documentId;
- }
- 
- private static void setDocumentId(String libraryDocumentId2) throws ApiException {
+
+ public static String getFirstDocumentId() throws ApiException {
 
    Documents documents =  libraryDocumentsApi.getDocuments(headers,
                                                            libraryDocumentId);
    List<OriginalDocument> documentsList = documents.getDocuments();
-   documentId = documentsList.get(0).getDocumentId();
+   return documentsList.get(0).getDocumentId();
  }
 
  public static boolean isExistingLibraryDocument(String name) throws ApiException {

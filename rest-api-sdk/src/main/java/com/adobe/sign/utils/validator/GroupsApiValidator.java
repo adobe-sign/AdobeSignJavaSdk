@@ -23,6 +23,8 @@ import com.adobe.sign.utils.ApiException;
  */
 public class GroupsApiValidator {
 
+  private static final String GROUP_CREATION_INFO = "groupCreationInfo";
+  private static final String GROUP_MODIFICATION_INFO = "groupModificationInfo";
   /**
    * Validator for getGroups Api that fetches list of all the groups in the account.
    *
@@ -40,7 +42,7 @@ public class GroupsApiValidator {
    * @throws ApiException
    */
   public static void createGroupValidator(GroupCreationInfo groupCreationInfo) throws ApiException {
-    ApiValidatorHelper.validateParameter(groupCreationInfo);
+    ApiValidatorHelper.validateParameter(groupCreationInfo, GROUP_CREATION_INFO);
 
     ApiValidatorHelper.validateParameter(groupCreationInfo.getGroupName(),
                                          SdkErrorCodes.INVALID_GROUP_NAME);
@@ -69,7 +71,7 @@ public class GroupsApiValidator {
     ApiValidatorHelper.validateId(groupId,
                                   SdkErrorCodes.INVALID_GROUP_ID);;
 
-    ApiValidatorHelper.validateParameter(groupModificationInfo);
+    ApiValidatorHelper.validateParameter(groupModificationInfo, GROUP_MODIFICATION_INFO);
     ApiValidatorHelper.validateParameter(groupModificationInfo.getGroupName(),
                                          SdkErrorCodes.INVALID_GROUP_NAME);
   }

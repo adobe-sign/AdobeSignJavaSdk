@@ -25,13 +25,13 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Agreement Documents Image Urls API.
+ * Junit test cases for Get Agreement Documents Image Urls endpoint.
  */
 public class GetAgreementDocumentsImageUrlsApiTest {
   private static AgreementsApi agreementsApi = null;
@@ -47,6 +47,7 @@ public class GetAgreementDocumentsImageUrlsApiTest {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
+
   /**
    * Test for fetching ImageUrls of all the documents combined through the getCombinedDocumentImageUrls endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -58,13 +59,14 @@ public class GetAgreementDocumentsImageUrlsApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getNullAccessTokenHeaderParams(),
-                                                 agreementId,
-                                                 TestData.VERSION_ID,
-                                                 TestData.PARTICIPANT_EMAIL,
-                                                 TestData.IMAGE_SIZE ,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
-                                                 TestData.SHOW_IMAGE_AVAILIBILITY);
+      DocumentImageUrls documentImageUrls = agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                                       agreementId,
+                                                                                       TestData.VERSION_ID,
+                                                                                       TestData.PARTICIPANT_EMAIL,
+                                                                                       TestData.IMAGE_SIZE,
+                                                                                       TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
+                                                                                       TestData.SHOW_IMAGE_AVAILIBILITY);
+      assertNotNull(documentImageUrls);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -72,13 +74,14 @@ public class GetAgreementDocumentsImageUrlsApiTest {
     }
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                                 agreementId,
-                                                 TestData.VERSION_ID,
-                                                 TestData.PARTICIPANT_EMAIL,
-                                                 TestData.IMAGE_SIZE ,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
-                                                 TestData.SHOW_IMAGE_AVAILIBILITY);
+      DocumentImageUrls documentImageUrls = agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                                       agreementId,
+                                                                                       TestData.VERSION_ID,
+                                                                                       TestData.PARTICIPANT_EMAIL,
+                                                                                       TestData.IMAGE_SIZE,
+                                                                                       TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
+                                                                                       TestData.SHOW_IMAGE_AVAILIBILITY);
+      assertNotNull(documentImageUrls);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -86,6 +89,7 @@ public class GetAgreementDocumentsImageUrlsApiTest {
     }
 
   }
+
   /**
    * Test for fetching ImageUrls of all the documents combined through the getCombinedDocumentImageUrls endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -96,23 +100,24 @@ public class GetAgreementDocumentsImageUrlsApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                                 agreementId,
-                                                 TestData.VERSION_ID,
-                                                 TestData.PARTICIPANT_EMAIL,
-                                                 TestData.IMAGE_SIZE ,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
-                                                 TestData.SHOW_IMAGE_AVAILIBILITY);
+      DocumentImageUrls documentImageUrls = agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                                       agreementId,
+                                                                                       TestData.VERSION_ID,
+                                                                                       TestData.PARTICIPANT_EMAIL,
+                                                                                       TestData.IMAGE_SIZE,
+                                                                                       TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
+                                                                                       TestData.SHOW_IMAGE_AVAILIBILITY);
+      assertNotNull(documentImageUrls);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching ImageUrls of all the documents combined through the getCombinedDocumentImageUrls endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: empty and null agreementId.
-   *
    *
    * @throws ApiException
    */
@@ -120,13 +125,14 @@ public class GetAgreementDocumentsImageUrlsApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getValidHeaderParams(),
-                                                 TestData.EMPTY_PARAM,
-                                                 TestData.VERSION_ID,
-                                                 TestData.PARTICIPANT_EMAIL,
-                                                 TestData.IMAGE_SIZE ,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
-                                                 TestData.SHOW_IMAGE_AVAILIBILITY);
+      DocumentImageUrls documentImageUrls = agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getValidHeaderParams(),
+                                                                                       TestData.EMPTY_PARAM,
+                                                                                       TestData.VERSION_ID,
+                                                                                       TestData.PARTICIPANT_EMAIL,
+                                                                                       TestData.IMAGE_SIZE,
+                                                                                       TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
+                                                                                       TestData.SHOW_IMAGE_AVAILIBILITY);
+      assertNotNull(documentImageUrls);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -134,13 +140,14 @@ public class GetAgreementDocumentsImageUrlsApiTest {
     }
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getValidHeaderParams(),
-                                                 TestData.NULL_PARAM,
-                                                 TestData.VERSION_ID,
-                                                 TestData.PARTICIPANT_EMAIL,
-                                                 TestData.IMAGE_SIZE ,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
-                                                 TestData.SHOW_IMAGE_AVAILIBILITY);
+      DocumentImageUrls documentImageUrls = agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getValidHeaderParams(),
+                                                                                       TestData.NULL_PARAM,
+                                                                                       TestData.VERSION_ID,
+                                                                                       TestData.PARTICIPANT_EMAIL,
+                                                                                       TestData.IMAGE_SIZE,
+                                                                                       TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
+                                                                                       TestData.SHOW_IMAGE_AVAILIBILITY);
+      assertNotNull(documentImageUrls);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -159,19 +166,21 @@ public class GetAgreementDocumentsImageUrlsApiTest {
   public void testInvalidVersionId() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getValidHeaderParams(),
-                                                 agreementId,
-                                                 TestData.EMPTY_PARAM,
-                                                 TestData.PARTICIPANT_EMAIL,
-                                                 TestData.IMAGE_SIZE ,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
-                                                 TestData.SHOW_IMAGE_AVAILIBILITY);
+      DocumentImageUrls documentImageUrls = agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getValidHeaderParams(),
+                                                                                       agreementId,
+                                                                                       TestData.EMPTY_PARAM,
+                                                                                       TestData.PARTICIPANT_EMAIL,
+                                                                                       TestData.IMAGE_SIZE,
+                                                                                       TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
+                                                                                       TestData.SHOW_IMAGE_AVAILIBILITY);
+      assertNotNull(documentImageUrls);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_VERSION_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching ImageUrls of all the documents combined through the getCombinedDocumentImageUrls endpoint. Negative scenarios covered:
    * INVALID_PARTICIPANT: empty participantId.
@@ -182,19 +191,21 @@ public class GetAgreementDocumentsImageUrlsApiTest {
   public void testInvalidParticipantEmail() throws ApiException {
 
     try {
-      agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getValidHeaderParams(),
-                                                 agreementId,
-                                                 TestData.VERSION_ID,
-                                                 TestData.EMPTY_PARAM,
-                                                 TestData.IMAGE_SIZE ,
-                                                 TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
-                                                 TestData.SHOW_IMAGE_AVAILIBILITY);
+      DocumentImageUrls documentImageUrls = agreementsApi.getCombinedDocumentImageUrls(ApiUtils.getValidHeaderParams(),
+                                                                                       agreementId,
+                                                                                       TestData.VERSION_ID,
+                                                                                       TestData.EMPTY_PARAM,
+                                                                                       TestData.IMAGE_SIZE,
+                                                                                       TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
+                                                                                       TestData.SHOW_IMAGE_AVAILIBILITY);
+      assertNotNull(documentImageUrls);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_PARTICIPANT.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching ImageUrls of all the documents combined through the getCombinedDocumentImageUrls endpoint.
    * Case covered is successful execution of the api call.
@@ -209,7 +220,7 @@ public class GetAgreementDocumentsImageUrlsApiTest {
                                                                                        agreementId,
                                                                                        TestData.VERSION_ID,
                                                                                        TestData.PARTICIPANT_EMAIL,
-                                                                                       TestData.IMAGE_SIZE ,
+                                                                                       TestData.IMAGE_SIZE,
                                                                                        TestData.INCLUDE_SUPPORTING_DOCUMENT_IMAGE_URLS,
                                                                                        TestData.SHOW_IMAGE_AVAILIBILITY);
       assertNotNull(documentImageUrls);

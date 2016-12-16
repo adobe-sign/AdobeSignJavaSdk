@@ -25,19 +25,19 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Agreement Info API.
+ * Junit test cases for Get Agreement Info endpoint.
  */
 public class GetAgreementInfoApiTest {
   private static AgreementsApi agreementsApi = null;
   private static String agreementId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -47,6 +47,7 @@ public class GetAgreementInfoApiTest {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
+
   /**
    * Test for fetching the details of the given agreement through the getAgreementInfo endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -58,8 +59,9 @@ public class GetAgreementInfoApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getAgreementInfo(ApiUtils.getNullAccessTokenHeaderParams(),
-                                     agreementId);
+      AgreementInfo agreementInfo = agreementsApi.getAgreementInfo(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                   agreementId);
+      assertNotNull(agreementInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -67,8 +69,9 @@ public class GetAgreementInfoApiTest {
     }
 
     try {
-      agreementsApi.getAgreementInfo(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                     agreementId);
+      AgreementInfo agreementInfo = agreementsApi.getAgreementInfo(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                   agreementId);
+      assertNotNull(agreementInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -76,6 +79,7 @@ public class GetAgreementInfoApiTest {
     }
 
   }
+
   /**
    * Test for fetching the details of the given agreement through the getAgreementInfo endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -86,14 +90,16 @@ public class GetAgreementInfoApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getAgreementInfo(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                     agreementId);
+      AgreementInfo agreementInfo = agreementsApi.getAgreementInfo(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                   agreementId);
+      assertNotNull(agreementInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching the details of the given agreement through the getAgreementInfo endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: null and empty agreementId.
@@ -104,8 +110,9 @@ public class GetAgreementInfoApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getAgreementInfo(ApiUtils.getValidHeaderParams(),
-                                     TestData.EMPTY_PARAM);
+      AgreementInfo agreementInfo = agreementsApi.getAgreementInfo(ApiUtils.getValidHeaderParams(),
+                                                                   TestData.EMPTY_PARAM);
+      assertNotNull(agreementInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -113,14 +120,16 @@ public class GetAgreementInfoApiTest {
     }
 
     try {
-      agreementsApi.getAgreementInfo(ApiUtils.getValidHeaderParams(),
-                                     TestData.NULL_PARAM);
+      AgreementInfo agreementInfo = agreementsApi.getAgreementInfo(ApiUtils.getValidHeaderParams(),
+                                                                   TestData.NULL_PARAM);
+      assertNotNull(agreementInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching the details of the given agreement through the getAgreementInfo endpoint.
    */

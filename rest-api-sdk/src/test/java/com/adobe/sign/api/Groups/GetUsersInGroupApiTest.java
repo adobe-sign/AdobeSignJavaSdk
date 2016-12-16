@@ -25,19 +25,18 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.GroupUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Users In Group API.
+ * Junit test cases for Get Users In Group endpoint.
  */
 public class GetUsersInGroupApiTest {
-  
+
   private static String groupId = null;
   private static GroupsApi groupsApi = null;
-
 
 
   @Rule
@@ -54,26 +53,28 @@ public class GetUsersInGroupApiTest {
    * Test for getting users in a group. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
    * INVALID_ACCESS_TOKEN: empty access token.
-   * 
+   *
    * @throws ApiException
    */
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      groupsApi.getUsersInGroup(ApiUtils.getNullAccessTokenHeaderParams(),
-                                groupId);
+      UsersInfo usersInfo = groupsApi.getUsersInGroup(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                      groupId);
+      assertNotNull(usersInfo);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      groupsApi.getUsersInGroup(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                groupId);
+      UsersInfo usersInfo = groupsApi.getUsersInGroup(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                      groupId);
+      assertNotNull(usersInfo);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
     }
@@ -82,17 +83,18 @@ public class GetUsersInGroupApiTest {
   /**
    * Test for getting users in a group. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
-   * 
+   *
    * @throws ApiException
    */
   @Test
   public void testInvalidXApiHeader() throws ApiException {
 
     try {
-      groupsApi.getUsersInGroup(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                groupId);
+      UsersInfo usersInfo = groupsApi.getUsersInGroup(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                      groupId);
+      assertNotNull(usersInfo);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
@@ -101,7 +103,7 @@ public class GetUsersInGroupApiTest {
   /**
    * Test for getting users in a group.
    * Case covered is successful execution of the api call.
-   * 
+   *
    * @throws ApiException
    */
   @Test
@@ -112,7 +114,7 @@ public class GetUsersInGroupApiTest {
                                                       groupId);
       assertNotNull(usersInfo);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       fail(ApiUtils.getMessage(e));
     }
   }
@@ -121,26 +123,28 @@ public class GetUsersInGroupApiTest {
    * Test for getting users in a group. Negative scenarios covered:
    * INVALID_GROUP_ID: empty group id.
    * MISSING_REQUIRED_PARAM: null group id.
-   * 
+   *
    * @throws ApiException
    */
   @Test
   public void testNullAndInvalidGroupId() throws ApiException {
 
     try {
-      groupsApi.getUsersInGroup(ApiUtils.getValidHeaderParams(),
-                                TestData.EMPTY_PARAM);
+      UsersInfo usersInfo = groupsApi.getUsersInGroup(ApiUtils.getValidHeaderParams(),
+                                                      TestData.EMPTY_PARAM);
+      assertNotNull(usersInfo);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_GROUP_ID.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      groupsApi.getUsersInGroup(ApiUtils.getValidHeaderParams(),
-                                TestData.NULL_PARAM);
+      UsersInfo usersInfo = groupsApi.getUsersInGroup(ApiUtils.getValidHeaderParams(),
+                                                      TestData.NULL_PARAM);
+      assertNotNull(usersInfo);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_GROUP_ID.getApiCode().equals(e.getApiCode()));
     }

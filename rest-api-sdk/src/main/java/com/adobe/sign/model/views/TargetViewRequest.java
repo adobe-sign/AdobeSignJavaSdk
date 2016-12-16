@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.045+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:34.537+05:30")
 public class TargetViewRequest   {
   
   private Boolean autoLogin = null;
@@ -52,9 +52,16 @@ public enum TargetViewEnum {
    **/
   @ApiModelProperty(value = "Auto LogIn Flag. If true, the URL returned will automatically log the user in. If false, the URL returned will require the credentials. By default its value is false")
   @JsonProperty("autoLogin")
+  /**
+   * @return Boolean
+   **/
   public Boolean getAutoLogin() {
     return autoLogin;
   }
+  /**
+   * Auto LogIn Flag. If true, the URL returned will automatically log the user in. If false, the URL returned will require the credentials. By default its value is false
+   * @param autoLogin
+   **/
   public void setAutoLogin(Boolean autoLogin) {
     this.autoLogin = autoLogin;
   }
@@ -65,9 +72,16 @@ public enum TargetViewEnum {
    **/
   @ApiModelProperty(value = "No Chrome Flag. If true, the embedded page is shown without a navigation header or footer. If false, the standard page header and footer will be present. By default its value is false")
   @JsonProperty("noChrome")
+  /**
+   * @return Boolean
+   **/
   public Boolean getNoChrome() {
     return noChrome;
   }
+  /**
+   * No Chrome Flag. If true, the embedded page is shown without a navigation header or footer. If false, the standard page header and footer will be present. By default its value is false
+   * @param noChrome
+   **/
   public void setNoChrome(Boolean noChrome) {
     this.noChrome = noChrome;
   }
@@ -78,9 +92,16 @@ public enum TargetViewEnum {
    **/
   @ApiModelProperty(required = true, value = "Two types of views are available- ACCOUNT_SETTINGS:- For getting the URL for Account Settings for Admin only, USER_PROFILE:- For getting the URL for User Profile")
   @JsonProperty("targetView")
+  /**
+   * @return TargetViewEnum
+   **/
   public TargetViewEnum getTargetView() {
     return targetView;
   }
+  /**
+   * Two types of views are available- ACCOUNT_SETTINGS:- For getting the URL for Account Settings for Admin only, USER_PROFILE:- For getting the URL for User Profile
+   * @param targetView
+   **/
   public void setTargetView(TargetViewEnum targetView) {
     this.targetView = targetView;
   }
@@ -88,6 +109,10 @@ public enum TargetViewEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class TargetViewRequest {\n");

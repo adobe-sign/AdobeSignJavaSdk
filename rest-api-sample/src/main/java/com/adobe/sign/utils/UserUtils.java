@@ -47,8 +47,8 @@ public class UserUtils {
       return userCreationResponse.getUserId();
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.CREATE_USER, e);
-      return null;
+      ApiUtils.logError(Errors.CREATE_USER);
+      throw e;
     }
   }
 
@@ -64,8 +64,8 @@ public class UserUtils {
       return usersInfo;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_USERS, e);
-      return null;
+      ApiUtils.logError(Errors.GET_USERS);
+      throw e;
     }
   }
 }

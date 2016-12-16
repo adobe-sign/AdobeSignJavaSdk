@@ -60,24 +60,14 @@ public class ApiUtils {
     return name + String.valueOf(System.currentTimeMillis());
   }
 
-  public static Date getStartDate()
-  {
-    return getDate(-Constants.DAYS_BEFORE_CURRENT_DATE);
-  }
-
-  public static Date getEndDate()
-  {
-    return getDate(0);
-  }
-
   public static Logger getLogger()
   {
     return log;
   }
 
-  private static Date getDate(int offset){
+  public static Date getDate(int offset){
     Calendar cal = Calendar.getInstance();
-    cal.add(Calendar.DATE, offset);
+    cal.add(Calendar.DATE, -offset);
     return cal.getTime();
   }
 
@@ -103,10 +93,9 @@ public class ApiUtils {
     configureLogProperty(className);
     configureEnvHostName();
   }
-  public static void logException(String error,Exception e) throws ApiException {
+  public static void logException(String error,Exception e) {
     log.error(error, e);
     System.err.println(error);
-    throw new ApiException(error);
   }
   public static void logError(String error) {
     log.error(error);
@@ -128,5 +117,13 @@ public class ApiUtils {
 
   public static String getUserEmail(String emailPrefix, String emailDomain) {
     return emailPrefix + String.valueOf(System.currentTimeMillis()) + emailDomain;
+  }
+  public static int getWaitingTimeLimit(int waitingDays){
+    int millisecsPerDay = getMilliSecsPerDay();
+    int waitingTimeLimit = waitingDays * millisecsPerDay;
+    return waitingTimeLimit;
+  }
+  public static int getServerPort(){
+    return Constants.SERVER_PORT;
   }
 }

@@ -32,16 +32,16 @@ import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.TransientDocumentsUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Post Library Documents API.
+ * Junit test cases for Create Library Documents endpoint.
  */
-public class PostLibraryDocumentsApiTest {
-  
+public class CreateLibraryDocumentsApiTest {
+
   private static LibraryDocumentsApi libraryDocumentsApi = null;
   private static String libraryDocumentId = null;
   private static String transientDocumentId = null;
@@ -71,8 +71,10 @@ public class PostLibraryDocumentsApiTest {
     LibraryCreationInfo creationInfo = new LibraryCreationInfo();
 
     try {
-      libraryDocumentsApi.createLibraryDocument(ApiUtils.getNullAccessTokenHeaderParams(),
-                                                creationInfo);
+      LibraryDocumentCreationResponse libraryDocumentCreationResponse = libraryDocumentsApi.createLibraryDocument(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                                                                  creationInfo);
+      assertNotNull(libraryDocumentCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -80,8 +82,10 @@ public class PostLibraryDocumentsApiTest {
     }
 
     try {
-      libraryDocumentsApi.createLibraryDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                                creationInfo);
+      LibraryDocumentCreationResponse libraryDocumentCreationResponse = libraryDocumentsApi.createLibraryDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                                                                  creationInfo);
+      assertNotNull(libraryDocumentCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -100,121 +104,136 @@ public class PostLibraryDocumentsApiTest {
     LibraryCreationInfo creationInfo = new LibraryCreationInfo();
 
     try {
-      libraryDocumentsApi.createLibraryDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                                creationInfo);
+      LibraryDocumentCreationResponse libraryDocumentCreationResponse = libraryDocumentsApi.createLibraryDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                                                                  creationInfo);
+      assertNotNull(libraryDocumentCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
-  
+
   /**
    * Test for creating a libraryDocument through the createLibraryDocument endpoint. Negative scenarios covered:
    * INVALID_FILE_INFO: FileInfo with all 4 parameters null, FileInfo with more than 1 parameter non-empty.
    * URL_INVALID: Invalid url specified in FileInfo's getDocumentUrl parameter.
    * MISSING_REQUIRED_PARAM: Null document name, null SharingType, null TemplateType.
-   * 
+   *
    * @throws ApiException
    */
   @Test
   public void testInvalidAgreementCreationInfo() throws ApiException {
     FileInfo fileInfo = new FileInfo();
-    
+
     LibraryCreationInfo libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(fileInfo,
                                                                                            ApiUtils.getLibraryDocumentName());
-    
+
     // FileInfo with all 4 parameters null.
     try {
-      libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
-                                                libraryCreationInfo);
+      LibraryDocumentCreationResponse libraryDocumentCreationResponse = libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                                                                                  libraryCreationInfo);
+      assertNotNull(libraryDocumentCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_FILE_INFO.getApiCode().equals(e.getApiCode()));
     }
-    
+
     URLFileInfo url = new URLFileInfo();
     url.setUrl(TestData.INVALID_URL);
     fileInfo.setDocumentURL(url);
-    
+
     libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(fileInfo,
                                                                        ApiUtils.getLibraryDocumentName());
-    
+
     // Invalid url specified in FileInfo's getDocumentUrl parameter.
     try {
-      libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
-                                                libraryCreationInfo);
+      LibraryDocumentCreationResponse libraryDocumentCreationResponse = libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                                                                                  libraryCreationInfo);
+      assertNotNull(libraryDocumentCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.URL_INVALID.getApiCode().equals(e.getApiCode()));
     }
-    
+
     fileInfo.setLibraryDocumentId(libraryDocumentId);
     fileInfo.setTransientDocumentId(transientDocumentId);
     fileInfo.setDocumentURL(null);
-    
+
     libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(fileInfo,
                                                                        ApiUtils.getLibraryDocumentName());
-    
+
     // FileInfo with more than 1 parameter non-empty.
     try {
-      libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
-                                                libraryCreationInfo);
+      LibraryDocumentCreationResponse libraryDocumentCreationResponse = libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                                                                                  libraryCreationInfo);
+      assertNotNull(libraryDocumentCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_FILE_INFO.getApiCode().equals(e.getApiCode()));
     }
-    
-    
+
+
     libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(TestData.NULL_PARAM);
-    
+
     // Name null in libraryDocumentCreationInfo
     try {
-      libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
-                                                libraryCreationInfo);
+      LibraryDocumentCreationResponse libraryDocumentCreationResponse = libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                                                                                  libraryCreationInfo);
+      assertNotNull(libraryDocumentCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
-    
+
     libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(null,
-                                                 LibraryDocumentCreationInfo.LibrarySharingModeEnum.USER,
-                                                 ApiUtils.getLibraryDocumentName());
-    
+                                                                       LibraryDocumentCreationInfo.LibrarySharingModeEnum.USER,
+                                                                       ApiUtils.getLibraryDocumentName());
+
     // SharingType null in libraryDocumentCreationInfo
     try {
-      libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
-                                                libraryCreationInfo);
+      LibraryDocumentCreationResponse libraryDocumentCreationResponse = libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                                                                                  libraryCreationInfo);
+      assertNotNull(libraryDocumentCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
-    
+
     libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(Arrays.asList(LibraryDocumentCreationInfo.LibraryTemplateTypesEnum.DOCUMENT),
-                                                                                     null,
-                                                                                     ApiUtils.getLibraryDocumentName());
-    
+                                                                       null,
+                                                                       ApiUtils.getLibraryDocumentName());
+
     // TemplateType null in libraryDocumentCreationInfo
     try {
-      libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
-                                                libraryCreationInfo);
+      LibraryDocumentCreationResponse libraryDocumentCreationResponse = libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                                                                                  libraryCreationInfo);
+      assertNotNull(libraryDocumentCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
-    
+
   }
-  
+
   /**
    * Test for creating a libraryDocument through the createLibraryDocument endpoint.
-   *
+   * <p>
    * Case covered is successful execution of the api call.
+   *
    * @throws ApiException
    */
   @Test
@@ -222,10 +241,10 @@ public class PostLibraryDocumentsApiTest {
     LibraryCreationInfo libraryCreationInfo = LibraryDocumentsUtils.getLibraryCreationInfo(ApiUtils.getLibraryDocumentName());
 
     try {
-      LibraryDocumentCreationResponse response = libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
-                                                                                           libraryCreationInfo);
-      assertNotNull(response);
-      assertNotNull(response.getLibraryDocumentId());
+      LibraryDocumentCreationResponse libraryDocumentCreationResponse = libraryDocumentsApi.createLibraryDocument(ApiUtils.getValidHeaderParams(),
+                                                                                                                  libraryCreationInfo);
+      assertNotNull(libraryDocumentCreationResponse);
+      assertNotNull(libraryDocumentCreationResponse.getLibraryDocumentId());
     }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));

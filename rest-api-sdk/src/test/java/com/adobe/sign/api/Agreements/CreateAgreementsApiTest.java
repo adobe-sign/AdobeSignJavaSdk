@@ -32,15 +32,15 @@ import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.TransientDocumentsUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Post Agreements API.
+ * Junit test cases for Create Agreements endpoint.
  */
-public class PostAgreementsApiTest {
+public class CreateAgreementsApiTest {
   private static AgreementsApi agreementsApi = null;
   private static String libraryDocumentId = null;
   private static String transientDocumentId = null;
@@ -70,8 +70,10 @@ public class PostAgreementsApiTest {
     AgreementCreationInfo creationInfo = new AgreementCreationInfo();
 
     try {
-      agreementsApi.createAgreement(ApiUtils.getNullAccessTokenHeaderParams(),
-                                    creationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                                          creationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -79,14 +81,17 @@ public class PostAgreementsApiTest {
     }
 
     try {
-      agreementsApi.createAgreement(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                    creationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                                          creationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for creating an agreement and sending it out for signature through the createAgreement endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -98,8 +103,9 @@ public class PostAgreementsApiTest {
     AgreementCreationInfo creationInfo = new AgreementCreationInfo();
 
     try {
-      agreementsApi.createAgreement(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                    creationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                                          creationInfo);
+      assertNotNull(agreementCreationResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -112,12 +118,13 @@ public class PostAgreementsApiTest {
    * INVALID_FILE_INFO: FileInfo with all 4 parameters null; FileInfo with more than 1 parameter non-empty.
    * URL_INVALID: Invalid url specified in FileInfo's getDocumentUrl parameter.
    * MISSING_REQUIRED_PARAM: Name null in documentCreationInfo; RecipientSetRole set to null; Both email and fax empty in recipientInfo;
-   *                         Signature type set to null.
+   * Signature type set to null.
    * EMPTY_REDIRECT_URL: Redirect url set to empty in PostSignOptions, if specified.
    * INVALID_REDIRECT_URL: Invalid url specified in PostSignOption.
    * INVALID_REDIRECT_DELAY: Negative redirect delay set in PostSignOptions.
    * INVALID_EMAIL: Wrong email set in recipientInfo.
    * INVALID_ARGUMENTS: Both email and fax specified in RecipientInfo.
+   *
    * @throws ApiException
    */
   @Test
@@ -126,12 +133,14 @@ public class PostAgreementsApiTest {
     FileInfo fileInfo = new FileInfo();
 
     AgreementCreationInfo agreementCreationInfo = AgreementsUtils.getAgreementCreationInfo(ApiUtils.getAgreementName(),
-                                                                           fileInfo);
+                                                                                           fileInfo);
 
     // FileInfo with all 4 parameters null.
     try {
-      agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
-                                    agreementCreationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
+                                                                                          agreementCreationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -143,12 +152,14 @@ public class PostAgreementsApiTest {
     fileInfo.setDocumentURL(url);
 
     agreementCreationInfo = AgreementsUtils.getAgreementCreationInfo(ApiUtils.getAgreementName(),
-                                                     fileInfo);
+                                                                     fileInfo);
 
     // Invalid url specified in FileInfo's getDocumentUrl parameter.
     try {
-      agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
-                                    agreementCreationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
+                                                                                          agreementCreationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -160,12 +171,14 @@ public class PostAgreementsApiTest {
     fileInfo.setDocumentURL(null);
 
     agreementCreationInfo = AgreementsUtils.getAgreementCreationInfo(ApiUtils.getAgreementName(),
-                                                     fileInfo);
+                                                                     fileInfo);
 
     // FileInfo with more than 1 parameter non-empty.
     try {
-      agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
-                                    agreementCreationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
+                                                                                          agreementCreationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -175,12 +188,14 @@ public class PostAgreementsApiTest {
     fileInfo.setTransientDocumentId(TestData.NULL_PARAM);
 
     agreementCreationInfo = AgreementsUtils.getAgreementCreationInfo(TestData.NULL_PARAM,
-                                                     fileInfo);
+                                                                     fileInfo);
 
     // Name null in documentCreationInfo
     try {
-      agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
-                                    agreementCreationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
+                                                                                          agreementCreationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -189,12 +204,14 @@ public class PostAgreementsApiTest {
 
     options.setRedirectUrl(TestData.EMPTY_PARAM);
     agreementCreationInfo = AgreementsUtils.getAgreementCreationInfo(ApiUtils.getAgreementName(),
-        options);
+                                                                     options);
 
     // Redirect url set to empty in PostSignOptions, if specified.
     try {
-      agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
-                                    agreementCreationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
+                                                                                          agreementCreationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -203,12 +220,14 @@ public class PostAgreementsApiTest {
 
     options.setRedirectUrl(TestData.INVALID_URL);
     agreementCreationInfo = AgreementsUtils.getAgreementCreationInfo(ApiUtils.getAgreementName(),
-                                                     options);
+                                                                     options);
 
     // Invalid url specified in PostSignOption.
     try {
-      agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
-                                    agreementCreationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
+                                                                                          agreementCreationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -218,12 +237,14 @@ public class PostAgreementsApiTest {
     options.setRedirectUrl(TestData.REDIRECT_URL);
     options.setRedirectDelay(TestData.INVALID_REDIRECT_DELAY);
     agreementCreationInfo = AgreementsUtils.getAgreementCreationInfo(ApiUtils.getAgreementName(),
-        options);
+                                                                     options);
 
     // Negative redirect delay set in PostSignOptions.
     try {
-      agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
-                                    agreementCreationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
+                                                                                          agreementCreationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -231,14 +252,16 @@ public class PostAgreementsApiTest {
     }
 
     agreementCreationInfo = AgreementsUtils.getAgreementCreationInfo(TestData.POST_EMAIL,
-                                                     TestData.NULL_PARAM,
-                                                     null,
-                                                     ApiUtils.getAgreementName());
+                                                                     TestData.NULL_PARAM,
+                                                                     null,
+                                                                     ApiUtils.getAgreementName());
 
     // RecipientSetRole set to null.
     try {
-      agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
-                                    agreementCreationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
+                                                                                          agreementCreationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -246,14 +269,16 @@ public class PostAgreementsApiTest {
     }
 
     agreementCreationInfo = AgreementsUtils.getAgreementCreationInfo(TestData.NULL_PARAM,
-        TestData.NULL_PARAM,
-        RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
-        ApiUtils.getAgreementName());
+                                                                     TestData.NULL_PARAM,
+                                                                     RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
+                                                                     ApiUtils.getAgreementName());
 
     // Both email and fax null in recipientInfo.
     try {
-      agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
-                                    agreementCreationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
+                                                                                          agreementCreationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -261,14 +286,16 @@ public class PostAgreementsApiTest {
     }
 
     agreementCreationInfo = AgreementsUtils.getAgreementCreationInfo(TestData.INVALID_EMAIL,
-                                                     TestData.NULL_PARAM,
-                                                     RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
-                                                     ApiUtils.getAgreementName());
+                                                                     TestData.NULL_PARAM,
+                                                                     RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
+                                                                     ApiUtils.getAgreementName());
 
     // Wrong email set in recipientInfo.
     try {
-      agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
-                                    agreementCreationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
+                                                                                          agreementCreationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -276,14 +303,16 @@ public class PostAgreementsApiTest {
     }
 
     agreementCreationInfo = AgreementsUtils.getAgreementCreationInfo(TestData.POST_EMAIL,
-        TestData.POST_FAX,
-        RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
-        ApiUtils.getAgreementName());
+                                                                     TestData.POST_FAX,
+                                                                     RecipientSetInfo.RecipientSetRoleEnum.SIGNER,
+                                                                     ApiUtils.getAgreementName());
 
     // Both email and fax specified in recipientInfo
     try {
-      agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
-                                    agreementCreationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
+                                                                                          agreementCreationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -294,8 +323,10 @@ public class PostAgreementsApiTest {
 
     // Signature type set to null.
     try {
-      agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
-                                    agreementCreationInfo);
+      AgreementCreationResponse agreementCreationResponse = agreementsApi.createAgreement(ApiUtils.getValidHeaderParams(),
+                                                                                          agreementCreationInfo);
+      assertNotNull(agreementCreationResponse);
+
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),

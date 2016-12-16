@@ -43,6 +43,7 @@ public class GetSigningUrl {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.GET_SIGNING_URL, e);
+      throw e;
     }
   }
     
@@ -51,7 +52,7 @@ public class GetSigningUrl {
    */
   private void run() throws ApiException{
     //Get agreement id.
-    String agreementId = AgreementUtils.getAgreementId(Constants.AGREEMENT_NAME);
+    String agreementId = AgreementUtils.getAgreementId(ApiUtils.getAgreementName(Constants.AGREEMENT_NAME));
 
     //Make API call to get the url for a agreement with a specific agreement id.
     List<SigningUrlSetInfo> signingUrlSetInfos = AgreementUtils.getSigningUrl(agreementId);

@@ -44,6 +44,7 @@ public class GetPersonalLibraryDocumentsOfUser {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.GET_PERSONAL_LIBRARY_DOCUMENTS, e);
+      throw e;
     }
   }
 
