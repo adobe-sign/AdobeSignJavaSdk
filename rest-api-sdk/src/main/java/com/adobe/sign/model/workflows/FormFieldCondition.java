@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class FormFieldCondition   {
   
   private String value = null;
@@ -35,9 +35,16 @@ public class FormFieldCondition   {
    **/
   @ApiModelProperty(value = "Value to compare the value of the whenField with, to evaluate the condition")
   @JsonProperty("value")
+  /**
+   * @return String
+   **/
   public String getValue() {
     return value;
   }
+  /**
+   * Value to compare the value of the whenField with, to evaluate the condition
+   * @param value
+   **/
   public void setValue(String value) {
     this.value = value;
   }
@@ -48,9 +55,16 @@ public class FormFieldCondition   {
    **/
   @ApiModelProperty(value = "Index of the location of the whenField whose value is the basis of the condition")
   @JsonProperty("whenFieldLocationIndex")
+  /**
+   * @return Integer
+   **/
   public Integer getWhenFieldLocationIndex() {
     return whenFieldLocationIndex;
   }
+  /**
+   * Index of the location of the whenField whose value is the basis of the condition
+   * @param whenFieldLocationIndex
+   **/
   public void setWhenFieldLocationIndex(Integer whenFieldLocationIndex) {
     this.whenFieldLocationIndex = whenFieldLocationIndex;
   }
@@ -61,9 +75,16 @@ public class FormFieldCondition   {
    **/
   @ApiModelProperty(value = "Name of the field whose value is the basis of condition")
   @JsonProperty("whenFieldName")
+  /**
+   * @return String
+   **/
   public String getWhenFieldName() {
     return whenFieldName;
   }
+  /**
+   * Name of the field whose value is the basis of condition
+   * @param whenFieldName
+   **/
   public void setWhenFieldName(String whenFieldName) {
     this.whenFieldName = whenFieldName;
   }
@@ -71,6 +92,10 @@ public class FormFieldCondition   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class FormFieldCondition {\n");

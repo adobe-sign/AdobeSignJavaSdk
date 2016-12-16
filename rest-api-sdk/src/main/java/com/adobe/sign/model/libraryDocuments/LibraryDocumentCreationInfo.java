@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:51.876+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.195+05:30")
 public class LibraryDocumentCreationInfo   {
   
-  private List<FileInfo> fileInfos = new ArrayList<FileInfo>();
+  private List<FileInfo> fileInfos = null;
 
 public enum LibrarySharingModeEnum {
   USER("USER"),
@@ -64,7 +64,7 @@ public enum LibraryTemplateTypesEnum {
   }
 }
 
-  private List<LibraryTemplateTypesEnum> libraryTemplateTypes = new ArrayList<LibraryTemplateTypesEnum>();
+  private List<LibraryTemplateTypesEnum> libraryTemplateTypes = null;
   private String name = null;
 
   
@@ -73,9 +73,16 @@ public enum LibraryTemplateTypesEnum {
    **/
   @ApiModelProperty(required = true, value = "A list of one or more files (or references to files) that will be sent out for signature. If more than one file is provided, they will be combined into one PDF before being sent out. Note: Only one of the four parameters in every FileInfo object must be specified")
   @JsonProperty("fileInfos")
+  /**
+   * @return List&lt;FileInfo&gt;
+   **/
   public List<FileInfo> getFileInfos() {
     return fileInfos;
   }
+  /**
+   * A list of one or more files (or references to files) that will be sent out for signature. If more than one file is provided, they will be combined into one PDF before being sent out. Note: Only one of the four parameters in every FileInfo object must be specified
+   * @param fileInfos
+   **/
   public void setFileInfos(List<FileInfo> fileInfos) {
     this.fileInfos = fileInfos;
   }
@@ -86,9 +93,16 @@ public enum LibraryTemplateTypesEnum {
    **/
   @ApiModelProperty(required = true, value = "Specifies who should have access to this library document")
   @JsonProperty("librarySharingMode")
+  /**
+   * @return LibrarySharingModeEnum
+   **/
   public LibrarySharingModeEnum getLibrarySharingMode() {
     return librarySharingMode;
   }
+  /**
+   * Specifies who should have access to this library document
+   * @param librarySharingMode
+   **/
   public void setLibrarySharingMode(LibrarySharingModeEnum librarySharingMode) {
     this.librarySharingMode = librarySharingMode;
   }
@@ -99,9 +113,16 @@ public enum LibraryTemplateTypesEnum {
    **/
   @ApiModelProperty(required = true, value = "A list of one or more library template types")
   @JsonProperty("libraryTemplateTypes")
+  /**
+   * @return List&lt;LibraryTemplateTypesEnum&gt;
+   **/
   public List<LibraryTemplateTypesEnum> getLibraryTemplateTypes() {
     return libraryTemplateTypes;
   }
+  /**
+   * A list of one or more library template types
+   * @param libraryTemplateTypes
+   **/
   public void setLibraryTemplateTypes(List<LibraryTemplateTypesEnum> libraryTemplateTypes) {
     this.libraryTemplateTypes = libraryTemplateTypes;
   }
@@ -112,9 +133,16 @@ public enum LibraryTemplateTypesEnum {
    **/
   @ApiModelProperty(required = true, value = "The name of the agreement that will be used to identify it, in emails and on the website")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * The name of the agreement that will be used to identify it, in emails and on the website
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -122,6 +150,10 @@ public enum LibraryTemplateTypesEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class LibraryDocumentCreationInfo {\n");

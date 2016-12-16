@@ -25,13 +25,13 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Agreements API.
+ * Junit test cases for Get Agreements endpoint.
  */
 public class GetAgreementsApiTest {
   private static AgreementsApi agreementsApi = null;
@@ -45,6 +45,7 @@ public class GetAgreementsApiTest {
     ApiUtils.configureProperty();
     agreementsApi = AgreementsUtils.getAgreementsApi();
   }
+
   /**
    * Test for fetching all user agreements through the getAgreements endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -56,22 +57,24 @@ public class GetAgreementsApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getAgreements(ApiUtils.getNullAccessTokenHeaderParams(),
-                                  TestData.AGREEMENT_QUERY,
-                                  TestData.AGREEMENT_EXTERNAL_ID,
-                                  TestData.AGREEMENT_EXTERNAL_GROUP,
-                                  TestData.AGREEMENT_EXTERNAL_NAMESPACE);
+      UserAgreements userAgreements = agreementsApi.getAgreements(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                  TestData.AGREEMENT_QUERY,
+                                                                  TestData.AGREEMENT_EXTERNAL_ID,
+                                                                  TestData.AGREEMENT_EXTERNAL_GROUP,
+                                                                  TestData.AGREEMENT_EXTERNAL_NAMESPACE);
+      assertNotNull(userAgreements);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      agreementsApi.getAgreements(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                  TestData.AGREEMENT_QUERY,
-                                  TestData.AGREEMENT_EXTERNAL_ID,
-                                  TestData.AGREEMENT_EXTERNAL_GROUP,
-                                  TestData.AGREEMENT_EXTERNAL_NAMESPACE);
+      UserAgreements userAgreements = agreementsApi.getAgreements(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                  TestData.AGREEMENT_QUERY,
+                                                                  TestData.AGREEMENT_EXTERNAL_ID,
+                                                                  TestData.AGREEMENT_EXTERNAL_GROUP,
+                                                                  TestData.AGREEMENT_EXTERNAL_NAMESPACE);
+      assertNotNull(userAgreements);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -79,6 +82,7 @@ public class GetAgreementsApiTest {
     }
 
   }
+
   /**
    * Test for fetching all user agreements through the getAgreements endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -89,17 +93,19 @@ public class GetAgreementsApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getAgreements(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                  TestData.AGREEMENT_QUERY,
-                                  TestData.AGREEMENT_EXTERNAL_ID,
-                                  TestData.AGREEMENT_EXTERNAL_GROUP,
-                                  TestData.AGREEMENT_EXTERNAL_NAMESPACE);
+      UserAgreements userAgreements = agreementsApi.getAgreements(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                  TestData.AGREEMENT_QUERY,
+                                                                  TestData.AGREEMENT_EXTERNAL_ID,
+                                                                  TestData.AGREEMENT_EXTERNAL_GROUP,
+                                                                  TestData.AGREEMENT_EXTERNAL_NAMESPACE);
+      assertNotNull(userAgreements);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching all user agreements through the getAgreements endpoint. Negative scenarios covered:
    * EMPTY_EXTERNAL_ID_PARAMETER: when externalId is empty but at least one of externalGroup or externalNamespace is non-empty.
@@ -110,11 +116,12 @@ public class GetAgreementsApiTest {
   public void testEmptyExternalId() throws ApiException {
 
     try {
-      agreementsApi.getAgreements(ApiUtils.getValidHeaderParams(),
-                                  TestData.AGREEMENT_QUERY,
-                                  TestData.EMPTY_PARAM,
-                                  TestData.GROUP_NAME,
-                                  TestData.AGREEMENT_EXTERNAL_NAMESPACE);
+      UserAgreements userAgreements = agreementsApi.getAgreements(ApiUtils.getValidHeaderParams(),
+                                                                  TestData.AGREEMENT_QUERY,
+                                                                  TestData.EMPTY_PARAM,
+                                                                  TestData.GROUP_NAME,
+                                                                  TestData.AGREEMENT_EXTERNAL_NAMESPACE);
+      assertNotNull(userAgreements);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),

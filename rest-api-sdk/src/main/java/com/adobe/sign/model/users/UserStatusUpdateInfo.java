@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.999+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:33.254+05:30")
 public class UserStatusUpdateInfo   {
   
   private String comment = null;
@@ -51,9 +51,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(value = "An optional comment describing why you want to activate/deactivate a given user")
   @JsonProperty("comment")
+  /**
+   * @return String
+   **/
   public String getComment() {
     return comment;
   }
+  /**
+   * An optional comment describing why you want to activate/deactivate a given user
+   * @param comment
+   **/
   public void setComment(String comment) {
     this.comment = comment;
   }
@@ -64,9 +71,16 @@ public enum UserStatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The state to which the user is to be updated. The valid states for this variable is currently, ACTIVE and INACTIVE")
   @JsonProperty("userStatus")
+  /**
+   * @return UserStatusEnum
+   **/
   public UserStatusEnum getUserStatus() {
     return userStatus;
   }
+  /**
+   * The state to which the user is to be updated. The valid states for this variable is currently, ACTIVE and INACTIVE
+   * @param userStatus
+   **/
   public void setUserStatus(UserStatusEnum userStatus) {
     this.userStatus = userStatus;
   }
@@ -74,6 +88,10 @@ public enum UserStatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserStatusUpdateInfo {\n");

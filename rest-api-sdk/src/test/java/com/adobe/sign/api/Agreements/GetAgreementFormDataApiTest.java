@@ -24,13 +24,13 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Agreement Form Data API.
+ * Junit test cases for Get Agreement Form Data endpoint.
  */
 public class GetAgreementFormDataApiTest {
   private static AgreementsApi agreementsApi = null;
@@ -46,6 +46,7 @@ public class GetAgreementFormDataApiTest {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
+
   /**
    * Test for fetching an agreement's form data through the getFormData endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -57,21 +58,24 @@ public class GetAgreementFormDataApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getFormData(ApiUtils.getNullAccessTokenHeaderParams(),
-                                agreementId);
+      byte[] formData = agreementsApi.getFormData(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                  agreementId);
+      assertNotNull(formData);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      agreementsApi.getFormData(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                agreementId);
+      byte[] formData = agreementsApi.getFormData(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                  agreementId);
+      assertNotNull(formData);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching an agreement's form data through the getFormData endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -82,13 +86,15 @@ public class GetAgreementFormDataApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getFormData(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                agreementId);
+      byte[] formData = agreementsApi.getFormData(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                  agreementId);
+      assertNotNull(formData);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching an agreement's form data through the getFormData endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: null and empty agreementId.
@@ -99,21 +105,24 @@ public class GetAgreementFormDataApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getFormData(ApiUtils.getValidHeaderParams(),
-                                TestData.EMPTY_PARAM);
+      byte[] formData = agreementsApi.getFormData(ApiUtils.getValidHeaderParams(),
+                                                  TestData.EMPTY_PARAM);
+      assertNotNull(formData);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      agreementsApi.getFormData(ApiUtils.getValidHeaderParams(),
-                                TestData.NULL_PARAM);
+      byte[] formData = agreementsApi.getFormData(ApiUtils.getValidHeaderParams(),
+                                                  TestData.NULL_PARAM);
+      assertNotNull(formData);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching an agreement's form data through the getFormData endpoint.
    */

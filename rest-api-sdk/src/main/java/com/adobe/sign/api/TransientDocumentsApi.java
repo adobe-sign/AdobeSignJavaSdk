@@ -26,7 +26,7 @@ import java.io.File;
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:04:00.006+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:36.483+05:30")
     public class TransientDocumentsApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -44,17 +44,17 @@ import javax.ws.rs.core.MultivaluedMap;
     * The document uploaded through this call is referred to as transient since it is available only for 7 days after the upload. The returned transient document ID can be used to refer to the document in api calls like POST /agreements where uploaded file needs to be referred. The transient document request is a multipart request consisting of three parts - filename, mime type and the file stream. You can only upload one file at a time in this request.
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with any of the following scopes: agreement_write agreement_send widget_write library_write 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with any of the following scopes: agreement_write agreement_send widget_write library_write 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
-    * @param file The file part of the multipart request for document upload. You can upload only one file at a time.
     * @param fileName A name for the document being uploaded.
+    * @param file The file part of the multipart request for document upload. You can upload only one file at a time.
     * @param mimeType The mime type of the document being uploaded. If not specified here then mime type is picked up from the file object. If mime type is not present there either then mime type is inferred from file name extension.
     * @return TransientDocumentResponse
     */
     public TransientDocumentResponse createTransientDocument (MultivaluedMap headers,
-                                        File file,
                                         String fileName,
+                                        File file,
                                         String mimeType) throws ApiException {
 
     //Validate header parameters

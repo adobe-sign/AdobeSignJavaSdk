@@ -25,20 +25,20 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.GroupUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Group Info API.
+ * Junit test cases for Get Group Info endpoint.
  */
 public class GetGroupInfoApiTest {
-  
+
   private static String groupId = null;
   private static GroupsApi groupsApi = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -51,17 +51,18 @@ public class GetGroupInfoApiTest {
 
   /**
    * Test for getting details of a group. Negative scenarios covered:
-   * NO_ACCESS_TOKEN_HEADER: null access token. 
+   * NO_ACCESS_TOKEN_HEADER: null access token.
    * INVALID_ACCESS_TOKEN: empty access token.
-   * 
+   *
    * @throws ApiException
    */
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      groupsApi.getGroupDetails(ApiUtils.getNullAccessTokenHeaderParams(),
-                                groupId);
+      GroupDetailsInfo groupDetailsInfo = groupsApi.getGroupDetails(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                    groupId);
+      assertNotNull(groupDetailsInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -69,8 +70,9 @@ public class GetGroupInfoApiTest {
     }
 
     try {
-      groupsApi.getGroupDetails(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                groupId);
+      GroupDetailsInfo groupDetailsInfo = groupsApi.getGroupDetails(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                    groupId);
+      assertNotNull(groupDetailsInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -81,15 +83,16 @@ public class GetGroupInfoApiTest {
   /**
    * Test for getting details of a group. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
-   * 
+   *
    * @throws ApiException
    */
   @Test
   public void testInvalidXApiHeader() throws ApiException {
 
     try {
-      groupsApi.getGroupDetails(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                groupId);
+      GroupDetailsInfo groupDetailsInfo = groupsApi.getGroupDetails(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                    groupId);
+      assertNotNull(groupDetailsInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -99,8 +102,8 @@ public class GetGroupInfoApiTest {
 
   /**
    * Test for getting details of a group. Case covered is successful execution
-   * of the API call.
-   * 
+   * of the endpoint call.
+   *
    * @throws ApiException
    */
   @Test
@@ -120,15 +123,16 @@ public class GetGroupInfoApiTest {
   /**
    * Test for getting details of a group. Negative scenarios covered:
    * INVALID_GROUP_ID: empty group id. MISSING_REQUIRED_PARAM: null group id.
-   * 
+   *
    * @throws ApiException
    */
   @Test
   public void testNullAndInvalidGroupId() throws ApiException {
 
     try {
-      groupsApi.getGroupDetails(ApiUtils.getValidHeaderParams(),
-                                TestData.EMPTY_PARAM);
+      GroupDetailsInfo groupDetailsInfo = groupsApi.getGroupDetails(ApiUtils.getValidHeaderParams(),
+                                                                    TestData.EMPTY_PARAM);
+      assertNotNull(groupDetailsInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -136,8 +140,9 @@ public class GetGroupInfoApiTest {
     }
 
     try {
-      groupsApi.getGroupDetails(ApiUtils.getValidHeaderParams(),
-                                TestData.NULL_PARAM);
+      GroupDetailsInfo groupDetailsInfo = groupsApi.getGroupDetails(ApiUtils.getValidHeaderParams(),
+                                                                    TestData.NULL_PARAM);
+      assertNotNull(groupDetailsInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),

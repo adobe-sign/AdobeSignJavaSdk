@@ -23,20 +23,20 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Delete Library Document API.
+ * Junit test cases for Delete Library Document endpoint.
  */
 public class DeleteLibraryDocumentApiTest {
 
   private static LibraryDocumentsApi libraryDocumentsApi = null;
   private static String libraryDocumentId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -46,7 +46,7 @@ public class DeleteLibraryDocumentApiTest {
     libraryDocumentsApi = LibraryDocumentsUtils.getLibraryDocumentsApi();
     libraryDocumentId = LibraryDocumentsUtils.createLibraryDocument(ApiUtils.getLibraryDocumentName());
   }
-  
+
   /**
    * Test for deleting the library document through the deleteLibraryDocument endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -59,7 +59,7 @@ public class DeleteLibraryDocumentApiTest {
     try {
       libraryDocumentsApi.deleteLibraryDocument(ApiUtils.getNullAccessTokenHeaderParams(),
                                                 libraryDocumentId);
-    } 
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
@@ -68,7 +68,7 @@ public class DeleteLibraryDocumentApiTest {
     try {
       libraryDocumentsApi.deleteLibraryDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
                                                 libraryDocumentId);
-    } 
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
@@ -86,7 +86,7 @@ public class DeleteLibraryDocumentApiTest {
     try {
       libraryDocumentsApi.deleteLibraryDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
                                                 libraryDocumentId);
-    } 
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
@@ -104,7 +104,7 @@ public class DeleteLibraryDocumentApiTest {
     try {
       libraryDocumentsApi.deleteLibraryDocument(ApiUtils.getValidHeaderParams(),
                                                 TestData.EMPTY_PARAM);
-    } 
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_LIBRARYDOCUMENT_ID.getApiCode().equals(e.getApiCode()));
@@ -113,7 +113,7 @@ public class DeleteLibraryDocumentApiTest {
     try {
       libraryDocumentsApi.deleteLibraryDocument(ApiUtils.getValidHeaderParams(),
                                                 TestData.NULL_PARAM);
-    } 
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_LIBRARYDOCUMENT_ID.getApiCode().equals(e.getApiCode()));
@@ -132,7 +132,7 @@ public class DeleteLibraryDocumentApiTest {
     try {
       libraryDocumentsApi.deleteLibraryDocument(ApiUtils.getValidHeaderParams(),
                                                 libraryDocumentId);
-    } 
+    }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));
     }

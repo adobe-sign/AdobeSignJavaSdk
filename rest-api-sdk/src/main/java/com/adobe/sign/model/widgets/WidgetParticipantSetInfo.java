@@ -14,8 +14,8 @@
 package com.adobe.sign.model.widgets;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.widgets.WidgetParticipantInfo;
 import java.util.*;
+import com.adobe.sign.model.widgets.WidgetParticipantInfo;
 
 
 
@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class WidgetParticipantSetInfo   {
   
-  private List<WidgetParticipantInfo> participantSetMemberInfos = new ArrayList<WidgetParticipantInfo>();
+  private List<WidgetParticipantInfo> participantSetMemberInfos = null;
 
 public enum RolesEnum {
   SENDER("SENDER"),
@@ -53,7 +53,7 @@ public enum RolesEnum {
   }
 }
 
-  private List<RolesEnum> roles = new ArrayList<RolesEnum>();
+  private List<RolesEnum> roles = null;
 
 public enum SecurityOptionsEnum {
   PASSWORD("PASSWORD"),
@@ -74,7 +74,7 @@ public enum SecurityOptionsEnum {
   }
 }
 
-  private List<SecurityOptionsEnum> securityOptions = new ArrayList<SecurityOptionsEnum>();
+  private List<SecurityOptionsEnum> securityOptions = null;
 
 public enum StatusEnum {
   WAITING_FOR_MY_SIGNATURE("WAITING_FOR_MY_SIGNATURE"),
@@ -119,9 +119,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about the members of the recipient set")
   @JsonProperty("participantSetMemberInfos")
+  /**
+   * @return List&lt;WidgetParticipantInfo&gt;
+   **/
   public List<WidgetParticipantInfo> getParticipantSetMemberInfos() {
     return participantSetMemberInfos;
   }
+  /**
+   * Information about the members of the recipient set
+   * @param participantSetMemberInfos
+   **/
   public void setParticipantSetMemberInfos(List<WidgetParticipantInfo> participantSetMemberInfos) {
     this.participantSetMemberInfos = participantSetMemberInfos;
   }
@@ -132,9 +139,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The current roles of the participant set. A participant set can have one or more roles")
   @JsonProperty("roles")
+  /**
+   * @return List&lt;RolesEnum&gt;
+   **/
   public List<RolesEnum> getRoles() {
     return roles;
   }
+  /**
+   * The current roles of the participant set. A participant set can have one or more roles
+   * @param roles
+   **/
   public void setRoles(List<RolesEnum> roles) {
     this.roles = roles;
   }
@@ -145,9 +159,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "Security options that apply to the participant")
   @JsonProperty("securityOptions")
+  /**
+   * @return List&lt;SecurityOptionsEnum&gt;
+   **/
   public List<SecurityOptionsEnum> getSecurityOptions() {
     return securityOptions;
   }
+  /**
+   * Security options that apply to the participant
+   * @param securityOptions
+   **/
   public void setSecurityOptions(List<SecurityOptionsEnum> securityOptions) {
     this.securityOptions = securityOptions;
   }
@@ -158,9 +179,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The status of the participant set with respect to the widget")
   @JsonProperty("status")
+  /**
+   * @return StatusEnum
+   **/
   public StatusEnum getStatus() {
     return status;
   }
+  /**
+   * The status of the participant set with respect to the widget
+   * @param status
+   **/
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -168,6 +196,10 @@ public enum StatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetParticipantSetInfo {\n");

@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class NextParticipantInfo   {
   
   private String email = null;
@@ -36,9 +36,16 @@ public class NextParticipantInfo   {
    **/
   @ApiModelProperty(required = true, value = "The email address of the next participant")
   @JsonProperty("email")
+  /**
+   * @return String
+   **/
   public String getEmail() {
     return email;
   }
+  /**
+   * The email address of the next participant
+   * @param email
+   **/
   public void setEmail(String email) {
     this.email = email;
   }
@@ -49,9 +56,16 @@ public class NextParticipantInfo   {
    **/
   @ApiModelProperty(value = "The name of the next participant, if available")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * The name of the next participant, if available
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -62,9 +76,16 @@ public class NextParticipantInfo   {
    **/
   @ApiModelProperty(required = true, value = "The date since which the document has been waiting for the participant to take action")
   @JsonProperty("waitingSince")
+  /**
+   * @return Date
+   **/
   public Date getWaitingSince() {
     return waitingSince;
   }
+  /**
+   * The date since which the document has been waiting for the participant to take action
+   * @param waitingSince
+   **/
   public void setWaitingSince(Date waitingSince) {
     this.waitingSince = waitingSince;
   }
@@ -72,6 +93,10 @@ public class NextParticipantInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class NextParticipantInfo {\n");

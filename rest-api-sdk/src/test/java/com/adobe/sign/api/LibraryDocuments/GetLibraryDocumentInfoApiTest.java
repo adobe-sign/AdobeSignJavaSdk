@@ -25,16 +25,16 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Library Document Info API.
+ * Junit test cases for Get Library Document Info endpoint.
  */
 public class GetLibraryDocumentInfoApiTest {
-  
+
   private static LibraryDocumentsApi libraryDocumentsApi = null;
   private static String libraryDocumentId = null;
 
@@ -48,7 +48,7 @@ public class GetLibraryDocumentInfoApiTest {
     libraryDocumentsApi = LibraryDocumentsUtils.getLibraryDocumentsApi();
     libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);
   }
-  
+
   /**
    * Test for retrieving the details of the library document through the getLibraryDocumentInfo endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -59,18 +59,20 @@ public class GetLibraryDocumentInfoApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      libraryDocumentsApi.getLibraryDocumentInfo(ApiUtils.getNullAccessTokenHeaderParams(),
-                                                 libraryDocumentId);
-    } 
+      LibraryDocumentInfo libraryDocumentInfo = libraryDocumentsApi.getLibraryDocumentInfo(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                                           libraryDocumentId);
+      assertNotNull(libraryDocumentInfo);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      libraryDocumentsApi.getLibraryDocumentInfo(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                                 libraryDocumentId);
-    } 
+      LibraryDocumentInfo libraryDocumentInfo = libraryDocumentsApi.getLibraryDocumentInfo(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                                           libraryDocumentId);
+      assertNotNull(libraryDocumentInfo);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
@@ -86,9 +88,10 @@ public class GetLibraryDocumentInfoApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      libraryDocumentsApi.getLibraryDocumentInfo(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                                 libraryDocumentId);
-    } 
+      LibraryDocumentInfo libraryDocumentInfo = libraryDocumentsApi.getLibraryDocumentInfo(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                                           libraryDocumentId);
+      assertNotNull(libraryDocumentInfo);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
@@ -104,18 +107,20 @@ public class GetLibraryDocumentInfoApiTest {
   @Test
   public void testInvalidLibraryDocumentId() throws ApiException {
     try {
-      libraryDocumentsApi.getLibraryDocumentInfo(ApiUtils.getValidHeaderParams(),
-                                                 TestData.EMPTY_PARAM);
-    } 
+      LibraryDocumentInfo libraryDocumentInfo = libraryDocumentsApi.getLibraryDocumentInfo(ApiUtils.getValidHeaderParams(),
+                                                                                           TestData.EMPTY_PARAM);
+      assertNotNull(libraryDocumentInfo);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_LIBRARYDOCUMENT_ID.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      libraryDocumentsApi.getLibraryDocumentInfo(ApiUtils.getValidHeaderParams(),
-                                                 TestData.NULL_PARAM);
-    } 
+      LibraryDocumentInfo libraryDocumentInfo = libraryDocumentsApi.getLibraryDocumentInfo(ApiUtils.getValidHeaderParams(),
+                                                                                           TestData.NULL_PARAM);
+      assertNotNull(libraryDocumentInfo);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_LIBRARYDOCUMENT_ID.getApiCode().equals(e.getApiCode()));
@@ -135,7 +140,7 @@ public class GetLibraryDocumentInfoApiTest {
                                                                                            libraryDocumentId);
       assertNotNull(libraryDocumentInfo);
       assertNotNull(libraryDocumentInfo.getLibraryDocumentId());
-    } 
+    }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));
     }

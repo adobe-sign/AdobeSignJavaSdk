@@ -30,12 +30,16 @@ import com.sun.jersey.multipart.file.FileDataBodyPart;
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-04-05T18:03:59.501+05:30")
 public class ApiClient {
 
+  private final String VERSION = "1.1.2";
+  private final String SDK_NAME = "Java SDK ";
+  private final String X_SDK_VERSION_KEY = "x-sdk-version";
+  private final String X_SDK_VERSION = SDK_NAME + VERSION;
   private Map<String, Client> hostMap = new HashMap<String, Client>();
   private Map<String, String> defaultHeaderMap = new HashMap<String, String>();
   private boolean debugging = false;
-  private String envHostName = "https://secure.na1.echosign.com";
-  private String subPath = "/api/rest/v5";
-  private boolean queryBaseUrl = true;
+  private String envHostName = "https://api.echosign.com/".replaceAll("\\/+$", "/");
+  private String baseUri = null;
+  private String subPath = "api/rest/v5";
   private JSON json = new JSON();
 
   private int statusCode;
@@ -57,15 +61,11 @@ public class ApiClient {
   }
 
   public String getBaseUri() {
-    if (queryBaseUrl)
-      return null;
-
-    return envHostName;
+    return baseUri;
   }
 
   public void setBaseUri(String baseUri) {
-    this.envHostName = baseUri;
-    queryBaseUrl = false;
+    this.baseUri = baseUri;
   }
 
   /**
@@ -81,7 +81,7 @@ public class ApiClient {
   public void setEnvHostName(String hostName) {
     if(hostName != null && hostName.length()>0) {
       this.envHostName = hostName;
-      queryBaseUrl = true;
+      this.baseUri = null;
     }
   }
   /**
@@ -103,7 +103,7 @@ public class ApiClient {
    */
   public void setUserAgent(String userAgent) {
     addDefaultHeader("User-Agent",
-                     userAgent);
+        userAgent);
   }
 
   /**
@@ -115,7 +115,7 @@ public class ApiClient {
   public void addDefaultHeader(String key,
                                String value) {
     defaultHeaderMap.put(key,
-                         value);
+        value);
   }
 
   /**
@@ -210,7 +210,7 @@ public class ApiClient {
     }
     else {
       params.add(new Pair(name,
-                          parameterToString(value)));
+          parameterToString(value)));
       return params;
     }
 
@@ -225,7 +225,7 @@ public class ApiClient {
     if (collectionFormat.equals("multi")) {
       for (Object item : valueCollection) {
         params.add(new Pair(name,
-                            parameterToString(item)));
+            parameterToString(item)));
       }
 
       return params;
@@ -253,7 +253,7 @@ public class ApiClient {
     }
 
     params.add(new Pair(name,
-                        sb.substring(1)));
+        sb.substring(1)));
 
     return params;
   }
@@ -270,10 +270,10 @@ public class ApiClient {
   public String selectHeaderAccept(String[] accepts) {
     if (accepts.length == 0) return null;
     if (StringUtil.containsIgnoreCase(accepts,
-                                      "application/json"))
+        "application/json"))
       return "application/json";
     return StringUtil.join(accepts,
-                           ",");
+        ",");
   }
 
   /**
@@ -291,7 +291,7 @@ public class ApiClient {
       return "application/json";
 
     if (StringUtil.containsIgnoreCase(contentTypes,
-                                      "application/json"))
+        "application/json"))
       return "application/json";
     return contentTypes[0];
   }
@@ -302,8 +302,8 @@ public class ApiClient {
   public String escapeString(String str) {
     try {
       return URLEncoder.encode(str,
-                               "utf8").replaceAll("\\+",
-                                                  "%20");
+          "utf8").replaceAll("\\+",
+          "%20");
     }
     catch (UnsupportedEncodingException e) {
       return str;
@@ -321,7 +321,7 @@ public class ApiClient {
     }
     else {
       throw new ApiException(400,
-                             "can not serialize object into Content-Type: " + contentType);
+          "can not serialize object into Content-Type: " + contentType);
     }
   }
 
@@ -336,7 +336,7 @@ public class ApiClient {
       contentType = contentTypes.get(0);
     if (contentType == null)
       throw new ApiException(500,
-                             "missing Content-Type in response");
+          "missing Content-Type in response");
 
     String body;
     if (response.hasEntity())
@@ -347,7 +347,7 @@ public class ApiClient {
     if (contentType.startsWith("application/json")) {
 
       return json.deserialize(body,
-                              returnType);
+          returnType);
     }
     else if (returnType.getType().equals(String.class)) {
       // Expecting string, return the raw response body.
@@ -355,7 +355,7 @@ public class ApiClient {
     }
     else {
       throw new ApiException(500,
-                             "Content type \"" + contentType + "\" is not supported for type: " + returnType.getType());
+          "Content type \"" + contentType + "\" is not supported for type: " + returnType.getType());
     }
   }
 
@@ -370,9 +370,12 @@ public class ApiClient {
                                         String accept,
                                         String contentType) throws ApiException {
 
+    if(!isOauth(path))
+      headerParams.put(X_SDK_VERSION_KEY,X_SDK_VERSION);
+
     if (body != null && binaryBody != null) {
       throw new ApiException(500,
-                             "either body or binaryBody must be null");
+          "either body or binaryBody must be null");
     }
 
     Client client = getClient(baseUrl);
@@ -414,13 +417,13 @@ public class ApiClient {
         if (param.getValue() instanceof File) {
           File file = (File) param.getValue();
           mp.bodyPart(new FileDataBodyPart(param.getKey(),
-                                           file,
-                                           MediaType.MULTIPART_FORM_DATA_TYPE));
+              file,
+              MediaType.MULTIPART_FORM_DATA_TYPE));
         }
         else {
           mp.field(param.getKey(),
-                   parameterToString(param.getValue()),
-                   MediaType.MULTIPART_FORM_DATA_TYPE);
+              parameterToString(param.getValue()),
+              MediaType.MULTIPART_FORM_DATA_TYPE);
         }
       }
       body = mp;
@@ -430,90 +433,103 @@ public class ApiClient {
     }
     ClientResponse response = null;
 
-    if ("GET".equals(method)) {
-      response = (ClientResponse) builder.get(ClientResponse.class);
-    }
-    else if ("POST".equals(method)) {
-      if (encodedFormParams != null) {
-        response = builder.type(contentType).post(ClientResponse.class,
-                                                  encodedFormParams);
+    try {
+      if ("GET".equals(method)) {
+        response = (ClientResponse) builder.get(ClientResponse.class);
       }
-      else if (body == null) {
-        if (binaryBody == null)
-          response = builder.post(ClientResponse.class,
-                                  null);
-        else
+      else if ("POST".equals(method)) {
+        if (encodedFormParams != null) {
           response = builder.type(contentType).post(ClientResponse.class,
-                                                    binaryBody);
+              encodedFormParams);
+        }
+        else if (body == null) {
+          if (binaryBody == null)
+            response = builder.post(ClientResponse.class,
+                null);
+          else
+            response = builder.type(contentType).post(ClientResponse.class,
+                binaryBody);
+        }
+        else if (body instanceof FormDataMultiPart) {
+          response = builder.type(contentType).post(ClientResponse.class,
+              body);
+        }
+        else {
+          response = builder.type(contentType).post(ClientResponse.class,
+              serialize(body,
+                  contentType));
+        }
       }
-      else if (body instanceof FormDataMultiPart) {
-        response = builder.type(contentType).post(ClientResponse.class,
-                                                  body);
-      }
-      else {
-        response = builder.type(contentType).post(ClientResponse.class,
-                                                  serialize(body,
-                                                            contentType));
-      }
-    }
-    else if ("PUT".equals(method)) {
-      if (encodedFormParams != null) {
-        response = builder.type(contentType).put(ClientResponse.class,
-                                                 encodedFormParams);
-      }
-      else if (body == null) {
-        if (binaryBody == null)
-          response = builder.put(ClientResponse.class,
-                                 null);
-        else
+      else if ("PUT".equals(method)) {
+        if (encodedFormParams != null) {
           response = builder.type(contentType).put(ClientResponse.class,
-                                                   binaryBody);
+              encodedFormParams);
+        }
+        else if (body == null) {
+          if (binaryBody == null)
+            response = builder.put(ClientResponse.class,
+                null);
+          else
+            response = builder.type(contentType).put(ClientResponse.class,
+                binaryBody);
+        }
+        else {
+          response = builder.type(contentType).put(ClientResponse.class,
+              serialize(body, contentType));
+        }
       }
-      else {
-        response = builder.type(contentType).put(ClientResponse.class,
-                                                 serialize(body, contentType));
-      }
-    }
-    else if ("DELETE".equals(method)) {
-      if (encodedFormParams != null) {
-        response = builder.type(contentType).delete(ClientResponse.class,
-                                                    encodedFormParams);
-      }
-      else if (body == null) {
-        if (binaryBody == null)
-          response = builder.delete(ClientResponse.class);
-        else
+      else if ("DELETE".equals(method)) {
+        if (encodedFormParams != null) {
           response = builder.type(contentType).delete(ClientResponse.class,
-                                                      binaryBody);
+              encodedFormParams);
+        }
+        else if (body == null) {
+          if (binaryBody == null)
+            response = builder.delete(ClientResponse.class);
+          else
+            response = builder.type(contentType).delete(ClientResponse.class,
+                binaryBody);
+        }
+        else {
+          response = builder.type(contentType).delete(ClientResponse.class,
+              serialize(body, contentType));
+        }
       }
       else {
-        response = builder.type(contentType).delete(ClientResponse.class,
-                                                    serialize(body, contentType));
+        throw new ApiException(500,
+            "unknown method type " + method);
       }
+      if(response.getStatusInfo().getFamily() == Family.SERVER_ERROR) {
+        throw new ApiException(response.getStatusInfo().getStatusCode(), "Service Unavailable");
+      }
+
+      return response;
     }
-    else {
-      throw new ApiException(500,
-                             "unknown method type " + method);
+    catch (ApiException e) {
+      throw e;
     }
-    return response;
+    catch (Exception error) {
+      throw new ApiException("Connection Error");
+    }
+
   }
 
   private String getBaseUrl(String accessToken) throws ApiException {
 
     String baseUrl = envHostName + subPath;
     String path = "/base_uris".replaceAll("\\{format\\}",
-                                          "json");
+        "json");
     Map<String, String> headerParams = new HashMap<String, String>();
     if (accessToken != null)
       headerParams.put("Access-Token",
-                       parameterToString(accessToken));
+          parameterToString(accessToken));
 
     List<Pair> queryParams = new ArrayList<Pair>();
 
     Map<String, Object> formParams = new HashMap<String, Object>();
 
     final String[] accepts = {
-            "application/json"
+        "application/json"
     };
     final String acceptHeader = selectHeaderAccept(accepts);
 
@@ -526,19 +542,19 @@ public class ApiClient {
     };
 
     ClientResponse response = getAPIResponse(baseUrl,
-                                             path,
-                                             "GET",
-                                             queryParams,
-                                             null,
-                                             null,
-                                             headerParams,
-                                             formParams,
-                                             acceptHeader,
-                                             contentType);
+        path,
+        "GET",
+        queryParams,
+        null,
+        null,
+        headerParams,
+        formParams,
+        acceptHeader,
+        contentType);
 
     if (response.getStatusInfo().getFamily() == Family.SUCCESSFUL) {
       BaseUriInfo baseUriInfo = deserialize(response,
-                                            returnType);
+          returnType);
       return baseUriInfo.getApiAccessPoint();
     }
     return envHostName;
@@ -571,8 +587,9 @@ public class ApiClient {
                          TypeRef returnType,
                          boolean addSubPath) throws ApiException {
 
-    String baseUrl = envHostName;
-    if (queryBaseUrl) {
+    String baseUrl = baseUri;
+    if(baseUrl == null)
+    {
       baseUrl = getBaseUrl(headerParams.get("Access-Token"));
     }
 
@@ -580,15 +597,15 @@ public class ApiClient {
       baseUrl += subPath;
 
     ClientResponse response = getAPIResponse(baseUrl,
-                                             path,
-                                             method,
-                                             queryParams,
-                                             body,
-                                             binaryBody,
-                                             headerParams,
-                                             formParams,
-                                             accept,
-                                             contentType);
+        path,
+        method,
+        queryParams,
+        body,
+        binaryBody,
+        headerParams,
+        formParams,
+        accept,
+        contentType);
 
     statusCode = response.getStatusInfo().getStatusCode();
     responseHeaders = response.getHeaders();
@@ -601,7 +618,7 @@ public class ApiClient {
         return null;
       else
         return deserialize(response,
-                           returnType);
+            returnType);
     }
     else {
       String message = "error";
@@ -643,10 +660,10 @@ public class ApiClient {
 
     }
     throw new ApiException(response.getStatusInfo().getStatusCode(),
-                           message,
-                           code,
-                           response.getHeaders(),
-                           respBody);
+        message,
+        code,
+        response.getHeaders(),
+        respBody);
   }
 
   /**
@@ -674,8 +691,8 @@ public class ApiClient {
                                 String contentType,
                                 boolean addSubPath) throws ApiException {
 
-    String baseUrl = envHostName;
-    if (queryBaseUrl) {
+    String baseUrl = baseUri;
+    if (baseUrl == null) {
       baseUrl = getBaseUrl(headerParams.get("Access-Token"));
     }
 
@@ -683,15 +700,15 @@ public class ApiClient {
       baseUrl += subPath;
 
     ClientResponse response = getAPIResponse(baseUrl,
-                                             path,
-                                             method,
-                                             queryParams,
-                                             body,
-                                             binaryBody,
-                                             headerParams,
-                                             formParams,
-                                             accept,
-                                             contentType);
+        path,
+        method,
+        queryParams,
+        body,
+        binaryBody,
+        headerParams,
+        formParams,
+        accept,
+        contentType);
 
     if (response.getStatusInfo() == ClientResponse.Status.NO_CONTENT) {
       return null;
@@ -705,7 +722,7 @@ public class ApiClient {
         }
         catch (IOException ex) {
           throw new ApiException(500,
-                                 "Error obtaining binary response data");
+              "Error obtaining binary response data");
         }
         return data;
       }
@@ -731,8 +748,8 @@ public class ApiClient {
       }
 
       throw new ApiException(response.getStatusInfo().getStatusCode(),
-        exception == null ? null : exception.getCode(),
-        exception == null ? message : exception.getMessage());
+          exception == null ? null : exception.getCode(),
+          exception == null ? message : exception.getMessage());
     }
   }
 
@@ -748,7 +765,7 @@ public class ApiClient {
   private <T> T getRestException(String message, Class<T> clazz) throws IOException {
     ObjectMapper mapper = new ObjectMapper();
     return mapper.readValue(message,
-                            clazz);
+        clazz);
   }
 
   /**
@@ -762,10 +779,10 @@ public class ApiClient {
       String valueStr = parameterToString(param.getValue());
       try {
         formParamBuilder.append(URLEncoder.encode(param.getKey(),
-                                                  "utf8"))
-                        .append("=")
-                        .append(URLEncoder.encode(valueStr,
-                                                  "utf8"));
+            "utf8"))
+            .append("=")
+            .append(URLEncoder.encode(valueStr,
+                "utf8"));
         formParamBuilder.append("&");
       }
       catch (UnsupportedEncodingException e) {
@@ -776,7 +793,7 @@ public class ApiClient {
     String encodedFormParams = formParamBuilder.toString();
     if (encodedFormParams.endsWith("&")) {
       encodedFormParams = encodedFormParams.substring(0,
-                                                      encodedFormParams.length() - 1);
+          encodedFormParams.length() - 1);
     }
 
     return encodedFormParams;
@@ -791,9 +808,16 @@ public class ApiClient {
       if (debugging)
         client.addFilter(new LoggingFilter());
       hostMap.put(baseUrl,
-                  client);
+          client);
     }
     return hostMap.get(baseUrl);
+  }
+
+  private boolean isOauth(String path) {
+    path = path.toLowerCase();
+    if(path.startsWith("oauth"))
+      return true;
+    return false;
   }
 
 

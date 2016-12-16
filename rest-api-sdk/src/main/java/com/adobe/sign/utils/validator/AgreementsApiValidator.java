@@ -32,6 +32,20 @@ import com.adobe.sign.utils.StringUtil;
  */
 public class AgreementsApiValidator {
 
+  private static final String AGREEMENT_CREATION_INFO = "agreementCreationInfo";
+  private static final String DOCUMENT_CREATION_INFO = "documentCreationInfo";
+  private static final String NAME = "name";
+  private static final String RECIPIENT_SET_INFOS = "recipientSetInfos";
+
+  private static final String SIGNATURE_TYPE = "signatureType";
+  private static final String ALTERNATE_PARTICIPANT_INFO = "alternateParticipantInfo";
+  private static final String EMAIL = "email";
+
+  private static final String AGREEMENT_STATUS_UPATE_INFO = "agreementStatusUpdateInfo";
+
+  private static final String RECIPIENT_SET_MEMBER_INFO = "recipientSetMemberInfos";
+  private static final String RECIPIENT_SET_ROLE = "recipientSetRole";
+
   /**
    * Validator for getAgreements API that retrieves agreements for the user.
    *
@@ -58,26 +72,26 @@ public class AgreementsApiValidator {
    * @throws ApiException
    */
   public static void createAgreementValidator(AgreementCreationInfo agreementCreationInfo) throws ApiException {
-    ApiValidatorHelper.validateParameter(agreementCreationInfo);
+    ApiValidatorHelper.validateParameter(agreementCreationInfo,AGREEMENT_CREATION_INFO);
 
     DocumentCreationInfo documentCreationInfo = agreementCreationInfo.getDocumentCreationInfo();
-    ApiValidatorHelper.validateParameter(documentCreationInfo);
+    ApiValidatorHelper.validateParameter(documentCreationInfo,DOCUMENT_CREATION_INFO);
 
     List<FileInfo> fileInfos = documentCreationInfo.getFileInfos();
     validateFileInfo(fileInfos);
 
-    ApiValidatorHelper.validateParameter(documentCreationInfo.getName());
+    ApiValidatorHelper.validateParameter(documentCreationInfo.getName(),NAME);
 
     validatePostSignOptions(documentCreationInfo.getPostSignOptions());
 
-    ApiValidatorHelper.validateParameter(documentCreationInfo.getRecipientSetInfos());
+    ApiValidatorHelper.validateParameter(documentCreationInfo.getRecipientSetInfos(),RECIPIENT_SET_INFOS);
 
     List<RecipientSetInfo> recipientSetInfos = documentCreationInfo.getRecipientSetInfos();
     validateRecipientSetInfos(recipientSetInfos);
 
     validateInteractiveOptions(agreementCreationInfo);
 
-    ApiValidatorHelper.validateParameter(documentCreationInfo.getSignatureType());
+    ApiValidatorHelper.validateParameter(documentCreationInfo.getSignatureType(),SIGNATURE_TYPE);
   }
 
   /**
@@ -316,9 +330,9 @@ public class AgreementsApiValidator {
     ApiValidatorHelper.validateId(participantSetId,
                                   SdkErrorCodes.INVALID_PARTICIPANT_SET_ID);
 
-    ApiValidatorHelper.validateParameter(alternateParticipantInfo);
+    ApiValidatorHelper.validateParameter(alternateParticipantInfo, ALTERNATE_PARTICIPANT_INFO);
 
-    ApiValidatorHelper.validateParameter(alternateParticipantInfo.getEmail());
+    ApiValidatorHelper.validateParameter(alternateParticipantInfo.getEmail(), EMAIL);
     ApiValidatorHelper.validateEmailParamater(alternateParticipantInfo.getEmail());
 
     ApiValidatorHelper.validateParameter(alternateParticipantInfo.getPrivateMessage(),
@@ -348,7 +362,7 @@ public class AgreementsApiValidator {
 
     ApiValidatorHelper.validateId(agreementId,
                                   SdkErrorCodes.INVALID_AGREEMENT_ID);
-    ApiValidatorHelper.validateParameter(agreementStatusUpdateInfo);
+    ApiValidatorHelper.validateParameter(agreementStatusUpdateInfo, AGREEMENT_STATUS_UPATE_INFO);
     ApiValidatorHelper.validateParameter(agreementStatusUpdateInfo.getValue(),
                                          SdkErrorCodes.MUST_PROVIDE_VALID_AGREEMENT_STATUS);
   }
@@ -365,7 +379,7 @@ public class AgreementsApiValidator {
 
     for (RecipientSetInfo recipientSetInfo : recipientSetInfos) {
 
-      ApiValidatorHelper.validateParameter(recipientSetInfo.getRecipientSetMemberInfos());
+      ApiValidatorHelper.validateParameter(recipientSetInfo.getRecipientSetMemberInfos(), RECIPIENT_SET_MEMBER_INFO);
       int numberOfRecipients = recipientSetInfo.getRecipientSetMemberInfos().size();
 
       if ((interactiveOptions.getAuthoringRequested() || interactiveOptions.getSendThroughWeb()) && numberOfRecipients > 1)
@@ -401,14 +415,14 @@ public class AgreementsApiValidator {
 
     for (RecipientSetInfo recipientSetInfo : recipientSetInfos) {
 
-      ApiValidatorHelper.validateParameter(recipientSetInfo.getRecipientSetMemberInfos());
+      ApiValidatorHelper.validateParameter(recipientSetInfo.getRecipientSetMemberInfos(), RECIPIENT_SET_MEMBER_INFO);
       List<RecipientInfo> recipientInfos = recipientSetInfo.getRecipientSetMemberInfos();
       int numberOfRecipients = recipientInfos.size();
 
       for (RecipientInfo recipientInfo : recipientInfos) {
         ApiValidatorHelper.validateRecipientSetInfos(recipientInfo.getEmail(), recipientInfo.getFax(), numberOfRecipients);
       }
-      ApiValidatorHelper.validateParameter(recipientSetInfo.getRecipientSetRole());
+      ApiValidatorHelper.validateParameter(recipientSetInfo.getRecipientSetRole(), RECIPIENT_SET_ROLE);
     }
   }
 

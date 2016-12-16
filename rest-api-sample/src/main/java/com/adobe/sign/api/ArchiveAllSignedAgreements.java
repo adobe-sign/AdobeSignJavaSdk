@@ -45,6 +45,7 @@ public class ArchiveAllSignedAgreements {
       client.run();
     } catch (ApiException e) {
       ApiUtils.logException(Errors.ARCHIVE_AGREEMENT, e);
+      throw e;
     }
   }
 

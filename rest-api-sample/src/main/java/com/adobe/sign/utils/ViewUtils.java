@@ -42,8 +42,8 @@ public class ViewUtils {
       return viewUrl;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.URL_FOR_MANAGE_PAGE, e);
-      return null;
+      ApiUtils.logError(Errors.URL_FOR_MANAGE_PAGE);
+      throw e;
     }
   }
 
@@ -63,8 +63,8 @@ public class ViewUtils {
       return viewUrl;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.URL_FOR_VIEW_AGREEMENT_ASSET_PAGE, e);
-      return null;
+      ApiUtils.logError(Errors.URL_FOR_VIEW_AGREEMENT_ASSET_PAGE);
+      throw e;
     }
   }
 
@@ -84,8 +84,8 @@ public class ViewUtils {
       return viewUrl;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.URL_FOR_SETTINGS_PAGE, e);
-      return null;
+      ApiUtils.logError(Errors.URL_FOR_SETTINGS_PAGE);
+      throw e;
     }
   }
 }

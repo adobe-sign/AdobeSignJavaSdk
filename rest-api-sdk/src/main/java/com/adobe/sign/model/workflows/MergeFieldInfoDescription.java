@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class MergeFieldInfoDescription   {
   
   private String defaultValue = null;
@@ -37,9 +37,16 @@ public class MergeFieldInfoDescription   {
    **/
   @ApiModelProperty(required = true, value = "default value of the field if input for this field is not provided and this field is required")
   @JsonProperty("defaultValue")
+  /**
+   * @return String
+   **/
   public String getDefaultValue() {
     return defaultValue;
   }
+  /**
+   * default value of the field if input for this field is not provided and this field is required
+   * @param defaultValue
+   **/
   public void setDefaultValue(String defaultValue) {
     this.defaultValue = defaultValue;
   }
@@ -50,9 +57,16 @@ public class MergeFieldInfoDescription   {
    **/
   @ApiModelProperty(required = true, value = "The display text that can be shown for this custom field")
   @JsonProperty("displayName")
+  /**
+   * @return String
+   **/
   public String getDisplayName() {
     return displayName;
   }
+  /**
+   * The display text that can be shown for this custom field
+   * @param displayName
+   **/
   public void setDisplayName(String displayName) {
     this.displayName = displayName;
   }
@@ -63,9 +77,16 @@ public class MergeFieldInfoDescription   {
    **/
   @ApiModelProperty(required = true, value = "Whether current field can be edited. If editable attribute for this field is false then this field should not be provided in the agreement creation request and default value of this field will be used in agreement creation")
   @JsonProperty("editable")
+  /**
+   * @return Boolean
+   **/
   public Boolean getEditable() {
     return editable;
   }
+  /**
+   * Whether current field can be edited. If editable attribute for this field is false then this field should not be provided in the agreement creation request and default value of this field will be used in agreement creation
+   * @param editable
+   **/
   public void setEditable(Boolean editable) {
     this.editable = editable;
   }
@@ -76,9 +97,16 @@ public class MergeFieldInfoDescription   {
    **/
   @ApiModelProperty(required = true, value = "Name of the custom field in this workflow")
   @JsonProperty("fieldName")
+  /**
+   * @return String
+   **/
   public String getFieldName() {
     return fieldName;
   }
+  /**
+   * Name of the custom field in this workflow
+   * @param fieldName
+   **/
   public void setFieldName(String fieldName) {
     this.fieldName = fieldName;
   }
@@ -89,9 +117,16 @@ public class MergeFieldInfoDescription   {
    **/
   @ApiModelProperty(required = true, value = "Whether current field should be visible on agreement creation page. If visible attribute for this field is false then this field should not be shown on the agreement creation page using this workflow")
   @JsonProperty("visible")
+  /**
+   * @return Boolean
+   **/
   public Boolean getVisible() {
     return visible;
   }
+  /**
+   * Whether current field should be visible on agreement creation page. If visible attribute for this field is false then this field should not be shown on the agreement creation page using this workflow
+   * @param visible
+   **/
   public void setVisible(Boolean visible) {
     this.visible = visible;
   }
@@ -99,6 +134,10 @@ public class MergeFieldInfoDescription   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class MergeFieldInfoDescription {\n");

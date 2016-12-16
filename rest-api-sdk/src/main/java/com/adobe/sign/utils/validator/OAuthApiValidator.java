@@ -12,7 +12,7 @@
 */
 package com.adobe.sign.utils.validator;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.adobe.sign.model.oAuth.AccessTokenRefreshRequest;
 import com.adobe.sign.model.oAuth.AccessTokenRequest;
@@ -26,6 +26,19 @@ import com.adobe.sign.utils.ApiException;
  */
 public class OAuthApiValidator {
 
+  private static final String TOKEN = "token";
+  private static final String ACCESS_TOKEN_REQUEST = "accessTokenRequest";
+  private static final String AUTHORIZATION_REQUEST = "authorizationRequest";
+  private static final String ACESS_TOKEN_REFRESH_REQUEST = "accessTokenRefreshRequest";
+  private static final String SCOPES = "scopes";
+  private static final String CLIENT_ID = "clientId";
+  private static final String CLIENT_SECRET = "clientSecret";
+  private static final String REFRESH_TOKEN = "refreshToken";
+  private static final String GRANT_TYPE = "grantType";
+  private static final String CODE = "code";
+  private static final String RESPONSE_TYPE = "responseType";
+  private static final String REDIRECT_URI = "redirectUri";
+
   /**
    * Validator for getAuthorizationUrl API that forms the url for authorization workflow.
    *
@@ -33,14 +46,15 @@ public class OAuthApiValidator {
    * @throws ApiException
    */
   public static void getAuthorizationUrlValidator(AuthorizationRequest authorizationRequest) throws ApiException {
-    ApiValidatorHelper.validateParameter(authorizationRequest);
+    ApiValidatorHelper.validateParameter(authorizationRequest, AUTHORIZATION_REQUEST);
 
-    ArrayList<String> parameterList = new ArrayList();
-    parameterList.add(authorizationRequest.getClientId());
-    parameterList.add(authorizationRequest.getRedirectUri());
+    HashMap<String, String> hashMap = new HashMap<String, String>();
+    hashMap.put(CLIENT_ID, authorizationRequest.getClientId());
+    hashMap.put(REDIRECT_URI, authorizationRequest.getRedirectUri());
+    hashMap.put(RESPONSE_TYPE, authorizationRequest.getResponseType());
 
-    ApiValidatorHelper.validateRequiredParameters(parameterList);
-    ApiValidatorHelper.validateParameter(authorizationRequest.getScopes());
+    ApiValidatorHelper.validateRequiredParameters(hashMap);
+    ApiValidatorHelper.validateParameter(authorizationRequest.getScopes(), SCOPES);
     validateRedirectUri(authorizationRequest.getRedirectUri());
   }
 
@@ -51,15 +65,15 @@ public class OAuthApiValidator {
    * @throws ApiException
    */
   public static void getAccessTokenValidator(AccessTokenRequest accessTokenRequest) throws ApiException {
-    ApiValidatorHelper.validateParameter(accessTokenRequest);
+    ApiValidatorHelper.validateParameter(accessTokenRequest, ACCESS_TOKEN_REQUEST);
 
-    ArrayList<String> parameterList = new ArrayList();
-    parameterList.add(accessTokenRequest.getClientId());
-    parameterList.add(accessTokenRequest.getClientSecret());
-    parameterList.add(accessTokenRequest.getCode());
-    parameterList.add(accessTokenRequest.getGrantType());
+    HashMap<String, String> hashMap = new HashMap<String, String>();
+    hashMap.put(CLIENT_ID, accessTokenRequest.getClientId());
+    hashMap.put(CLIENT_SECRET, accessTokenRequest.getClientSecret());
+    hashMap.put(CODE, accessTokenRequest.getCode());
+    hashMap.put(GRANT_TYPE, accessTokenRequest.getGrantType());
 
-    ApiValidatorHelper.validateRequiredParameters(parameterList);
+    ApiValidatorHelper.validateRequiredParameters(hashMap);
     validateRedirectUri(accessTokenRequest.getRedirectUri());
   }
 
@@ -70,15 +84,15 @@ public class OAuthApiValidator {
    * @throws ApiException
    */
   public static void refreshAccessTokenValidator(AccessTokenRefreshRequest accessTokenRefreshRequest) throws ApiException {
-    ApiValidatorHelper.validateParameter(accessTokenRefreshRequest);
+    ApiValidatorHelper.validateParameter(accessTokenRefreshRequest, ACESS_TOKEN_REFRESH_REQUEST);
 
-    ArrayList<String> parameterList = new ArrayList();
-    parameterList.add(accessTokenRefreshRequest.getClientId());
-    parameterList.add(accessTokenRefreshRequest.getClientSecret());
-    parameterList.add(accessTokenRefreshRequest.getRefreshToken());
-    parameterList.add(accessTokenRefreshRequest.getGrantType());
+    HashMap<String, String> hashMap = new HashMap<String, String>();
+    hashMap.put(CLIENT_ID, accessTokenRefreshRequest.getClientId());
+    hashMap.put(CLIENT_SECRET, accessTokenRefreshRequest.getClientSecret());
+    hashMap.put(REFRESH_TOKEN, accessTokenRefreshRequest.getRefreshToken());
+    hashMap.put(GRANT_TYPE, accessTokenRefreshRequest.getGrantType());
 
-    ApiValidatorHelper.validateRequiredParameters(parameterList);
+    ApiValidatorHelper.validateRequiredParameters(hashMap);
   }
 
   /**
@@ -88,7 +102,7 @@ public class OAuthApiValidator {
    * @throws ApiException
    */
   public static void revokeTokenValidator(Token token) throws ApiException {
-    ApiValidatorHelper.validateParameter(token);
+    ApiValidatorHelper.validateParameter(token, TOKEN);
 
     ApiValidatorHelper.validateParameter(token.getToken(),
                                          SdkErrorCodes.MISSING_REQUIRED_PARAM);

@@ -47,6 +47,7 @@ public class CreateNewWidgetWithCounterSigners {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.CREATE_WIDGET_WITH_COUNTER_SIGNERS, e);
+      throw e;
       }
   }
   /**
@@ -66,14 +67,14 @@ public class CreateNewWidgetWithCounterSigners {
 
     // Add counter signer to the counterSignerMemberList
     ArrayList<String> counterSignerMemberList = new ArrayList<>();
-    counterSignerMemberList.add(Constants.USER_EMAIL);
+    counterSignerMemberList.add(ApiUtils.getUserEmail(Constants.USER_EMAIL_PREFIX,Constants.USER_EMAIL_DOMAIN));
 
     // Make call to create the widget.
     WidgetCreationResponse widgetCreationResponse = WidgetUtils.createWidgetWithCounterSigner(transientDocumentId,
                                                                                               WidgetUtils.DocumentIdentifierType.TRANSIENT_DOCUMENT_ID,
                                                                                               formFieldDocumentId,
                                                                                               WidgetUtils.DocumentIdentifierType.TRANSIENT_DOCUMENT_ID,
-                                                                                              Constants.WIDGET_NAME,
+                                                                                              ApiUtils.getWidgetName(Constants.WIDGET_NAME),
                                                                                               counterSignerMemberList);
     // Display widget ID and corresponding code of newly created widget.
     ApiUtils.getLogger().info("Newly created widget's ID: " + widgetCreationResponse.getWidgetId());

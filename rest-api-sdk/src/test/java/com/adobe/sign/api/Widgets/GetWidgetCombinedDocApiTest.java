@@ -25,20 +25,20 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WidgetUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Widget Combined Doc API.
+ * Junit test cases for Get Widget Combined Doc endpoint.
  */
 public class GetWidgetCombinedDocApiTest {
 
   private static WidgetsApi widgetsApi = null;
   private static String widgetId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -60,22 +60,24 @@ public class GetWidgetCombinedDocApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      widgetsApi.getWidgetCombinedDocument(ApiUtils.getNullAccessTokenHeaderParams(),
-                                           widgetId,
-                                           TestData.VERSION_ID,
-                                           TestData.PARTICIPANT_EMAIL,
-                                           TestData.AUDIT_REPORT);
+      byte[] widgetCombinedDocument = widgetsApi.getWidgetCombinedDocument(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                           widgetId,
+                                                                           TestData.VERSION_ID,
+                                                                           TestData.PARTICIPANT_EMAIL,
+                                                                           TestData.AUDIT_REPORT);
+      assertNotNull(widgetCombinedDocument);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      widgetsApi.getWidgetCombinedDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                           widgetId,
-                                           TestData.VERSION_ID,
-                                           TestData.PARTICIPANT_EMAIL,
-                                           TestData.AUDIT_REPORT);
+      byte[] widgetCombinedDocument = widgetsApi.getWidgetCombinedDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                           widgetId,
+                                                                           TestData.VERSION_ID,
+                                                                           TestData.PARTICIPANT_EMAIL,
+                                                                           TestData.AUDIT_REPORT);
+      assertNotNull(widgetCombinedDocument);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
@@ -92,11 +94,12 @@ public class GetWidgetCombinedDocApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      widgetsApi.getWidgetCombinedDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                           widgetId,
-                                           TestData.VERSION_ID,
-                                           TestData.PARTICIPANT_EMAIL,
-                                           TestData.AUDIT_REPORT);
+      byte[] widgetCombinedDocument = widgetsApi.getWidgetCombinedDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                           widgetId,
+                                                                           TestData.VERSION_ID,
+                                                                           TestData.PARTICIPANT_EMAIL,
+                                                                           TestData.AUDIT_REPORT);
+      assertNotNull(widgetCombinedDocument);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
@@ -113,22 +116,24 @@ public class GetWidgetCombinedDocApiTest {
   @Test
   public void testInvalidWidgetId() throws ApiException {
     try {
-      widgetsApi.getWidgetCombinedDocument(ApiUtils.getValidHeaderParams(),
-                                           TestData.EMPTY_PARAM,
-                                           TestData.VERSION_ID,
-                                           TestData.PARTICIPANT_EMAIL,
-                                           TestData.AUDIT_REPORT);
+      byte[] widgetCombinedDocument = widgetsApi.getWidgetCombinedDocument(ApiUtils.getValidHeaderParams(),
+                                                                           TestData.EMPTY_PARAM,
+                                                                           TestData.VERSION_ID,
+                                                                           TestData.PARTICIPANT_EMAIL,
+                                                                           TestData.AUDIT_REPORT);
+      assertNotNull(widgetCombinedDocument);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_WIDGET_ID.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      widgetsApi.getWidgetCombinedDocument(ApiUtils.getValidHeaderParams(),
-                                           TestData.NULL_PARAM,
-                                           TestData.VERSION_ID,
-                                           TestData.PARTICIPANT_EMAIL,
-                                           TestData.AUDIT_REPORT);
+      byte[] widgetCombinedDocument = widgetsApi.getWidgetCombinedDocument(ApiUtils.getValidHeaderParams(),
+                                                                           TestData.NULL_PARAM,
+                                                                           TestData.VERSION_ID,
+                                                                           TestData.PARTICIPANT_EMAIL,
+                                                                           TestData.AUDIT_REPORT);
+      assertNotNull(widgetCombinedDocument);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_WIDGET_ID.getApiCode().equals(e.getApiCode()));
@@ -146,12 +151,14 @@ public class GetWidgetCombinedDocApiTest {
   public void testInvalidVersionId() throws Exception {
 
     try {
-      widgetsApi.getWidgetCombinedDocument(ApiUtils.getValidHeaderParams(),
-                                           widgetId,
-                                           TestData.EMPTY_PARAM,
-                                           TestData.PARTICIPANT_EMAIL,
-                                           TestData.AUDIT_REPORT);
-    } catch (ApiException e) {
+      byte[] widgetCombinedDocument = widgetsApi.getWidgetCombinedDocument(ApiUtils.getValidHeaderParams(),
+                                                                           widgetId,
+                                                                           TestData.EMPTY_PARAM,
+                                                                           TestData.PARTICIPANT_EMAIL,
+                                                                           TestData.AUDIT_REPORT);
+      assertNotNull(widgetCombinedDocument);
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(), SdkErrorCodes.INVALID_VERSION_ID.getApiCode().equals(e.getApiCode()));
     }
   }
@@ -167,11 +174,12 @@ public class GetWidgetCombinedDocApiTest {
   public void testInvalidParticipantEmail() throws Exception {
 
     try {
-      widgetsApi.getWidgetCombinedDocument(ApiUtils.getValidHeaderParams(),
-                                           widgetId,
-                                           TestData.VERSION_ID,
-                                           TestData.EMPTY_PARAM,
-                                           TestData.AUDIT_REPORT);
+      byte[] widgetCombinedDocument = widgetsApi.getWidgetCombinedDocument(ApiUtils.getValidHeaderParams(),
+                                                                           widgetId,
+                                                                           TestData.VERSION_ID,
+                                                                           TestData.EMPTY_PARAM,
+                                                                           TestData.AUDIT_REPORT);
+      assertNotNull(widgetCombinedDocument);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -188,18 +196,17 @@ public class GetWidgetCombinedDocApiTest {
   @Test
   public void testGetCombinedDocument() throws ApiException {
     try {
-      byte[] widgetCombinedDocument =  widgetsApi.getWidgetCombinedDocument(ApiUtils.getValidHeaderParams(),
-                                                                            widgetId,
-                                                                            TestData.VERSION_ID,
-                                                                            TestData.PARTICIPANT_EMAIL,
-                                                                            TestData.AUDIT_REPORT);
+      byte[] widgetCombinedDocument = widgetsApi.getWidgetCombinedDocument(ApiUtils.getValidHeaderParams(),
+                                                                           widgetId,
+                                                                           TestData.VERSION_ID,
+                                                                           TestData.PARTICIPANT_EMAIL,
+                                                                           TestData.AUDIT_REPORT);
       assertNotNull(widgetCombinedDocument);
     }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));
     }
   }
-
 
 
 }

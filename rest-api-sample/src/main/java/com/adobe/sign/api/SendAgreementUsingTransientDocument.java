@@ -53,6 +53,7 @@ public class SendAgreementUsingTransientDocument {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.SEND_AGREEMENT_USING_TRANSIENT_DOCUMENT, e);
+      throw e;
     }
   }
 
@@ -69,13 +70,13 @@ public class SendAgreementUsingTransientDocument {
 
     //List containing email ids of recipients.
     List<String> recipientSetEmailList = new ArrayList<String>();
-    recipientSetEmailList.add(Constants.USER_EMAIL);
+    recipientSetEmailList.add(ApiUtils.getUserEmail(Constants.USER_EMAIL_PREFIX,Constants.USER_EMAIL_DOMAIN));
 
     //Create agreement using the transient document.
     AgreementCreationResponse agreementCreationResponse =  AgreementUtils.createAgreement(recipientSetEmailList,
                                                                                           transientDocumentId,
                                                                                           AgreementUtils.DocumentIdentifierType.TRANSIENT_DOCUMENT_ID,
-                                                                                          Constants.AGREEMENT_NAME);
+                                                                                          ApiUtils.getAgreementName(Constants.AGREEMENT_NAME));
 
     //Get agreement info using the agreement id.
     AgreementInfo agreementInfo = AgreementUtils.getAgreementInfo(agreementCreationResponse.getAgreementId());

@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * A JSON that contains the id of the newly created Mega Sign
  **/
 @ApiModel(description = "A JSON that contains the id of the newly created Mega Sign")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.898+05:30")
 public class MegaSignCreationResponse   {
   
   private String megaSignId = null;
@@ -36,9 +36,16 @@ public class MegaSignCreationResponse   {
    **/
   @ApiModelProperty(required = true, value = "Unique identifier of the MegaSign parent agreement")
   @JsonProperty("megaSignId")
+  /**
+   * @return String
+   **/
   public String getMegaSignId() {
     return megaSignId;
   }
+  /**
+   * Unique identifier of the MegaSign parent agreement
+   * @param megaSignId
+   **/
   public void setMegaSignId(String megaSignId) {
     this.megaSignId = megaSignId;
   }
@@ -46,6 +53,10 @@ public class MegaSignCreationResponse   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class MegaSignCreationResponse {\n");

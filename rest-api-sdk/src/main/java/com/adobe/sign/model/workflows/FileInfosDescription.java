@@ -14,8 +14,8 @@
 package com.adobe.sign.model.workflows;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.workflows.WorkflowLibraryDocument;
 import java.util.*;
+import com.adobe.sign.model.workflows.WorkflowLibraryDocument;
 
 
 
@@ -24,13 +24,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class FileInfosDescription   {
   
   private String label = null;
   private String name = null;
   private Boolean required = null;
-  private List<WorkflowLibraryDocument> workflowLibraryDocumentSelectorList = new ArrayList<WorkflowLibraryDocument>();
+  private List<WorkflowLibraryDocument> workflowLibraryDocumentSelectorList = null;
 
   
   /**
@@ -38,9 +38,16 @@ public class FileInfosDescription   {
    **/
   @ApiModelProperty(required = true, value = "Display label of this field for the external users")
   @JsonProperty("label")
+  /**
+   * @return String
+   **/
   public String getLabel() {
     return label;
   }
+  /**
+   * Display label of this field for the external users
+   * @param label
+   **/
   public void setLabel(String label) {
     this.label = label;
   }
@@ -51,9 +58,16 @@ public class FileInfosDescription   {
    **/
   @ApiModelProperty(required = true, value = "Name of the fileInfo element")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * Name of the fileInfo element
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -64,9 +78,16 @@ public class FileInfosDescription   {
    **/
   @ApiModelProperty(required = true, value = "Whether this field is required or optional")
   @JsonProperty("required")
+  /**
+   * @return Boolean
+   **/
   public Boolean getRequired() {
     return required;
   }
+  /**
+   * Whether this field is required or optional
+   * @param required
+   **/
   public void setRequired(Boolean required) {
     this.required = required;
   }
@@ -77,9 +98,16 @@ public class FileInfosDescription   {
    **/
   @ApiModelProperty(required = true, value = "A list of workflow library documents out of which one workflow library document can be selected with this fileInfo object")
   @JsonProperty("workflowLibraryDocumentSelectorList")
+  /**
+   * @return List&lt;WorkflowLibraryDocument&gt;
+   **/
   public List<WorkflowLibraryDocument> getWorkflowLibraryDocumentSelectorList() {
     return workflowLibraryDocumentSelectorList;
   }
+  /**
+   * A list of workflow library documents out of which one workflow library document can be selected with this fileInfo object
+   * @param workflowLibraryDocumentSelectorList
+   **/
   public void setWorkflowLibraryDocumentSelectorList(List<WorkflowLibraryDocument> workflowLibraryDocumentSelectorList) {
     this.workflowLibraryDocumentSelectorList = workflowLibraryDocumentSelectorList;
   }
@@ -87,6 +115,10 @@ public class FileInfosDescription   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class FileInfosDescription {\n");

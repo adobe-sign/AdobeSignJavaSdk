@@ -44,6 +44,7 @@ public class GetGroupsInAccount {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.GET_GROUPS_IN_ACCOUNT, e);
+      throw e;
     }
   }
 

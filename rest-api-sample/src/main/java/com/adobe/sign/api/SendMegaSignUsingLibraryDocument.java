@@ -51,6 +51,7 @@ public class SendMegaSignUsingLibraryDocument {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.SEND_MEGASIGN_USING_LIBRARY_DOCUMENT, e);
+      throw e;
     }
   }
 
@@ -66,7 +67,7 @@ public class SendMegaSignUsingLibraryDocument {
     else {
       //List containing email ids of recipients
       List<String> recipientSetEmailList = new ArrayList<String>();
-      recipientSetEmailList.add(Constants.USER_EMAIL);
+      recipientSetEmailList.add(ApiUtils.getUserEmail(Constants.USER_EMAIL_PREFIX,Constants.USER_EMAIL_DOMAIN));
 
       //Create a megaSign parent agreement
       MegaSignCreationResponse megaSignCreationResponse = MegaSignUtils.createMegaSign(libraryDocumentId,

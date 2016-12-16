@@ -17,7 +17,7 @@ import javax.ws.rs.core.MultivaluedMap;
 import com.adobe.sign.api.TransientDocumentsApi;
 import com.adobe.sign.model.transientDocuments.TransientDocumentResponse;
 
-public class TransientDocumentsUtils extends ApiUtils {
+public class TransientDocumentsUtils {
 
   private static TransientDocumentsApi transientDocumentsApi = new TransientDocumentsApi();
   private static MultivaluedMap headers = ApiUtils.getValidHeaderParams();
@@ -26,8 +26,8 @@ public class TransientDocumentsUtils extends ApiUtils {
     String transientDocumentId = null;
 
     TransientDocumentResponse response = transientDocumentsApi.createTransientDocument(headers,
-                                                                                       TestData.SAMPLE_FILE.getAbsoluteFile(),
                                                                                        transientDocumentName,
+                                                                                       ApiUtils.getFile(TestData.SAMPLE_FILE_PATH),
                                                                                        TestData.VALID_MIME);
     transientDocumentId = response.getTransientDocumentId();
 

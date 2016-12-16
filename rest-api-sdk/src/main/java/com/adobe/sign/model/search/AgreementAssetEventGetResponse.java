@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:55.943+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:33.916+05:30")
 public class AgreementAssetEventGetResponse   {
   
-  private List<DocumentEventForUser> events = new ArrayList<DocumentEventForUser>();
+  private List<DocumentEventForUser> events = null;
   private String nextPageCursor = null;
 
   
@@ -36,9 +36,16 @@ public class AgreementAssetEventGetResponse   {
    **/
   @ApiModelProperty(required = true, value = "An ordered list of the events in the audit trail of this document")
   @JsonProperty("events")
+  /**
+   * @return List&lt;DocumentEventForUser&gt;
+   **/
   public List<DocumentEventForUser> getEvents() {
     return events;
   }
+  /**
+   * An ordered list of the events in the audit trail of this document
+   * @param events
+   **/
   public void setEvents(List<DocumentEventForUser> events) {
     this.events = events;
   }
@@ -49,9 +56,16 @@ public class AgreementAssetEventGetResponse   {
    **/
   @ApiModelProperty(required = true, value = "The page cursor of the next page to be fetched. If the next page cursor is blank then the given page is the last page")
   @JsonProperty("nextPageCursor")
+  /**
+   * @return String
+   **/
   public String getNextPageCursor() {
     return nextPageCursor;
   }
+  /**
+   * The page cursor of the next page to be fetched. If the next page cursor is blank then the given page is the last page
+   * @param nextPageCursor
+   **/
   public void setNextPageCursor(String nextPageCursor) {
     this.nextPageCursor = nextPageCursor;
   }
@@ -59,6 +73,10 @@ public class AgreementAssetEventGetResponse   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class AgreementAssetEventGetResponse {\n");

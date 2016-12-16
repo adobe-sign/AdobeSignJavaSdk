@@ -113,7 +113,7 @@ public class CreateGroupWithOAuthWorkFlowUsingDesktopApp {
     ApiUtils.getLogger().info(refreshedAccessTokenResponse.toString());
 
     //Make API call to create a group with refreshed token. You can also use the accessToken before it's expiry time.
-    String groupId = GroupUtils.createGroupWithOAuthWorkflow(Constants.GROUP_NAME,
+    String groupId = GroupUtils.createGroupWithOAuthWorkflow(ApiUtils.getGroupName(Constants.GROUP_NAME),
                                                              refreshedAccessTokenResponse.getAccessToken());
 
     //Display group id of the new group

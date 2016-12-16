@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class WidgetOriginalDocument   {
   
   private String documentId = null;
@@ -36,9 +36,16 @@ public class WidgetOriginalDocument   {
    **/
   @ApiModelProperty(required = true, value = "Id of the document")
   @JsonProperty("documentId")
+  /**
+   * @return String
+   **/
   public String getDocumentId() {
     return documentId;
   }
+  /**
+   * Id of the document
+   * @param documentId
+   **/
   public void setDocumentId(String documentId) {
     this.documentId = documentId;
   }
@@ -49,9 +56,16 @@ public class WidgetOriginalDocument   {
    **/
   @ApiModelProperty(required = true, value = "Mime-type of the document")
   @JsonProperty("mimeType")
+  /**
+   * @return String
+   **/
   public String getMimeType() {
     return mimeType;
   }
+  /**
+   * Mime-type of the document
+   * @param mimeType
+   **/
   public void setMimeType(String mimeType) {
     this.mimeType = mimeType;
   }
@@ -62,9 +76,16 @@ public class WidgetOriginalDocument   {
    **/
   @ApiModelProperty(required = true, value = "Name of the document")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * Name of the document
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -75,9 +96,16 @@ public class WidgetOriginalDocument   {
    **/
   @ApiModelProperty(required = true, value = "Number of pages in the document")
   @JsonProperty("numPages")
+  /**
+   * @return Integer
+   **/
   public Integer getNumPages() {
     return numPages;
   }
+  /**
+   * Number of pages in the document
+   * @param numPages
+   **/
   public void setNumPages(Integer numPages) {
     this.numPages = numPages;
   }
@@ -85,6 +113,10 @@ public class WidgetOriginalDocument   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetOriginalDocument {\n");

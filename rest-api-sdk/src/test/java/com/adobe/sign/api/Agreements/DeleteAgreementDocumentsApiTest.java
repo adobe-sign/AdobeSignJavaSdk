@@ -23,13 +23,13 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Delete Agreement Documents API.
+ * Junit test cases for Delete Agreement Documents endpoint.
  */
 public class DeleteAgreementDocumentsApiTest {
   private static AgreementsApi agreementsApi = null;
@@ -45,6 +45,7 @@ public class DeleteAgreementDocumentsApiTest {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.createAgreement(ApiUtils.getAgreementName());
   }
+
   /**
    * Test for deleting all the documents associated with an agreement through the deleteDocuments endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -74,6 +75,7 @@ public class DeleteAgreementDocumentsApiTest {
     }
 
   }
+
   /**
    * Test for deleting all the documents associated with an agreement through the deleteDocuments endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -92,6 +94,7 @@ public class DeleteAgreementDocumentsApiTest {
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for deleting all the documents associated with an agreement through the deleteDocuments endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: empty and null agreementId.
@@ -119,6 +122,7 @@ public class DeleteAgreementDocumentsApiTest {
                  SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for deleting all the documents associated with an agreement through the deleteDocuments endpoint.
    * Case covered is successful execution of the api call.

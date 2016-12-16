@@ -27,18 +27,17 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.OAuthUtil;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get GetAuthorizationUrlTest API.
+ * Junit test cases for Get GetAuthorizationUrlTest endpoint.
  */
 public class GetAuthorizationUrlTest {
 
   private static OAuthApi oAuthApi = null;
   private static ArrayList<Scope> scopes = new ArrayList<>();
-
 
 
   @BeforeClass
@@ -51,6 +50,7 @@ public class GetAuthorizationUrlTest {
   /**
    * Test for fetching the authorizationUrl through the getAuthorizationUrl endpoint. Negative scenarios covered:
    * MISSING_REQUIRED_PARAM: ClientId null in authorizationRequest.
+   *
    * @throws ApiException
    */
   @Test
@@ -58,15 +58,16 @@ public class GetAuthorizationUrlTest {
 
     //ClientId Null in authorizationRequest
     AuthorizationRequest authorizationRequest = new AuthorizationRequest(TestData.NULL_PARAM,
-                                                                TestData.REDIRECT_URI,
-                                                                scopes,
-                                                                TestData.STATE,
-                                                                TestData.RESPONSE_TYPE);
+                                                                         TestData.REDIRECT_URI,
+                                                                         scopes,
+                                                                         TestData.STATE,
+                                                                         TestData.RESPONSE_TYPE);
     try {
       oAuthApi.getAuthorizationUrl(authorizationRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
   }
 
@@ -75,6 +76,7 @@ public class GetAuthorizationUrlTest {
    * Test for fetching the authorizationUrl through the getAuthorizationUrl endpoint. Negative scenarios covered:
    * MISSING_REQUIRED_PARAM: redirectUri null in authorizationRequest.
    * INVALID_REQUEST : Invalid redirectUri specified in authorizationRequest.
+   *
    * @throws ApiException
    */
   @Test
@@ -82,24 +84,26 @@ public class GetAuthorizationUrlTest {
 
     //redirectUri null in authorizationRequest
     AuthorizationRequest authorizationRequest = new AuthorizationRequest(TestData.CLIENT_ID,
-                                                                TestData.NULL_PARAM,
-                                                                scopes,
-                                                                TestData.STATE,
-                                                                TestData.RESPONSE_TYPE);
+                                                                         TestData.NULL_PARAM,
+                                                                         scopes,
+                                                                         TestData.STATE,
+                                                                         TestData.RESPONSE_TYPE);
     try {
       oAuthApi.getAuthorizationUrl(authorizationRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
 
     //Invalid redirectUri in authorizationRequest
     authorizationRequest.setRedirectUri(TestData.INVALID_URL);
     try {
       oAuthApi.getAuthorizationUrl(authorizationRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.INVALID_REQUEST.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.INVALID_REQUEST.getApiCode().equals(e.getApiCode()));
     }
   }
 
@@ -107,6 +111,7 @@ public class GetAuthorizationUrlTest {
   /**
    * Test for fetching the authorizationUrl through the getAuthorizationUrl endpoint. Negative scenarios covered:
    * MISSING_REQUIRED_PARAM: scopes null in authorizationRequest.
+   *
    * @throws ApiException
    */
   @Test
@@ -114,21 +119,23 @@ public class GetAuthorizationUrlTest {
 
     //scopes Null in authorizationRequest
     AuthorizationRequest authorizationRequest = new AuthorizationRequest(TestData.CLIENT_ID,
-                                                                TestData.REDIRECT_URI,
-                                                                null,
-                                                                TestData.STATE,
-                                                                TestData.RESPONSE_TYPE);
+                                                                         TestData.REDIRECT_URI,
+                                                                         null,
+                                                                         TestData.STATE,
+                                                                         TestData.RESPONSE_TYPE);
     try {
       oAuthApi.getAuthorizationUrl(authorizationRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
   }
 
   /**
    * Test for fetching the authorizationUrl through the getAuthorizationUrl endpoint. Negative scenarios covered:
    * MISSING_REQUIRED_PARAM: responseType null in authorizationRequest.
+   *
    * @throws ApiException
    */
   @Test
@@ -136,15 +143,16 @@ public class GetAuthorizationUrlTest {
 
     //responseType Null in authorizationRequest
     AuthorizationRequest authorizationRequest = new AuthorizationRequest(TestData.CLIENT_ID,
-                                                                TestData.REDIRECT_URI,
-                                                                scopes,
-                                                                TestData.STATE,
-                                                                TestData.NULL_PARAM);
+                                                                         TestData.REDIRECT_URI,
+                                                                         scopes,
+                                                                         TestData.STATE,
+                                                                         TestData.NULL_PARAM);
     try {
       oAuthApi.getAuthorizationUrl(authorizationRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
   }
 
@@ -158,15 +166,15 @@ public class GetAuthorizationUrlTest {
   public void testGetAuthorizationUrl() throws ApiException {
 
     AuthorizationRequest authorizationRequest = new AuthorizationRequest(TestData.CLIENT_ID,
-                                                                TestData.REDIRECT_URI,
-                                                                scopes,
-                                                                TestData.STATE,
-                                                                TestData.RESPONSE_TYPE);
+                                                                         TestData.REDIRECT_URI,
+                                                                         scopes,
+                                                                         TestData.STATE,
+                                                                         TestData.RESPONSE_TYPE);
     try {
       String authorizationUrl = oAuthApi.getAuthorizationUrl(authorizationRequest);
       assertNotNull(authorizationUrl);
     }
-    catch (ApiException e){
+    catch (ApiException e) {
       fail(ApiUtils.getMessage(e));
     }
   }

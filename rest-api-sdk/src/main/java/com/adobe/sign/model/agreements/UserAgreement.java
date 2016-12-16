@@ -14,9 +14,9 @@
 package com.adobe.sign.model.agreements;
 
 import com.adobe.sign.utils.StringUtil;
+import java.util.Date;
 import com.adobe.sign.model.agreements.DisplayUserSetInfo;
 import java.util.*;
-import java.util.Date;
 
 
 
@@ -25,12 +25,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class UserAgreement   {
   
   private String agreementId = null;
   private Date displayDate = null;
-  private List<DisplayUserSetInfo> displayUserSetInfos = new ArrayList<DisplayUserSetInfo>();
+  private List<DisplayUserSetInfo> displayUserSetInfos = null;
   private Boolean esign = null;
   private String latestVersionId = null;
   private String name = null;
@@ -71,9 +71,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The unique identifier of the agreement")
   @JsonProperty("agreementId")
+  /**
+   * @return String
+   **/
   public String getAgreementId() {
     return agreementId;
   }
+  /**
+   * The unique identifier of the agreement
+   * @param agreementId
+   **/
   public void setAgreementId(String agreementId) {
     this.agreementId = agreementId;
   }
@@ -84,9 +91,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The display date for the agreement")
   @JsonProperty("displayDate")
+  /**
+   * @return Date
+   **/
   public Date getDisplayDate() {
     return displayDate;
   }
+  /**
+   * The display date for the agreement
+   * @param displayDate
+   **/
   public void setDisplayDate(Date displayDate) {
     this.displayDate = displayDate;
   }
@@ -97,9 +111,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The most relevant current user set for the agreement. It is typically the next signer if the agreement is from the current user, or the sender if received from another user")
   @JsonProperty("displayUserSetInfos")
+  /**
+   * @return List&lt;DisplayUserSetInfo&gt;
+   **/
   public List<DisplayUserSetInfo> getDisplayUserSetInfos() {
     return displayUserSetInfos;
   }
+  /**
+   * The most relevant current user set for the agreement. It is typically the next signer if the agreement is from the current user, or the sender if received from another user
+   * @param displayUserSetInfos
+   **/
   public void setDisplayUserSetInfos(List<DisplayUserSetInfo> displayUserSetInfos) {
     this.displayUserSetInfos = displayUserSetInfos;
   }
@@ -110,9 +131,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "True if this is an e-sign document")
   @JsonProperty("esign")
+  /**
+   * @return Boolean
+   **/
   public Boolean getEsign() {
     return esign;
   }
+  /**
+   * True if this is an e-sign document
+   * @param esign
+   **/
   public void setEsign(Boolean esign) {
     this.esign = esign;
   }
@@ -123,9 +151,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "A version ID which uniquely identifies the current version of the agreement")
   @JsonProperty("latestVersionId")
+  /**
+   * @return String
+   **/
   public String getLatestVersionId() {
     return latestVersionId;
   }
+  /**
+   * A version ID which uniquely identifies the current version of the agreement
+   * @param latestVersionId
+   **/
   public void setLatestVersionId(String latestVersionId) {
     this.latestVersionId = latestVersionId;
   }
@@ -136,9 +171,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Name of the Agreement")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * Name of the Agreement
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -149,9 +191,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The current status of the document from the perspective of the user")
   @JsonProperty("status")
+  /**
+   * @return StatusEnum
+   **/
   public StatusEnum getStatus() {
     return status;
   }
+  /**
+   * The current status of the document from the perspective of the user
+   * @param status
+   **/
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -159,6 +208,10 @@ public enum StatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class UserAgreement {\n");

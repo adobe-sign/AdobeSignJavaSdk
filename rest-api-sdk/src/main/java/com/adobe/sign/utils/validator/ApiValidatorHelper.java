@@ -13,13 +13,12 @@
 package com.adobe.sign.utils.validator;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import javax.ws.rs.core.MultivaluedMap;
 
-import com.adobe.sign.utils.ApiClient;
 import com.adobe.sign.utils.ApiException;
 import com.adobe.sign.utils.StringUtil;
 import org.apache.commons.validator.routines.EmailValidator;
@@ -37,7 +36,9 @@ public class ApiValidatorHelper {
   private static final String X_API_USER_EMAIL_ID_FORMAT_BEGINNING = "email:";
   private static final String ACCESS_TOKEN_KEY = "Access-Token";
   private static final String X_API_USER_KEY = "x-api-user";
-
+  private static final String FAX = "fax";
+  private static final String COMMA = " , ";
+  private static final String EMAIL = "email";
   /**
    * Common method for validating header parameters, which are used in all the API's.
    *
@@ -54,7 +55,7 @@ public class ApiValidatorHelper {
         accessToken = true;
       }
       else if(key.equalsIgnoreCase(X_API_USER_KEY)) {
-        validatexApiHeader(headerParams.get(key));
+        validateXApiUser(headerParams.get(key));
       }
     }
     if(!accessToken) {
@@ -65,12 +66,14 @@ public class ApiValidatorHelper {
   /**
    * Function to validate a list of mandatory parameters.
    *.
-   * @param paramList The parameter List from which every parameter needs to be validated.
+   * @param hashMap The parameter List from which every parameter needs to be validated.
    * @throws ApiException
    */
-  public static void validateRequiredParameters(ArrayList<String> paramList) throws ApiException {
-    for (String param : paramList)
-      validateParameter(param);
+  public static void validateRequiredParameters(HashMap hashMap) throws ApiException {
+    Set<String> keys = hashMap.keySet();
+    for (String key : keys) {
+      validateParameter(hashMap.get(key),key);
+    }
   }
 
   /**
@@ -79,10 +82,10 @@ public class ApiValidatorHelper {
    * @param param The parameter that needs to be validated.
    * @throws ApiException
    */
-  public static <T> void validateParameter(T param) throws ApiException {
-    validateParameter(param, SdkErrorCodes.MISSING_REQUIRED_PARAM);
-  }
 
+  public static <T> void validateParameter(T param ,String missingField) throws ApiException {
+    validateParameter(param, SdkErrorCodes.MISSING_REQUIRED_PARAM ,missingField);
+  }
   /**
    * A generic helper function  that can accept any type of parameter and validate it.
    *
@@ -95,11 +98,23 @@ public class ApiValidatorHelper {
     if (param == null)
       throw new ApiException(sdkErrorCode);
 
-    if ((param instanceof List) && ((new ArrayList<>(Arrays.asList(param))).isEmpty()))
+    if ((param instanceof List) && ((List)param).isEmpty())
       throw new ApiException(sdkErrorCode);
 
     if ((param instanceof String) && (StringUtil.isEmpty((String) param)))
       throw new ApiException(sdkErrorCode);
+  }
+
+  public static <T> void validateParameter(T param,
+                                           SdkErrorCodes sdkErrorCode,String missingField) throws ApiException {
+    if (param == null)
+      throw new ApiException(sdkErrorCode,missingField);
+
+    if ((param instanceof List) && ((List)param).isEmpty())
+      throw new ApiException(sdkErrorCode,missingField);
+
+    if ((param instanceof String) && (StringUtil.isEmpty((String) param)))
+      throw new ApiException(sdkErrorCode,missingField);
   }
 
   /**
@@ -221,7 +236,7 @@ public class ApiValidatorHelper {
    */
   public static void validateRecipientSetInfos(String email, String fax, int numberOfRecipients) throws ApiException {
     if (StringUtil.isEmpty(fax) && StringUtil.isEmpty(email))
-      throw new ApiException(SdkErrorCodes.MISSING_REQUIRED_PARAM);
+      throw new ApiException(SdkErrorCodes.MISSING_REQUIRED_PARAM, EMAIL + COMMA + FAX);
 
     if (!StringUtil.isEmpty(fax) && !StringUtil.isEmpty(email))
       throw new ApiException(SdkErrorCodes.INVALID_ARGUMENTS);
@@ -232,7 +247,7 @@ public class ApiValidatorHelper {
     if (email != null)
       validateEmailParamater(email);
     if (fax != null)
-      validateParameter(fax);
+      validateParameter(fax, FAX);
   }
 
   /**
@@ -294,15 +309,15 @@ public class ApiValidatorHelper {
   }
 
   /**
-   * Helper function that accepts an xApiHeader parameter and validates it.
+   * Helper function that accepts an xApiUser parameter and validates it.
    */
-  private static void validatexApiHeader(Object xApiHeader) throws ApiException {
-    if (xApiHeader == null)
+  private static void validateXApiUser(Object xApiUser) throws ApiException {
+    if (xApiUser == null)
       return;
     else {
-      String xApiHeaderValue = xApiHeader.toString();
-      if (xApiHeaderValue.length() == 0
-              || !(xApiHeaderValue.contains(X_API_USER_EMAIL_ID_FORMAT_BEGINNING) || xApiHeaderValue.contains(X_API_USER_USER_ID_FORMAT_BEGINNING)))
+      String xApiUserValue = xApiUser.toString();
+      if (xApiUserValue.length() == 0
+              || !(xApiUserValue.contains(X_API_USER_EMAIL_ID_FORMAT_BEGINNING) || xApiUserValue.contains(X_API_USER_USER_ID_FORMAT_BEGINNING)))
         throw new ApiException(SdkErrorCodes.INVALID_X_API_USER_HEADER);
     }
   }

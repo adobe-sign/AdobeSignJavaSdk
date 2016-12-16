@@ -28,7 +28,7 @@ import com.adobe.sign.model.views.TargetViewRequest;
     import java.util.*;
 import javax.ws.rs.core.MultivaluedMap;
 
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.045+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:34.537+05:30")
     public class ViewsApi {
     private ApiClient apiClient;
     private final String CONTENT_TYPE = "Content-Type";
@@ -46,8 +46,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * This endpoint will return the URL for manage page. If an agreement asset id is given then that agreement asset will be shown selected in the resulted manage page url.The agreement asset refers to any asset through which an agreement can be created for instance library document,widget and agreement itself. If the user wants to generate a URL that will automatically log the user in then user_login scope is required in the given Oauth Access Token.
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: user_login - If the user wants to generate a URL that will automatically log the user in then this scope is required else any valid scope can be used 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: user_login - If the user wants to generate a URL that will automatically log the user in then this scope is required else any valid scope can be used 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementAssetListRequest Information about the type of url to be generated for Manage Page
     * @return ViewUrl
@@ -115,8 +115,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * This endpoint will return the URL of view agreement page for an agreement asset. The agreement asset refers to any asset through which an agreement can be created for instance library document,widget and agreement itself. If the user wants to generate a URL that will automatically log the user in then user_login scope is required in the given Oauth Access Token.
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: agreement_read - Required when agreementAssetId refers to an agreement widget_read - Required when agreementAssetId refers to a widget library_read - Required when agreementAssetId refers to a library document user_login - In addition to one of the above scopes, this scope is required if the user wants to generate a URL that will automatically log the user in. 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: agreement_read - Required when agreementAssetId refers to an agreement widget_read - Required when agreementAssetId refers to a widget library_read - Required when agreementAssetId refers to a library document user_login - In addition to one of the above scopes, this scope is required if the user wants to generate a URL that will automatically log the user in. 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param agreementAssetRequest Information about the type of url to be generated for Agreement Asset Page
     * @return ViewUrl
@@ -184,8 +184,8 @@ import javax.ws.rs.core.MultivaluedMap;
     * This endpoint will return the URL for Settings Page. The settings page can be of two types - user profile page(for non admin) and account settings page(for admin). If the user wants to generate a URL that will automatically log the user in then user_login scope is required in the given Oauth Access Token.
     * @param headers Multivalued map containing key value pair for below parameters and custom parameters.
     <pre>
-    Access-Token(key) An OAuth Access Token with scopes: user_login - If the user wants to generate a URL that will automatically log the user in then this scope is required else any valid scope can be used 
-    x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
+    <br>Access-Token(key) An OAuth Access Token with scopes: user_login - If the user wants to generate a URL that will automatically log the user in then this scope is required else any valid scope can be used 
+    <br>x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre>
     
     * @param targetViewRequest Information about the type of url to be generated for various Settings page
     * @return ViewUrl

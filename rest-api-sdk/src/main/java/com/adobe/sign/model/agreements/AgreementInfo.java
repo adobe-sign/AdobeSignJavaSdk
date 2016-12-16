@@ -14,11 +14,11 @@
 package com.adobe.sign.model.agreements;
 
 import com.adobe.sign.utils.StringUtil;
+import java.util.Date;
+import com.adobe.sign.model.agreements.DocumentHistoryEvent;
+import java.util.*;
 import com.adobe.sign.model.agreements.NextParticipantSetInfo;
 import com.adobe.sign.model.agreements.ParticipantSetInfo;
-import java.util.*;
-import com.adobe.sign.model.agreements.DocumentHistoryEvent;
-import java.util.Date;
 
 
 
@@ -27,19 +27,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class AgreementInfo   {
   
   private String agreementId = null;
-  private List<DocumentHistoryEvent> events = new ArrayList<DocumentHistoryEvent>();
+  private List<DocumentHistoryEvent> events = null;
   private Date expiration = null;
   private String latestVersionId = null;
   private String locale = null;
   private String message = null;
   private Boolean modifiable = null;
   private String name = null;
-  private List<NextParticipantSetInfo> nextParticipantSetInfos = new ArrayList<NextParticipantSetInfo>();
-  private List<ParticipantSetInfo> participantSetInfos = new ArrayList<ParticipantSetInfo>();
+  private List<NextParticipantSetInfo> nextParticipantSetInfos = null;
+  private List<ParticipantSetInfo> participantSetInfos = null;
 
 public enum SecurityOptionsEnum {
   OPEN_PROTECTED("OPEN_PROTECTED"),
@@ -57,7 +57,7 @@ public enum SecurityOptionsEnum {
   }
 }
 
-  private List<SecurityOptionsEnum> securityOptions = new ArrayList<SecurityOptionsEnum>();
+  private List<SecurityOptionsEnum> securityOptions = null;
 
 public enum StatusEnum {
   OUT_FOR_SIGNATURE("OUT_FOR_SIGNATURE"),
@@ -99,9 +99,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "A resource identifier that can be used to uniquely identify the agreement resource in other apis")
   @JsonProperty("agreementId")
+  /**
+   * @return String
+   **/
   public String getAgreementId() {
     return agreementId;
   }
+  /**
+   * A resource identifier that can be used to uniquely identify the agreement resource in other apis
+   * @param agreementId
+   **/
   public void setAgreementId(String agreementId) {
     this.agreementId = agreementId;
   }
@@ -112,9 +119,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "An ordered list of the events in the audit trail of this document")
   @JsonProperty("events")
+  /**
+   * @return List&lt;DocumentHistoryEvent&gt;
+   **/
   public List<DocumentHistoryEvent> getEvents() {
     return events;
   }
+  /**
+   * An ordered list of the events in the audit trail of this document
+   * @param events
+   **/
   public void setEvents(List<DocumentHistoryEvent> events) {
     this.events = events;
   }
@@ -125,9 +139,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "The date after which the document can no longer be signed, if an expiration date is configured. The value is nil if an expiration date is not set for the document")
   @JsonProperty("expiration")
+  /**
+   * @return Date
+   **/
   public Date getExpiration() {
     return expiration;
   }
+  /**
+   * The date after which the document can no longer be signed, if an expiration date is configured. The value is nil if an expiration date is not set for the document
+   * @param expiration
+   **/
   public void setExpiration(Date expiration) {
     this.expiration = expiration;
   }
@@ -138,9 +159,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "An ID which uniquely identifies the current version of the document")
   @JsonProperty("latestVersionId")
+  /**
+   * @return String
+   **/
   public String getLatestVersionId() {
     return latestVersionId;
   }
+  /**
+   * An ID which uniquely identifies the current version of the document
+   * @param latestVersionId
+   **/
   public void setLatestVersionId(String latestVersionId) {
     this.latestVersionId = latestVersionId;
   }
@@ -151,9 +179,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The locale associated with this agreement - for example, en_US or fr_FR")
   @JsonProperty("locale")
+  /**
+   * @return String
+   **/
   public String getLocale() {
     return locale;
   }
+  /**
+   * The locale associated with this agreement - for example, en_US or fr_FR
+   * @param locale
+   **/
   public void setLocale(String locale) {
     this.locale = locale;
   }
@@ -164,9 +199,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "The message associated with the document that the sender has provided")
   @JsonProperty("message")
+  /**
+   * @return String
+   **/
   public String getMessage() {
     return message;
   }
+  /**
+   * The message associated with the document that the sender has provided
+   * @param message
+   **/
   public void setMessage(String message) {
     this.message = message;
   }
@@ -177,9 +219,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about whether the agreement can be modified")
   @JsonProperty("modifiable")
+  /**
+   * @return Boolean
+   **/
   public Boolean getModifiable() {
     return modifiable;
   }
+  /**
+   * Information about whether the agreement can be modified
+   * @param modifiable
+   **/
   public void setModifiable(Boolean modifiable) {
     this.modifiable = modifiable;
   }
@@ -190,9 +239,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The name of the document, specified by the sender")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * The name of the document, specified by the sender
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -203,9 +259,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about who needs to act next for this document - for example, if the agreement is in status OUT_FOR_SIGNATURE or OUT_FOR_APPROVAL, this will be the next signer or approver. If the AgreementStatus is a terminal state, this array is empty")
   @JsonProperty("nextParticipantSetInfos")
+  /**
+   * @return List&lt;NextParticipantSetInfo&gt;
+   **/
   public List<NextParticipantSetInfo> getNextParticipantSetInfos() {
     return nextParticipantSetInfos;
   }
+  /**
+   * Information about who needs to act next for this document - for example, if the agreement is in status OUT_FOR_SIGNATURE or OUT_FOR_APPROVAL, this will be the next signer or approver. If the AgreementStatus is a terminal state, this array is empty
+   * @param nextParticipantSetInfos
+   **/
   public void setNextParticipantSetInfos(List<NextParticipantSetInfo> nextParticipantSetInfos) {
     this.nextParticipantSetInfos = nextParticipantSetInfos;
   }
@@ -216,9 +279,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about all the participant sets of this document")
   @JsonProperty("participantSetInfos")
+  /**
+   * @return List&lt;ParticipantSetInfo&gt;
+   **/
   public List<ParticipantSetInfo> getParticipantSetInfos() {
     return participantSetInfos;
   }
+  /**
+   * Information about all the participant sets of this document
+   * @param participantSetInfos
+   **/
   public void setParticipantSetInfos(List<ParticipantSetInfo> participantSetInfos) {
     this.participantSetInfos = participantSetInfos;
   }
@@ -229,9 +299,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "Security information about the document that specifies whether or not a password is required to view and sign the document")
   @JsonProperty("securityOptions")
+  /**
+   * @return List&lt;SecurityOptionsEnum&gt;
+   **/
   public List<SecurityOptionsEnum> getSecurityOptions() {
     return securityOptions;
   }
+  /**
+   * Security information about the document that specifies whether or not a password is required to view and sign the document
+   * @param securityOptions
+   **/
   public void setSecurityOptions(List<SecurityOptionsEnum> securityOptions) {
     this.securityOptions = securityOptions;
   }
@@ -242,9 +319,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The current status of the document")
   @JsonProperty("status")
+  /**
+   * @return StatusEnum
+   **/
   public StatusEnum getStatus() {
     return status;
   }
+  /**
+   * The current status of the document
+   * @param status
+   **/
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -255,9 +339,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Whether vaulting was enabled for the agreement")
   @JsonProperty("vaultingEnabled")
+  /**
+   * @return Boolean
+   **/
   public Boolean getVaultingEnabled() {
     return vaultingEnabled;
   }
+  /**
+   * Whether vaulting was enabled for the agreement
+   * @param vaultingEnabled
+   **/
   public void setVaultingEnabled(Boolean vaultingEnabled) {
     this.vaultingEnabled = vaultingEnabled;
   }
@@ -265,6 +356,10 @@ public enum StatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class AgreementInfo {\n");

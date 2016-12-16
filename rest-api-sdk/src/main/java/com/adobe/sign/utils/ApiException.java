@@ -8,6 +8,7 @@ import com.adobe.sign.utils.validator.SdkErrorCodes;
 @javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-04-28T14:56:11.140+05:30")
 public class ApiException extends Exception {
   private int httpCode = 0;
+  private static final String SEPARATOR = " : ";
   private Map<String, List<String>> responseHeaders = null;
   private String responseBody = null;
   private String apiCode = null;
@@ -71,7 +72,7 @@ public class ApiException extends Exception {
     super(message);
     this.httpCode = httpCode;
   }
-  
+
   public ApiException(int httpCode,
                       String apiCode,
                       String message) {
@@ -89,7 +90,7 @@ public class ApiException extends Exception {
     this.responseHeaders = responseHeaders;
     this.responseBody = responseBody;
   }
-  
+
   public ApiException(int httpCode,
                       String message,
                       String apiCode,
@@ -107,10 +108,16 @@ public class ApiException extends Exception {
          sdkErrorCode.getMessage());
   }
 
+  public ApiException(SdkErrorCodes sdkErrorCode,String missingParam) {
+    this(sdkErrorCode.getHttpCode(),
+         sdkErrorCode.getApiCode(),
+         sdkErrorCode.getMessage() + SEPARATOR + missingParam);
+  }
+
   public int getHttpCode() {
     return httpCode;
   }
-  
+
   public String getApiCode() {
     return apiCode;
   }

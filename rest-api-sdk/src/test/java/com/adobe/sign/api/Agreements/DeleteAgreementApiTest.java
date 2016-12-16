@@ -24,19 +24,19 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Delete Agreement API.
+ * Junit test cases for Delete Agreement endpoint.
  */
 public class DeleteAgreementApiTest {
   private static AgreementsApi agreementsApi = null;
   private static String agreementId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -46,6 +46,7 @@ public class DeleteAgreementApiTest {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.createAgreement(ApiUtils.getAgreementName());
   }
+
   /**
    * Test for deleting an agreement through the deleteAgreement endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -74,6 +75,7 @@ public class DeleteAgreementApiTest {
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for deleting an agreement through the deleteAgreement endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -92,6 +94,7 @@ public class DeleteAgreementApiTest {
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for deleting an agreement through the deleteAgreement endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: empty and null agreementId.
@@ -119,6 +122,7 @@ public class DeleteAgreementApiTest {
                  SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for deleting an agreement through the deleteAgreement endpoint.
    * Case covered is successful execution of the api call.
@@ -129,7 +133,7 @@ public class DeleteAgreementApiTest {
   public void testDeleteAgreement() throws ApiException {
 
     try {
-     agreementsApi.deleteAgreement(getValidHeaderParams(),
+      agreementsApi.deleteAgreement(getValidHeaderParams(),
                                     agreementId);
     }
     catch (ApiException e) {

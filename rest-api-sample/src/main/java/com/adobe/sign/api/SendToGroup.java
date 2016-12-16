@@ -36,6 +36,7 @@ public class SendToGroup {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.SEND_TO_GROUP, e);
+      throw e;
     }
   }
 
@@ -53,13 +54,13 @@ public class SendToGroup {
     else {
       //List containing email ids of recipients
       List<String> recipientSetEmailList = new ArrayList<String>();
-      recipientSetEmailList.add(Constants.USER_EMAIL);
+      recipientSetEmailList.add(ApiUtils.getUserEmail(Constants.USER_EMAIL_PREFIX,Constants.USER_EMAIL_DOMAIN));
       //Create agreement using the first library document of the user
       AgreementCreationResponse agreementCreationResponse = AgreementUtils.createAgreementWithRecipientSetName(recipientSetEmailList,
                                                                                                                Constants.RECIPIENT_SET_NAME,
                                                                                                                libraryDocumentId,
                                                                                                                AgreementUtils.DocumentIdentifierType.LIBRARY_DOCUMENT_ID,
-                                                                                                               Constants.AGREEMENT_NAME);
+                                                                                                               ApiUtils.getAgreementName(Constants.AGREEMENT_NAME));
 
       //Get agreement info using the agreement id
       AgreementInfo agreementInfo = AgreementUtils.getAgreementInfo(agreementCreationResponse.getAgreementId());

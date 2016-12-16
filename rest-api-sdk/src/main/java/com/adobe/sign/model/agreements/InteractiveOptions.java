@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class InteractiveOptions   {
   
   private Boolean authoringRequested = null;
@@ -39,9 +39,16 @@ public class InteractiveOptions   {
    **/
   @ApiModelProperty(value = "Indicates that authoring is requested prior to sending the document")
   @JsonProperty("authoringRequested")
+  /**
+   * @return Boolean
+   **/
   public Boolean getAuthoringRequested() {
     return authoringRequested;
   }
+  /**
+   * Indicates that authoring is requested prior to sending the document
+   * @param authoringRequested
+   **/
   public void setAuthoringRequested(Boolean authoringRequested) {
     this.authoringRequested = authoringRequested;
   }
@@ -52,9 +59,16 @@ public class InteractiveOptions   {
    **/
   @ApiModelProperty(value = "If user settings allow, automatically logs the user in")
   @JsonProperty("autoLoginUser")
+  /**
+   * @return Boolean
+   **/
   public Boolean getAutoLoginUser() {
     return autoLoginUser;
   }
+  /**
+   * If user settings allow, automatically logs the user in
+   * @param autoLoginUser
+   **/
   public void setAutoLoginUser(Boolean autoLoginUser) {
     this.autoLoginUser = autoLoginUser;
   }
@@ -65,9 +79,16 @@ public class InteractiveOptions   {
    **/
   @ApiModelProperty(value = "The locale in which page returned by this API should be shown in - for example, en_US or fr_FR. In case locale provided by client is not available or no locale is specified, page will be shown in the default language set in the user account")
   @JsonProperty("locale")
+  /**
+   * @return String
+   **/
   public String getLocale() {
     return locale;
   }
+  /**
+   * The locale in which page returned by this API should be shown in - for example, en_US or fr_FR. In case locale provided by client is not available or no locale is specified, page will be shown in the default language set in the user account
+   * @param locale
+   **/
   public void setLocale(String locale) {
     this.locale = locale;
   }
@@ -78,9 +99,16 @@ public class InteractiveOptions   {
    **/
   @ApiModelProperty(value = "Turn off Chrome for the URL generated")
   @JsonProperty("noChrome")
+  /**
+   * @return Boolean
+   **/
   public Boolean getNoChrome() {
     return noChrome;
   }
+  /**
+   * Turn off Chrome for the URL generated
+   * @param noChrome
+   **/
   public void setNoChrome(Boolean noChrome) {
     this.noChrome = noChrome;
   }
@@ -91,9 +119,16 @@ public class InteractiveOptions   {
    **/
   @ApiModelProperty(value = "A url to send page will be returned from where the agreement creation needs to be completed. All the parameters provided here will be retained in the send page")
   @JsonProperty("sendThroughWeb")
+  /**
+   * @return Boolean
+   **/
   public Boolean getSendThroughWeb() {
     return sendThroughWeb;
   }
+  /**
+   * A url to send page will be returned from where the agreement creation needs to be completed. All the parameters provided here will be retained in the send page
+   * @param sendThroughWeb
+   **/
   public void setSendThroughWeb(Boolean sendThroughWeb) {
     this.sendThroughWeb = sendThroughWeb;
   }
@@ -104,9 +139,16 @@ public class InteractiveOptions   {
    **/
   @ApiModelProperty(value = "A JSON object of Type SendThroughWebOptions to customize the sendPage. This one will apply only if sendThroughWeb is set to true")
   @JsonProperty("sendThroughWebOptions")
+  /**
+   * @return SendThroughWebOptions
+   **/
   public SendThroughWebOptions getSendThroughWebOptions() {
     return sendThroughWebOptions;
   }
+  /**
+   * A JSON object of Type SendThroughWebOptions to customize the sendPage. This one will apply only if sendThroughWeb is set to true
+   * @param sendThroughWebOptions
+   **/
   public void setSendThroughWebOptions(SendThroughWebOptions sendThroughWebOptions) {
     this.sendThroughWebOptions = sendThroughWebOptions;
   }
@@ -114,6 +156,10 @@ public class InteractiveOptions   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class InteractiveOptions {\n");

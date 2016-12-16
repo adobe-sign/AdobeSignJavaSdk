@@ -27,15 +27,13 @@ import com.adobe.sign.utils.Constants;
  * </p>
  */
 public class CreateGroupWithOAuthWorkFlowUsingServer {
-  //Port to be used for the server
-  public static int port = Constants.SERVER_PORT;
 
   public static void main(String[] args) throws ApiException{
     ApiUtils.configureProperty(CreateGroupWithOAuthWorkFlowUsingServer.class.getName());
     LocalHttpsServer localHttpsServer = new LocalHttpsServer();
 
     //Start the server
-    localHttpsServer.Start(port);
+    localHttpsServer.Start(ApiUtils.getServerPort());
 
   }
 }

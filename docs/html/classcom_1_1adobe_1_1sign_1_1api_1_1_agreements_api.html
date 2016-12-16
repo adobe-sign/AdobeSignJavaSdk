@@ -168,7 +168,9 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_send - If both authoringRequested and sendThroughWeb parameter are set to false agreement_write - If any of the authoringRequested or sendThroughWeb parameter is set to true user_login - Required additionally if the autoLoginUser parameter is set to true 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementCreationInfo</td><td>Information about the agreement that you want to send and authoring options that you want to apply at the time of sending. </td></tr>
   </table>
@@ -223,7 +225,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_write 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
     <tr><td class="paramname">participantSetId</td><td>The participant set identifier </td></tr>
@@ -263,7 +267,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_retention 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
   </table>
@@ -300,7 +306,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_retention 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
   </table>
@@ -337,7 +345,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
   </table>
@@ -392,7 +402,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">query</td><td>The query string used for the search. Multiple search terms can be provided, separated by spaces. Some of the search terms include document name, participant name or company, and form data </td></tr>
     <tr><td class="paramname">externalId</td><td>ExternalID for which you would like to retrieve agreement information. ExternalId is passed in the call to the agreement creation API </td></tr>
@@ -450,7 +462,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
     <tr><td class="paramname">versionId</td><td>The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used. </td></tr>
@@ -489,7 +503,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <p>Retrieves the audit trail of an agreement identified by agreementid. PDF file stream containing audit trail information </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
   </table>
@@ -549,7 +565,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <p>Gets a single combined PDF document for the documents associated with an agreement. A File Stream of combined PDF document </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
     <tr><td class="paramname">versionId</td><td>The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used. </td></tr>
@@ -620,12 +638,14 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
     <tr><td class="paramname">versionId</td><td>The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used. </td></tr>
     <tr><td class="paramname">participantEmail</td><td>The email address of the participant to be used to retrieve its visible document page image urls. </td></tr>
-    <tr><td class="paramname">imageSizes</td><td>A comma separated list of image sizes i.e. {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT}. Default sizes returned are {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT}. </td></tr>
+    <tr><td class="paramname">imageSizes</td><td>A comma separated list of image sizes i.e. (FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT). Default sizes returned are (FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT). </td></tr>
     <tr><td class="paramname">includeSupportingDocumentsImageUrls</td><td>When set to true, returns image urls of supporting documents as well. Else, return image urls of only the original document. </td></tr>
     <tr><td class="paramname">showImageAvailabilityOnly</td><td>When set to true, returns only image availability. Else, returns both image urls and its availability. </td></tr>
   </table>
@@ -668,7 +688,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
     <tr><td class="paramname">includeSupportingDocumentsPagesInfo</td><td>When set to true, returns info of all pages of supporting documents as well. Else, return the info of pages of only the original document. </td></tr>
@@ -730,7 +752,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
     <tr><td class="paramname">versionId</td><td>The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used. </td></tr>
@@ -776,7 +800,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <p>Retrieves the file stream of a document of an agreement. Raw stream of the file </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
     <tr><td class="paramname">documentId</td><td>The document identifier, as retrieved from the API which fetches the documents of a specified agreement </td></tr>
@@ -856,13 +882,15 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
     <tr><td class="paramname">documentId</td><td>The document identifier, as retrieved from the API which fetches the documents of a specified agreement </td></tr>
     <tr><td class="paramname">versionId</td><td>The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used. </td></tr>
     <tr><td class="paramname">participantEmail</td><td>The email address of the participant to be used to retrieve its visible document page image urls. </td></tr>
-    <tr><td class="paramname">imageSizes</td><td>A comma separated list of image sizes i.e. {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT}. Default sizes returned are {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT}. </td></tr>
+    <tr><td class="paramname">imageSizes</td><td>A comma separated list of image sizes i.e. (FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT). Default sizes returned are (FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT). </td></tr>
     <tr><td class="paramname">showImageAvailabilityOnly</td><td>When set to true, returns only image availability. Else, returns both image urls and its availability. </td></tr>
     <tr><td class="paramname">startPage</td><td>Start of page number range for which imageUrls are requested. Starting page number should be greater than 0. </td></tr>
     <tr><td class="paramname">endPage</td><td>End of page number range for which imageUrls are requested. </td></tr>
@@ -918,7 +946,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
     <tr><td class="paramname">documentId</td><td>The document identifier, as retrieved from the API which fetches the documents of a specified agreement </td></tr>
@@ -957,7 +987,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <p>Retrieves data entered by the user into interactive form fields at the time they signed the agreement CSV file stream containing form data information </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
   </table>
@@ -994,7 +1026,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_write 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
   </table>
@@ -1037,7 +1071,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_write 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementId</td><td>The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. </td></tr>
     <tr><td class="paramname">agreementStatusUpdateInfo</td><td>Agreement status update information object. </td></tr>

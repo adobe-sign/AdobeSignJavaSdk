@@ -25,31 +25,31 @@ import com.adobe.sign.utils.BaseUrisUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Base Uris API.
+ * Junit test cases for Get Base Uris endpoint.
  */
 public class GetBaseUrisApiTest {
 
   private static BaseUrisApi baseurisApi = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
-  
+
   @BeforeClass
   public static void setup() {
     ApiUtils.configureProperty();
     baseurisApi = BaseUrisUtils.getBaseUrisApi();
-    
+
   }
 
   /**
-   * Test for retrieving the base uri to access other APIs through the getBaseUris endpoint. Negative scenarios covered:
+   * Test for retrieving the base uri to access other endpoint through the getBaseUris endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
    * INVALID_ACCESS_TOKEN: empty access token.
    *
@@ -58,7 +58,8 @@ public class GetBaseUrisApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      baseurisApi.getBaseUris(ApiUtils.getNullAccessTokenHeaderParams());
+      BaseUriInfo baseUriInfo = baseurisApi.getBaseUris(ApiUtils.getNullAccessTokenHeaderParams());
+      assertNotNull(baseUriInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -66,7 +67,8 @@ public class GetBaseUrisApiTest {
     }
 
     try {
-      baseurisApi.getBaseUris(ApiUtils.getEmptyAccessTokenHeaderParams());
+      BaseUriInfo baseUriInfo = baseurisApi.getBaseUris(ApiUtils.getEmptyAccessTokenHeaderParams());
+      assertNotNull(baseUriInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -76,7 +78,7 @@ public class GetBaseUrisApiTest {
 
   /**
    * Test for getting the base uri.
-   * Case covered is successful execution of the API call.
+   * Case covered is successful execution of the endpoint call.
    *
    * @throws ApiException
    */

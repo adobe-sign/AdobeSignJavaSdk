@@ -25,13 +25,13 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WorkFlowUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get WorkFlows APIs
+ * Junit test cases for Get WorkFlows endpoint
  */
 public class GetWorkFlowsApiTest {
   private static WorkflowsApi workflowsApi = null;
@@ -56,9 +56,10 @@ public class GetWorkFlowsApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      workflowsApi.getWorkflows(ApiUtils.getNullAccessTokenHeaderParams(),
-                                TestData.INCLUDE_DRAFT_WORKFLOWS,
-                                TestData.GROUP_ID);
+      UserWorkflows userWorkflows = workflowsApi.getWorkflows(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                              TestData.INCLUDE_DRAFT_WORKFLOWS,
+                                                              TestData.GROUP_ID);
+      assertNotNull(userWorkflows);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -66,9 +67,10 @@ public class GetWorkFlowsApiTest {
     }
 
     try {
-      workflowsApi.getWorkflows(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                TestData.INCLUDE_DRAFT_WORKFLOWS,
-                                TestData.GROUP_ID);
+      UserWorkflows userWorkflows = workflowsApi.getWorkflows(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                              TestData.INCLUDE_DRAFT_WORKFLOWS,
+                                                              TestData.GROUP_ID);
+      assertNotNull(userWorkflows);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -85,9 +87,10 @@ public class GetWorkFlowsApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      workflowsApi.getWorkflows(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                TestData.INCLUDE_DRAFT_WORKFLOWS,
-                                TestData.GROUP_ID);
+      UserWorkflows userWorkflows = workflowsApi.getWorkflows(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                              TestData.INCLUDE_DRAFT_WORKFLOWS,
+                                                              TestData.GROUP_ID);
+      assertNotNull(userWorkflows);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -104,9 +107,10 @@ public class GetWorkFlowsApiTest {
   @Test
   public void testEmptyGroupId() throws ApiException {
     try {
-      workflowsApi.getWorkflows(ApiUtils.getValidHeaderParams(),
-                                TestData.INCLUDE_DRAFT_WORKFLOWS,
-                                TestData.EMPTY_PARAM);
+      UserWorkflows userWorkflows = workflowsApi.getWorkflows(ApiUtils.getValidHeaderParams(),
+                                                              TestData.INCLUDE_DRAFT_WORKFLOWS,
+                                                              TestData.EMPTY_PARAM);
+      assertNotNull(userWorkflows);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),

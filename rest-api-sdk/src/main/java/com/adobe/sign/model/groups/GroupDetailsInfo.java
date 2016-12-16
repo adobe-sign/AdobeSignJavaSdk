@@ -14,9 +14,9 @@
 package com.adobe.sign.model.groups;
 
 import com.adobe.sign.utils.StringUtil;
+import java.util.Date;
 import java.util.*;
 import com.adobe.sign.model.groups.UserInfo;
-import java.util.Date;
 
 
 
@@ -25,11 +25,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.002+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:32.597+05:30")
 public class GroupDetailsInfo   {
   
   private Date dateCreated = null;
-  private List<UserInfo> groupAdmins = new ArrayList<UserInfo>();
+  private List<UserInfo> groupAdmins = null;
   private String groupId = null;
   private String groupName = null;
 
@@ -39,9 +39,16 @@ public class GroupDetailsInfo   {
    **/
   @ApiModelProperty(required = true, value = "Date of creation of the group")
   @JsonProperty("dateCreated")
+  /**
+   * @return Date
+   **/
   public Date getDateCreated() {
     return dateCreated;
   }
+  /**
+   * Date of creation of the group
+   * @param dateCreated
+   **/
   public void setDateCreated(Date dateCreated) {
     this.dateCreated = dateCreated;
   }
@@ -52,9 +59,16 @@ public class GroupDetailsInfo   {
    **/
   @ApiModelProperty(value = "The list of admins of the group.")
   @JsonProperty("groupAdmins")
+  /**
+   * @return List&lt;UserInfo&gt;
+   **/
   public List<UserInfo> getGroupAdmins() {
     return groupAdmins;
   }
+  /**
+   * The list of admins of the group.
+   * @param groupAdmins
+   **/
   public void setGroupAdmins(List<UserInfo> groupAdmins) {
     this.groupAdmins = groupAdmins;
   }
@@ -65,9 +79,16 @@ public class GroupDetailsInfo   {
    **/
   @ApiModelProperty(required = true, value = "Unique identifier of the group")
   @JsonProperty("groupId")
+  /**
+   * @return String
+   **/
   public String getGroupId() {
     return groupId;
   }
+  /**
+   * Unique identifier of the group
+   * @param groupId
+   **/
   public void setGroupId(String groupId) {
     this.groupId = groupId;
   }
@@ -78,9 +99,16 @@ public class GroupDetailsInfo   {
    **/
   @ApiModelProperty(required = true, value = "Name of the group")
   @JsonProperty("groupName")
+  /**
+   * @return String
+   **/
   public String getGroupName() {
     return groupName;
   }
+  /**
+   * Name of the group
+   * @param groupName
+   **/
   public void setGroupName(String groupName) {
     this.groupName = groupName;
   }
@@ -88,6 +116,10 @@ public class GroupDetailsInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class GroupDetailsInfo {\n");

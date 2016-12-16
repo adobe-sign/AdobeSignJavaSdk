@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class PostSignOptions   {
   
   private Integer redirectDelay = null;
@@ -34,9 +34,16 @@ public class PostSignOptions   {
    **/
   @ApiModelProperty(value = "The delay (in seconds) before the user is taken to the success page. If this value is greater than 0, the user will first see the standard Adobe Sign success message, and then after a delay will be redirected to your success page.")
   @JsonProperty("redirectDelay")
+  /**
+   * @return Integer
+   **/
   public Integer getRedirectDelay() {
     return redirectDelay;
   }
+  /**
+   * The delay (in seconds) before the user is taken to the success page. If this value is greater than 0, the user will first see the standard Adobe Sign success message, and then after a delay will be redirected to your success page.
+   * @param redirectDelay
+   **/
   public void setRedirectDelay(Integer redirectDelay) {
     this.redirectDelay = redirectDelay;
   }
@@ -47,9 +54,16 @@ public class PostSignOptions   {
    **/
   @ApiModelProperty(required = true, value = "A publicly accessible url to which the user will be sent after successfully completing the signing process.")
   @JsonProperty("redirectUrl")
+  /**
+   * @return String
+   **/
   public String getRedirectUrl() {
     return redirectUrl;
   }
+  /**
+   * A publicly accessible url to which the user will be sent after successfully completing the signing process.
+   * @param redirectUrl
+   **/
   public void setRedirectUrl(String redirectUrl) {
     this.redirectUrl = redirectUrl;
   }
@@ -57,6 +71,10 @@ public class PostSignOptions   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class PostSignOptions {\n");

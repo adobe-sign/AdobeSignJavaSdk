@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class WidgetPersonalizationInfo   {
   
   private Boolean allowManualVerification = null;
@@ -38,9 +38,16 @@ public class WidgetPersonalizationInfo   {
    **/
   @ApiModelProperty(value = "Not used at this time")
   @JsonProperty("allowManualVerification")
+  /**
+   * @return Boolean
+   **/
   public Boolean getAllowManualVerification() {
     return allowManualVerification;
   }
+  /**
+   * Not used at this time
+   * @param allowManualVerification
+   **/
   public void setAllowManualVerification(Boolean allowManualVerification) {
     this.allowManualVerification = allowManualVerification;
   }
@@ -51,9 +58,16 @@ public class WidgetPersonalizationInfo   {
    **/
   @ApiModelProperty(value = "Comment describing how the API caller established the identity of the signer - will appear in the audit trail.")
   @JsonProperty("comment")
+  /**
+   * @return String
+   **/
   public String getComment() {
     return comment;
   }
+  /**
+   * Comment describing how the API caller established the identity of the signer - will appear in the audit trail.
+   * @param comment
+   **/
   public void setComment(String comment) {
     this.comment = comment;
   }
@@ -64,9 +78,16 @@ public class WidgetPersonalizationInfo   {
    **/
   @ApiModelProperty(required = true, value = "The email address of the person who will be receiving this widget")
   @JsonProperty("email")
+  /**
+   * @return String
+   **/
   public String getEmail() {
     return email;
   }
+  /**
+   * The email address of the person who will be receiving this widget
+   * @param email
+   **/
   public void setEmail(String email) {
     this.email = email;
   }
@@ -77,9 +98,16 @@ public class WidgetPersonalizationInfo   {
    **/
   @ApiModelProperty(value = "Expiration date for the personalization of this widget. After this date, the identity of the signer will not be assumed by Adobe Sign.")
   @JsonProperty("expiration")
+  /**
+   * @return Date
+   **/
   public Date getExpiration() {
     return expiration;
   }
+  /**
+   * Expiration date for the personalization of this widget. After this date, the identity of the signer will not be assumed by Adobe Sign.
+   * @param expiration
+   **/
   public void setExpiration(Date expiration) {
     this.expiration = expiration;
   }
@@ -90,9 +118,16 @@ public class WidgetPersonalizationInfo   {
    **/
   @ApiModelProperty(value = "Should the intended signer be allowed to sign this widget more than once")
   @JsonProperty("reusable")
+  /**
+   * @return Boolean
+   **/
   public Boolean getReusable() {
     return reusable;
   }
+  /**
+   * Should the intended signer be allowed to sign this widget more than once
+   * @param reusable
+   **/
   public void setReusable(Boolean reusable) {
     this.reusable = reusable;
   }
@@ -100,6 +135,10 @@ public class WidgetPersonalizationInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetPersonalizationInfo {\n");

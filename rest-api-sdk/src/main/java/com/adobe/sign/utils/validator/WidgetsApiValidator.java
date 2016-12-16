@@ -30,6 +30,14 @@ import com.adobe.sign.utils.StringUtil;
  */
 public class WidgetsApiValidator {
 
+  private static final String WIDGET_CREATION_REQUEST = "widgetCreationRequest";
+  private static final String WIDGET_CREATION_INFO = "widgetCreationInfo";
+  private static final String NAME = "name";
+  private static final String WIDGET_STATUS_UPDATE_INFO = "widgetStatusUpdateInfo";
+  private static final String COUNTER_SINGER_SET_MEMBER_INFOS = "counterSignerSetMemberInfos";
+  private static final String COUNTER_SINGER_SET_ROLE = "counterSignerSetRole";
+  private static final String WIDGET_PERSONALIZATION_INFO = "widgetPersonalizationInfo";
+
   /**
    * Validator for getWidgets API that retrieves widgets for the user.
    *
@@ -48,15 +56,15 @@ public class WidgetsApiValidator {
   public static void createWidgetValidator(WidgetCreationRequest widgetCreationRequest) throws ApiException {
 
 
-    ApiValidatorHelper.validateParameter(widgetCreationRequest);
+    ApiValidatorHelper.validateParameter(widgetCreationRequest, WIDGET_CREATION_REQUEST);
 
     WidgetCreationInfo widgetCreationInfo = widgetCreationRequest.getWidgetCreationInfo();
-    ApiValidatorHelper.validateParameter(widgetCreationInfo);
+    ApiValidatorHelper.validateParameter(widgetCreationInfo, WIDGET_CREATION_INFO);
 
     List<WidgetFileInfo> fileInfos = widgetCreationInfo.getFileInfos();
     validateFileInfo(fileInfos);
 
-    ApiValidatorHelper.validateParameter(widgetCreationInfo.getName());
+    ApiValidatorHelper.validateParameter(widgetCreationInfo.getName(), NAME);
 
     if (widgetCreationInfo.getSignatureFlow() != null)
       ApiValidatorHelper.validateParameter(widgetCreationInfo.getSignatureFlow(),
@@ -171,7 +179,7 @@ public class WidgetsApiValidator {
                                                       WidgetPersonalizationInfo widgetPersonalizationInfo) throws ApiException {
     ApiValidatorHelper.validateId(widgetId,
                                   SdkErrorCodes.INVALID_WIDGET_ID);
-    ApiValidatorHelper.validateParameter(widgetPersonalizationInfo);
+    ApiValidatorHelper.validateParameter(widgetPersonalizationInfo, WIDGET_PERSONALIZATION_INFO);
     ApiValidatorHelper.validateEmailParamater(widgetPersonalizationInfo.getEmail());
   }
 
@@ -186,7 +194,7 @@ public class WidgetsApiValidator {
                                                  WidgetStatusUpdateInfo widgetStatusUpdateInfo) throws ApiException {
     ApiValidatorHelper.validateId(widgetId,
                                   SdkErrorCodes.INVALID_WIDGET_ID);
-    ApiValidatorHelper.validateParameter(widgetStatusUpdateInfo);
+    ApiValidatorHelper.validateParameter(widgetStatusUpdateInfo, WIDGET_STATUS_UPDATE_INFO);
     ApiValidatorHelper.validateParameter(widgetStatusUpdateInfo.getValue(),
                                          SdkErrorCodes.MUST_PROVIDE_VALID_WIDGET_STATUS);
 
@@ -232,14 +240,14 @@ public class WidgetsApiValidator {
   private static void validateCounterSignerSetInfo(List<CounterSignerSetInfo> counterSignerSetInfos) throws ApiException {
     for (CounterSignerSetInfo counterSignerSetInfo : counterSignerSetInfos) {
 
-      ApiValidatorHelper.validateParameter(counterSignerSetInfo.getCounterSignerSetMemberInfos());
+      ApiValidatorHelper.validateParameter(counterSignerSetInfo.getCounterSignerSetMemberInfos(), COUNTER_SINGER_SET_MEMBER_INFOS);
       List<CounterSignerInfo> counterSignerInfos = counterSignerSetInfo.getCounterSignerSetMemberInfos();
       int numberOfRecipients = counterSignerInfos.size();
 
       for (CounterSignerInfo counterSignerInfo : counterSignerInfos)
         ApiValidatorHelper.validateRecipientSetInfos(counterSignerInfo.getEmail(), null, numberOfRecipients);
 
-      ApiValidatorHelper.validateParameter(counterSignerSetInfo.getCounterSignerSetRole());
+      ApiValidatorHelper.validateParameter(counterSignerSetInfo.getCounterSignerSetRole(), COUNTER_SINGER_SET_ROLE);
     }
   }
 

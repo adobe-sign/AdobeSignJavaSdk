@@ -43,6 +43,7 @@ public class GetUsersInAccount {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.GET_USERS_IN_ACCOUNT, e);
+      throw e;
     }
   }
 

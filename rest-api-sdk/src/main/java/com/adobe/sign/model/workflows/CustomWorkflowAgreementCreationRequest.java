@@ -14,8 +14,8 @@
 package com.adobe.sign.model.workflows;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.workflows.InteractiveOptions;
 import com.adobe.sign.model.workflows.DocumentCreationInfo;
+import com.adobe.sign.model.workflows.InteractiveOptions;
 
 
 
@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class CustomWorkflowAgreementCreationRequest   {
   
   private DocumentCreationInfo documentCreationInfo = null;
@@ -36,9 +36,16 @@ public class CustomWorkflowAgreementCreationRequest   {
    **/
   @ApiModelProperty(required = true, value = "Information about the document you want to send")
   @JsonProperty("documentCreationInfo")
+  /**
+   * @return DocumentCreationInfo
+   **/
   public DocumentCreationInfo getDocumentCreationInfo() {
     return documentCreationInfo;
   }
+  /**
+   * Information about the document you want to send
+   * @param documentCreationInfo
+   **/
   public void setDocumentCreationInfo(DocumentCreationInfo documentCreationInfo) {
     this.documentCreationInfo = documentCreationInfo;
   }
@@ -49,9 +56,16 @@ public class CustomWorkflowAgreementCreationRequest   {
    **/
   @ApiModelProperty(value = "Options for authoring and sending the agreement")
   @JsonProperty("options")
+  /**
+   * @return InteractiveOptions
+   **/
   public InteractiveOptions getOptions() {
     return options;
   }
+  /**
+   * Options for authoring and sending the agreement
+   * @param options
+   **/
   public void setOptions(InteractiveOptions options) {
     this.options = options;
   }
@@ -59,6 +73,10 @@ public class CustomWorkflowAgreementCreationRequest   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class CustomWorkflowAgreementCreationRequest {\n");

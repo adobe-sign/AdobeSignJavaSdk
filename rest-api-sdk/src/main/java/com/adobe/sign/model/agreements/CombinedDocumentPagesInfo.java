@@ -14,8 +14,8 @@
 package com.adobe.sign.model.agreements;
 
 import com.adobe.sign.utils.StringUtil;
-import java.util.*;
 import com.adobe.sign.model.agreements.DocumentPageInfo;
+import java.util.*;
 
 
 
@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class CombinedDocumentPagesInfo   {
   
-  private List<DocumentPageInfo> documentPagesInfo = new ArrayList<DocumentPageInfo>();
+  private List<DocumentPageInfo> documentPagesInfo = null;
 
   
   /**
@@ -35,9 +35,16 @@ public class CombinedDocumentPagesInfo   {
    **/
   @ApiModelProperty(required = true, value = "List of basic information of all pages of the combined document of an Agreement.")
   @JsonProperty("documentPagesInfo")
+  /**
+   * @return List&lt;DocumentPageInfo&gt;
+   **/
   public List<DocumentPageInfo> getDocumentPagesInfo() {
     return documentPagesInfo;
   }
+  /**
+   * List of basic information of all pages of the combined document of an Agreement.
+   * @param documentPagesInfo
+   **/
   public void setDocumentPagesInfo(List<DocumentPageInfo> documentPagesInfo) {
     this.documentPagesInfo = documentPagesInfo;
   }
@@ -45,6 +52,10 @@ public class CombinedDocumentPagesInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class CombinedDocumentPagesInfo {\n");

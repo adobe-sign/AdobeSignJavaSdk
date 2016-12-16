@@ -26,20 +26,20 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WidgetUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Widget Documents API.
+ * Junit test cases for Get Widget Documents endpoint.
  */
 public class GetWidgetDocumentsApiTest {
 
   private static WidgetsApi widgetsApi = null;
   private static String widgetId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -60,10 +60,11 @@ public class GetWidgetDocumentsApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      widgetsApi.getWidgetDocuments(ApiUtils.getNullAccessTokenHeaderParams(),
-                                    widgetId,
-                                    TestData.VERSION_ID,
-                                    TestData.PARTICIPANT_EMAIL);
+      WidgetDocuments widgetDocuments = widgetsApi.getWidgetDocuments(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                      widgetId,
+                                                                      TestData.VERSION_ID,
+                                                                      TestData.PARTICIPANT_EMAIL);
+      assertNotNull(widgetDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -71,10 +72,11 @@ public class GetWidgetDocumentsApiTest {
     }
 
     try {
-      widgetsApi.getWidgetDocuments(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                    widgetId,
-                                    TestData.VERSION_ID,
-                                    TestData.PARTICIPANT_EMAIL);
+      WidgetDocuments widgetDocuments = widgetsApi.getWidgetDocuments(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                      widgetId,
+                                                                      TestData.VERSION_ID,
+                                                                      TestData.PARTICIPANT_EMAIL);
+      assertNotNull(widgetDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -91,10 +93,11 @@ public class GetWidgetDocumentsApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      widgetsApi.getWidgetDocuments(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                    widgetId,
-                                    TestData.VERSION_ID,
-                                    TestData.PARTICIPANT_EMAIL);
+      WidgetDocuments widgetDocuments = widgetsApi.getWidgetDocuments(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                      widgetId,
+                                                                      TestData.VERSION_ID,
+                                                                      TestData.PARTICIPANT_EMAIL);
+      assertNotNull(widgetDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -111,10 +114,11 @@ public class GetWidgetDocumentsApiTest {
   @Test
   public void testInvalidWidgetId() throws ApiException {
     try {
-      widgetsApi.getWidgetDocuments(ApiUtils.getValidHeaderParams(),
-                                    TestData.EMPTY_PARAM,
-                                    TestData.VERSION_ID,
-                                    TestData.PARTICIPANT_EMAIL);
+      WidgetDocuments widgetDocuments = widgetsApi.getWidgetDocuments(ApiUtils.getValidHeaderParams(),
+                                                                      TestData.EMPTY_PARAM,
+                                                                      TestData.VERSION_ID,
+                                                                      TestData.PARTICIPANT_EMAIL);
+      assertNotNull(widgetDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -122,10 +126,11 @@ public class GetWidgetDocumentsApiTest {
     }
 
     try {
-      widgetsApi.getWidgetDocuments(ApiUtils.getValidHeaderParams(),
-                                    TestData.NULL_PARAM,
-                                    TestData.VERSION_ID,
-                                    TestData.PARTICIPANT_EMAIL);
+      WidgetDocuments widgetDocuments = widgetsApi.getWidgetDocuments(ApiUtils.getValidHeaderParams(),
+                                                                      TestData.NULL_PARAM,
+                                                                      TestData.VERSION_ID,
+                                                                      TestData.PARTICIPANT_EMAIL);
+      assertNotNull(widgetDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -143,10 +148,11 @@ public class GetWidgetDocumentsApiTest {
   public void testInvalidVersionId() throws Exception {
 
     try {
-      widgetsApi.getWidgetDocuments(ApiUtils.getValidHeaderParams(),
-                                    widgetId,
-                                    TestData.EMPTY_PARAM,
-                                    TestData.PARTICIPANT_EMAIL);
+      WidgetDocuments widgetDocuments = widgetsApi.getWidgetDocuments(ApiUtils.getValidHeaderParams(),
+                                                                      widgetId,
+                                                                      TestData.EMPTY_PARAM,
+                                                                      TestData.PARTICIPANT_EMAIL);
+      assertNotNull(widgetDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -164,10 +170,11 @@ public class GetWidgetDocumentsApiTest {
   public void testInvalidParticipantEmail() throws Exception {
 
     try {
-      widgetsApi.getWidgetDocuments(ApiUtils.getValidHeaderParams(),
-                                    widgetId,
-                                    TestData.VERSION_ID,
-                                    TestData.EMPTY_PARAM);
+      WidgetDocuments widgetDocuments = widgetsApi.getWidgetDocuments(ApiUtils.getValidHeaderParams(),
+                                                                      widgetId,
+                                                                      TestData.VERSION_ID,
+                                                                      TestData.EMPTY_PARAM);
+      assertNotNull(widgetDocuments);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),

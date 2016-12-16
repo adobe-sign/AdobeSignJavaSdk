@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:54.002+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:32.597+05:30")
 public class GroupCreationResponse   {
   
   private String groupId = null;
@@ -33,9 +33,16 @@ public class GroupCreationResponse   {
    **/
   @ApiModelProperty(required = true, value = "Unique identifier of the group created.")
   @JsonProperty("groupId")
+  /**
+   * @return String
+   **/
   public String getGroupId() {
     return groupId;
   }
+  /**
+   * Unique identifier of the group created.
+   * @param groupId
+   **/
   public void setGroupId(String groupId) {
     this.groupId = groupId;
   }
@@ -43,6 +50,10 @@ public class GroupCreationResponse   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class GroupCreationResponse {\n");

@@ -15,11 +15,10 @@ package com.adobe.sign.api;
 
 import com.adobe.sign.model.agreements.AlternateParticipantResponse;
 import com.adobe.sign.utils.AgreementUtils;
+import com.adobe.sign.utils.ApiException;
+import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Constants;
 import com.adobe.sign.utils.Errors;
-import com.adobe.sign.utils.FileUtils;
-import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.ApiException;
 
 /**
  * This sample client creates an alternate signer for the given agreement.
@@ -43,6 +42,7 @@ public class CreateAlternateParticipant {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.CREATE_ALTERNATE_PARTICIPANT, e);
+      throw e;
      }
   }
 
@@ -51,7 +51,7 @@ public class CreateAlternateParticipant {
    */
   private void run() throws ApiException{
     //Get agreement ID
-    String agreementId = AgreementUtils.getAgreementId(Constants.AGREEMENT_NAME);
+    String agreementId = AgreementUtils.getAgreementId(ApiUtils.getAgreementName(Constants.AGREEMENT_NAME));
 
     //Make API call to create alternate participant
     AlternateParticipantResponse alternateParticipantResponse = AgreementUtils.createAlternateParticipant(agreementId,

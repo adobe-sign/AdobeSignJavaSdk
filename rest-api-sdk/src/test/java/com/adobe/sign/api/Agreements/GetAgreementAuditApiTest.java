@@ -24,13 +24,13 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Agreement Audit API.
+ * Junit test cases for Get Agreement Audit endpoint.
  */
 public class GetAgreementAuditApiTest {
   private static AgreementsApi agreementsApi = null;
@@ -46,6 +46,7 @@ public class GetAgreementAuditApiTest {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
+
   /**
    * Test for fetching an agreement's audit trail through the getAuditTrail endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -57,8 +58,9 @@ public class GetAgreementAuditApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getAuditTrail(ApiUtils.getNullAccessTokenHeaderParams(),
-                                  agreementId);
+      byte[] audit = agreementsApi.getAuditTrail(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                 agreementId);
+      assertNotNull(audit);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -66,14 +68,16 @@ public class GetAgreementAuditApiTest {
     }
 
     try {
-      agreementsApi.getAuditTrail(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                  agreementId);
+      byte[] audit = agreementsApi.getAuditTrail(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                 agreementId);
+      assertNotNull(audit);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching an agreement's audit trail through the getAuditTrail endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -84,14 +88,16 @@ public class GetAgreementAuditApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getAuditTrail(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                  agreementId);
+      byte[] audit = agreementsApi.getAuditTrail(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                 agreementId);
+      assertNotNull(audit);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching an agreement's audit trail through the getAuditTrail endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: null and empty agreementId.
@@ -102,8 +108,9 @@ public class GetAgreementAuditApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getAuditTrail(ApiUtils.getValidHeaderParams(),
-                                  TestData.EMPTY_PARAM);
+      byte[] audit = agreementsApi.getAuditTrail(ApiUtils.getValidHeaderParams(),
+                                                 TestData.EMPTY_PARAM);
+      assertNotNull(audit);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -111,14 +118,16 @@ public class GetAgreementAuditApiTest {
     }
 
     try {
-      agreementsApi.getAuditTrail(ApiUtils.getValidHeaderParams(),
-                                  TestData.NULL_PARAM);
+      byte[] audit = agreementsApi.getAuditTrail(ApiUtils.getValidHeaderParams(),
+                                                 TestData.NULL_PARAM);
+      assertNotNull(audit);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching an agreement's audit trail through the getAuditTrail endpoint.
    */

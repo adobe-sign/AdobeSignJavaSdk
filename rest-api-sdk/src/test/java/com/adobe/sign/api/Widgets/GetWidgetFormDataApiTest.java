@@ -25,19 +25,19 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.WidgetUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Widget Form Data API.
+ * Junit test cases for Get Widget Form Data endpoint.
  */
 public class GetWidgetFormDataApiTest {
   private static WidgetsApi widgetsApi = null;
   private static String widgetId = null;
 
-  
+
   @Rule
   public Retry retry = new Retry();
 
@@ -59,8 +59,9 @@ public class GetWidgetFormDataApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      widgetsApi.getWidgetFormData(ApiUtils.getNullAccessTokenHeaderParams(),
-                                   widgetId);
+      byte[] formData = widgetsApi.getWidgetFormData(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                     widgetId);
+      assertNotNull(formData);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -68,8 +69,9 @@ public class GetWidgetFormDataApiTest {
     }
 
     try {
-      widgetsApi.getWidgetFormData(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                   widgetId);
+      byte[] formData = widgetsApi.getWidgetFormData(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                     widgetId);
+      assertNotNull(formData);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -88,8 +90,9 @@ public class GetWidgetFormDataApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      widgetsApi.getWidgetFormData(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                   widgetId);
+      byte[] formData = widgetsApi.getWidgetFormData(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                     widgetId);
+      assertNotNull(formData);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -107,8 +110,9 @@ public class GetWidgetFormDataApiTest {
   public void testInvalidWidgetId() throws ApiException {
 
     try {
-      widgetsApi.getWidgetFormData(ApiUtils.getValidHeaderParams(),
-                                   TestData.EMPTY_PARAM);
+      byte[] formData = widgetsApi.getWidgetFormData(ApiUtils.getValidHeaderParams(),
+                                                     TestData.EMPTY_PARAM);
+      assertNotNull(formData);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -116,8 +120,9 @@ public class GetWidgetFormDataApiTest {
     }
 
     try {
-      widgetsApi.getWidgetFormData(ApiUtils.getValidHeaderParams(),
-                                   TestData.NULL_PARAM);
+      byte[] formData = widgetsApi.getWidgetFormData(ApiUtils.getValidHeaderParams(),
+                                                     TestData.NULL_PARAM);
+      assertNotNull(formData);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),

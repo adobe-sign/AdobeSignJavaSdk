@@ -25,13 +25,13 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Agreement Document Url API.
+ * Junit test cases for Get Agreement Document Url endpoint.
  */
 public class GetAgreementDocumentUrlApiTest {
   private static AgreementsApi agreementsApi = null;
@@ -47,8 +47,9 @@ public class GetAgreementDocumentUrlApiTest {
     ApiUtils.configureProperty();
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
-    documentId = AgreementsUtils.getDocumentId();
+    documentId = AgreementsUtils.getFirstDocumentId();
   }
+
   /**
    * Test for fetching url of given document through the getDocumentUrl endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -60,11 +61,12 @@ public class GetAgreementDocumentUrlApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getDocumentUrl(ApiUtils.getNullAccessTokenHeaderParams(),
-                                   agreementId,
-                                   documentId,
-                                   TestData.VERSION_ID,
-                                   TestData.PARTICIPANT_EMAIL);
+      DocumentUrl documentUrl = agreementsApi.getDocumentUrl(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                             agreementId,
+                                                             documentId,
+                                                             TestData.VERSION_ID,
+                                                             TestData.PARTICIPANT_EMAIL);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -72,17 +74,19 @@ public class GetAgreementDocumentUrlApiTest {
     }
 
     try {
-      agreementsApi.getDocumentUrl(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                   agreementId,
-                                   documentId,
-                                   TestData.VERSION_ID,
-                                   TestData.PARTICIPANT_EMAIL);
+      DocumentUrl documentUrl = agreementsApi.getDocumentUrl(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                             agreementId,
+                                                             documentId,
+                                                             TestData.VERSION_ID,
+                                                             TestData.PARTICIPANT_EMAIL);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching url of given document through the getDocumentUrl endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -93,17 +97,19 @@ public class GetAgreementDocumentUrlApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getDocumentUrl(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                   agreementId,
-                                   documentId,
-                                   TestData.VERSION_ID,
-                                   TestData.PARTICIPANT_EMAIL);
+      DocumentUrl documentUrl = agreementsApi.getDocumentUrl(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                             agreementId,
+                                                             documentId,
+                                                             TestData.VERSION_ID,
+                                                             TestData.PARTICIPANT_EMAIL);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching url of given document through the getDocumentUrl endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: empty and null agreementId.
@@ -114,11 +120,12 @@ public class GetAgreementDocumentUrlApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
-                                   TestData.EMPTY_PARAM,
-                                   documentId,
-                                   TestData.VERSION_ID,
-                                   TestData.PARTICIPANT_EMAIL);
+      DocumentUrl documentUrl = agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
+                                                             TestData.EMPTY_PARAM,
+                                                             documentId,
+                                                             TestData.VERSION_ID,
+                                                             TestData.PARTICIPANT_EMAIL);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -126,17 +133,19 @@ public class GetAgreementDocumentUrlApiTest {
     }
 
     try {
-      agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
-                                   TestData.NULL_PARAM,
-                                   documentId,
-                                   TestData.VERSION_ID,
-                                   TestData.PARTICIPANT_EMAIL);
+      DocumentUrl documentUrl = agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
+                                                             TestData.NULL_PARAM,
+                                                             documentId,
+                                                             TestData.VERSION_ID,
+                                                             TestData.PARTICIPANT_EMAIL);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching url of given document through the getDocumentUrl endpoint. Negative scenarios covered:
    * INVALID_DOCUMENT_ID: null and empty documentId.
@@ -147,29 +156,32 @@ public class GetAgreementDocumentUrlApiTest {
   public void testInvalidDocumentId() throws ApiException {
 
     try {
-      agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
-                                   agreementId,
-                                   TestData.EMPTY_PARAM,
-                                   TestData.VERSION_ID,
-                                   TestData.PARTICIPANT_EMAIL);
+      DocumentUrl documentUrl = agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
+                                                             agreementId,
+                                                             TestData.EMPTY_PARAM,
+                                                             TestData.VERSION_ID,
+                                                             TestData.PARTICIPANT_EMAIL);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
-                 SdkErrorCodes. INVALID_DOCUMENT_ID.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.INVALID_DOCUMENT_ID.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
-                                   agreementId,
-                                   TestData.NULL_PARAM,
-                                   TestData.VERSION_ID,
-                                   TestData.PARTICIPANT_EMAIL);
+      DocumentUrl documentUrl = agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
+                                                             agreementId,
+                                                             TestData.NULL_PARAM,
+                                                             TestData.VERSION_ID,
+                                                             TestData.PARTICIPANT_EMAIL);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
-                 SdkErrorCodes. INVALID_DOCUMENT_ID.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.INVALID_DOCUMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching url of given document through the getDocumentUrl endpoint. Negative scenarios covered:
    * INVALID_VERSION_ID: empty versionId.
@@ -180,17 +192,19 @@ public class GetAgreementDocumentUrlApiTest {
   public void testInvalidVersionId() throws ApiException {
 
     try {
-      agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
-                                   agreementId,
-                                   documentId,
-                                   TestData.EMPTY_PARAM,
-                                   TestData.PARTICIPANT_EMAIL);
+      DocumentUrl documentUrl = agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
+                                                             agreementId,
+                                                             documentId,
+                                                             TestData.EMPTY_PARAM,
+                                                             TestData.PARTICIPANT_EMAIL);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_VERSION_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching url of given document through the getDocumentUrl endpoint. Negative scenarios covered:
    * INVALID_PARTICIPANT: empty participantId.
@@ -201,17 +215,19 @@ public class GetAgreementDocumentUrlApiTest {
   public void testInvalidParticipantEmail() throws ApiException {
 
     try {
-      agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
-                                   agreementId,
-                                   documentId,
-                                   TestData.VERSION_ID,
-                                   TestData.EMPTY_PARAM);
+      DocumentUrl documentUrl = agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
+                                                             agreementId,
+                                                             documentId,
+                                                             TestData.VERSION_ID,
+                                                             TestData.EMPTY_PARAM);
+      assertNotNull(documentUrl);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_PARTICIPANT.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching url of given document through the getDocumentUrl endpoint.
    * Case covered is successful execution of the api call.
@@ -222,11 +238,11 @@ public class GetAgreementDocumentUrlApiTest {
   public void testDocumentUrl() throws ApiException {
 
     try {
-      DocumentUrl documentUrl =  agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
-                                                              agreementId,
-                                                              documentId,
-                                                              TestData.VERSION_ID,
-                                                              TestData.PARTICIPANT_EMAIL);
+      DocumentUrl documentUrl = agreementsApi.getDocumentUrl(ApiUtils.getValidHeaderParams(),
+                                                             agreementId,
+                                                             documentId,
+                                                             TestData.VERSION_ID,
+                                                             TestData.PARTICIPANT_EMAIL);
       assertNotNull(documentUrl);
     }
     catch (ApiException e) {

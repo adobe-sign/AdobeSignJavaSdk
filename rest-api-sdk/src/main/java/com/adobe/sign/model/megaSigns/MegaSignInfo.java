@@ -14,9 +14,9 @@
 package com.adobe.sign.model.megaSigns;
 
 import com.adobe.sign.utils.StringUtil;
-import java.util.*;
-import com.adobe.sign.model.megaSigns.DocumentHistoryEvent;
 import java.util.Date;
+import com.adobe.sign.model.megaSigns.DocumentHistoryEvent;
+import java.util.*;
 
 
 
@@ -25,10 +25,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:52.934+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.898+05:30")
 public class MegaSignInfo   {
   
-  private List<DocumentHistoryEvent> events = new ArrayList<DocumentHistoryEvent>();
+  private List<DocumentHistoryEvent> events = null;
   private Date expiration = null;
   private String locale = null;
   private String megaSignId = null;
@@ -52,7 +52,7 @@ public enum SecurityOptionsEnum {
   }
 }
 
-  private List<SecurityOptionsEnum> securityOptions = new ArrayList<SecurityOptionsEnum>();
+  private List<SecurityOptionsEnum> securityOptions = null;
 
 public enum StatusEnum {
   WAITING_FOR_MY_SIGNATURE("WAITING_FOR_MY_SIGNATURE"),
@@ -90,9 +90,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "An ordered list of the events in the audit trail of this document")
   @JsonProperty("events")
+  /**
+   * @return List&lt;DocumentHistoryEvent&gt;
+   **/
   public List<DocumentHistoryEvent> getEvents() {
     return events;
   }
+  /**
+   * An ordered list of the events in the audit trail of this document
+   * @param events
+   **/
   public void setEvents(List<DocumentHistoryEvent> events) {
     this.events = events;
   }
@@ -103,9 +110,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "The date after which the document can no longer be signed, if an expiration date is configured. The value is nil if an expiration date is not set for the document")
   @JsonProperty("expiration")
+  /**
+   * @return Date
+   **/
   public Date getExpiration() {
     return expiration;
   }
+  /**
+   * The date after which the document can no longer be signed, if an expiration date is configured. The value is nil if an expiration date is not set for the document
+   * @param expiration
+   **/
   public void setExpiration(Date expiration) {
     this.expiration = expiration;
   }
@@ -116,9 +130,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The locale associated with this agreement - for example, en_US or fr_FR")
   @JsonProperty("locale")
+  /**
+   * @return String
+   **/
   public String getLocale() {
     return locale;
   }
+  /**
+   * The locale associated with this agreement - for example, en_US or fr_FR
+   * @param locale
+   **/
   public void setLocale(String locale) {
     this.locale = locale;
   }
@@ -129,9 +150,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Unique identifier of the MegaSign parent agreement")
   @JsonProperty("megaSignId")
+  /**
+   * @return String
+   **/
   public String getMegaSignId() {
     return megaSignId;
   }
+  /**
+   * Unique identifier of the MegaSign parent agreement
+   * @param megaSignId
+   **/
   public void setMegaSignId(String megaSignId) {
     this.megaSignId = megaSignId;
   }
@@ -142,9 +170,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "The message associated with the document that the sender has provided")
   @JsonProperty("message")
+  /**
+   * @return String
+   **/
   public String getMessage() {
     return message;
   }
+  /**
+   * The message associated with the document that the sender has provided
+   * @param message
+   **/
   public void setMessage(String message) {
     this.message = message;
   }
@@ -155,9 +190,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "A version ID which uniquely identifies the current version of the agreement")
   @JsonProperty("latestVersionId")
+  /**
+   * @return String
+   **/
   public String getLatestVersionId() {
     return latestVersionId;
   }
+  /**
+   * A version ID which uniquely identifies the current version of the agreement
+   * @param latestVersionId
+   **/
   public void setLatestVersionId(String latestVersionId) {
     this.latestVersionId = latestVersionId;
   }
@@ -168,9 +210,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The name of the document, specified by the sender")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * The name of the document, specified by the sender
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -181,9 +230,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "Security information about the document that specifies whether or not a password is required to view and sign the document")
   @JsonProperty("securityOptions")
+  /**
+   * @return List&lt;SecurityOptionsEnum&gt;
+   **/
   public List<SecurityOptionsEnum> getSecurityOptions() {
     return securityOptions;
   }
+  /**
+   * Security information about the document that specifies whether or not a password is required to view and sign the document
+   * @param securityOptions
+   **/
   public void setSecurityOptions(List<SecurityOptionsEnum> securityOptions) {
     this.securityOptions = securityOptions;
   }
@@ -194,9 +250,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Current status of the MegaSign parent agreement from the perspective of the user")
   @JsonProperty("status")
+  /**
+   * @return StatusEnum
+   **/
   public StatusEnum getStatus() {
     return status;
   }
+  /**
+   * Current status of the MegaSign parent agreement from the perspective of the user
+   * @param status
+   **/
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -204,6 +267,10 @@ public enum StatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class MegaSignInfo {\n");

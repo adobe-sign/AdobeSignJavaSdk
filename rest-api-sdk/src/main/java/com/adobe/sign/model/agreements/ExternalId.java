@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class ExternalId   {
   
   private String group = null;
@@ -35,9 +35,16 @@ public class ExternalId   {
    **/
   @ApiModelProperty(value = "An arbitrary value from your system, which can be specified at sending time and then later returned or queried")
   @JsonProperty("group")
+  /**
+   * @return String
+   **/
   public String getGroup() {
     return group;
   }
+  /**
+   * An arbitrary value from your system, which can be specified at sending time and then later returned or queried
+   * @param group
+   **/
   public void setGroup(String group) {
     this.group = group;
   }
@@ -48,9 +55,16 @@ public class ExternalId   {
    **/
   @ApiModelProperty(value = "An arbitrary value from your system, which can be specified at sending time and then later returned or queried")
   @JsonProperty("id")
+  /**
+   * @return String
+   **/
   public String getId() {
     return id;
   }
+  /**
+   * An arbitrary value from your system, which can be specified at sending time and then later returned or queried
+   * @param id
+   **/
   public void setId(String id) {
     this.id = id;
   }
@@ -61,9 +75,16 @@ public class ExternalId   {
    **/
   @ApiModelProperty(value = "Only supported value for the ExternalID namespace at this time is API_OTHER")
   @JsonProperty("namespace")
+  /**
+   * @return String
+   **/
   public String getNamespace() {
     return namespace;
   }
+  /**
+   * Only supported value for the ExternalID namespace at this time is API_OTHER
+   * @param namespace
+   **/
   public void setNamespace(String namespace) {
     this.namespace = namespace;
   }
@@ -71,6 +92,10 @@ public class ExternalId   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class ExternalId {\n");

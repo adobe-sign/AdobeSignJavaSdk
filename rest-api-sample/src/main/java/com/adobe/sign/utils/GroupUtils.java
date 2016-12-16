@@ -42,8 +42,8 @@ public class GroupUtils {
       return groupCreationResponse.getGroupId();
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.CREATE_GROUP, e);
-      return null;
+      ApiUtils.logError(Errors.CREATE_GROUP);
+      throw e;
     }
   }
 
@@ -66,8 +66,8 @@ public class GroupUtils {
       return groupCreationResponse.getGroupId();
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.CREATE_GROUP_OAUTH, e);
-      return null;
+      ApiUtils.logError(Errors.CREATE_GROUP_OAUTH);
+      throw e;
     }
   }
 
@@ -82,8 +82,8 @@ public class GroupUtils {
       return groupsInfo;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_GROUPS, e);
-      return null;
+      ApiUtils.logError(Errors.GET_GROUPS);
+      throw e;
     }
   }
 }

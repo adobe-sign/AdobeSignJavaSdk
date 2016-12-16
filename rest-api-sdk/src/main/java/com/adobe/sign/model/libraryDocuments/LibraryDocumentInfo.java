@@ -15,8 +15,8 @@ package com.adobe.sign.model.libraryDocuments;
 
 import com.adobe.sign.utils.StringUtil;
 import com.adobe.sign.model.libraryDocuments.LibDocParticipantInfo;
-import java.util.*;
 import com.adobe.sign.model.libraryDocuments.LibDocumentHistoryEvent;
+import java.util.*;
 
 
 
@@ -25,16 +25,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:51.876+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:31.195+05:30")
 public class LibraryDocumentInfo   {
   
-  private List<LibDocumentHistoryEvent> events = new ArrayList<LibDocumentHistoryEvent>();
+  private List<LibDocumentHistoryEvent> events = null;
   private String libraryDocumentId = null;
   private String locale = null;
   private String message = null;
   private String latestVersionId = null;
   private String name = null;
-  private List<LibDocParticipantInfo> participants = new ArrayList<LibDocParticipantInfo>();
+  private List<LibDocParticipantInfo> participants = null;
 
 public enum SecurityOptionsEnum {
   OPEN_PROTECTED("OPEN_PROTECTED"),
@@ -52,7 +52,7 @@ public enum SecurityOptionsEnum {
   }
 }
 
-  private List<SecurityOptionsEnum> securityOptions = new ArrayList<SecurityOptionsEnum>();
+  private List<SecurityOptionsEnum> securityOptions = null;
 
 public enum StatusEnum {
   OUT_FOR_SIGNATURE("OUT_FOR_SIGNATURE"),
@@ -93,9 +93,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "An ordered list of the events in the audit trail of this document")
   @JsonProperty("events")
+  /**
+   * @return List&lt;LibDocumentHistoryEvent&gt;
+   **/
   public List<LibDocumentHistoryEvent> getEvents() {
     return events;
   }
+  /**
+   * An ordered list of the events in the audit trail of this document
+   * @param events
+   **/
   public void setEvents(List<LibDocumentHistoryEvent> events) {
     this.events = events;
   }
@@ -106,9 +113,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "A resource identifier that can be used to uniquely identify the library document in other apis")
   @JsonProperty("libraryDocumentId")
+  /**
+   * @return String
+   **/
   public String getLibraryDocumentId() {
     return libraryDocumentId;
   }
+  /**
+   * A resource identifier that can be used to uniquely identify the library document in other apis
+   * @param libraryDocumentId
+   **/
   public void setLibraryDocumentId(String libraryDocumentId) {
     this.libraryDocumentId = libraryDocumentId;
   }
@@ -119,9 +133,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The locale associated with this agreement - for example, en_US or fr_FR")
   @JsonProperty("locale")
+  /**
+   * @return String
+   **/
   public String getLocale() {
     return locale;
   }
+  /**
+   * The locale associated with this agreement - for example, en_US or fr_FR
+   * @param locale
+   **/
   public void setLocale(String locale) {
     this.locale = locale;
   }
@@ -132,9 +153,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "The message associated with the document that the sender has provided")
   @JsonProperty("message")
+  /**
+   * @return String
+   **/
   public String getMessage() {
     return message;
   }
+  /**
+   * The message associated with the document that the sender has provided
+   * @param message
+   **/
   public void setMessage(String message) {
     this.message = message;
   }
@@ -145,9 +173,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "A version ID which uniquely identifies the current version of the agreement")
   @JsonProperty("latestVersionId")
+  /**
+   * @return String
+   **/
   public String getLatestVersionId() {
     return latestVersionId;
   }
+  /**
+   * A version ID which uniquely identifies the current version of the agreement
+   * @param latestVersionId
+   **/
   public void setLatestVersionId(String latestVersionId) {
     this.latestVersionId = latestVersionId;
   }
@@ -158,9 +193,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The name of the document, specified by the sender")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * The name of the document, specified by the sender
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -171,9 +213,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "Information about all the participants of this document")
   @JsonProperty("participants")
+  /**
+   * @return List&lt;LibDocParticipantInfo&gt;
+   **/
   public List<LibDocParticipantInfo> getParticipants() {
     return participants;
   }
+  /**
+   * Information about all the participants of this document
+   * @param participants
+   **/
   public void setParticipants(List<LibDocParticipantInfo> participants) {
     this.participants = participants;
   }
@@ -184,9 +233,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(value = "Security information about the document that specifies whether or not a password is required to view and sign the document")
   @JsonProperty("securityOptions")
+  /**
+   * @return List&lt;SecurityOptionsEnum&gt;
+   **/
   public List<SecurityOptionsEnum> getSecurityOptions() {
     return securityOptions;
   }
+  /**
+   * Security information about the document that specifies whether or not a password is required to view and sign the document
+   * @param securityOptions
+   **/
   public void setSecurityOptions(List<SecurityOptionsEnum> securityOptions) {
     this.securityOptions = securityOptions;
   }
@@ -197,9 +253,16 @@ public enum StatusEnum {
    **/
   @ApiModelProperty(required = true, value = "The current status of the document")
   @JsonProperty("status")
+  /**
+   * @return StatusEnum
+   **/
   public StatusEnum getStatus() {
     return status;
   }
+  /**
+   * The current status of the document
+   * @param status
+   **/
   public void setStatus(StatusEnum status) {
     this.status = status;
   }
@@ -207,6 +270,10 @@ public enum StatusEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class LibraryDocumentInfo {\n");

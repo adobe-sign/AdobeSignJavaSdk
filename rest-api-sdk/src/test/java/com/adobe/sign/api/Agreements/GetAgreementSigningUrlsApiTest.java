@@ -25,13 +25,13 @@ import com.adobe.sign.utils.ApiUtils;
 import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Agreement Signing Urls API.
+ * Junit test cases for Get Agreement Signing Urls endpoint.
  */
 public class GetAgreementSigningUrlsApiTest {
   private static AgreementsApi agreementsApi = null;
@@ -47,6 +47,7 @@ public class GetAgreementSigningUrlsApiTest {
     agreementsApi = AgreementsUtils.getAgreementsApi();
     agreementId = AgreementsUtils.getResourceId(TestData.AGREEMENT_NAME);
   }
+
   /**
    * Test for fetching an agreement's signing link through the getSigningUrl endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -58,8 +59,9 @@ public class GetAgreementSigningUrlsApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      agreementsApi.getSigningUrl(ApiUtils.getNullAccessTokenHeaderParams(),
-                                  agreementId);
+      SigningUrlResponse signingUrlResponse = agreementsApi.getSigningUrl(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                          agreementId);
+      assertNotNull(signingUrlResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -67,14 +69,16 @@ public class GetAgreementSigningUrlsApiTest {
     }
 
     try {
-      agreementsApi.getSigningUrl(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                  agreementId);
+      SigningUrlResponse signingUrlResponse = agreementsApi.getSigningUrl(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                          agreementId);
+      assertNotNull(signingUrlResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_ACCESS_TOKEN.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching an agreement's signing link through the getSigningUrl endpoint. Negative scenarios covered:
    * INVALID_X_API_USER_HEADER: empty xApiUser.
@@ -85,14 +89,16 @@ public class GetAgreementSigningUrlsApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      agreementsApi.getSigningUrl(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                  agreementId);
+      SigningUrlResponse signingUrlResponse = agreementsApi.getSigningUrl(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                          agreementId);
+      assertNotNull(signingUrlResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching an agreement's signing link through the getSigningUrl endpoint. Negative scenarios covered:
    * INVALID_AGREEMENT_ID: null and empty agreementId.
@@ -103,8 +109,9 @@ public class GetAgreementSigningUrlsApiTest {
   public void testInvalidAgreementId() throws ApiException {
 
     try {
-      agreementsApi.getSigningUrl(ApiUtils.getValidHeaderParams(),
-                                  TestData.EMPTY_PARAM);
+      SigningUrlResponse signingUrlResponse = agreementsApi.getSigningUrl(ApiUtils.getValidHeaderParams(),
+                                                                          TestData.EMPTY_PARAM);
+      assertNotNull(signingUrlResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -112,14 +119,16 @@ public class GetAgreementSigningUrlsApiTest {
     }
 
     try {
-      agreementsApi.getSigningUrl(ApiUtils.getValidHeaderParams(),
-                                  TestData.NULL_PARAM);
+      SigningUrlResponse signingUrlResponse = agreementsApi.getSigningUrl(ApiUtils.getValidHeaderParams(),
+                                                                          TestData.NULL_PARAM);
+      assertNotNull(signingUrlResponse);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_AGREEMENT_ID.getApiCode().equals(e.getApiCode()));
     }
   }
+
   /**
    * Test for fetching an agreement's signing link through the getSigningUrl endpoint.
    */

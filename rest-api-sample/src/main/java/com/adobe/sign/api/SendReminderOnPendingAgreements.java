@@ -48,6 +48,7 @@ public class SendReminderOnPendingAgreements {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.SEND_REMINDER_PENDING_AGREEMENT, e);
+      throw e;
     }
   }
 

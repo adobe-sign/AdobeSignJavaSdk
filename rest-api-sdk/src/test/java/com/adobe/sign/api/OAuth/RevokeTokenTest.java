@@ -21,17 +21,16 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.OAuthUtil;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get revokeToken API.
+ * Junit test cases for Get revokeToken endpoint.
  */
 public class RevokeTokenTest {
 
   private static OAuthApi oAuthApi = null;
-
 
 
   @BeforeClass
@@ -52,7 +51,8 @@ public class RevokeTokenTest {
     //token Null.
     try {
       oAuthApi.revokeToken(null);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }

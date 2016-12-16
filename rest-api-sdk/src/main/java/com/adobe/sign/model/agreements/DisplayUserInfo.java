@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class DisplayUserInfo   {
   
   private String company = null;
@@ -35,9 +35,16 @@ public class DisplayUserInfo   {
    **/
   @ApiModelProperty(value = "Displays the name of the company of the user, if available")
   @JsonProperty("company")
+  /**
+   * @return String
+   **/
   public String getCompany() {
     return company;
   }
+  /**
+   * Displays the name of the company of the user, if available
+   * @param company
+   **/
   public void setCompany(String company) {
     this.company = company;
   }
@@ -48,9 +55,16 @@ public class DisplayUserInfo   {
    **/
   @ApiModelProperty(required = true, value = "Displays the email of the user")
   @JsonProperty("email")
+  /**
+   * @return String
+   **/
   public String getEmail() {
     return email;
   }
+  /**
+   * Displays the email of the user
+   * @param email
+   **/
   public void setEmail(String email) {
     this.email = email;
   }
@@ -61,9 +75,16 @@ public class DisplayUserInfo   {
    **/
   @ApiModelProperty(value = "Displays the full name of the user, if available.")
   @JsonProperty("fullName")
+  /**
+   * @return String
+   **/
   public String getFullName() {
     return fullName;
   }
+  /**
+   * Displays the full name of the user, if available.
+   * @param fullName
+   **/
   public void setFullName(String fullName) {
     this.fullName = fullName;
   }
@@ -71,6 +92,10 @@ public class DisplayUserInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class DisplayUserInfo {\n");

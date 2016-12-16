@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class AgreementStatusUpdateInfo   {
   
   private String comment = null;
@@ -51,9 +51,16 @@ public enum ValueEnum {
    **/
   @ApiModelProperty(value = "An optional comment describing to the recipient why you want to cancel the transaction")
   @JsonProperty("comment")
+  /**
+   * @return String
+   **/
   public String getComment() {
     return comment;
   }
+  /**
+   * An optional comment describing to the recipient why you want to cancel the transaction
+   * @param comment
+   **/
   public void setComment(String comment) {
     this.comment = comment;
   }
@@ -64,9 +71,16 @@ public enum ValueEnum {
    **/
   @ApiModelProperty(value = "Whether or not you would like the recipient to be notified that the transaction has been cancelled. The notification is mandatory if any party has already signed this document. The default value is false")
   @JsonProperty("notifySigner")
+  /**
+   * @return Boolean
+   **/
   public Boolean getNotifySigner() {
     return notifySigner;
   }
+  /**
+   * Whether or not you would like the recipient to be notified that the transaction has been cancelled. The notification is mandatory if any party has already signed this document. The default value is false
+   * @param notifySigner
+   **/
   public void setNotifySigner(Boolean notifySigner) {
     this.notifySigner = notifySigner;
   }
@@ -77,9 +91,16 @@ public enum ValueEnum {
    **/
   @ApiModelProperty(required = true, value = "The state to which the agreement is to be updated. The only valid state for this variable is currently, CANCEL")
   @JsonProperty("value")
+  /**
+   * @return ValueEnum
+   **/
   public ValueEnum getValue() {
     return value;
   }
+  /**
+   * The state to which the agreement is to be updated. The only valid state for this variable is currently, CANCEL
+   * @param value
+   **/
   public void setValue(ValueEnum value) {
     this.value = value;
   }
@@ -87,6 +108,10 @@ public enum ValueEnum {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class AgreementStatusUpdateInfo {\n");

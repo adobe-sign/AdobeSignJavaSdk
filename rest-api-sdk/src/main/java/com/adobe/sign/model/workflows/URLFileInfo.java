@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class URLFileInfo   {
   
   private String mimeType = null;
@@ -35,9 +35,16 @@ public class URLFileInfo   {
    **/
   @ApiModelProperty(value = "The mime type of the referenced file, used to determine if the file can be accepted and the necessary conversion steps can be performed")
   @JsonProperty("mimeType")
+  /**
+   * @return String
+   **/
   public String getMimeType() {
     return mimeType;
   }
+  /**
+   * The mime type of the referenced file, used to determine if the file can be accepted and the necessary conversion steps can be performed
+   * @param mimeType
+   **/
   public void setMimeType(String mimeType) {
     this.mimeType = mimeType;
   }
@@ -48,9 +55,16 @@ public class URLFileInfo   {
    **/
   @ApiModelProperty(value = "The original system file name of the document being sent - used to name attachments, and to infer the mime type if one is not explicitly specified")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * The original system file name of the document being sent - used to name attachments, and to infer the mime type if one is not explicitly specified
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -61,9 +75,16 @@ public class URLFileInfo   {
    **/
   @ApiModelProperty(value = "A publicly accessible URL for retrieving the raw file content. HTTP authentication is supported using standard embedded syntax - i.e. http://username:password@your.server.com/path/to/file.")
   @JsonProperty("url")
+  /**
+   * @return String
+   **/
   public String getUrl() {
     return url;
   }
+  /**
+   * A publicly accessible URL for retrieving the raw file content. HTTP authentication is supported using standard embedded syntax - i.e. http://username:password@your.server.com/path/to/file.
+   * @param url
+   **/
   public void setUrl(String url) {
     this.url = url;
   }
@@ -71,6 +92,10 @@ public class URLFileInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class URLFileInfo {\n");

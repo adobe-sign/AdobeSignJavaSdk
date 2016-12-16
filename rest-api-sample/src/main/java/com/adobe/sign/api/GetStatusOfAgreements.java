@@ -46,6 +46,7 @@ public class GetStatusOfAgreements {
     }
     catch (ApiException e) {
       ApiUtils.logException(Errors.GET_AGREEMENT_STATUS, e);
+      throw e;
    }
   }
 

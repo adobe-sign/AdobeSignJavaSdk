@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * A JSON that contains the id of the newly created alternate participant
  **/
 @ApiModel(description = "A JSON that contains the id of the newly created alternate participant")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:49.202+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:29.604+05:30")
 public class AlternateParticipantResponse   {
   
   private String participantId = null;
@@ -36,9 +36,16 @@ public class AlternateParticipantResponse   {
    **/
   @ApiModelProperty(required = true, value = "The unique identifier of the alternate participant")
   @JsonProperty("participantId")
+  /**
+   * @return String
+   **/
   public String getParticipantId() {
     return participantId;
   }
+  /**
+   * The unique identifier of the alternate participant
+   * @param participantId
+   **/
   public void setParticipantId(String participantId) {
     this.participantId = participantId;
   }
@@ -46,6 +53,10 @@ public class AlternateParticipantResponse   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class AlternateParticipantResponse {\n");

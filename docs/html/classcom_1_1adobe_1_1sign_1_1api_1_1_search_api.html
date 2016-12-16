@@ -135,7 +135,9 @@ Public Member Functions</h2></td></tr>
 <p>Create a search object for agreement asset event . It will return the result for the first page and search Id to fetch results for further pages. The agreement asset refers to any asset through which an agreement can be created for instance library document,widget and agreement itself. To search for Agreement Asset Events, first make a POST request to the API to create search results with relevant search parameters. Response will be the first page of results along with a search Id param and next page cursor. These can be used to fetch further page results if they are available using the API to retrieve search results </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read widget_read library_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">agreementAssetEventRequest</td><td>Information about the Agreement Asset Events to be generated </td></tr>
   </table>
@@ -183,7 +185,9 @@ x-api-user(key) The userId or email of API caller using the account or group tok
 <p>Return the result for the page which is described inside the Page Cursor Info. The agreement asset refers to any asset through which an agreement can be created for instance library document,widget and agreement itself. Provide the searchId obtained from the API to create search results request and the next page cursor id from the original call to the API to create search results or a previous call to the API to retrieve search results. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">headers</td><td>Multivalued map containing key value pair for below parameters and custom parameters. <pre>
+<br />
 Access-Token(key) An OAuth Access Token with scopes: agreement_read widget_read library_read 
+<br />
 x-api-user(key) The userId or email of API caller using the account or group token in the format userid:{userId} OR email:{email}. If it is not specified, then the caller is inferred from the token. </pre></td></tr>
     <tr><td class="paramname">searchId</td><td>The search object identifier, as returned by the agreementAssetEvent creation API . </td></tr>
     <tr><td class="paramname">pageCursor</td><td>Page cursor of the page whose result will be fetched </td></tr>

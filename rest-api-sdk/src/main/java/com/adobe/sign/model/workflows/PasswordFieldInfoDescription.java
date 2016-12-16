@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class PasswordFieldInfoDescription   {
   
   private String defaultValue = null;
@@ -37,9 +37,16 @@ public class PasswordFieldInfoDescription   {
    **/
   @ApiModelProperty(required = true, value = "Default value of the password info field")
   @JsonProperty("defaultValue")
+  /**
+   * @return String
+   **/
   public String getDefaultValue() {
     return defaultValue;
   }
+  /**
+   * Default value of the password info field
+   * @param defaultValue
+   **/
   public void setDefaultValue(String defaultValue) {
     this.defaultValue = defaultValue;
   }
@@ -50,9 +57,16 @@ public class PasswordFieldInfoDescription   {
    **/
   @ApiModelProperty(required = true, value = "Label of password field")
   @JsonProperty("label")
+  /**
+   * @return String
+   **/
   public String getLabel() {
     return label;
   }
+  /**
+   * Label of password field
+   * @param label
+   **/
   public void setLabel(String label) {
     this.label = label;
   }
@@ -63,9 +77,16 @@ public class PasswordFieldInfoDescription   {
    **/
   @ApiModelProperty(required = true, value = "Name of password field")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * Name of password field
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -76,9 +97,16 @@ public class PasswordFieldInfoDescription   {
    **/
   @ApiModelProperty(required = true, value = "Whether this field is required or optional")
   @JsonProperty("required")
+  /**
+   * @return Boolean
+   **/
   public Boolean getRequired() {
     return required;
   }
+  /**
+   * Whether this field is required or optional
+   * @param required
+   **/
   public void setRequired(Boolean required) {
     this.required = required;
   }
@@ -89,9 +117,16 @@ public class PasswordFieldInfoDescription   {
    **/
   @ApiModelProperty(required = true, value = "Whether password info field is visible on agreement creation page")
   @JsonProperty("visible")
+  /**
+   * @return Boolean
+   **/
   public Boolean getVisible() {
     return visible;
   }
+  /**
+   * Whether password info field is visible on agreement creation page
+   * @param visible
+   **/
   public void setVisible(Boolean visible) {
     this.visible = visible;
   }
@@ -99,6 +134,10 @@ public class PasswordFieldInfoDescription   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class PasswordFieldInfoDescription {\n");

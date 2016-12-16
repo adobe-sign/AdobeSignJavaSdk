@@ -22,18 +22,17 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.OAuthUtil;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.ApiUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get refreshAccessToken API.
+ * Junit test cases for Get refreshAccessToken endpoint.
  */
 public class RefreshAccessTokenTest {
 
   private static OAuthApi oAuthApi = null;
   private static String REFRESH_TOKEN = "refreshToken";
-
 
 
   @BeforeClass
@@ -45,6 +44,7 @@ public class RefreshAccessTokenTest {
   /**
    * Test for refreshing the access token through the refreshAccessToken endpoint. Negative scenarios covered:
    * MISSING_REQUIRED_PARAM: ClientId null in accessTokenRefreshRequest.
+   *
    * @throws ApiException
    */
   @Test
@@ -52,20 +52,22 @@ public class RefreshAccessTokenTest {
 
     //ClientId Null in accessTokenRefreshRequest
     AccessTokenRefreshRequest accessTokenRefreshRequest = new AccessTokenRefreshRequest(TestData.NULL_PARAM,
-                                                                                     TestData.CLIENT_SECRET,
-                                                                                     REFRESH_TOKEN,
-                                                                                     TestData.REFRESH_TOKEN_GRANT_TYPE);
+                                                                                        TestData.CLIENT_SECRET,
+                                                                                        REFRESH_TOKEN,
+                                                                                        TestData.REFRESH_TOKEN_GRANT_TYPE);
     try {
       oAuthApi.refreshAccessToken(accessTokenRefreshRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
   }
 
   /**
    * Test for refreshing the access token through the refreshAccessToken endpoint. Negative scenarios covered:
    * MISSING_REQUIRED_PARAM: ClientSecret null in accessTokenRefreshRequest.
+   *
    * @throws ApiException
    */
   @Test
@@ -73,20 +75,22 @@ public class RefreshAccessTokenTest {
 
     //ClientSecret Null in accessTokenRefreshRequest
     AccessTokenRefreshRequest accessTokenRefreshRequest = new AccessTokenRefreshRequest(TestData.CLIENT_ID,
-                                                                                     TestData.NULL_PARAM,
-                                                                                     REFRESH_TOKEN,
-                                                                                     TestData.REFRESH_TOKEN_GRANT_TYPE);
+                                                                                        TestData.NULL_PARAM,
+                                                                                        REFRESH_TOKEN,
+                                                                                        TestData.REFRESH_TOKEN_GRANT_TYPE);
     try {
       oAuthApi.refreshAccessToken(accessTokenRefreshRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
   }
 
   /**
    * Test for refreshing the access token through the refreshAccessToken endpoint. Negative scenarios covered:
    * MISSING_REQUIRED_PARAM: grantType null in accessTokenRefreshRequest.
+   *
    * @throws ApiException
    */
   @Test
@@ -94,20 +98,22 @@ public class RefreshAccessTokenTest {
 
     //grantType Null in accessTokenRefreshRequest
     AccessTokenRefreshRequest accessTokenRefreshRequest = new AccessTokenRefreshRequest(TestData.CLIENT_ID,
-                                                                                     TestData.CLIENT_SECRET,
-                                                                                     REFRESH_TOKEN,
-                                                                                     TestData.NULL_PARAM);
+                                                                                        TestData.CLIENT_SECRET,
+                                                                                        REFRESH_TOKEN,
+                                                                                        TestData.NULL_PARAM);
     try {
       oAuthApi.refreshAccessToken(accessTokenRefreshRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
   }
 
   /**
    * Test for refreshing the access token through the refreshAccessToken endpoint. Negative scenarios covered:
    * MISSING_REQUIRED_PARAM: refreshToken null in accessTokenRefreshRequest.
+   *
    * @throws ApiException
    */
   @Test
@@ -115,14 +121,15 @@ public class RefreshAccessTokenTest {
 
     //refreshToken Null in accessTokenRefreshRequest
     AccessTokenRefreshRequest accessTokenRefreshRequest = new AccessTokenRefreshRequest(TestData.CLIENT_ID,
-                                                                                     TestData.CLIENT_SECRET,
-                                                                                     TestData.NULL_PARAM,
-                                                                                     TestData.REFRESH_TOKEN_GRANT_TYPE);
+                                                                                        TestData.CLIENT_SECRET,
+                                                                                        TestData.NULL_PARAM,
+                                                                                        TestData.REFRESH_TOKEN_GRANT_TYPE);
     try {
       oAuthApi.refreshAccessToken(accessTokenRefreshRequest);
-    } catch (ApiException e) {
+    }
+    catch (ApiException e) {
       assertTrue(e.getMessage(),
-        SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
+                 SdkErrorCodes.MISSING_REQUIRED_PARAM.getApiCode().equals(e.getApiCode()));
     }
   }
 }

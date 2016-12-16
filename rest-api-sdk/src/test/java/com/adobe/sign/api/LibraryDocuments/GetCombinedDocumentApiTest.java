@@ -24,16 +24,16 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.LibraryDocumentsUtils;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get Combined Document API.
+ * Junit test cases for Get Combined Document endpoint.
  */
 public class GetCombinedDocumentApiTest {
-  
+
   private static LibraryDocumentsApi libraryDocumentsApi = null;
   private static String libraryDocumentId = null;
 
@@ -48,7 +48,7 @@ public class GetCombinedDocumentApiTest {
     libraryDocumentId = LibraryDocumentsUtils.getResourceId(TestData.LIBRARY_DOCUMENT_NAME);
   }
 
-  
+
   /**
    * Test for retrieving the single combined PDF document for the documents associated with the library document through the getCombinedDocument endpoint. Negative scenarios covered:
    * NO_ACCESS_TOKEN_HEADER: null access token.
@@ -59,19 +59,22 @@ public class GetCombinedDocumentApiTest {
   @Test
   public void testNullAndEmptyAccessToken() throws ApiException {
     try {
-      libraryDocumentsApi.getCombinedDocument(ApiUtils.getNullAccessTokenHeaderParams(),
-                                              libraryDocumentId,
-                                              TestData.AUDIT_REPORT);
-    } 
+      byte[] getCombinedDocument = libraryDocumentsApi.getCombinedDocument(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                                           libraryDocumentId,
+                                                                           TestData.AUDIT_REPORT);
+      assertNotNull(getCombinedDocument);
+
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.NO_ACCESS_TOKEN_HEADER.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      libraryDocumentsApi.getCombinedDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                                              libraryDocumentId,
-                                              TestData.AUDIT_REPORT);
+      byte[] getCombinedDocument = libraryDocumentsApi.getCombinedDocument(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                                           libraryDocumentId,
+                                                                           TestData.AUDIT_REPORT);
+      assertNotNull(getCombinedDocument);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -88,10 +91,11 @@ public class GetCombinedDocumentApiTest {
   @Test
   public void testInvalidXApiUser() throws ApiException {
     try {
-      libraryDocumentsApi.getCombinedDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
-                                              libraryDocumentId,
-                                              TestData.AUDIT_REPORT);
-    } 
+      byte[] getCombinedDocument = libraryDocumentsApi.getCombinedDocument(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                                           libraryDocumentId,
+                                                                           TestData.AUDIT_REPORT);
+      assertNotNull(getCombinedDocument);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_X_API_USER_HEADER.getApiCode().equals(e.getApiCode()));
@@ -107,20 +111,22 @@ public class GetCombinedDocumentApiTest {
   @Test
   public void testInvalidLibraryDocumentId() throws ApiException {
     try {
-      libraryDocumentsApi.getCombinedDocument(ApiUtils.getValidHeaderParams(),
-                                              TestData.EMPTY_PARAM,
-                                              TestData.AUDIT_REPORT);
-    } 
+      byte[] getCombinedDocument = libraryDocumentsApi.getCombinedDocument(ApiUtils.getValidHeaderParams(),
+                                                                           TestData.EMPTY_PARAM,
+                                                                           TestData.AUDIT_REPORT);
+      assertNotNull(getCombinedDocument);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_LIBRARYDOCUMENT_ID.getApiCode().equals(e.getApiCode()));
     }
 
     try {
-      libraryDocumentsApi.getCombinedDocument(ApiUtils.getValidHeaderParams(),
-                                              TestData.NULL_PARAM,
-                                              TestData.AUDIT_REPORT);
-    } 
+      byte[] getCombinedDocument = libraryDocumentsApi.getCombinedDocument(ApiUtils.getValidHeaderParams(),
+                                                                           TestData.NULL_PARAM,
+                                                                           TestData.AUDIT_REPORT);
+      assertNotNull(getCombinedDocument);
+    }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
                  SdkErrorCodes.INVALID_LIBRARYDOCUMENT_ID.getApiCode().equals(e.getApiCode()));
@@ -140,7 +146,7 @@ public class GetCombinedDocumentApiTest {
                                                                            libraryDocumentId,
                                                                            TestData.AUDIT_REPORT);
       assertNotNull(getCombinedDocument);
-    } 
+    }
     catch (ApiException e) {
       fail(ApiUtils.getMessage(e));
     }

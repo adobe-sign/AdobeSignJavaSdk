@@ -24,11 +24,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:57.932+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:35.173+05:30")
 public class RecipientsInfo   {
   
   private String name = null;
-  private List<RecipientInfo> recipients = new ArrayList<RecipientInfo>();
+  private List<RecipientInfo> recipients = null;
 
   
   /**
@@ -36,9 +36,16 @@ public class RecipientsInfo   {
    **/
   @ApiModelProperty(required = true, value = "Name of the recipient list as returned in workflow description")
   @JsonProperty("name")
+  /**
+   * @return String
+   **/
   public String getName() {
     return name;
   }
+  /**
+   * Name of the recipient list as returned in workflow description
+   * @param name
+   **/
   public void setName(String name) {
     this.name = name;
   }
@@ -49,9 +56,16 @@ public class RecipientsInfo   {
    **/
   @ApiModelProperty(required = true, value = "A list of one or more recipients. For regular (non-MegaSign) documents, there is no limit on the number of electronic signatures in a single document. Written signatures are limited to four per document. This limit includes the sender if the signature of the sender is also required")
   @JsonProperty("recipients")
+  /**
+   * @return List&lt;RecipientInfo&gt;
+   **/
   public List<RecipientInfo> getRecipients() {
     return recipients;
   }
+  /**
+   * A list of one or more recipients. For regular (non-MegaSign) documents, there is no limit on the number of electronic signatures in a single document. Written signatures are limited to four per document. This limit includes the sender if the signature of the sender is also required
+   * @param recipients
+   **/
   public void setRecipients(List<RecipientInfo> recipients) {
     this.recipients = recipients;
   }
@@ -59,6 +73,10 @@ public class RecipientsInfo   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class RecipientsInfo {\n");

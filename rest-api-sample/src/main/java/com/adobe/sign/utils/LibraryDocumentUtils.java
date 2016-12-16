@@ -36,8 +36,8 @@ public class LibraryDocumentUtils {
       return documentLibraryItems;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_LIBRARY_DOCUMENTS, e);
-      return null;
+      ApiUtils.logError(Errors.GET_LIBRARY_DOCUMENTS);
+      throw e;
     }
   }
 
@@ -58,8 +58,8 @@ public class LibraryDocumentUtils {
       return null;
     }
     catch (ApiException e) {
-      ApiUtils.logException(Errors.GET_FIRST_LIBRARY_DOCUMENT, e);
-      return null;
+      ApiUtils.logError(Errors.GET_FIRST_LIBRARY_DOCUMENT);
+      throw e;
     }
   }
 }

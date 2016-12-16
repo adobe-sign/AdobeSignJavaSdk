@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:55.943+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:33.916+05:30")
 public class DocumentEventForUser   {
   
   private String agreementAssetId = null;
@@ -37,9 +37,16 @@ public class DocumentEventForUser   {
    **/
   @ApiModelProperty(required = true, value = "The ID of the agreement asset.")
   @JsonProperty("agreementAssetId")
+  /**
+   * @return String
+   **/
   public String getAgreementAssetId() {
     return agreementAssetId;
   }
+  /**
+   * The ID of the agreement asset.
+   * @param agreementAssetId
+   **/
   public void setAgreementAssetId(String agreementAssetId) {
     this.agreementAssetId = agreementAssetId;
   }
@@ -50,9 +57,16 @@ public class DocumentEventForUser   {
    **/
   @ApiModelProperty(required = true, value = "The name of the agreement asset")
   @JsonProperty("agreementAssetName")
+  /**
+   * @return String
+   **/
   public String getAgreementAssetName() {
     return agreementAssetName;
   }
+  /**
+   * The name of the agreement asset
+   * @param agreementAssetName
+   **/
   public void setAgreementAssetName(String agreementAssetName) {
     this.agreementAssetName = agreementAssetName;
   }
@@ -63,9 +77,16 @@ public class DocumentEventForUser   {
    **/
   @ApiModelProperty(required = true, value = "The type of the agreement asset")
   @JsonProperty("agreementAssetType")
+  /**
+   * @return String
+   **/
   public String getAgreementAssetType() {
     return agreementAssetType;
   }
+  /**
+   * The type of the agreement asset
+   * @param agreementAssetType
+   **/
   public void setAgreementAssetType(String agreementAssetType) {
     this.agreementAssetType = agreementAssetType;
   }
@@ -76,9 +97,16 @@ public class DocumentEventForUser   {
    **/
   @ApiModelProperty(required = true, value = "An ordered list of the events in the audit trail of this document")
   @JsonProperty("documentHistoryEvent")
+  /**
+   * @return DocumentHistoryEvent
+   **/
   public DocumentHistoryEvent getDocumentHistoryEvent() {
     return documentHistoryEvent;
   }
+  /**
+   * An ordered list of the events in the audit trail of this document
+   * @param documentHistoryEvent
+   **/
   public void setDocumentHistoryEvent(DocumentHistoryEvent documentHistoryEvent) {
     this.documentHistoryEvent = documentHistoryEvent;
   }
@@ -86,6 +114,10 @@ public class DocumentEventForUser   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class DocumentEventForUser {\n");

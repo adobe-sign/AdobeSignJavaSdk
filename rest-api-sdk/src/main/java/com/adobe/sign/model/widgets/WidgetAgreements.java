@@ -14,8 +14,8 @@
 package com.adobe.sign.model.widgets;
 
 import com.adobe.sign.utils.StringUtil;
-import com.adobe.sign.model.widgets.UserAgreement;
 import java.util.*;
+import com.adobe.sign.model.widgets.UserAgreement;
 
 
 
@@ -24,10 +24,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @ApiModel(description = "")
-@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-08-29T16:03:50.624+05:30")
+@javax.annotation.Generated(value = "class io.swagger.codegen.languages.JavaClientCodegen", date = "2016-12-12T17:48:30.461+05:30")
 public class WidgetAgreements   {
   
-  private List<UserAgreement> userAgreementList = new ArrayList<UserAgreement>();
+  private List<UserAgreement> userAgreementList = null;
 
   
   /**
@@ -35,9 +35,16 @@ public class WidgetAgreements   {
    **/
   @ApiModelProperty(required = true, value = "An array of WidgetAgreement items")
   @JsonProperty("userAgreementList")
+  /**
+   * @return List&lt;UserAgreement&gt;
+   **/
   public List<UserAgreement> getUserAgreementList() {
     return userAgreementList;
   }
+  /**
+   * An array of WidgetAgreement items
+   * @param userAgreementList
+   **/
   public void setUserAgreementList(List<UserAgreement> userAgreementList) {
     this.userAgreementList = userAgreementList;
   }
@@ -45,6 +52,10 @@ public class WidgetAgreements   {
   
 
   @Override
+  /**
+   * A string representation of the object.
+   * @return String
+   **/
   public String toString()  {
     StringBuilder sb = new StringBuilder();
     sb.append("class WidgetAgreements {\n");

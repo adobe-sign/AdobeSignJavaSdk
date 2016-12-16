@@ -25,36 +25,35 @@ import com.adobe.sign.utils.Context;
 import com.adobe.sign.utils.Retry;
 import com.adobe.sign.utils.TestData;
 import com.adobe.sign.utils.UserUtils;
-import com.adobe.sign.utils.validator.SdkErrorCodes;
+import com.adobe.sign.utils.SdkErrorCodes;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 
 /**
- * Junit test cases for Get User Info API.
+ * Junit test cases for Get User Info endpoint.
  */
 public class GetUserInfoApiTest {
 
-	private static UsersApi usersApi = null;
-	private static String userId = null;
-
+  private static UsersApi usersApi = null;
+  private static String userId = null;
 
 
   @Rule
   public Retry retry = new Retry();
-	
 
-	/**
-	 * Setting up the UsersApi BeforeClass the tests are run.
-	 *
-	 * @throws ApiException
-	 */
-	@BeforeClass
-	public static void setup() throws ApiException {
+
+  /**
+   * Setting up the UsersApi BeforeClass the tests are run.
+   *
+   * @throws ApiException
+   */
+  @BeforeClass
+  public static void setup() throws ApiException {
     ApiUtils.configureProperty();
     userId = UserUtils.getResourceId(TestData.USER_EMAIL);
-		usersApi = UserUtils.getUsersApi();
-	}
+    usersApi = UserUtils.getUsersApi();
+  }
 
   /**
    * Test for getting user details through the getUserInfo endpoint. Negative scenarios covered:
@@ -67,8 +66,9 @@ public class GetUserInfoApiTest {
   public void testNullAndEmptyAccessToken() throws ApiException {
 
     try {
-      usersApi.getUserDetail(ApiUtils.getNullAccessTokenHeaderParams(),
-                             userId);
+      UserDetailsInfo userDetailsInfo = usersApi.getUserDetail(ApiUtils.getNullAccessTokenHeaderParams(),
+                                                               userId);
+      assertNotNull(userDetailsInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -76,8 +76,9 @@ public class GetUserInfoApiTest {
     }
 
     try {
-      usersApi.getUserDetail(ApiUtils.getEmptyAccessTokenHeaderParams(),
-                             userId);
+      UserDetailsInfo userDetailsInfo = usersApi.getUserDetail(ApiUtils.getEmptyAccessTokenHeaderParams(),
+                                                               userId);
+      assertNotNull(userDetailsInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -96,8 +97,9 @@ public class GetUserInfoApiTest {
   public void testNullAndInvalidUserId() throws ApiException {
 
     try {
-      usersApi.getUserDetail(ApiUtils.getValidHeaderParams(),
-                             TestData.NULL_PARAM);
+      UserDetailsInfo userDetailsInfo = usersApi.getUserDetail(ApiUtils.getValidHeaderParams(),
+                                                               TestData.NULL_PARAM);
+      assertNotNull(userDetailsInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -105,8 +107,9 @@ public class GetUserInfoApiTest {
     }
 
     try {
-      usersApi.getUserDetail(ApiUtils.getValidHeaderParams(),
-                             TestData.EMPTY_PARAM);
+      UserDetailsInfo userDetailsInfo = usersApi.getUserDetail(ApiUtils.getValidHeaderParams(),
+                                                               TestData.EMPTY_PARAM);
+      assertNotNull(userDetailsInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
@@ -124,8 +127,9 @@ public class GetUserInfoApiTest {
   public void testInvalidXApiUser() throws ApiException {
 
     try {
-      usersApi.getUserDetail(ApiUtils.getEmptyXApiUserHeaderParams(),
-                             userId);
+      UserDetailsInfo userDetailsInfo = usersApi.getUserDetail(ApiUtils.getEmptyXApiUserHeaderParams(),
+                                                               userId);
+      assertNotNull(userDetailsInfo);
     }
     catch (ApiException e) {
       assertTrue(e.getMessage(),
