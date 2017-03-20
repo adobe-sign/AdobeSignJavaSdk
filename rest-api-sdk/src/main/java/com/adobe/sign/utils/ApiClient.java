@@ -819,6 +819,13 @@ public class ApiClient {
       return true;
     return false;
   }
+  
+  /**
+  * Allows you to override the default Client for a specific base URL.
+  */
+  public void addClientForUrl(String baseUrl, Client client ) {
+    hostMap.put(baseUrl,client);
+  }
 
 
 }
