@@ -4,6 +4,9 @@ import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.Proxy;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -21,9 +24,12 @@ import javax.ws.rs.core.Response.Status.Family;
 import com.adobe.sign.model.baseUris.BaseUriInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientHandler;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource.Builder;
 import com.sun.jersey.api.client.filter.LoggingFilter;
+import com.sun.jersey.client.urlconnection.HttpURLConnectionFactory;
+import com.sun.jersey.client.urlconnection.URLConnectionClientHandler;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 
@@ -41,6 +47,7 @@ public class ApiClient {
   private String baseUri = null;
   private String subPath = "api/rest/v5";
   private JSON json = new JSON();
+  private Proxy proxy;
 
   private int statusCode;
   private Map<String, List<String>> responseHeaders;
@@ -67,6 +74,8 @@ public class ApiClient {
   public void setBaseUri(String baseUri) {
     this.baseUri = baseUri;
   }
+
+  public void setProxy(Proxy proxy){ this.proxy = proxy;}
 
   /**
    * Gets the enviroment
@@ -804,7 +813,14 @@ public class ApiClient {
    */
   private Client getClient(String baseUrl) {
     if (!hostMap.containsKey(baseUrl)) {
-      Client client = Client.create();
+      Client client = null;
+      if( proxy == null ) {
+        client = Client.create();
+      }
+      else {
+        client = createClientWithProxy();
+      }
+
       if (debugging)
         client.addFilter(new LoggingFilter());
       hostMap.put(baseUrl,
@@ -813,12 +829,27 @@ public class ApiClient {
     return hostMap.get(baseUrl);
   }
 
+  /**
+   * Creates a jersey client with the configured proxy
+   * @return
+     */
+  private Client createClientWithProxy() {
+
+    HttpURLConnectionFactory connectionFactory = new HttpURLConnectionFactory() {
+      @Override
+      public HttpURLConnection getHttpURLConnection(URL url) throws IOException {
+        return (HttpURLConnection)url.openConnection(proxy);
+      }
+    };
+    ClientHandler clientHandler = new URLConnectionClientHandler(connectionFactory);
+    return new Client(clientHandler);
+  }
+
   private boolean isOauth(String path) {
     path = path.toLowerCase();
     if(path.startsWith("oauth"))
       return true;
     return false;
   }
-
 
 }
