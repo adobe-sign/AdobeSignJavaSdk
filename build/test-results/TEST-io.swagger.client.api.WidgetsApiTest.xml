@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="io.swagger.client.api.WidgetsApiTest" tests="17" skipped="17" failures="0" errors="0" timestamp="2018-09-13T09:54:41" hostname="srustagi-osx-1" time="0.002">
+  <properties/>
+  <testcase name="getWidgetViewTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getWidgetNoteForApiUserTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateWidgetTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getWidgetsTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getWidgetDocumentInfoTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getWidgetFormDataTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.001">
+    <skipped/>
+  </testcase>
+  <testcase name="getWidgetCombinedDocumentTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateWidgetVisibilityTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getWidgetAgreementsTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.001">
+    <skipped/>
+  </testcase>
+  <testcase name="getEventsTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getParticipantSetTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getWidgetDocumentsTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getWidgetInfoTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateWidgetStateTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getAllWidgetMembersTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="createWidgetTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getWidgetAuditTrailTest" classname="io.swagger.client.api.WidgetsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

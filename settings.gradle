@@ -1,6 +1,1 @@
-rootProject.name = "adobe-sign-java-sdk"
-
-include "rest-api-sdk"
-include "rest-api-sample"
-
-
+rootProject.name = "swagger-java-client"

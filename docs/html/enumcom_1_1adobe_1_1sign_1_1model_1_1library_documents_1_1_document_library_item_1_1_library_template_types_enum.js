@@ -1,7 +1,0 @@
-var enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_document_library_item_1_1_library_template_types_enum =
-[
-    [ "LibraryTemplateTypesEnum", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_document_library_item_1_1_library_template_types_enum.html#afafc5021afb6d7d6ded704342bdec22f", null ],
-    [ "toString", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_document_library_item_1_1_library_template_types_enum.html#ad146fa8579a5f8a876c4688cc5a68520", null ],
-    [ "DOCUMENT", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_document_library_item_1_1_library_template_types_enum.html#abd86489da6f6f01822af7dbe0274de95", null ],
-    [ "FORM_FIELD_LAYER", "enumcom_1_1adobe_1_1sign_1_1model_1_1library_documents_1_1_document_library_item_1_1_library_template_types_enum.html#a5bdfddd2a951825431c4623173618530", null ]
-];

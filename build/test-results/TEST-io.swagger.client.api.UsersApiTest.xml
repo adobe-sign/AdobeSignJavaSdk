@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="io.swagger.client.api.UsersApiTest" tests="7" skipped="7" failures="0" errors="0" timestamp="2018-09-13T09:54:41" hostname="srustagi-osx-1" time="0.0">
+  <properties/>
+  <testcase name="modifyUserStateTest" classname="io.swagger.client.api.UsersApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getUserViewsTest" classname="io.swagger.client.api.UsersApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getUserDetailTest" classname="io.swagger.client.api.UsersApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="modifyUserTest" classname="io.swagger.client.api.UsersApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getGroupsOfUserTest" classname="io.swagger.client.api.UsersApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getUsersTest" classname="io.swagger.client.api.UsersApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateGroupsOfUserTest" classname="io.swagger.client.api.UsersApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,10 @@
+io/swagger/client/api/TransientDocumentsApiTest.class
+io/swagger/client/api/WebhooksApiTest.class
+io/swagger/client/api/GroupsApiTest.class
+io/swagger/client/api/WorkflowsApiTest.class
+io/swagger/client/api/LibraryDocumentsApiTest.class
+io/swagger/client/api/WidgetsApiTest.class
+io/swagger/client/api/MegaSignsApiTest.class
+io/swagger/client/api/UsersApiTest.class
+io/swagger/client/api/BaseUrisApiTest.class
+io/swagger/client/api/AgreementsApiTest.class

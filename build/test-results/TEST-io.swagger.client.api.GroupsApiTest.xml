@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="io.swagger.client.api.GroupsApiTest" tests="3" skipped="3" failures="0" errors="0" timestamp="2018-09-13T09:54:41" hostname="srustagi-osx-1" time="0.001">
+  <properties/>
+  <testcase name="getGroupDetailsTest" classname="io.swagger.client.api.GroupsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getGroupsTest" classname="io.swagger.client.api.GroupsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getUsersInGroupTest" classname="io.swagger.client.api.GroupsApiTest" time="0.001">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

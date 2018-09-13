@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="io.swagger.client.api.AgreementsApiTest" tests="32" skipped="32" failures="0" errors="0" timestamp="2018-09-13T09:54:41" hostname="srustagi-osx-1" time="0.002">
+  <properties/>
+  <testcase name="createReminderOnParticipantTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="rejectAgreementForParticipationTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="createDelegatedParticipantSetsTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getAgreementRemindersTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="createShareOnAgreementTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateParticipantSetTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getAgreementsTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateAgreementStateTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateAgreementMergeInfoTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getFormFieldsTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateAgreementVisibilityTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getCombinedDocumentPagesInfoTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getAllDocumentsTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="createAgreementTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getAuditTrailTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="createAgreementViewTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getDocumentTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getAllMembersTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getAgreementNoteForApiUserTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getAgreementInfoTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getCombinedDocumentTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getEventsTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getParticipantSetTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getAllDocumentsImageUrlsTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="addTemplateFieldsToAgreementTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="deleteDocumentsTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getSigningUrlTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getFormDataTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getDocumentImageUrlsTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateFormFieldsTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getMergeInfoTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateAgreementTest" classname="io.swagger.client.api.AgreementsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

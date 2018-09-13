@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="io.swagger.client.api.LibraryDocumentsApiTest" tests="14" skipped="14" failures="0" errors="0" timestamp="2018-09-13T09:54:41" hostname="srustagi-osx-1" time="0.001">
+  <properties/>
+  <testcase name="getLibraryDocumentsTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="createLibraryDocumentTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateLibraryDocumentTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getLibraryDocumentImageUrlsTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getCombinedDocumentTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getDocumentsTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getLibraryDocumentTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getEventsTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateLibraryDocumentStateTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="updateLibraryDocumentVisibilityTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getLibraryDocumentAuditTrailTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getLibraryDocumentNoteForApiUserTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="getLibraryDocumentInfoTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <testcase name="createLibraryDocumentViewTest" classname="io.swagger.client.api.LibraryDocumentsApiTest" time="0.0">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
