@@ -84,6 +84,9 @@ public class AgreementInfo {
 
   @SerializedName("postSignOption")
   private PostSignOption postSignOption = null;
+  
+  @SerializedName("mergeFieldInfo")
+  private List<MergefieldInfo> mergeFieldInfo = null;
 
   /**
    * Optional parameter that sets how often you want to send reminders to the participants. If it is not specified, the default frequency set for the account will be used. Should not be provided in offline agreement creation.
@@ -469,6 +472,19 @@ public class AgreementInfo {
     this.externalId = externalId;
   }
 
+  public AgreementInfo mergeFieldInfo(List<MergefieldInfo> mergeFieldInfo) {
+    this.mergeFieldInfo = mergeFieldInfo;
+    return this;
+  }
+  
+  public AgreementInfo addMergeFieldInfoItem(MergefieldInfo mergeFieldInfoItem) {
+    if (this.mergeFieldInfo == null) {
+      this.mergeFieldInfo = new ArrayList<MergefieldInfo>();
+    }
+    this.mergeFieldInfo.add(mergeFieldInfoItem);
+    return this;
+  }
+  
   public AgreementInfo fileInfos(List<FileInfo> fileInfos) {
     this.fileInfos = fileInfos;
     return this;
@@ -493,6 +509,19 @@ public class AgreementInfo {
 
   public void setFileInfos(List<FileInfo> fileInfos) {
     this.fileInfos = fileInfos;
+  }
+  
+  /**
+   * Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are currently supported
+   * @return mergeFieldInfo
+  **/
+  @ApiModelProperty(value = "Optional default values for fields to merge into the document. The values will be presented to the signers for editable fields; for read-only fields the provided values will not be editable during the signing process. Merging data into fields is currently not supported when used with libraryDocumentId or libraryDocumentName. Only file and url are currently supported")
+  public List<MergefieldInfo> getMergeFieldInfo() {
+    return mergeFieldInfo;
+  }
+  
+  public void setMergeFieldInfo(List<MergefieldInfo> mergeFieldInfo) {
+    this.mergeFieldInfo = mergeFieldInfo;
   }
 
   public AgreementInfo firstReminderDelay(Integer firstReminderDelay) {
@@ -791,6 +820,7 @@ public class AgreementInfo {
         Objects.equals(this.expirationTime, agreementInfo.expirationTime) &&
         Objects.equals(this.externalId, agreementInfo.externalId) &&
         Objects.equals(this.fileInfos, agreementInfo.fileInfos) &&
+        Objects.equals(this.mergeFieldInfo, agreementInfo.mergeFieldInfo) &&
         Objects.equals(this.firstReminderDelay, agreementInfo.firstReminderDelay) &&
         Objects.equals(this.id, agreementInfo.id) &&
         Objects.equals(this.locale, agreementInfo.locale) &&
@@ -810,7 +840,7 @@ public class AgreementInfo {
 
   @Override
   public int hashCode() {
-    return Objects.hash(ccs, createdDate, deviceInfo, documentVisibilityEnabled, emailOption, expirationTime, externalId, fileInfos, firstReminderDelay, id, locale, message, name, participantSetsInfo, postSignOption, reminderFrequency, securityOption, senderEmail, signatureType, state, status, vaultingInfo, workflowId);
+    return Objects.hash(ccs, createdDate, deviceInfo, documentVisibilityEnabled, emailOption, expirationTime, externalId, fileInfos, mergeFieldInfo, firstReminderDelay, id, locale, message, name, participantSetsInfo, postSignOption, reminderFrequency, securityOption, senderEmail, signatureType, state, status, vaultingInfo, workflowId);
   }
 
 
@@ -827,6 +857,7 @@ public class AgreementInfo {
     sb.append("    expirationTime: ").append(toIndentedString(expirationTime)).append("\n");
     sb.append("    externalId: ").append(toIndentedString(externalId)).append("\n");
     sb.append("    fileInfos: ").append(toIndentedString(fileInfos)).append("\n");
+    sb.append("    mergeFieldInfo: ").append(toIndentedString(mergeFieldInfo)).append("\n");
     sb.append("    firstReminderDelay: ").append(toIndentedString(firstReminderDelay)).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    locale: ").append(toIndentedString(locale)).append("\n");
