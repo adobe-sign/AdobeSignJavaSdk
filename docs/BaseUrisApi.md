@@ -16,7 +16,7 @@ Gets the base uri to access other APIs. In case other APIs are accessed from a d
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.BaseUrisApi;
 
 

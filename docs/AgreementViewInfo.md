@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 Name | Value
 ---- | -----
 COMPOSE | &quot;COMPOSE&quot;
+MODIFY | &quot;MODIFY&quot;
 PREFILL | &quot;PREFILL&quot;
 AUTHORING | &quot;AUTHORING&quot;
 SEND_PROGRESS | &quot;SEND_PROGRESS&quot;

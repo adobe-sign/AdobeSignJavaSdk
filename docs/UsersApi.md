@@ -22,7 +22,7 @@ Retrieves the groups of the user.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.UsersApi;
 
 
@@ -69,7 +69,7 @@ Retrieves detailed information about the user in the caller account.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.UsersApi;
 
 
@@ -116,7 +116,7 @@ Retrieves the URL of manage, account settings and user profile page.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.UsersApi;
 
 
@@ -167,7 +167,7 @@ Retrieves all the users in an account.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.UsersApi;
 
 
@@ -175,7 +175,7 @@ UsersApi apiInstance = new UsersApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('user_read')\" oncontextmenu=\"this.href=oauthDoc('user_read')\" target=\"oauthDoc\">user_read</a></li></ul>in the format <b>'Bearer {accessToken}'.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String cursor = "cursor_example"; // String | Used to navigate through the pages. If not provided, returns the first page.
-Integer pageSize = 56; // Integer | Number of intended items in the response page.
+Integer pageSize = 56; // Integer | Number of intended items in the response page. If not provided, it is decided by the application settings.
 try {
     UsersInfo result = apiInstance.getUsers(authorization, xApiUser, cursor, pageSize);
     System.out.println(result);
@@ -192,7 +192,7 @@ Name | Type | Description  | Notes
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;user_read&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;user_read&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;user_read&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **cursor** | **String**| Used to navigate through the pages. If not provided, returns the first page. | [optional]
- **pageSize** | **Integer**| Number of intended items in the response page. | [optional]
+ **pageSize** | **Integer**| Number of intended items in the response page. If not provided, it is decided by the application settings. | [optional]
 
 ### Return type
 
@@ -216,7 +216,7 @@ Update an user.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.UsersApi;
 
 
@@ -264,7 +264,7 @@ Activate/Deactivate a given user.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.UsersApi;
 
 
@@ -313,7 +313,7 @@ Updates the groups of the user.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.UsersApi;
 
 

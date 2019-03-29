@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **state** | [**StateEnum**](#StateEnum) | The state in which the widget should land. For example in order to create a widget in DRAFT state, field should be DRAFT. The state field will never get returned in GET /widgets/{ID} and will be ignored if provided in PUT /widgets/{ID} call. The eventual status of the widget can be obtained from GET /widgets/ID |  [optional]
 **status** | [**StatusEnum**](#StatusEnum) | Status of the Widget. If provided in POST, it will simply be ignored |  [optional]
 **vaultingInfo** | [**VaultingInfo**](VaultingInfo.md) | Vaulting properties that allows Adobe Sign to securely store documents with a vault provider |  [optional]
+**widgetInActiveInfo** | [**WidgetInActiveInfo**](WidgetInActiveInfo.md) | The custom message which will be displayed to the user or the URL to which user will be redirected when the widget is accessed in a disabled state. This can only be specified in PUT request |  [optional]
 **widgetParticipantSetInfo** | [**WidgetParticipantSetInfo**](WidgetParticipantSetInfo.md) | Represents widget participant for whom email should not be provided |  [optional]
 
 

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="io.swagger.client.api.WorkflowsApiTest" tests="1" skipped="1" failures="0" errors="0" timestamp="2018-09-13T09:54:41" hostname="srustagi-osx-1" time="0.0">
-  <properties/>
-  <testcase name="getWorkflowsTest" classname="io.swagger.client.api.WorkflowsApiTest" time="0.0">
-    <skipped/>
-  </testcase>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

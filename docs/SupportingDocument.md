@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **id** | **String** | Id representing the document |  [optional]
 **mimeType** | **String** | Mime-type of the document |  [optional]
 **numPages** | **Integer** | Number of pages in the document |  [optional]
+**participantId** | **String** | The unique identifier of the participant that uploaded the supporting document |  [optional]
 
 
 

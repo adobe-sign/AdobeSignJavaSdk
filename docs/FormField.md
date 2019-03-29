@@ -36,6 +36,7 @@ Name | Type | Description | Notes
 **readOnly** | **Boolean** | true if it is a read-only field, else false |  [optional]
 **required** | **Boolean** | true if it is a mandatory field to be filled by the signer, else false |  [optional]
 **tooltip** | **String** | Text that appears while hovering over the field |  [optional]
+**urlOverridable** | **Boolean** | For widget text fields only - true if the default value may come from the URL, else false |  [optional]
 **validation** | [**ValidationEnum**](#ValidationEnum) | Rule for validating the field value. |  [optional]
 **validationData** | **String** | Further data for validating input with regards to the field&#39;s specified format. The contents and interpretation of formatData depends on the value of validation. |  [optional]
 **validationErrMsg** | **String** | Error message to be shown to the signer if filled value doesn&#39;t match the validations of the form field |  [optional]

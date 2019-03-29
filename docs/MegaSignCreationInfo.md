@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **expirationTime** | [**Date**](Date.md) | Time after which Agreement expires and needs to be signed before it. Format should be yyyy-MM-dd&#39;T&#39;HH:mm:ssZ. For example, e.g 2016-02-25T18:46:19Z represents UTC time. Should not be provided in offline agreement creation. |  [optional]
 **externalId** | [**ExternalId**](ExternalId.md) | An arbitrary value from your system, which can be specified at sending time and then later returned or queried |  [optional]
 **fileInfos** | [**List&lt;FileInfo&gt;**](FileInfo.md) | A list of one or more files (or references to files) that will be sent out for signature. If more than one file is provided, they will be combined into one PDF before being sent out. Note: Only one of the four parameters in every FileInfo object must be specified |  [optional]
-**firstReminderDelay** | **Integer** | Integer which specifies the delay in hours before sending the first reminder.&lt;br&gt;This is an optional field. The minimum value allowed is 1 hour and the maximum value can’t be more than the difference of agreement creation and expiry time of the agreement in hours.&lt;br&gt;If this is not specified but the reminder frequency is specified, then the first reminder will be sent based on frequency.&lt;br&gt;i.e. if the reminder is created with frequency specified as daily, the firstReminderDelay will be 24 hours |  [optional]
+**firstReminderDelay** | **Integer** | Integer which specifies the delay in hours before sending the first reminder.&lt;br&gt;This is an optional field. The minimum value allowed is 1 hour and the maximum value can’t be more than the difference of agreement creation and expiry time of the agreement in hours.&lt;br&gt;If this is not specified but the reminder frequency is specified, then the first reminder will be sent based on frequency.&lt;br&gt;i.e. if the reminder is created with frequency specified as daily, the firstReminderDelay will be 24 hours. Cannot be updated in a PUT |  [optional]
 **id** | **String** | The unique identifier of megasign  |  [optional]
 **locale** | **String** | The locale associated with this agreement - specifies the language for the signing page and emails, for example en_US or fr_FR. If none specified, defaults to the language configured for the agreement sender |  [optional]
 **message** | **String** | An optional message to the participants, describing what is being sent or why their signature is required |  [optional]
@@ -30,6 +30,10 @@ Name | Type | Description | Notes
 Name | Value
 ---- | -----
 DAILY_UNTIL_SIGNED | &quot;DAILY_UNTIL_SIGNED&quot;
+WEEKDAILY_UNTIL_SIGNED | &quot;WEEKDAILY_UNTIL_SIGNED&quot;
+EVERY_OTHER_DAY_UNTIL_SIGNED | &quot;EVERY_OTHER_DAY_UNTIL_SIGNED&quot;
+EVERY_THIRD_DAY_UNTIL_SIGNED | &quot;EVERY_THIRD_DAY_UNTIL_SIGNED&quot;
+EVERY_FIFTH_DAY_UNTIL_SIGNED | &quot;EVERY_FIFTH_DAY_UNTIL_SIGNED&quot;
 WEEKLY_UNTIL_SIGNED | &quot;WEEKLY_UNTIL_SIGNED&quot;
 
 

@@ -18,10 +18,12 @@ Method | HTTP request | Description
 
 Creates a webhook.
 
+This is a primary endpoint which is used to create a new webhook. A webhook can only be created in ACTIVE state. Currently, webhooks are supported at four scopes - Account, Group, User and Resource. &lt;br/&gt; &lt;br/&gt; Before creating a webhook successfully at any of these scopes, Adobe Sign &lt;a href&#x3D;&#39;https://www.adobe.io/apis/documentcloud/sign/docs.html#!adobeio/adobeio-documentation/master/sign/webhooks.md#verificationofintentofthewebhookurl&#39;&gt;verifies&lt;/a&gt; that the webhook URL that is provided in the registration request really intends to receive notifications and is a valid URL. &lt;br/&gt;There is a defined mechanism for this validation where Adobe Sign makes an HTTPS GET request to the webhook URL. This request has a custom HTTP header X-AdobeSign-ClientId. The value of this header is the client ID of the application that is requesting to create the webhook. To register a webhook successfully, the webhook URL must respond to this verification request with an HTTPS 2XX response code, and also it must send back the same client ID value in one of the following two ways:&lt;ol&gt;&lt;li&gt;In a custom response header, X-AdobeSign-ClientId. This is the same header which was passed in the request, and can be echoed back in the response.&lt;/li&gt;&lt;li&gt; In the JSON response body of the response with the key of xAdobeSignClientId and its value being the same client ID that was sent in the request. &lt;/li&gt;&lt;/ol&gt;&lt;p&gt;On successful registration,  Adobe Sign sends a success response (any HTTPS 2XX code) to your client app with the unique webhook identifier and a Location header, which contains the URL of the webhook resource created in Adobe Sign.&lt;br/&gt; To learn more, please refer &lt;a href&#x3D;&#39;https://www.adobe.io/apis/documentcloud/sign/docs.html#!adobeio/adobeio-documentation/master/sign/webhooks.md&#39;&gt;Webhooks in Adobe Sign Guide&lt;/a&gt;.&lt;/p&gt;
+
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.WebhooksApi;
 
 
@@ -70,7 +72,7 @@ Deletes a webhook.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.WebhooksApi;
 
 
@@ -120,7 +122,7 @@ Retrieves the details of a webhook.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.WebhooksApi;
 
 
@@ -171,7 +173,7 @@ Retrieves webhooks for a user.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.WebhooksApi;
 
 
@@ -181,9 +183,9 @@ String xApiUser = "xApiUser_example"; // String | The userId or email of API cal
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
 Boolean showInActiveWebhooks = true; // Boolean | A query parameter to fetch all the inactive webhooks along with the active webhooks.
 String scope = "scope_example"; // String | Scope of webhook. The possible values are ACCOUNT, GROUP, USER or RESOURCE
-String resourceType = "resourceType_example"; // String | The type of resource on which webhook was created. The possible values are AGREEMENT, WIDGET and MEGASIGN.
+String resourceType = "resourceType_example"; // String | The type of resource on which webhook was created. The possible values are AGREEMENT, WIDGET, MEGASIGN and LIBRARY_DOCUMENT.
 String cursor = "cursor_example"; // String | Used to navigate through the pages. If not provided, returns the first page.
-Integer pageSize = 56; // Integer | Number of intended items in the response page.
+Integer pageSize = 56; // Integer | Number of intended items in the response page. If not provided, it is decided by the application settings.
 try {
     UserWebhooks result = apiInstance.getWebhooks(authorization, xApiUser, xOnBehalfOfUser, showInActiveWebhooks, scope, resourceType, cursor, pageSize);
     System.out.println(result);
@@ -202,9 +204,9 @@ Name | Type | Description  | Notes
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
  **showInActiveWebhooks** | **Boolean**| A query parameter to fetch all the inactive webhooks along with the active webhooks. | [optional]
  **scope** | **String**| Scope of webhook. The possible values are ACCOUNT, GROUP, USER or RESOURCE | [optional] [enum: ACCOUNT, GROUP, USER, RESOURCE]
- **resourceType** | **String**| The type of resource on which webhook was created. The possible values are AGREEMENT, WIDGET and MEGASIGN. | [optional] [enum: AGREEMENT, WIDGET, MEGASIGN]
+ **resourceType** | **String**| The type of resource on which webhook was created. The possible values are AGREEMENT, WIDGET, MEGASIGN and LIBRARY_DOCUMENT. | [optional] [enum: AGREEMENT, WIDGET, MEGASIGN, LIBRARY_DOCUMENT]
  **cursor** | **String**| Used to navigate through the pages. If not provided, returns the first page. | [optional]
- **pageSize** | **Integer**| Number of intended items in the response page. | [optional]
+ **pageSize** | **Integer**| Number of intended items in the response page. If not provided, it is decided by the application settings. | [optional]
 
 ### Return type
 
@@ -228,7 +230,7 @@ Updates a webhook.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.WebhooksApi;
 
 
@@ -280,7 +282,7 @@ Updates the state of a webhook identified by webhookId in the path.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.WebhooksApi;
 
 

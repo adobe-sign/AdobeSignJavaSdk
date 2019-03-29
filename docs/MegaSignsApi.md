@@ -27,7 +27,7 @@ This is a primary endpoint which is used to create a new megaSign. A megaSign ca
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.MegaSignsApi;
 
 
@@ -78,7 +78,7 @@ CSV file stream containing form data information
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.MegaSignsApi;
 
 
@@ -131,7 +131,7 @@ Retrieves the events information for the MegaSign parent agreement.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.MegaSignsApi;
 
 
@@ -182,7 +182,7 @@ Get all the child agreements of the specified MegaSign parent agreement.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.MegaSignsApi;
 
 
@@ -192,7 +192,7 @@ String megaSignId = "megaSignId_example"; // String | The identifier of the Mega
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
 String cursor = "cursor_example"; // String | Used to navigate through the pages. If not provided, returns the first page.
-Integer pageSize = 56; // Integer | Number of intended items in the response page.
+Integer pageSize = 56; // Integer | Number of intended items in the response page. If not provided, it is decided by the application settings.
 try {
     MegaSignChildAgreements result = apiInstance.getMegaSignChildAgreements(authorization, megaSignId, xApiUser, xOnBehalfOfUser, cursor, pageSize);
     System.out.println(result);
@@ -211,7 +211,7 @@ Name | Type | Description  | Notes
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
  **cursor** | **String**| Used to navigate through the pages. If not provided, returns the first page. | [optional]
- **pageSize** | **Integer**| Number of intended items in the response page. | [optional]
+ **pageSize** | **Integer**| Number of intended items in the response page. If not provided, it is decided by the application settings. | [optional]
 
 ### Return type
 
@@ -235,7 +235,7 @@ Retrieves a single combined PDF document for the documents associated with the M
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.MegaSignsApi;
 
 
@@ -290,7 +290,7 @@ CSV file stream containing form data information
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.MegaSignsApi;
 
 
@@ -339,7 +339,7 @@ Get detailed information of the specified MegaSign parent agreement.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.MegaSignsApi;
 
 
@@ -390,7 +390,7 @@ Retrieves the requested views of mega sign agreement.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.MegaSignsApi;
 
 
@@ -441,7 +441,7 @@ Retrieves MegaSign parent agreements for a user.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.MegaSignsApi;
 
 
@@ -450,7 +450,7 @@ String authorization = "authorization_example"; // String | An <a href=\"#\" onc
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
 String cursor = "cursor_example"; // String | Used to navigate through the pages. If not provided, returns the first page.
-Integer pageSize = 56; // Integer | Number of intended items in the response page.
+Integer pageSize = 56; // Integer | Number of intended items in the response page. If not provided, it is decided by the application settings.
 try {
     MegaSigns result = apiInstance.getMegaSigns(authorization, xApiUser, xOnBehalfOfUser, cursor, pageSize);
     System.out.println(result);
@@ -468,7 +468,7 @@ Name | Type | Description  | Notes
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
  **cursor** | **String**| Used to navigate through the pages. If not provided, returns the first page. | [optional]
- **pageSize** | **Integer**| Number of intended items in the response page. | [optional]
+ **pageSize** | **Integer**| Number of intended items in the response page. If not provided, it is decided by the application settings. | [optional]
 
 ### Return type
 
@@ -494,7 +494,7 @@ This endpoint can be used by creator of the MegaSign to transition between the s
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.MegaSignsApi;
 
 

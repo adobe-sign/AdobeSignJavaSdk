@@ -18,7 +18,7 @@ The document uploaded through this call is referred to as transient since it is 
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.TransientDocumentsApi;
 
 

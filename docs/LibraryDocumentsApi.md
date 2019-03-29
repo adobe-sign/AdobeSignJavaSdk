@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**getCombinedDocument**](LibraryDocumentsApi.md#getCombinedDocument) | **GET** /libraryDocuments/{libraryDocumentId}/combinedDocument | Retrieves the combined document associated with a library document.
 [**getDocuments**](LibraryDocumentsApi.md#getDocuments) | **GET** /libraryDocuments/{libraryDocumentId}/documents | Retrieves the IDs of the documents associated with library document.
 [**getEvents**](LibraryDocumentsApi.md#getEvents) | **GET** /libraryDocuments/{libraryDocumentId}/events | Retrieves the events information for a library document.
+[**getFormData**](LibraryDocumentsApi.md#getFormData) | **GET** /libraryDocuments/{libraryDocumentId}/formData | Retrieves data entered into the interactive form fields of the library document.
 [**getLibraryDocument**](LibraryDocumentsApi.md#getLibraryDocument) | **GET** /libraryDocuments/{libraryDocumentId}/documents/{documentId} | Retrieves the file stream of a document of library document.
 [**getLibraryDocumentAuditTrail**](LibraryDocumentsApi.md#getLibraryDocumentAuditTrail) | **GET** /libraryDocuments/{libraryDocumentId}/auditTrail | Retrieves the audit trail associated with a library document.
 [**getLibraryDocumentImageUrls**](LibraryDocumentsApi.md#getLibraryDocumentImageUrls) | **GET** /libraryDocuments/{libraryDocumentId}/documents/{documentId}/imageUrls | Retrieves image urls of all visible pages of a document associated with a library document.
@@ -16,6 +17,7 @@ Method | HTTP request | Description
 [**getLibraryDocumentNoteForApiUser**](LibraryDocumentsApi.md#getLibraryDocumentNoteForApiUser) | **GET** /libraryDocuments/{libraryDocumentId}/me/note | Retrieves the latest note of a library document for the API user.
 [**getLibraryDocuments**](LibraryDocumentsApi.md#getLibraryDocuments) | **GET** /libraryDocuments | Retrieves library documents for a user.
 [**updateLibraryDocument**](LibraryDocumentsApi.md#updateLibraryDocument) | **PUT** /libraryDocuments/{libraryDocumentId} | Updates the library document.
+[**updateLibraryDocumentNoteForApiUser**](LibraryDocumentsApi.md#updateLibraryDocumentNoteForApiUser) | **PUT** /libraryDocuments/{libraryDocumentId}/me/note | Updates the latest note of a library document for the API user.
 [**updateLibraryDocumentState**](LibraryDocumentsApi.md#updateLibraryDocumentState) | **PUT** /libraryDocuments/{libraryDocumentId}/state | Updates the library document&#39;s state.
 [**updateLibraryDocumentVisibility**](LibraryDocumentsApi.md#updateLibraryDocumentVisibility) | **PUT** /libraryDocuments/{libraryDocumentId}/me/visibility | Updates the visibility of library document.
 
@@ -29,13 +31,13 @@ Creates a template that is placed in the library of the user for reuse.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
 LibraryDocumentsApi apiInstance = new LibraryDocumentsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('library_write')\" oncontextmenu=\"this.href=oauthDoc('library_write')\" target=\"oauthDoc\">library_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
-LibraryDocumentInfo libraryDocumentInfo = new LibraryDocumentInfo(); // LibraryDocumentInfo | Information about the library document that you want to create.
+LibraryDocumentCreationInfoV6 libraryDocumentInfo = new LibraryDocumentCreationInfoV6(); // LibraryDocumentCreationInfoV6 | Information about the library document that you want to create.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
 try {
@@ -52,7 +54,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;library_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **libraryDocumentInfo** | [**LibraryDocumentInfo**](LibraryDocumentInfo.md)| Information about the library document that you want to create. |
+ **libraryDocumentInfo** | [**LibraryDocumentCreationInfoV6**](LibraryDocumentCreationInfoV6.md)| Information about the library document that you want to create. |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
 
@@ -78,7 +80,7 @@ Retrieves the latest state view url of a library document.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
@@ -131,7 +133,7 @@ Retrieves the combined document associated with a library document.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
@@ -184,7 +186,7 @@ Retrieves the IDs of the documents associated with library document.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
@@ -237,7 +239,7 @@ Retrieves the events information for a library document.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
@@ -279,6 +281,59 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="getFormData"></a>
+# **getFormData**
+> byte[] getFormData(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch)
+
+Retrieves data entered into the interactive form fields of the library document.
+
+This API can only be called by the creator of the library document
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.model.ApiException;
+//import io.swagger.client.api.LibraryDocumentsApi;
+
+
+LibraryDocumentsApi apiInstance = new LibraryDocumentsApi();
+String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('library_read')\" oncontextmenu=\"this.href=oauthDoc('library_read')\" target=\"oauthDoc\">library_read</a></li></ul>in the format <b>'Bearer {accessToken}'.
+String libraryDocumentId = "libraryDocumentId_example"; // String | The document identifier, as retrieved from the API to fetch library documents.
+String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
+String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifNoneMatch = "ifNoneMatch_example"; // String | Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn't changed.
+try {
+    byte[] result = apiInstance.getFormData(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling LibraryDocumentsApi#getFormData");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;library_read&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
+ **libraryDocumentId** | **String**| The document identifier, as retrieved from the API to fetch library documents. |
+ **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
+ **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifNoneMatch** | **String**| Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn&#39;t changed. | [optional]
+
+### Return type
+
+**byte[]**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: text/csv
+
 <a name="getLibraryDocument"></a>
 # **getLibraryDocument**
 > byte[] getLibraryDocument(authorization, libraryDocumentId, documentId, xApiUser, xOnBehalfOfUser, ifNoneMatch)
@@ -288,7 +343,7 @@ Retrieves the file stream of a document of library document.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
@@ -334,14 +389,14 @@ No authorization required
 
 <a name="getLibraryDocumentAuditTrail"></a>
 # **getLibraryDocumentAuditTrail**
-> byte[] getLibraryDocumentAuditTrail(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser)
+> byte[] getLibraryDocumentAuditTrail(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch)
 
 Retrieves the audit trail associated with a library document.
 
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
@@ -350,8 +405,9 @@ String authorization = "authorization_example"; // String | An <a href=\"#\" onc
 String libraryDocumentId = "libraryDocumentId_example"; // String | The document identifier, as retrieved from the API to fetch library documents.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifNoneMatch = "ifNoneMatch_example"; // String | Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn't changed.
 try {
-    byte[] result = apiInstance.getLibraryDocumentAuditTrail(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser);
+    byte[] result = apiInstance.getLibraryDocumentAuditTrail(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling LibraryDocumentsApi#getLibraryDocumentAuditTrail");
@@ -367,6 +423,7 @@ Name | Type | Description  | Notes
  **libraryDocumentId** | **String**| The document identifier, as retrieved from the API to fetch library documents. |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifNoneMatch** | **String**| Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn&#39;t changed. | [optional]
 
 ### Return type
 
@@ -390,7 +447,7 @@ Retrieves image urls of all visible pages of a document associated with a librar
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
@@ -442,14 +499,14 @@ No authorization required
 
 <a name="getLibraryDocumentInfo"></a>
 # **getLibraryDocumentInfo**
-> LibraryDocumentInfo getLibraryDocumentInfo(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch)
+> LibraryDocumentCreationInfoV6 getLibraryDocumentInfo(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch)
 
 Retrieves the details of a library document.
 
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
@@ -460,7 +517,7 @@ String xApiUser = "xApiUser_example"; // String | The userId or email of API cal
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
 String ifNoneMatch = "ifNoneMatch_example"; // String | Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn't changed.
 try {
-    LibraryDocumentInfo result = apiInstance.getLibraryDocumentInfo(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch);
+    LibraryDocumentCreationInfoV6 result = apiInstance.getLibraryDocumentInfo(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling LibraryDocumentsApi#getLibraryDocumentInfo");
@@ -480,7 +537,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LibraryDocumentInfo**](LibraryDocumentInfo.md)
+[**LibraryDocumentCreationInfoV6**](LibraryDocumentCreationInfoV6.md)
 
 ### Authorization
 
@@ -500,7 +557,7 @@ Retrieves the latest note of a library document for the API user.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
@@ -549,7 +606,7 @@ Retrieves library documents for a user.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
@@ -557,9 +614,9 @@ LibraryDocumentsApi apiInstance = new LibraryDocumentsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('library_read')\" oncontextmenu=\"this.href=oauthDoc('library_read')\" target=\"oauthDoc\">library_read</a></li></ul>in the format <b>'Bearer {accessToken}'.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
-Boolean showHiddenLibraryDocuments = true; // Boolean | A query parameter to fetch all the hidden library documents along with the visible library documents.
+Boolean showHiddenLibraryDocuments = true; // Boolean | A query parameter to fetch all the hidden library documents along with the visible library documents. Default value is false.
 String cursor = "cursor_example"; // String | Used to navigate through the pages. If not provided, returns the first page.
-Integer pageSize = 56; // Integer | Number of intended items in the response page.
+Integer pageSize = 56; // Integer | Number of intended items in the response page. If not provided, it is decided by the application settings.
 try {
     LibraryDocuments result = apiInstance.getLibraryDocuments(authorization, xApiUser, xOnBehalfOfUser, showHiddenLibraryDocuments, cursor, pageSize);
     System.out.println(result);
@@ -576,9 +633,9 @@ Name | Type | Description  | Notes
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;library_read&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
- **showHiddenLibraryDocuments** | **Boolean**| A query parameter to fetch all the hidden library documents along with the visible library documents. | [optional]
+ **showHiddenLibraryDocuments** | **Boolean**| A query parameter to fetch all the hidden library documents along with the visible library documents. Default value is false. | [optional]
  **cursor** | **String**| Used to navigate through the pages. If not provided, returns the first page. | [optional]
- **pageSize** | **Integer**| Number of intended items in the response page. | [optional]
+ **pageSize** | **Integer**| Number of intended items in the response page. If not provided, it is decided by the application settings. | [optional]
 
 ### Return type
 
@@ -604,7 +661,7 @@ Currently status, name, sharingMode and templateTypes of the library document ca
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
@@ -645,6 +702,56 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json, text/csv
+
+<a name="updateLibraryDocumentNoteForApiUser"></a>
+# **updateLibraryDocumentNoteForApiUser**
+> updateLibraryDocumentNoteForApiUser(authorization, libraryDocumentId, note, xApiUser, xOnBehalfOfUser)
+
+Updates the latest note of a library document for the API user.
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.model.ApiException;
+//import io.swagger.client.api.LibraryDocumentsApi;
+
+
+LibraryDocumentsApi apiInstance = new LibraryDocumentsApi();
+String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('library_write')\" oncontextmenu=\"this.href=oauthDoc('library_write')\" target=\"oauthDoc\">library_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
+String libraryDocumentId = "libraryDocumentId_example"; // String | The document identifier, as retrieved from the API to fetch library documents.
+Note note = new Note(); // Note | The note to be associated with the library document.
+String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
+String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+try {
+    apiInstance.updateLibraryDocumentNoteForApiUser(authorization, libraryDocumentId, note, xApiUser, xOnBehalfOfUser);
+} catch (ApiException e) {
+    System.err.println("Exception when calling LibraryDocumentsApi#updateLibraryDocumentNoteForApiUser");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;library_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
+ **libraryDocumentId** | **String**| The document identifier, as retrieved from the API to fetch library documents. |
+ **note** | [**Note**](Note.md)| The note to be associated with the library document. |
+ **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
+ **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 <a name="updateLibraryDocumentState"></a>
@@ -658,7 +765,7 @@ Currently state can be changed from AUTHORING to ACTIVE.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
@@ -699,7 +806,7 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, text/csv
 
 <a name="updateLibraryDocumentVisibility"></a>
 # **updateLibraryDocumentVisibility**
@@ -710,7 +817,7 @@ Updates the visibility of library document.
 ### Example
 ```java
 // Import classes:
-//import io.swagger.client.ApiException;
+//import io.swagger.client.model.ApiException;
 //import io.swagger.client.api.LibraryDocumentsApi;
 
 
@@ -749,5 +856,5 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: application/json
+ - **Accept**: application/json, text/csv
 

@@ -14,6 +14,8 @@ Adobe Sign SDK aims at providing an easy way to integrate the Adobe Sign RESTful
   - [Sample SDK Usage](#sample-sdk-usage) 
   - [Documentation for API Endpoints](#documentation-for-api-endpoints)   
   - [Documentation for Models](#documentation-for-models) 
+  - [Contributing] (#contributing)
+  - [Licensing] (#licensing)
   - [Recommendation](#recommendation)    
   - [Report Issues/Bugs](#report-issuesbugs)  
 
@@ -182,7 +184,7 @@ Class | Method | HTTP request | Description
 *AgreementsApi* | [**addTemplateFieldsToAgreement**](docs/AgreementsApi.md#addTemplateFieldsToAgreement) | **POST** /agreements/{agreementId}/formFields | Adds template fields to an agreement
 *AgreementsApi* | [**createAgreement**](docs/AgreementsApi.md#createAgreement) | **POST** /agreements | Creates an agreement. Sends it out for signatures, and returns the agreementID in the response to the client.
 *AgreementsApi* | [**createAgreementView**](docs/AgreementsApi.md#createAgreementView) | **POST** /agreements/{agreementId}/views | Retrieves the latest state view url of agreement.
-*AgreementsApi* | [**createDelegatedParticipantSets**](docs/AgreementsApi.md#createDelegatedParticipantSets) | **POST** /agreements/{agreementId}/members/participantSets/{participantSetId}/delegatedParticipantSets | Creates a participantSet to which the agreement is forwarded for taking appropriate action.
+*AgreementsApi* | [**createDelegatedParticipantSets**](docs/AgreementsApi.md#createDelegatedParticipantSets) | **POST** /agreements/{agreementId}/members/participantSets/{participantSetId}/delegatedParticipantSets | Creates a participantSet to which the agreement is forwarded for taking appropriate action.
 *AgreementsApi* | [**createReminderOnParticipant**](docs/AgreementsApi.md#createReminderOnParticipant) | **POST** /agreements/{agreementId}/reminders | Creates a reminder on the specified participants of an agreement identified by agreementId in the path.
 *AgreementsApi* | [**createShareOnAgreement**](docs/AgreementsApi.md#createShareOnAgreement) | **POST** /agreements/{agreementId}/members/share | Share an agreement with someone.
 *AgreementsApi* | [**deleteDocuments**](docs/AgreementsApi.md#deleteDocuments) | **DELETE** /agreements/{agreementId}/documents | Deletes all the documents of an agreement.
@@ -291,6 +293,15 @@ Class | Method | HTTP request | Description
  - [UserAgreements](docs/UserAgreements.md)
  - [VaultingInfo](docs/VaultingInfo.md)
  - [VisibilityInfo](docs/VisibilityInfo.md)
+ 
+## Contributing
+
+Contributions are welcomed! Read the [Contributing Guide](CONTRIBUTING.md) for more information.
+
+## Licensing
+
+This project is licensed under the Apache V2 License. See [LICENSE](LICENSE) for more information.
+
 
 ## Recommendation
 
@@ -299,4 +310,3 @@ It's recommended to create an instance of `ApiClient` per thread and per user (w
 ## Report Issues/Bugs
 
 You can report the issues in the issues section of the GitHub repo.
-
