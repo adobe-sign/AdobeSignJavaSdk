@@ -14,8 +14,8 @@ Adobe Sign SDK aims at providing an easy way to integrate the Adobe Sign RESTful
   - [Sample SDK Usage](#sample-sdk-usage) 
   - [Documentation for API Endpoints](#documentation-for-api-endpoints)   
   - [Documentation for Models](#documentation-for-models) 
-  - [Contributing] (#contributing)
-  - [Licensing] (#licensing)
+  - [Contributing](#contributing)  
+  - [Licensing](#licensing)  
   - [Recommendation](#recommendation)    
   - [Report Issues/Bugs](#report-issuesbugs)  
 
