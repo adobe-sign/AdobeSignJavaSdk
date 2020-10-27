@@ -46,6 +46,9 @@ import java.util.List;
  */
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2019-03-11T15:48:52.659+05:30")
 public class ParticipantSetInfo {
+  @SerializedName("id")
+  private String id = null;
+
   @SerializedName("label")
   private String label = null;
 
@@ -131,6 +134,23 @@ public class ParticipantSetInfo {
 
   @SerializedName("visiblePages")
   private List<String> visiblePages = null;
+
+  public ParticipantSetInfo id(String id) {
+    this.id = id;
+    return this;
+  }
+
+  /**
+   * The unique identifier of the participant. This will be ignored as part of POST or PUT calls. The Id might be null in draft state.
+  **/
+  @ApiModelProperty(value = "The unique identifier of the participant. This will be ignored as part of POST or PUT calls. The Id might be null in draft state.")
+  public String getId() {
+    return id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
 
   public ParticipantSetInfo label(String label) {
     this.label = label;
@@ -284,7 +304,8 @@ public class ParticipantSetInfo {
       return false;
     }
     ParticipantSetInfo participantSetInfo = (ParticipantSetInfo) o;
-    return Objects.equals(this.label, participantSetInfo.label) &&
+    return Objects.equals(this.id, participantSetInfo.id) &&
+        Objects.equals(this.label, participantSetInfo.label) &&
         Objects.equals(this.memberInfos, participantSetInfo.memberInfos) &&
         Objects.equals(this.name, participantSetInfo.name) &&
         Objects.equals(this.order, participantSetInfo.order) &&
@@ -295,7 +316,7 @@ public class ParticipantSetInfo {
 
   @Override
   public int hashCode() {
-    return Objects.hash(label, memberInfos, name, order, privateMessage, role, visiblePages);
+    return Objects.hash(id, label, memberInfos, name, order, privateMessage, role, visiblePages);
   }
 
 
@@ -304,6 +325,7 @@ public class ParticipantSetInfo {
     StringBuilder sb = new StringBuilder();
     sb.append("class ParticipantSetInfo {\n");
     
+    sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    label: ").append(toIndentedString(label)).append("\n");
     sb.append("    memberInfos: ").append(toIndentedString(memberInfos)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
