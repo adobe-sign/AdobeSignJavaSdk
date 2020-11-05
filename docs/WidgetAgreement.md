@@ -4,14 +4,26 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**displayDate** | [**Date**](Date.md) | The display date for the agreement. Format would be yyyy-MM-dd&#39;T&#39;HH:mm:ssZ. For example, e.g 2016-02-25T18:46:19Z represents UTC time |  [optional]
-**displayParticipantSetInfos** | [**List&lt;DisplayWidgetParticipantSetInfo&gt;**](DisplayWidgetParticipantSetInfo.md) | The most relevant current user set for the agreement. It is typically the next signer if the agreement is from the current user, or the sender if received from another user |  [optional]
-**id** | **String** | The unique identifier of the agreement.If provided in POST, it will simply be ignored |  [optional]
-**esign** | **Boolean** | True if this is an e-sign document |  [optional]
 **hidden** | **Boolean** | True if agreement is hidden for the user |  [optional]
-**latestVersionId** | **String** | A version ID which uniquely identifies the current version of the agreement |  [optional]
+**displayDate** | [**Date**](Date.md) | The display date for the agreement. Format would be yyyy-MM-dd&#39;T&#39;HH:mm:ssZ. For example, e.g 2016-02-25T18:46:19Z represents UTC time |  [optional]
+**groupId** | **String** | Unique identifier of the group |  [optional]
+**esign** | **Boolean** | True if this is an e-sign document |  [optional]
 **name** | **String** | Name of the Agreement |  [optional]
+**displayParticipantSetInfos** | [**List&lt;DisplayWidgetParticipantSetInfo&gt;**](DisplayWidgetParticipantSetInfo.md) | The most relevant current user set for the agreement. It is typically the next signer if the agreement is from the current user, or the sender if received from another user |  [optional]
+**latestVersionId** | **String** | A version ID which uniquely identifies the current version of the agreement |  [optional]
+**id** | **String** | The unique identifier of the agreement.If provided in POST, it will simply be ignored |  [optional]
+**type** | [**TypeEnum**](#TypeEnum) | The kind of agreement |  [optional]
+**parentId** | **String** | The parent id of a megaSign child *OR* the originating id of a widget agreement instance |  [optional]
 **status** | [**StatusEnum**](#StatusEnum) | The current status of the document from the perspective of the originator |  [optional]
+
+
+<a name="TypeEnum"></a>
+## Enum: TypeEnum
+Name | Value
+---- | -----
+AGREEMENT | &quot;AGREEMENT&quot;
+MEGASIGN_CHILD | &quot;MEGASIGN_CHILD&quot;
+WIDGET_INSTANCE | &quot;WIDGET_INSTANCE&quot;
 
 
 <a name="StatusEnum"></a>

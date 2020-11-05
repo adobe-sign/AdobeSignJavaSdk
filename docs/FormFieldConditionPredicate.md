@@ -4,10 +4,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**fieldLocationIndex** | **Integer** | Index of the location of the form field used in the predicate |  [optional]
 **fieldName** | **String** | Name of the field whose value is the basis of predicate |  [optional]
-**operator** | [**OperatorEnum**](#OperatorEnum) | Operator to be applied on the value of the predicate field. |  [optional]
 **value** | **String** | Value to compare against the value of the predicate&#39;s form field, using the specified operator |  [optional]
+**operator** | [**OperatorEnum**](#OperatorEnum) | Operator to be applied on the value of the predicate field. |  [optional]
+**fieldLocationIndex** | **Integer** | Index of the location of the form field used in the predicate |  [optional]
 
 
 <a name="OperatorEnum"></a>

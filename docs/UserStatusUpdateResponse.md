@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **code** | [**CodeEnum**](#CodeEnum) | The result of the attempt to activate or deactivate the user |  [optional]
-**message** | **String** | String result message if there was no error |  [optional]
 **state** | [**StateEnum**](#StateEnum) | A status value showing the result of this operation |  [optional]
+**message** | **String** | String result message if there was no error |  [optional]
 
 
 <a name="CodeEnum"></a>

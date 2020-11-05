@@ -4,13 +4,13 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **String** | The unique identifier of the participant set. This cannot be changed as part of the PUT call. |  [optional]
+**role** | [**RoleEnum**](#RoleEnum) | Role assumed by all participants in the set (signer, approver etc.). |  [optional]
+**name** | **String** | Name of ParticipantSet (it can be empty, but needs not to be unique in a single megaSign). Maximum no of characters in participant set name is restricted to 255. |  [optional]
+**id** | **String** | The unique identifier of the participant set. |  [optional]
+**privateMessage** | **String** | Participant set&#39;s private message - all participants in the set will receive the same message. |  [optional]
 **memberInfos** | [**List&lt;DetailedParticipantInfo&gt;**](DetailedParticipantInfo.md) | Array of ParticipantInfo objects, containing participant-specific data (e.g. email). All participants in the array belong to the same set |  [optional]
-**name** | **String** | Name of ParticipantSet (it can be empty, but needs not to be unique in a single agreement). Maximum no of characters in participant set name is restricted to 255. This cannot be changed as part of the PUT call. |  [optional]
-**order** | **Integer** | Index indicating sequential signing group (specified for hybrid routing). This cannot be changed as part of the PUT call. |  [optional]
-**privateMessage** | **String** | Participant set&#39;s private message - all participants in the set will receive the same message. This cannot be changed as part of the PUT call. |  [optional]
-**role** | [**RoleEnum**](#RoleEnum) | Role assumed by all participants in the set (signer, approver etc.). This cannot be changed as part of the PUT call. |  [optional]
-**status** | [**StatusEnum**](#StatusEnum) | The agreement status with respect to the participant set. This cannot be changed as part of the PUT call. |  [optional]
+**order** | **Integer** | Index indicating sequential signing group (specified for hybrid routing). |  [optional]
+**status** | [**StatusEnum**](#StatusEnum) | The megaSign status with respect to the participant set. |  [optional]
 
 
 <a name="RoleEnum"></a>

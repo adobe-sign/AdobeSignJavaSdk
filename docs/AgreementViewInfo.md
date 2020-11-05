@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**commonViewConfiguration** | [**CommonViewConfiguration**](CommonViewConfiguration.md) | Common view configuration for all the available views |  [optional]
 **composeViewConfiguration** | [**ComposeViewConfiguration**](ComposeViewConfiguration.md) | Compose page view configuration |  [optional]
+**commonViewConfiguration** | [**CommonViewConfiguration**](CommonViewConfiguration.md) | Common view configuration for all the available views |  [optional]
 **name** | [**NameEnum**](#NameEnum) | Name of the requested agreement view |  [optional]
 
 

@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **embeddedCode** | **String** | Embedded code of url of resource  |  [optional]
-**expiration** | [**Date**](Date.md) | Expiration of user url  |  [optional]
 **name** | [**NameEnum**](#NameEnum) | Name of the requested user view |  [optional]
+**expiration** | [**Date**](Date.md) | Expiration of user url  |  [optional]
 **url** | **String** | Url of resource location |  [optional]
 
 
