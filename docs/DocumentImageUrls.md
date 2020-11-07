@@ -4,9 +4,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**imageSize** | [**ImageSizeEnum**](#ImageSizeEnum) | ImageSize corresponding to the imageUrl returned  |  [optional]
 **imageURLs** | [**List&lt;PageImageUrl&gt;**](PageImageUrl.md) | A list of image url (one per page). |  [optional]
 **imagesAvailable** | **Boolean** | true if images for the associated image size is available, else false. |  [optional]
+**imageSize** | [**ImageSizeEnum**](#ImageSizeEnum) | ImageSize corresponding to the imageUrl returned  |  [optional]
 
 
 <a name="ImageSizeEnum"></a>

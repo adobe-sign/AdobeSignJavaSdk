@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **commonViewConfiguration** | [**CommonViewConfiguration**](CommonViewConfiguration.md) | Common view configuration for all the available views |  [optional]
-**name** | [**NameEnum**](#NameEnum) | Name of the requested widget view |  [optional]
+**name** | [**NameEnum**](#NameEnum) | Name of the requested web form view |  [optional]
+**personalizedSigningViewConfiguration** | [**PersonalizedSigningViewConfiguration**](PersonalizedSigningViewConfiguration.md) | Personalized SIGNING view configuration |  [optional]
 
 
 <a name="NameEnum"></a>

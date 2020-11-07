@@ -4,8 +4,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**authenticationMethod** | [**AuthenticationMethodEnum**](#AuthenticationMethodEnum) | The authentication method for the participants to have access to view and sign the document. When replacing a participant that has PASSWORD or PHONE authentication specified, you must supply a password or phone number for the new participant, and you cannot change the authentication method |  [optional]
 **password** | **String** | The password required for the participant to view and sign the document. Note that AdobeSign will never show this password to anyone, so you will need to separately communicate it to any relevant parties. The password will not be returned in GET call. When replacing a participant that has PASSWORD authentication specified, you must supply a password for the new participant. |  [optional]
+**authenticationMethod** | [**AuthenticationMethodEnum**](#AuthenticationMethodEnum) | The authentication method for the participants to have access to view and sign the document. When replacing a participant that has PASSWORD or PHONE authentication specified, you must supply a password or phone number for the new participant, and you cannot change the authentication method.  For unknown participants, only email based authentication is allowed. Hence, only ‘NONE’ authenticaiton method is permitted |  [optional]
 **phoneInfo** | [**PhoneInfo**](PhoneInfo.md) | The phoneInfo required for the participant to view and sign the document |  [optional]
 
 

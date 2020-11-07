@@ -1,6 +1,6 @@
 # AgreementsApi
 
-All URIs are relative to *http://localhost/api/rest/v6*
+All URIs are relative to *https://secure.au1.echosign.com/api/rest/v6*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,8 +10,10 @@ Method | HTTP request | Description
 [**createDelegatedParticipantSets**](AgreementsApi.md#createDelegatedParticipantSets) | **POST** /agreements/{agreementId}/members/participantSets/{participantSetId}/delegatedParticipantSets | Creates a participantSet to which the agreement is forwarded for taking appropriate action.
 [**createReminderOnParticipant**](AgreementsApi.md#createReminderOnParticipant) | **POST** /agreements/{agreementId}/reminders | Creates a reminder on the specified participants of an agreement identified by agreementId in the path.
 [**createShareOnAgreement**](AgreementsApi.md#createShareOnAgreement) | **POST** /agreements/{agreementId}/members/share | Share an agreement with someone.
+[**createSignerIdentityReport**](AgreementsApi.md#createSignerIdentityReport) | **POST** /agreements/{agreementId}/signerIdentityReport | Retrieves the signer identity report of an agreement identified by agreementId.
 [**deleteDocuments**](AgreementsApi.md#deleteDocuments) | **DELETE** /agreements/{agreementId}/documents | Deletes all the documents of an agreement.
 [**getAgreementInfo**](AgreementsApi.md#getAgreementInfo) | **GET** /agreements/{agreementId} | Retrieves the current status of an agreement.
+[**getAgreementInfoForUser**](AgreementsApi.md#getAgreementInfoForUser) | **GET** /agreements/{agreementId}/me | Retrieves the agreement information related to the api caller
 [**getAgreementNoteForApiUser**](AgreementsApi.md#getAgreementNoteForApiUser) | **GET** /agreements/{agreementId}/me/note | Retrieves the latest note associated with an agreement.
 [**getAgreementReminder**](AgreementsApi.md#getAgreementReminder) | **GET** /agreements/{agreementId}/reminders/{reminderId} | Retrieves a specific reminder associated with an agreement
 [**getAgreementReminders**](AgreementsApi.md#getAgreementReminders) | **GET** /agreements/{agreementId}/reminders | Retrieves the reminders of an agreement, identified by agreementId in the path.
@@ -39,6 +41,7 @@ Method | HTTP request | Description
 [**updateAgreementReminder**](AgreementsApi.md#updateAgreementReminder) | **PUT** /agreements/{agreementId}/reminders/{reminderId} | Updates an existing reminder for an agreement
 [**updateAgreementSecurityOptionsForParticipation**](AgreementsApi.md#updateAgreementSecurityOptionsForParticipation) | **PUT** /agreements/{agreementId}/members/participantSets/{participantSetId}/participants/{participantId}/securityOptions | Updates the security options for a particular participant.
 [**updateAgreementState**](AgreementsApi.md#updateAgreementState) | **PUT** /agreements/{agreementId}/state | Updates the state of an agreement identified by agreementId in the path.
+[**updateAgreementVaulted**](AgreementsApi.md#updateAgreementVaulted) | **PUT** /agreements/{agreementId}/vaulted | Complete the vaulting process and update the agreement as vaulted.
 [**updateAgreementVisibility**](AgreementsApi.md#updateAgreementVisibility) | **PUT** /agreements/{agreementId}/me/visibility | Updates the visibility of an agreement.
 [**updateFormFields**](AgreementsApi.md#updateFormFields) | **PUT** /agreements/{agreementId}/formFields | Updates form fields of an agreement.  This will replace all fields in AUTHORING mode agreements, and will replace all fields except for text tag generated fields in DRAFT mode agreements.
 [**updateParticipantSet**](AgreementsApi.md#updateParticipantSet) | **PUT** /agreements/{agreementId}/members/participantSets/{participantSetId} | Updates the participant set of an agreement identified by agreementId in the path.
@@ -46,7 +49,7 @@ Method | HTTP request | Description
 
 <a name="addTemplateFieldsToAgreement"></a>
 # **addTemplateFieldsToAgreement**
-> AgreementFormFields addTemplateFieldsToAgreement(authorization, ifMatch, agreementId, formFieldPostInfo, xApiUser, xOnBehalfOfUser)
+> AgreementFormFields addTemplateFieldsToAgreement(authorization, agreementId, formFieldPostInfo, xApiUser, xOnBehalfOfUser, ifMatch)
 
 Adds template fields to an agreement
 
@@ -59,13 +62,13 @@ Adds template fields to an agreement
 
 AgreementsApi apiInstance = new AgreementsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('agreement_write')\" oncontextmenu=\"this.href=oauthDoc('agreement_write')\" target=\"oauthDoc\">agreement_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
 FormFieldPostInfo formFieldPostInfo = new FormFieldPostInfo(); // FormFieldPostInfo | List of form fields to add or replace
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 try {
-    AgreementFormFields result = apiInstance.addTemplateFieldsToAgreement(authorization, ifMatch, agreementId, formFieldPostInfo, xApiUser, xOnBehalfOfUser);
+    AgreementFormFields result = apiInstance.addTemplateFieldsToAgreement(authorization, agreementId, formFieldPostInfo, xApiUser, xOnBehalfOfUser, ifMatch);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling AgreementsApi#addTemplateFieldsToAgreement");
@@ -78,11 +81,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
  **formFieldPostInfo** | [**FormFieldPostInfo**](FormFieldPostInfo.md)| List of form fields to add or replace |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
 
 ### Return type
 
@@ -354,9 +357,60 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="createSignerIdentityReport"></a>
+# **createSignerIdentityReport**
+> byte[] createSignerIdentityReport(authorization, agreementId, xApiUser, signerIdentityReportInfo)
+
+Retrieves the signer identity report of an agreement identified by agreementId.
+
+PDF file stream containing signer identify information
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.model.ApiException;
+//import io.swagger.client.api.AgreementsApi;
+
+
+AgreementsApi apiInstance = new AgreementsApi();
+String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('agreement_read')\" oncontextmenu=\"this.href=oauthDoc('agreement_read')\" target=\"oauthDoc\">agreement_read</a></li></ul>in the format <b>'Bearer {accessToken}'.
+String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
+String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
+SignerIdentityReportInfo signerIdentityReportInfo = new SignerIdentityReportInfo(); // SignerIdentityReportInfo | Information about the agreement for which you want to create signer identity report.
+try {
+    byte[] result = apiInstance.createSignerIdentityReport(authorization, agreementId, xApiUser, signerIdentityReportInfo);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling AgreementsApi#createSignerIdentityReport");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_read&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_read&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_read&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
+ **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
+ **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
+ **signerIdentityReportInfo** | [**SignerIdentityReportInfo**](SignerIdentityReportInfo.md)| Information about the agreement for which you want to create signer identity report. | [optional]
+
+### Return type
+
+**byte[]**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/pdf, application/pdf;encoding=base64
+
 <a name="deleteDocuments"></a>
 # **deleteDocuments**
-> deleteDocuments(authorization, ifMatch, agreementId, xApiUser, xOnBehalfOfUser)
+> deleteDocuments(authorization, agreementId, xApiUser, xOnBehalfOfUser, ifMatch)
 
 Deletes all the documents of an agreement.
 
@@ -369,12 +423,12 @@ Deletes all the documents of an agreement.
 
 AgreementsApi apiInstance = new AgreementsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('agreement_retention')\" oncontextmenu=\"this.href=oauthDoc('agreement_retention')\" target=\"oauthDoc\">agreement_retention</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 try {
-    apiInstance.deleteDocuments(authorization, ifMatch, agreementId, xApiUser, xOnBehalfOfUser);
+    apiInstance.deleteDocuments(authorization, agreementId, xApiUser, xOnBehalfOfUser, ifMatch);
 } catch (ApiException e) {
     System.err.println("Exception when calling AgreementsApi#deleteDocuments");
     e.printStackTrace();
@@ -386,10 +440,10 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_retention&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_retention&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_retention&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
 
 ### Return type
 
@@ -406,7 +460,7 @@ No authorization required
 
 <a name="getAgreementInfo"></a>
 # **getAgreementInfo**
-> AgreementInfo getAgreementInfo(authorization, agreementId, xApiUser, xOnBehalfOfUser, ifNoneMatch)
+> FetchedAgreementInfo getAgreementInfo(authorization, agreementId, xApiUser, xOnBehalfOfUser, ifNoneMatch)
 
 Retrieves the current status of an agreement.
 
@@ -424,7 +478,7 @@ String xApiUser = "xApiUser_example"; // String | The userId or email of API cal
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
 String ifNoneMatch = "ifNoneMatch_example"; // String | Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn't changed.
 try {
-    AgreementInfo result = apiInstance.getAgreementInfo(authorization, agreementId, xApiUser, xOnBehalfOfUser, ifNoneMatch);
+    FetchedAgreementInfo result = apiInstance.getAgreementInfo(authorization, agreementId, xApiUser, xOnBehalfOfUser, ifNoneMatch);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling AgreementsApi#getAgreementInfo");
@@ -444,7 +498,54 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**AgreementInfo**](AgreementInfo.md)
+[**FetchedAgreementInfo**](FetchedAgreementInfo.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getAgreementInfoForUser"></a>
+# **getAgreementInfoForUser**
+> MyAgreementInfo getAgreementInfoForUser(authorization, agreementId, xApiUser)
+
+Retrieves the agreement information related to the api caller
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.model.ApiException;
+//import io.swagger.client.api.AgreementsApi;
+
+
+AgreementsApi apiInstance = new AgreementsApi();
+String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('agreement_read')\" oncontextmenu=\"this.href=oauthDoc('agreement_read')\" target=\"oauthDoc\">agreement_read</a></li></ul>in the format <b>'Bearer {accessToken}'.
+String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
+String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
+try {
+    MyAgreementInfo result = apiInstance.getAgreementInfoForUser(authorization, agreementId, xApiUser);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling AgreementsApi#getAgreementInfoForUser");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_read&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_read&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_read&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
+ **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
+ **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
+
+### Return type
+
+[**MyAgreementInfo**](MyAgreementInfo.md)
 
 ### Authorization
 
@@ -573,7 +674,7 @@ String authorization = "authorization_example"; // String | An <a href=\"#\" onc
 String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
-String status = "status_example"; // String | A comma-separated list of reminder statuses of the reminders which should be returned in the response. Currently supported values are ACTIVE, CANCELLED, COMPLETE
+String status = "status_example"; // String | A comma-separated list of reminder statuses of the reminders which should be returned in the response. Currently supported values are ACTIVE, CANCELED, COMPLETE
 try {
     RemindersResponse result = apiInstance.getAgreementReminders(authorization, agreementId, xApiUser, xOnBehalfOfUser, status);
     System.out.println(result);
@@ -591,7 +692,7 @@ Name | Type | Description  | Notes
  **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
- **status** | **String**| A comma-separated list of reminder statuses of the reminders which should be returned in the response. Currently supported values are ACTIVE, CANCELLED, COMPLETE | [optional]
+ **status** | **String**| A comma-separated list of reminder statuses of the reminders which should be returned in the response. Currently supported values are ACTIVE, CANCELED, COMPLETE | [optional]
 
 ### Return type
 
@@ -608,7 +709,7 @@ No authorization required
 
 <a name="getAgreementSecurityOptionsForParticipation"></a>
 # **getAgreementSecurityOptionsForParticipation**
-> ParticipantSecurityOption getAgreementSecurityOptionsForParticipation(authorization, agreementId, participantSetId, participantId, ifNoneMatch, xApiUser)
+> ParticipantSecurityOption getAgreementSecurityOptionsForParticipation(authorization, agreementId, participantSetId, participantId, ifNoneMatch, xApiUser, xOnBehalfOfUser)
 
 Retrieves the security options for a particular participant.
 
@@ -626,8 +727,9 @@ String participantSetId = "participantSetId_example"; // String | The participan
 String participantId = "participantId_example"; // String | The participant identifier
 String ifNoneMatch = "ifNoneMatch_example"; // String | Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn't changed.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
+String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
 try {
-    ParticipantSecurityOption result = apiInstance.getAgreementSecurityOptionsForParticipation(authorization, agreementId, participantSetId, participantId, ifNoneMatch, xApiUser);
+    ParticipantSecurityOption result = apiInstance.getAgreementSecurityOptionsForParticipation(authorization, agreementId, participantSetId, participantId, ifNoneMatch, xApiUser, xOnBehalfOfUser);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling AgreementsApi#getAgreementSecurityOptionsForParticipation");
@@ -645,6 +747,7 @@ Name | Type | Description  | Notes
  **participantId** | **String**| The participant identifier |
  **ifNoneMatch** | **String**| Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn&#39;t changed. | [optional]
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
+ **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
 
 ### Return type
 
@@ -661,7 +764,7 @@ No authorization required
 
 <a name="getAgreements"></a>
 # **getAgreements**
-> UserAgreements getAgreements(authorization, xApiUser, xOnBehalfOfUser, externalId, showHiddenAgreements, cursor, pageSize)
+> UserAgreements getAgreements(authorization, xApiUser, xOnBehalfOfUser, externalId, groupId, showHiddenAgreements, cursor, pageSize)
 
 Retrieves agreements for the user.
 
@@ -677,11 +780,12 @@ String authorization = "authorization_example"; // String | An <a href=\"#\" onc
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
 String externalId = "externalId_example"; // String | Case-sensitive ExternalID for which you would like to retrieve agreement information. ExternalId is passed in the call to the agreement creation API.
+String groupId = "groupId_example"; // String | The group identifier, as returned by the group creation API or retrieved from the API to fetch groups.
 Boolean showHiddenAgreements = true; // Boolean | A query parameter to fetch all the hidden agreements along with the visible agreements. Default value is false.
 String cursor = "cursor_example"; // String | Used to navigate through the pages. If not provided, returns the first page.
 Integer pageSize = 56; // Integer | Number of intended items in the response page. If not provided, it is decided by the application settings.
 try {
-    UserAgreements result = apiInstance.getAgreements(authorization, xApiUser, xOnBehalfOfUser, externalId, showHiddenAgreements, cursor, pageSize);
+    UserAgreements result = apiInstance.getAgreements(authorization, xApiUser, xOnBehalfOfUser, externalId, groupId, showHiddenAgreements, cursor, pageSize);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling AgreementsApi#getAgreements");
@@ -697,6 +801,7 @@ Name | Type | Description  | Notes
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
  **externalId** | **String**| Case-sensitive ExternalID for which you would like to retrieve agreement information. ExternalId is passed in the call to the agreement creation API. | [optional]
+ **groupId** | **String**| The group identifier, as returned by the group creation API or retrieved from the API to fetch groups. | [optional]
  **showHiddenAgreements** | **Boolean**| A query parameter to fetch all the hidden agreements along with the visible agreements. Default value is false. | [optional]
  **cursor** | **String**| Used to navigate through the pages. If not provided, returns the first page. | [optional]
  **pageSize** | **Integer**| Number of intended items in the response page. If not provided, it is decided by the application settings. | [optional]
@@ -958,7 +1063,7 @@ String ifNoneMatch = "ifNoneMatch_example"; // String | Pass the value of the e-
 String versionId = "versionId_example"; // String | The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used.
 String participantId = "participantId_example"; // String | The participant identifier to be used to retrieve documents. If not mentioned, the participation of api caller is used.
 Boolean attachSupportingDocuments = true; // Boolean | When set to true, attach corresponding supporting documents to the signed agreement PDF. Default value of this parameter is true.
-Boolean attachAuditReport = true; // Boolean | When set to true, attach an audit report to the signed agreement PDF. Default value is false
+Boolean attachAuditReport = true; // Boolean | When set to true, attach an audit report to the signed agreement PDF. The default value is false.
 try {
     byte[] result = apiInstance.getCombinedDocument(authorization, agreementId, xApiUser, xOnBehalfOfUser, ifNoneMatch, versionId, participantId, attachSupportingDocuments, attachAuditReport);
     System.out.println(result);
@@ -980,7 +1085,7 @@ Name | Type | Description  | Notes
  **versionId** | **String**| The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used. | [optional]
  **participantId** | **String**| The participant identifier to be used to retrieve documents. If not mentioned, the participation of api caller is used. | [optional]
  **attachSupportingDocuments** | **Boolean**| When set to true, attach corresponding supporting documents to the signed agreement PDF. Default value of this parameter is true. | [optional]
- **attachAuditReport** | **Boolean**| When set to true, attach an audit report to the signed agreement PDF. Default value is false | [optional]
+ **attachAuditReport** | **Boolean**| When set to true, attach an audit report to the signed agreement PDF. The default value is false. | [optional]
 
 ### Return type
 
@@ -1069,7 +1174,7 @@ String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or em
 String versionId = "versionId_example"; // String | The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used.
 String participantId = "participantId_example"; // String | The participant identifier to be used to retrieve documents. If not mentioned, the participation of api caller is used.
 Boolean attachSupportingDocuments = true; // Boolean | When set to true, attach corresponding supporting documents to the signed agreement PDF. Default value of this parameter is true.
-Boolean attachAuditReport = true; // Boolean | When set to true, attach an audit report to the signed agreement PDF. Default value is false
+Boolean attachAuditReport = true; // Boolean | When set to true, attach an audit report to the signed agreement PDF. The default value is false.
 try {
     DocumentUrl result = apiInstance.getCombinedDocumentUrl(authorization, agreementId, xApiUser, xOnBehalfOfUser, versionId, participantId, attachSupportingDocuments, attachAuditReport);
     System.out.println(result);
@@ -1090,7 +1195,7 @@ Name | Type | Description  | Notes
  **versionId** | **String**| The version identifier of agreement as provided by the API which retrieves information of a specific agreement. If not provided then latest version will be used. | [optional]
  **participantId** | **String**| The participant identifier to be used to retrieve documents. If not mentioned, the participation of api caller is used. | [optional]
  **attachSupportingDocuments** | **Boolean**| When set to true, attach corresponding supporting documents to the signed agreement PDF. Default value of this parameter is true. | [optional]
- **attachAuditReport** | **Boolean**| When set to true, attach an audit report to the signed agreement PDF. Default value is false | [optional]
+ **attachAuditReport** | **Boolean**| When set to true, attach an audit report to the signed agreement PDF. The default value is false. | [optional]
 
 ### Return type
 
@@ -1478,7 +1583,7 @@ No authorization required
 
 <a name="getSigningUrl"></a>
 # **getSigningUrl**
-> SigningUrlResponse getSigningUrl(authorization, agreementId, xApiUser, ifNoneMatch)
+> SigningUrlResponse getSigningUrl(authorization, agreementId, xApiUser, ifNoneMatch, expiry)
 
 Retrieves the URL for the e-sign page for the current signer(s) of an agreement.
 
@@ -1494,8 +1599,9 @@ String authorization = "authorization_example"; // String | An <a href=\"#\" onc
 String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String ifNoneMatch = "ifNoneMatch_example"; // String | Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn't changed.
+Integer expiry = 56; // Integer | Lifetime of the esignUrl, between 30 and 315360000 seconds. If not provided, it is decided by the application settings.
 try {
-    SigningUrlResponse result = apiInstance.getSigningUrl(authorization, agreementId, xApiUser, ifNoneMatch);
+    SigningUrlResponse result = apiInstance.getSigningUrl(authorization, agreementId, xApiUser, ifNoneMatch, expiry);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling AgreementsApi#getSigningUrl");
@@ -1511,6 +1617,7 @@ Name | Type | Description  | Notes
  **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **ifNoneMatch** | **String**| Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn&#39;t changed. | [optional]
+ **expiry** | **Integer**| Lifetime of the esignUrl, between 30 and 315360000 seconds. If not provided, it is decided by the application settings. | [optional]
 
 ### Return type
 
@@ -1527,7 +1634,7 @@ No authorization required
 
 <a name="rejectAgreementForParticipation"></a>
 # **rejectAgreementForParticipation**
-> rejectAgreementForParticipation(authorization, ifMatch, agreementId, participantSetId, participantId, agreementRejectionInfo, xApiUser)
+> rejectAgreementForParticipation(authorization, agreementId, participantSetId, participantId, agreementRejectionInfo, ifMatch, xApiUser)
 
 Rejects the agreement for a participant.
 
@@ -1540,14 +1647,14 @@ Rejects the agreement for a participant.
 
 AgreementsApi apiInstance = new AgreementsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('agreement_write')\" oncontextmenu=\"this.href=oauthDoc('agreement_write')\" target=\"oauthDoc\">agreement_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
 String participantSetId = "participantSetId_example"; // String | The participant set identifier
 String participantId = "participantId_example"; // String | The participant identifier
 AgreementRejectionInfo agreementRejectionInfo = new AgreementRejectionInfo(); // AgreementRejectionInfo | Participant rejection information required for rejecting the agreement
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 try {
-    apiInstance.rejectAgreementForParticipation(authorization, ifMatch, agreementId, participantSetId, participantId, agreementRejectionInfo, xApiUser);
+    apiInstance.rejectAgreementForParticipation(authorization, agreementId, participantSetId, participantId, agreementRejectionInfo, ifMatch, xApiUser);
 } catch (ApiException e) {
     System.err.println("Exception when calling AgreementsApi#rejectAgreementForParticipation");
     e.printStackTrace();
@@ -1559,11 +1666,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
  **participantSetId** | **String**| The participant set identifier |
  **participantId** | **String**| The participant identifier |
  **agreementRejectionInfo** | [**AgreementRejectionInfo**](AgreementRejectionInfo.md)| Participant rejection information required for rejecting the agreement |
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
 
 ### Return type
@@ -1581,7 +1688,7 @@ No authorization required
 
 <a name="updateAgreement"></a>
 # **updateAgreement**
-> updateAgreement(authorization, ifMatch, agreementId, agreementInfo, xApiUser, xOnBehalfOfUser)
+> updateAgreement(authorization, agreementId, agreementInfo, xApiUser, xOnBehalfOfUser, ifMatch)
 
 Updates the agreement in draft state, or update the expirationTime on an existing agreement that is already out for signature.
 
@@ -1594,13 +1701,13 @@ Updates the agreement in draft state, or update the expirationTime on an existin
 
 AgreementsApi apiInstance = new AgreementsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('agreement_write')\" oncontextmenu=\"this.href=oauthDoc('agreement_write')\" target=\"oauthDoc\">agreement_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
 AgreementInfo agreementInfo = new AgreementInfo(); // AgreementInfo | Information necessary to update a modifiable agreement that is presently out for signature.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 try {
-    apiInstance.updateAgreement(authorization, ifMatch, agreementId, agreementInfo, xApiUser, xOnBehalfOfUser);
+    apiInstance.updateAgreement(authorization, agreementId, agreementInfo, xApiUser, xOnBehalfOfUser, ifMatch);
 } catch (ApiException e) {
     System.err.println("Exception when calling AgreementsApi#updateAgreement");
     e.printStackTrace();
@@ -1612,11 +1719,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
  **agreementInfo** | [**AgreementInfo**](AgreementInfo.md)| Information necessary to update a modifiable agreement that is presently out for signature. |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
 
 ### Return type
 
@@ -1633,7 +1740,7 @@ No authorization required
 
 <a name="updateAgreementMergeInfo"></a>
 # **updateAgreementMergeInfo**
-> updateAgreementMergeInfo(authorization, ifMatch, agreementId, formFieldMergeInfo, xApiUser, xOnBehalfOfUser)
+> updateAgreementMergeInfo(authorization, agreementId, formFieldMergeInfo, xApiUser, xOnBehalfOfUser, ifMatch)
 
 Set the merge info for an agreement.
 
@@ -1646,13 +1753,13 @@ Set the merge info for an agreement.
 
 AgreementsApi apiInstance = new AgreementsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('agreement_write')\" oncontextmenu=\"this.href=oauthDoc('agreement_write')\" target=\"oauthDoc\">agreement_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
 FormFieldMergeInfo formFieldMergeInfo = new FormFieldMergeInfo(); // FormFieldMergeInfo | A mapping indicating the default values to set for form fields
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 try {
-    apiInstance.updateAgreementMergeInfo(authorization, ifMatch, agreementId, formFieldMergeInfo, xApiUser, xOnBehalfOfUser);
+    apiInstance.updateAgreementMergeInfo(authorization, agreementId, formFieldMergeInfo, xApiUser, xOnBehalfOfUser, ifMatch);
 } catch (ApiException e) {
     System.err.println("Exception when calling AgreementsApi#updateAgreementMergeInfo");
     e.printStackTrace();
@@ -1664,11 +1771,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
  **formFieldMergeInfo** | [**FormFieldMergeInfo**](FormFieldMergeInfo.md)| A mapping indicating the default values to set for form fields |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
 
 ### Return type
 
@@ -1789,7 +1896,7 @@ No authorization required
 
 <a name="updateAgreementSecurityOptionsForParticipation"></a>
 # **updateAgreementSecurityOptionsForParticipation**
-> updateAgreementSecurityOptionsForParticipation(authorization, ifMatch, agreementId, participantSetId, participantId, participantSecurityOption, xApiUser)
+> updateAgreementSecurityOptionsForParticipation(authorization, agreementId, participantSetId, participantId, participantSecurityOption, ifMatch, xApiUser, xOnBehalfOfUser)
 
 Updates the security options for a particular participant.
 
@@ -1802,14 +1909,15 @@ Updates the security options for a particular participant.
 
 AgreementsApi apiInstance = new AgreementsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('agreement_write')\" oncontextmenu=\"this.href=oauthDoc('agreement_write')\" target=\"oauthDoc\">agreement_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
 String participantSetId = "participantSetId_example"; // String | The participant set identifier
 String participantId = "participantId_example"; // String | The participant identifier
 ParticipantSecurityOption participantSecurityOption = new ParticipantSecurityOption(); // ParticipantSecurityOption | Security options that apply to the participant
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
+String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
 try {
-    apiInstance.updateAgreementSecurityOptionsForParticipation(authorization, ifMatch, agreementId, participantSetId, participantId, participantSecurityOption, xApiUser);
+    apiInstance.updateAgreementSecurityOptionsForParticipation(authorization, agreementId, participantSetId, participantId, participantSecurityOption, ifMatch, xApiUser, xOnBehalfOfUser);
 } catch (ApiException e) {
     System.err.println("Exception when calling AgreementsApi#updateAgreementSecurityOptionsForParticipation");
     e.printStackTrace();
@@ -1821,12 +1929,13 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
  **participantSetId** | **String**| The participant set identifier |
  **participantId** | **String**| The participant identifier |
  **participantSecurityOption** | [**ParticipantSecurityOption**](ParticipantSecurityOption.md)| Security options that apply to the participant |
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
+ **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
 
 ### Return type
 
@@ -1843,7 +1952,7 @@ No authorization required
 
 <a name="updateAgreementState"></a>
 # **updateAgreementState**
-> updateAgreementState(authorization, ifMatch, agreementId, agreementStateInfo, xApiUser, xOnBehalfOfUser)
+> updateAgreementState(authorization, agreementId, agreementStateInfo, xApiUser, xOnBehalfOfUser, ifMatch)
 
 Updates the state of an agreement identified by agreementId in the path.
 
@@ -1858,13 +1967,13 @@ This endpoint can be used by originator/sender of an agreement to transition bet
 
 AgreementsApi apiInstance = new AgreementsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('agreement_write')\" oncontextmenu=\"this.href=oauthDoc('agreement_write')\" target=\"oauthDoc\">agreement_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
 AgreementStateInfo agreementStateInfo = new AgreementStateInfo(); // AgreementStateInfo | 
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 try {
-    apiInstance.updateAgreementState(authorization, ifMatch, agreementId, agreementStateInfo, xApiUser, xOnBehalfOfUser);
+    apiInstance.updateAgreementState(authorization, agreementId, agreementStateInfo, xApiUser, xOnBehalfOfUser, ifMatch);
 } catch (ApiException e) {
     System.err.println("Exception when calling AgreementsApi#updateAgreementState");
     e.printStackTrace();
@@ -1876,9 +1985,59 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
  **agreementStateInfo** | [**AgreementStateInfo**](AgreementStateInfo.md)|  |
+ **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
+ **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="updateAgreementVaulted"></a>
+# **updateAgreementVaulted**
+> updateAgreementVaulted(authorization, agreementId, vaultEventInfo, xApiUser, xOnBehalfOfUser)
+
+Complete the vaulting process and update the agreement as vaulted.
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.model.ApiException;
+//import io.swagger.client.api.AgreementsApi;
+
+
+AgreementsApi apiInstance = new AgreementsApi();
+String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('agreement_vault')\" oncontextmenu=\"this.href=oauthDoc('agreement_vault')\" target=\"oauthDoc\">agreement_vault</a></li></ul>in the format <b>'Bearer {accessToken}'.
+String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
+VaultEventInfo vaultEventInfo = new VaultEventInfo(); // VaultEventInfo | Information to vault an agreement
+String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
+String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+try {
+    apiInstance.updateAgreementVaulted(authorization, agreementId, vaultEventInfo, xApiUser, xOnBehalfOfUser);
+} catch (ApiException e) {
+    System.err.println("Exception when calling AgreementsApi#updateAgreementVaulted");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_vault&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_vault&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_vault&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
+ **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
+ **vaultEventInfo** | [**VaultEventInfo**](VaultEventInfo.md)| Information to vault an agreement |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
 
@@ -1947,7 +2106,7 @@ No authorization required
 
 <a name="updateFormFields"></a>
 # **updateFormFields**
-> AgreementFormFields updateFormFields(authorization, ifMatch, agreementId, formFieldPutInfo, xApiUser, xOnBehalfOfUser)
+> AgreementFormFields updateFormFields(authorization, agreementId, formFieldPutInfo, xApiUser, xOnBehalfOfUser, ifMatch)
 
 Updates form fields of an agreement.  This will replace all fields in AUTHORING mode agreements, and will replace all fields except for text tag generated fields in DRAFT mode agreements.
 
@@ -1960,13 +2119,13 @@ Updates form fields of an agreement.  This will replace all fields in AUTHORING 
 
 AgreementsApi apiInstance = new AgreementsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('agreement_write')\" oncontextmenu=\"this.href=oauthDoc('agreement_write')\" target=\"oauthDoc\">agreement_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
-FormFieldPutInfo formFieldPutInfo = new FormFieldPutInfo(); // FormFieldPutInfo | List of form fields to add or replace
+FormFieldPutInfo formFieldPutInfo = new FormFieldPutInfo(); // FormFieldPutInfo | List of form fields to set for agreement
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 try {
-    AgreementFormFields result = apiInstance.updateFormFields(authorization, ifMatch, agreementId, formFieldPutInfo, xApiUser, xOnBehalfOfUser);
+    AgreementFormFields result = apiInstance.updateFormFields(authorization, agreementId, formFieldPutInfo, xApiUser, xOnBehalfOfUser, ifMatch);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling AgreementsApi#updateFormFields");
@@ -1979,11 +2138,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
- **formFieldPutInfo** | [**FormFieldPutInfo**](FormFieldPutInfo.md)| List of form fields to add or replace |
+ **formFieldPutInfo** | [**FormFieldPutInfo**](FormFieldPutInfo.md)| List of form fields to set for agreement |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
 
 ### Return type
 
@@ -2000,7 +2159,7 @@ No authorization required
 
 <a name="updateParticipantSet"></a>
 # **updateParticipantSet**
-> updateParticipantSet(authorization, ifMatch, agreementId, participantSetId, detailedParticipantSetInfo, xApiUser, xOnBehalfOfUser)
+> updateParticipantSet(authorization, agreementId, participantSetId, detailedParticipantSetInfo, xApiUser, xOnBehalfOfUser, ifMatch)
 
 Updates the participant set of an agreement identified by agreementId in the path.
 
@@ -2013,14 +2172,14 @@ Updates the participant set of an agreement identified by agreementId in the pat
 
 AgreementsApi apiInstance = new AgreementsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('agreement_write')\" oncontextmenu=\"this.href=oauthDoc('agreement_write')\" target=\"oauthDoc\">agreement_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String agreementId = "agreementId_example"; // String | The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements.
 String participantSetId = "participantSetId_example"; // String | The participant set identifier
 DetailedParticipantSetInfo detailedParticipantSetInfo = new DetailedParticipantSetInfo(); // DetailedParticipantSetInfo | The new participant set info.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 try {
-    apiInstance.updateParticipantSet(authorization, ifMatch, agreementId, participantSetId, detailedParticipantSetInfo, xApiUser, xOnBehalfOfUser);
+    apiInstance.updateParticipantSet(authorization, agreementId, participantSetId, detailedParticipantSetInfo, xApiUser, xOnBehalfOfUser, ifMatch);
 } catch (ApiException e) {
     System.err.println("Exception when calling AgreementsApi#updateParticipantSet");
     e.printStackTrace();
@@ -2032,12 +2191,12 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;agreement_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;agreement_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **agreementId** | **String**| The agreement identifier, as returned by the agreement creation API or retrieved from the API to fetch agreements. |
  **participantSetId** | **String**| The participant set identifier |
  **detailedParticipantSetInfo** | [**DetailedParticipantSetInfo**](DetailedParticipantSetInfo.md)| The new participant set info. |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
 
 ### Return type
 

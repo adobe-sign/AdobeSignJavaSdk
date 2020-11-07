@@ -13,6 +13,7 @@ Name | Value
 ---- | -----
 AUTHORING | &quot;AUTHORING&quot;
 ACTIVE | &quot;ACTIVE&quot;
+REMOVED | &quot;REMOVED&quot;
 
 
 

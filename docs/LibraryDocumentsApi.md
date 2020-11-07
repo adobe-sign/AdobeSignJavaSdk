@@ -1,21 +1,26 @@
 # LibraryDocumentsApi
 
-All URIs are relative to *http://localhost/api/rest/v6*
+All URIs are relative to *https://secure.au1.echosign.com/api/rest/v6*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**createLibraryDocument**](LibraryDocumentsApi.md#createLibraryDocument) | **POST** /libraryDocuments | Creates a template that is placed in the library of the user for reuse.
 [**createLibraryDocumentView**](LibraryDocumentsApi.md#createLibraryDocumentView) | **POST** /libraryDocuments/{libraryDocumentId}/views | Retrieves the latest state view url of a library document.
+[**getAllLibraryDocumentMembers**](LibraryDocumentsApi.md#getAllLibraryDocumentMembers) | **GET** /libraryDocuments/{libraryDocumentId}/members | Retrieves information of members (creator) of the library document.
 [**getCombinedDocument**](LibraryDocumentsApi.md#getCombinedDocument) | **GET** /libraryDocuments/{libraryDocumentId}/combinedDocument | Retrieves the combined document associated with a library document.
 [**getDocuments**](LibraryDocumentsApi.md#getDocuments) | **GET** /libraryDocuments/{libraryDocumentId}/documents | Retrieves the IDs of the documents associated with library document.
 [**getEvents**](LibraryDocumentsApi.md#getEvents) | **GET** /libraryDocuments/{libraryDocumentId}/events | Retrieves the events information for a library document.
 [**getFormData**](LibraryDocumentsApi.md#getFormData) | **GET** /libraryDocuments/{libraryDocumentId}/formData | Retrieves data entered into the interactive form fields of the library document.
+[**getFormFields**](LibraryDocumentsApi.md#getFormFields) | **GET** /libraryDocuments/{libraryDocumentId}/formFields | Retrieves details of form fields of a library document.
+[**getLibraryCombinedDocumentUrl**](LibraryDocumentsApi.md#getLibraryCombinedDocumentUrl) | **GET** /libraryDocuments/{libraryDocumentId}/combinedDocument/url | Retrieves url of all visible pages of all the documents associated with a library document.
 [**getLibraryDocument**](LibraryDocumentsApi.md#getLibraryDocument) | **GET** /libraryDocuments/{libraryDocumentId}/documents/{documentId} | Retrieves the file stream of a document of library document.
 [**getLibraryDocumentAuditTrail**](LibraryDocumentsApi.md#getLibraryDocumentAuditTrail) | **GET** /libraryDocuments/{libraryDocumentId}/auditTrail | Retrieves the audit trail associated with a library document.
 [**getLibraryDocumentImageUrls**](LibraryDocumentsApi.md#getLibraryDocumentImageUrls) | **GET** /libraryDocuments/{libraryDocumentId}/documents/{documentId}/imageUrls | Retrieves image urls of all visible pages of a document associated with a library document.
 [**getLibraryDocumentInfo**](LibraryDocumentsApi.md#getLibraryDocumentInfo) | **GET** /libraryDocuments/{libraryDocumentId} | Retrieves the details of a library document.
+[**getLibraryDocumentInfoForUser**](LibraryDocumentsApi.md#getLibraryDocumentInfoForUser) | **GET** /libraryDocuments/{libraryDocumentId}/me | Retrieves the library document information related to the api caller
 [**getLibraryDocumentNoteForApiUser**](LibraryDocumentsApi.md#getLibraryDocumentNoteForApiUser) | **GET** /libraryDocuments/{libraryDocumentId}/me/note | Retrieves the latest note of a library document for the API user.
 [**getLibraryDocuments**](LibraryDocumentsApi.md#getLibraryDocuments) | **GET** /libraryDocuments | Retrieves library documents for a user.
+[**updateFormFields**](LibraryDocumentsApi.md#updateFormFields) | **PUT** /libraryDocuments/{libraryDocumentId}/formFields | Updates details of form fields of a library document.
 [**updateLibraryDocument**](LibraryDocumentsApi.md#updateLibraryDocument) | **PUT** /libraryDocuments/{libraryDocumentId} | Updates the library document.
 [**updateLibraryDocumentNoteForApiUser**](LibraryDocumentsApi.md#updateLibraryDocumentNoteForApiUser) | **PUT** /libraryDocuments/{libraryDocumentId}/me/note | Updates the latest note of a library document for the API user.
 [**updateLibraryDocumentState**](LibraryDocumentsApi.md#updateLibraryDocumentState) | **PUT** /libraryDocuments/{libraryDocumentId}/state | Updates the library document&#39;s state.
@@ -114,6 +119,57 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**LibraryDocumentViewResponse**](LibraryDocumentViewResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getAllLibraryDocumentMembers"></a>
+# **getAllLibraryDocumentMembers**
+> LibraryDocumentMembersInfo getAllLibraryDocumentMembers(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch)
+
+Retrieves information of members (creator) of the library document.
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.model.ApiException;
+//import io.swagger.client.api.LibraryDocumentsApi;
+
+
+LibraryDocumentsApi apiInstance = new LibraryDocumentsApi();
+String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('library_read')\" oncontextmenu=\"this.href=oauthDoc('library_read')\" target=\"oauthDoc\">library_read</a></li></ul>in the format <b>'Bearer {accessToken}'.
+String libraryDocumentId = "libraryDocumentId_example"; // String | The document identifier, as retrieved from the API to fetch library documents.
+String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
+String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifNoneMatch = "ifNoneMatch_example"; // String | Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn't changed.
+try {
+    LibraryDocumentMembersInfo result = apiInstance.getAllLibraryDocumentMembers(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling LibraryDocumentsApi#getAllLibraryDocumentMembers");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;library_read&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
+ **libraryDocumentId** | **String**| The document identifier, as retrieved from the API to fetch library documents. |
+ **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
+ **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifNoneMatch** | **String**| Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn&#39;t changed. | [optional]
+
+### Return type
+
+[**LibraryDocumentMembersInfo**](LibraryDocumentMembersInfo.md)
 
 ### Authorization
 
@@ -283,7 +339,7 @@ No authorization required
 
 <a name="getFormData"></a>
 # **getFormData**
-> byte[] getFormData(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch)
+> byte[] getFormData(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch, cursor, pageSize)
 
 Retrieves data entered into the interactive form fields of the library document.
 
@@ -302,8 +358,10 @@ String libraryDocumentId = "libraryDocumentId_example"; // String | The document
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
 String ifNoneMatch = "ifNoneMatch_example"; // String | Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn't changed.
+String cursor = "cursor_example"; // String | Used to navigate through the pages. If not provided, returns the first page.
+Integer pageSize = 56; // Integer | Number of intended items in the response page. If not provided, it is decided by the application settings.
 try {
-    byte[] result = apiInstance.getFormData(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch);
+    byte[] result = apiInstance.getFormData(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch, cursor, pageSize);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling LibraryDocumentsApi#getFormData");
@@ -320,6 +378,8 @@ Name | Type | Description  | Notes
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
  **ifNoneMatch** | **String**| Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn&#39;t changed. | [optional]
+ **cursor** | **String**| Used to navigate through the pages. If not provided, returns the first page. | [optional]
+ **pageSize** | **Integer**| Number of intended items in the response page. If not provided, it is decided by the application settings. | [optional]
 
 ### Return type
 
@@ -332,7 +392,109 @@ No authorization required
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/csv
+ - **Accept**: application/json, text/csv
+
+<a name="getFormFields"></a>
+# **getFormFields**
+> LibraryDocumentFormFields getFormFields(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch)
+
+Retrieves details of form fields of a library document.
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.model.ApiException;
+//import io.swagger.client.api.LibraryDocumentsApi;
+
+
+LibraryDocumentsApi apiInstance = new LibraryDocumentsApi();
+String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('library_read')\" oncontextmenu=\"this.href=oauthDoc('library_read')\" target=\"oauthDoc\">library_read</a></li></ul>in the format <b>'Bearer {accessToken}'.
+String libraryDocumentId = "libraryDocumentId_example"; // String | The document identifier, as retrieved from the API to fetch library documents.
+String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
+String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifNoneMatch = "ifNoneMatch_example"; // String | Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn't changed.
+try {
+    LibraryDocumentFormFields result = apiInstance.getFormFields(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, ifNoneMatch);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling LibraryDocumentsApi#getFormFields");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;library_read&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
+ **libraryDocumentId** | **String**| The document identifier, as retrieved from the API to fetch library documents. |
+ **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
+ **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifNoneMatch** | **String**| Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn&#39;t changed. | [optional]
+
+### Return type
+
+[**LibraryDocumentFormFields**](LibraryDocumentFormFields.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+<a name="getLibraryCombinedDocumentUrl"></a>
+# **getLibraryCombinedDocumentUrl**
+> DocumentUrl getLibraryCombinedDocumentUrl(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, attachAuditReport)
+
+Retrieves url of all visible pages of all the documents associated with a library document.
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.model.ApiException;
+//import io.swagger.client.api.LibraryDocumentsApi;
+
+
+LibraryDocumentsApi apiInstance = new LibraryDocumentsApi();
+String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('library_read')\" oncontextmenu=\"this.href=oauthDoc('library_read')\" target=\"oauthDoc\">library_read</a></li></ul>in the format <b>'Bearer {accessToken}'.
+String libraryDocumentId = "libraryDocumentId_example"; // String | The document identifier, as retrieved from the API to fetch library documents.
+String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
+String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+Boolean attachAuditReport = true; // Boolean | When set to true, attach an audit report to the library document PDF. The default value is false.
+try {
+    DocumentUrl result = apiInstance.getLibraryCombinedDocumentUrl(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser, attachAuditReport);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling LibraryDocumentsApi#getLibraryCombinedDocumentUrl");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;library_read&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
+ **libraryDocumentId** | **String**| The document identifier, as retrieved from the API to fetch library documents. |
+ **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
+ **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **attachAuditReport** | **Boolean**| When set to true, attach an audit report to the library document PDF. The default value is false. | [optional]
+
+### Return type
+
+[**DocumentUrl**](DocumentUrl.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 <a name="getLibraryDocument"></a>
 # **getLibraryDocument**
@@ -440,7 +602,7 @@ No authorization required
 
 <a name="getLibraryDocumentImageUrls"></a>
 # **getLibraryDocumentImageUrls**
-> DocumentImageUrlsInfo getLibraryDocumentImageUrls(authorization, libraryDocumentId, documentId, xApiUser, xOnBehalfOfUser, ifNoneMatch, imageSizes, startPage, endPage)
+> DocumentImageUrlsInfo getLibraryDocumentImageUrls(authorization, libraryDocumentId, documentId, xApiUser, xOnBehalfOfUser, imageSizes, startPage, endPage)
 
 Retrieves image urls of all visible pages of a document associated with a library document.
 
@@ -457,12 +619,11 @@ String libraryDocumentId = "libraryDocumentId_example"; // String | The document
 String documentId = "documentId_example"; // String | The document identifier, as retrieved from the API which fetches the documents of a specified library document
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
-String ifNoneMatch = "ifNoneMatch_example"; // String | Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn't changed.
 String imageSizes = "imageSizes_example"; // String | A comma separated list of image sizes i.e. {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT}. Default sizes returned are {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT}. 
 Integer startPage = 56; // Integer | Start of page number range for which imageUrls are requested. Starting page number should be greater than 0.
 Integer endPage = 56; // Integer | End of page number range for which imageUrls are requested.
 try {
-    DocumentImageUrlsInfo result = apiInstance.getLibraryDocumentImageUrls(authorization, libraryDocumentId, documentId, xApiUser, xOnBehalfOfUser, ifNoneMatch, imageSizes, startPage, endPage);
+    DocumentImageUrlsInfo result = apiInstance.getLibraryDocumentImageUrls(authorization, libraryDocumentId, documentId, xApiUser, xOnBehalfOfUser, imageSizes, startPage, endPage);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling LibraryDocumentsApi#getLibraryDocumentImageUrls");
@@ -479,7 +640,6 @@ Name | Type | Description  | Notes
  **documentId** | **String**| The document identifier, as retrieved from the API which fetches the documents of a specified library document |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
- **ifNoneMatch** | **String**| Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn&#39;t changed. | [optional]
  **imageSizes** | **String**| A comma separated list of image sizes i.e. {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_50_PERCENT, ZOOM_75_PERCENT, ZOOM_100_PERCENT, ZOOM_125_PERCENT, ZOOM_150_PERCENT, ZOOM_200_PERCENT}. Default sizes returned are {FIXED_WIDTH_50px, FIXED_WIDTH_250px, FIXED_WIDTH_675px, ZOOM_100_PERCENT}.  | [optional]
  **startPage** | **Integer**| Start of page number range for which imageUrls are requested. Starting page number should be greater than 0. | [optional]
  **endPage** | **Integer**| End of page number range for which imageUrls are requested. | [optional]
@@ -548,6 +708,53 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="getLibraryDocumentInfoForUser"></a>
+# **getLibraryDocumentInfoForUser**
+> MyAgreementInfo getLibraryDocumentInfoForUser(authorization, libraryDocumentId, xApiUser)
+
+Retrieves the library document information related to the api caller
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.model.ApiException;
+//import io.swagger.client.api.LibraryDocumentsApi;
+
+
+LibraryDocumentsApi apiInstance = new LibraryDocumentsApi();
+String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('library_read')\" oncontextmenu=\"this.href=oauthDoc('library_read')\" target=\"oauthDoc\">library_read</a></li></ul>in the format <b>'Bearer {accessToken}'.
+String libraryDocumentId = "libraryDocumentId_example"; // String | The document identifier, as retrieved from the API to fetch library documents.
+String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
+try {
+    MyAgreementInfo result = apiInstance.getLibraryDocumentInfoForUser(authorization, libraryDocumentId, xApiUser);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling LibraryDocumentsApi#getLibraryDocumentInfoForUser");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;library_read&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
+ **libraryDocumentId** | **String**| The document identifier, as retrieved from the API to fetch library documents. |
+ **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
+
+### Return type
+
+[**MyAgreementInfo**](MyAgreementInfo.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="getLibraryDocumentNoteForApiUser"></a>
 # **getLibraryDocumentNoteForApiUser**
 > Note getLibraryDocumentNoteForApiUser(authorization, libraryDocumentId, xApiUser, xOnBehalfOfUser)
@@ -599,7 +806,7 @@ No authorization required
 
 <a name="getLibraryDocuments"></a>
 # **getLibraryDocuments**
-> LibraryDocuments getLibraryDocuments(authorization, xApiUser, xOnBehalfOfUser, showHiddenLibraryDocuments, cursor, pageSize)
+> LibraryDocuments getLibraryDocuments(authorization, xApiUser, xOnBehalfOfUser, groupId, showHiddenLibraryDocuments, cursor, pageSize)
 
 Retrieves library documents for a user.
 
@@ -614,11 +821,12 @@ LibraryDocumentsApi apiInstance = new LibraryDocumentsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('library_read')\" oncontextmenu=\"this.href=oauthDoc('library_read')\" target=\"oauthDoc\">library_read</a></li></ul>in the format <b>'Bearer {accessToken}'.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String groupId = "groupId_example"; // String | The group identifier, as returned by the group creation API or retrieved from the API to fetch groups.
 Boolean showHiddenLibraryDocuments = true; // Boolean | A query parameter to fetch all the hidden library documents along with the visible library documents. Default value is false.
 String cursor = "cursor_example"; // String | Used to navigate through the pages. If not provided, returns the first page.
 Integer pageSize = 56; // Integer | Number of intended items in the response page. If not provided, it is decided by the application settings.
 try {
-    LibraryDocuments result = apiInstance.getLibraryDocuments(authorization, xApiUser, xOnBehalfOfUser, showHiddenLibraryDocuments, cursor, pageSize);
+    LibraryDocuments result = apiInstance.getLibraryDocuments(authorization, xApiUser, xOnBehalfOfUser, groupId, showHiddenLibraryDocuments, cursor, pageSize);
     System.out.println(result);
 } catch (ApiException e) {
     System.err.println("Exception when calling LibraryDocumentsApi#getLibraryDocuments");
@@ -633,6 +841,7 @@ Name | Type | Description  | Notes
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_read&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;library_read&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **groupId** | **String**| The group identifier, as returned by the group creation API or retrieved from the API to fetch groups. | [optional]
  **showHiddenLibraryDocuments** | **Boolean**| A query parameter to fetch all the hidden library documents along with the visible library documents. Default value is false. | [optional]
  **cursor** | **String**| Used to navigate through the pages. If not provided, returns the first page. | [optional]
  **pageSize** | **Integer**| Number of intended items in the response page. If not provided, it is decided by the application settings. | [optional]
@@ -650,9 +859,62 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: application/json
 
+<a name="updateFormFields"></a>
+# **updateFormFields**
+> LibraryDocumentFormFields updateFormFields(authorization, libraryDocumentId, formFieldPutInfo, xApiUser, xOnBehalfOfUser, ifNoneMatch)
+
+Updates details of form fields of a library document.
+
+### Example
+```java
+// Import classes:
+//import io.swagger.client.model.ApiException;
+//import io.swagger.client.api.LibraryDocumentsApi;
+
+
+LibraryDocumentsApi apiInstance = new LibraryDocumentsApi();
+String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('library_write')\" oncontextmenu=\"this.href=oauthDoc('library_write')\" target=\"oauthDoc\">library_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
+String libraryDocumentId = "libraryDocumentId_example"; // String | The document identifier, as retrieved from the API to fetch library documents.
+FormFieldPutInfo formFieldPutInfo = new FormFieldPutInfo(); // FormFieldPutInfo | List of form fields to set for library document
+String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
+String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifNoneMatch = "ifNoneMatch_example"; // String | Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn't changed.
+try {
+    LibraryDocumentFormFields result = apiInstance.updateFormFields(authorization, libraryDocumentId, formFieldPutInfo, xApiUser, xOnBehalfOfUser, ifNoneMatch);
+    System.out.println(result);
+} catch (ApiException e) {
+    System.err.println("Exception when calling LibraryDocumentsApi#updateFormFields");
+    e.printStackTrace();
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;library_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
+ **libraryDocumentId** | **String**| The document identifier, as retrieved from the API to fetch library documents. |
+ **formFieldPutInfo** | [**FormFieldPutInfo**](FormFieldPutInfo.md)| List of form fields to set for library document |
+ **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
+ **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifNoneMatch** | **String**| Pass the value of the e-tag header obtained from the previous response to the same request to get a RESOURCE_NOT_MODIFIED(304) if the resource hasn&#39;t changed. | [optional]
+
+### Return type
+
+[**LibraryDocumentFormFields**](LibraryDocumentFormFields.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
 <a name="updateLibraryDocument"></a>
 # **updateLibraryDocument**
-> updateLibraryDocument(authorization, ifMatch, libraryDocumentId, libraryDocumentInfo, xApiUser, xOnBehalfOfUser)
+> updateLibraryDocument(authorization, libraryDocumentId, libraryDocumentInfo, xApiUser, xOnBehalfOfUser, ifMatch)
 
 Updates the library document.
 
@@ -667,13 +929,13 @@ Currently status, name, sharingMode and templateTypes of the library document ca
 
 LibraryDocumentsApi apiInstance = new LibraryDocumentsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('library_write')\" oncontextmenu=\"this.href=oauthDoc('library_write')\" target=\"oauthDoc\">library_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String libraryDocumentId = "libraryDocumentId_example"; // String | The document identifier, as retrieved from the API to fetch library documents.
 LibraryDocumentInfo libraryDocumentInfo = new LibraryDocumentInfo(); // LibraryDocumentInfo | Information about the library document that you want to create.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 try {
-    apiInstance.updateLibraryDocument(authorization, ifMatch, libraryDocumentId, libraryDocumentInfo, xApiUser, xOnBehalfOfUser);
+    apiInstance.updateLibraryDocument(authorization, libraryDocumentId, libraryDocumentInfo, xApiUser, xOnBehalfOfUser, ifMatch);
 } catch (ApiException e) {
     System.err.println("Exception when calling LibraryDocumentsApi#updateLibraryDocument");
     e.printStackTrace();
@@ -685,11 +947,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;library_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **libraryDocumentId** | **String**| The document identifier, as retrieved from the API to fetch library documents. |
  **libraryDocumentInfo** | [**LibraryDocumentInfo**](LibraryDocumentInfo.md)| Information about the library document that you want to create. |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
 
 ### Return type
 
@@ -756,11 +1018,11 @@ No authorization required
 
 <a name="updateLibraryDocumentState"></a>
 # **updateLibraryDocumentState**
-> updateLibraryDocumentState(authorization, ifMatch, libraryDocumentId, libraryDocumentStateInfo, xApiUser, xOnBehalfOfUser)
+> updateLibraryDocumentState(authorization, libraryDocumentId, libraryDocumentStateInfo, xApiUser, xOnBehalfOfUser, ifMatch)
 
 Updates the library document&#39;s state.
 
-Currently state can be changed from AUTHORING to ACTIVE.
+Currently state can be changed from AUTHORING to ACTIVE, AUTHORING to REMOVED or ACTIVE to REMOVED
 
 ### Example
 ```java
@@ -771,13 +1033,13 @@ Currently state can be changed from AUTHORING to ACTIVE.
 
 LibraryDocumentsApi apiInstance = new LibraryDocumentsApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('library_write')\" oncontextmenu=\"this.href=oauthDoc('library_write')\" target=\"oauthDoc\">library_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String libraryDocumentId = "libraryDocumentId_example"; // String | The document identifier, as retrieved from the API to fetch library documents.
 LibraryDocumentStateInfo libraryDocumentStateInfo = new LibraryDocumentStateInfo(); // LibraryDocumentStateInfo | Information about the state of library document to which you want to update
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 try {
-    apiInstance.updateLibraryDocumentState(authorization, ifMatch, libraryDocumentId, libraryDocumentStateInfo, xApiUser, xOnBehalfOfUser);
+    apiInstance.updateLibraryDocumentState(authorization, libraryDocumentId, libraryDocumentStateInfo, xApiUser, xOnBehalfOfUser, ifMatch);
 } catch (ApiException e) {
     System.err.println("Exception when calling LibraryDocumentsApi#updateLibraryDocumentState");
     e.printStackTrace();
@@ -789,11 +1051,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;library_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;library_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **libraryDocumentId** | **String**| The document identifier, as retrieved from the API to fetch library documents. |
  **libraryDocumentStateInfo** | [**LibraryDocumentStateInfo**](LibraryDocumentStateInfo.md)| Information about the state of library document to which you want to update |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
 
 ### Return type
 
