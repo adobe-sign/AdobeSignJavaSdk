@@ -1,23 +1,9 @@
 # Adobe Sign Java SDK
 
+**NOTE**: This SDK is deprecated. Please refer to https://opensource.adobe.com/acrobat-sign/sdks/. 
+
 # Overview
 Adobe Sign SDK aims at providing an easy way to integrate the Adobe Sign RESTful web service into client applications through easy to consume client side objects wrapping the REST API functionality. This repository contains Adobe Sign’s SDK in Java to integrate with Adobe Sign v6 REST APIs.
-
-# Table of contents
-
-  - [Adobe Sign Java SDK](#adobe-sign-java-sdk)  
-  - [Overview](#overview)
-  - [Table of contents](#table-of-contents)  
-  - [Prerequisites](#prerequisites)  
-  - [Requirements for Building the SDK](#requirements-for-building-the-sdk)  
-  - [Getting Started](#getting-started) 
-  - [Sample SDK Usage](#sample-sdk-usage) 
-  - [Documentation for API Endpoints](#documentation-for-api-endpoints)   
-  - [Documentation for Models](#documentation-for-models) 
-  - [Contributing](#contributing)  
-  - [Licensing](#licensing)  
-  - [Recommendation](#recommendation)    
-  - [Report Issues/Bugs](#report-issuesbugs)  
 
 Prerequisites
 ====================
