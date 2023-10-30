@@ -1,6 +1,6 @@
 # WebhooksApi
 
-All URIs are relative to *http://localhost/api/rest/v6*
+All URIs are relative to *https://secure.au1.echosign.com/api/rest/v6*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -18,7 +18,7 @@ Method | HTTP request | Description
 
 Creates a webhook.
 
-This is a primary endpoint which is used to create a new webhook. A webhook can only be created in ACTIVE state. Currently, webhooks are supported at four scopes - Account, Group, User and Resource. &lt;br/&gt; &lt;br/&gt; Before creating a webhook successfully at any of these scopes, Adobe Sign &lt;a href&#x3D;&#39;https://www.adobe.io/apis/documentcloud/sign/docs.html#!adobeio/adobeio-documentation/master/sign/webhooks.md#verificationofintentofthewebhookurl&#39;&gt;verifies&lt;/a&gt; that the webhook URL that is provided in the registration request really intends to receive notifications and is a valid URL. &lt;br/&gt;There is a defined mechanism for this validation where Adobe Sign makes an HTTPS GET request to the webhook URL. This request has a custom HTTP header X-AdobeSign-ClientId. The value of this header is the client ID of the application that is requesting to create the webhook. To register a webhook successfully, the webhook URL must respond to this verification request with an HTTPS 2XX response code, and also it must send back the same client ID value in one of the following two ways:&lt;ol&gt;&lt;li&gt;In a custom response header, X-AdobeSign-ClientId. This is the same header which was passed in the request, and can be echoed back in the response.&lt;/li&gt;&lt;li&gt; In the JSON response body of the response with the key of xAdobeSignClientId and its value being the same client ID that was sent in the request. &lt;/li&gt;&lt;/ol&gt;&lt;p&gt;On successful registration,  Adobe Sign sends a success response (any HTTPS 2XX code) to your client app with the unique webhook identifier and a Location header, which contains the URL of the webhook resource created in Adobe Sign.&lt;br/&gt; To learn more, please refer &lt;a href&#x3D;&#39;https://www.adobe.io/apis/documentcloud/sign/docs.html#!adobeio/adobeio-documentation/master/sign/webhooks.md&#39;&gt;Webhooks in Adobe Sign Guide&lt;/a&gt;.&lt;/p&gt;
+This is a primary endpoint which is used to create a new webhook. A webhook can only be created in ACTIVE state. Currently, webhooks are supported at four scopes - Account, Group, User and Resource. &lt;br/&gt; &lt;br/&gt; Before creating a webhook successfully at any of these scopes, Adobe Sign &lt;a href&#x3D;&#39;https://www.adobe.io/apis/documentcloud/sign/docs.html#!adobedocs/adobe-sign/master/webhooks.md#verificationofintentofthewebhookurl&#39;&gt;verifies&lt;/a&gt; that the webhook URL that is provided in the registration request really intends to receive notifications and is a valid URL. &lt;br/&gt;There is a defined mechanism for this validation where Adobe Sign makes an HTTPS GET request to the webhook URL. This request has a custom HTTP header X-AdobeSign-ClientId. The value of this header is the client ID of the application that is requesting to create the webhook. To register a webhook successfully, the webhook URL must respond to this verification request with an HTTPS 2XX response code, and also it must send back the same client ID value in one of the following two ways:&lt;ol&gt;&lt;li&gt;In a custom response header, X-AdobeSign-ClientId. This is the same header which was passed in the request, and can be echoed back in the response.&lt;/li&gt;&lt;li&gt; In the JSON response body of the response with the key of xAdobeSignClientId and its value being the same client ID that was sent in the request. &lt;/li&gt;&lt;/ol&gt;&lt;p&gt;On successful registration,  Adobe Sign sends a success response (any HTTPS 2XX code) to your client app with the unique webhook identifier and a Location header, which contains the URL of the webhook resource created in Adobe Sign.&lt;br/&gt; To learn more, please refer &lt;a href&#x3D;&#39;https://www.adobe.io/apis/documentcloud/sign/docs.html#!adobedocs/adobe-sign/master/webhooks.md&#39;&gt;Webhooks in Adobe Sign Guide&lt;/a&gt;.&lt;/p&gt;
 
 ### Example
 ```java
@@ -65,7 +65,7 @@ No authorization required
 
 <a name="deleteWebhook"></a>
 # **deleteWebhook**
-> deleteWebhook(authorization, ifMatch, webhookId, xApiUser, xOnBehalfOfUser)
+> deleteWebhook(authorization, webhookId, xApiUser, xOnBehalfOfUser, ifMatch)
 
 Deletes a webhook.
 
@@ -78,12 +78,12 @@ Deletes a webhook.
 
 WebhooksApi apiInstance = new WebhooksApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('webhook_retention')\" oncontextmenu=\"this.href=oauthDoc('webhook_retention')\" target=\"oauthDoc\">webhook_retention</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String webhookId = "webhookId_example"; // String | The webhook identifier, as returned by the webhook creation API or retrieved from the API to fetch webhooks.
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 try {
-    apiInstance.deleteWebhook(authorization, ifMatch, webhookId, xApiUser, xOnBehalfOfUser);
+    apiInstance.deleteWebhook(authorization, webhookId, xApiUser, xOnBehalfOfUser, ifMatch);
 } catch (ApiException e) {
     System.err.println("Exception when calling WebhooksApi#deleteWebhook");
     e.printStackTrace();
@@ -95,10 +95,10 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;webhook_retention&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;webhook_retention&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;webhook_retention&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **webhookId** | **String**| The webhook identifier, as returned by the webhook creation API or retrieved from the API to fetch webhooks. |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
 
 ### Return type
 
@@ -223,7 +223,7 @@ No authorization required
 
 <a name="updateWebhook"></a>
 # **updateWebhook**
-> updateWebhook(authorization, ifMatch, webhookId, webhookInfo, xApiUser, xOnBehalfOfUser)
+> updateWebhook(authorization, webhookId, webhookInfo, xApiUser, xOnBehalfOfUser, ifMatch)
 
 Updates a webhook.
 
@@ -236,13 +236,13 @@ Updates a webhook.
 
 WebhooksApi apiInstance = new WebhooksApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('webhook_write')\" oncontextmenu=\"this.href=oauthDoc('webhook_write')\" target=\"oauthDoc\">webhook_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String webhookId = "webhookId_example"; // String | The webhook identifier, as returned by the webhook creation API or retrieved from the API to fetch webhooks.
 WebhookInfo webhookInfo = new WebhookInfo(); // WebhookInfo | Information necessary to update a webhook
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 try {
-    apiInstance.updateWebhook(authorization, ifMatch, webhookId, webhookInfo, xApiUser, xOnBehalfOfUser);
+    apiInstance.updateWebhook(authorization, webhookId, webhookInfo, xApiUser, xOnBehalfOfUser, ifMatch);
 } catch (ApiException e) {
     System.err.println("Exception when calling WebhooksApi#updateWebhook");
     e.printStackTrace();
@@ -254,11 +254,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;webhook_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;webhook_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;webhook_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **webhookId** | **String**| The webhook identifier, as returned by the webhook creation API or retrieved from the API to fetch webhooks. |
  **webhookInfo** | [**WebhookInfo**](WebhookInfo.md)| Information necessary to update a webhook |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
 
 ### Return type
 
@@ -275,7 +275,7 @@ No authorization required
 
 <a name="updateWebhookState"></a>
 # **updateWebhookState**
-> updateWebhookState(authorization, ifMatch, webhookId, webhookStateInfo, xApiUser, xOnBehalfOfUser)
+> updateWebhookState(authorization, webhookId, webhookStateInfo, xApiUser, xOnBehalfOfUser, ifMatch)
 
 Updates the state of a webhook identified by webhookId in the path.
 
@@ -288,13 +288,13 @@ Updates the state of a webhook identified by webhookId in the path.
 
 WebhooksApi apiInstance = new WebhooksApi();
 String authorization = "authorization_example"; // String | An <a href=\"#\" onclick=\"this.href=oauthDoc()\" oncontextmenu=\"this.href=oauthDoc()\" target=\"oauthDoc\">OAuth Access Token</a> with scopes:<ul><li style='list-style-type: square'><a href=\"#\" onclick=\"this.href=oauthDoc('webhook_write')\" oncontextmenu=\"this.href=oauthDoc('webhook_write')\" target=\"oauthDoc\">webhook_write</a></li></ul>in the format <b>'Bearer {accessToken}'.
-String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 String webhookId = "webhookId_example"; // String | The webhook identifier, as returned by the webhook creation API or retrieved from the API to fetch webhooks.
 WebhookStateInfo webhookStateInfo = new WebhookStateInfo(); // WebhookStateInfo | 
 String xApiUser = "xApiUser_example"; // String | The userId or email of API caller using the account or group token in the format <b>userid:{userId} OR email:{email}.</b> If it is not specified, then the caller is inferred from the token.
 String xOnBehalfOfUser = "xOnBehalfOfUser_example"; // String | The userId or email in the format <b>userid:{userId} OR email:{email}.</b> of the user that has shared his/her account
+String ifMatch = "ifMatch_example"; // String | The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned.
 try {
-    apiInstance.updateWebhookState(authorization, ifMatch, webhookId, webhookStateInfo, xApiUser, xOnBehalfOfUser);
+    apiInstance.updateWebhookState(authorization, webhookId, webhookStateInfo, xApiUser, xOnBehalfOfUser, ifMatch);
 } catch (ApiException e) {
     System.err.println("Exception when calling WebhooksApi#updateWebhookState");
     e.printStackTrace();
@@ -306,11 +306,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| An &lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc()\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;OAuth Access Token&lt;/a&gt; with scopes:&lt;ul&gt;&lt;li style&#x3D;&#39;list-style-type: square&#39;&gt;&lt;a href&#x3D;\&quot;#\&quot; onclick&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;webhook_write&#39;)\&quot; oncontextmenu&#x3D;\&quot;this.href&#x3D;oauthDoc(&#39;webhook_write&#39;)\&quot; target&#x3D;\&quot;oauthDoc\&quot;&gt;webhook_write&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;in the format &lt;b&gt;&#39;Bearer {accessToken}&#39;. |
- **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. |
  **webhookId** | **String**| The webhook identifier, as returned by the webhook creation API or retrieved from the API to fetch webhooks. |
  **webhookStateInfo** | [**WebhookStateInfo**](WebhookStateInfo.md)|  |
  **xApiUser** | **String**| The userId or email of API caller using the account or group token in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; If it is not specified, then the caller is inferred from the token. | [optional]
  **xOnBehalfOfUser** | **String**| The userId or email in the format &lt;b&gt;userid:{userId} OR email:{email}.&lt;/b&gt; of the user that has shared his/her account | [optional]
+ **ifMatch** | **String**| The server will only update the resource if it matches the listed ETag otherwise error RESOURCE_MODIFIED(412) is returned. | [optional]
 
 ### Return type
 
